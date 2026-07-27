@@ -19,7 +19,7 @@
         "threshold": 64,
         "model": {
           "type": "minecraft:model",
-          "model": "jackstar/2_items/arrow_spectral_full"
+          "model": "jackstar:item/2_items/arrow_spectral_full"
         }
       },
       {
@@ -29,7 +29,7 @@
           "property": "minecraft:component",
           "component": "minecraft:custom_name",
           "cases": [
-            {"when": {"text": "","extra": [{"text": "Return","obfuscated": false,"italic": false,"underlined": false,"strikethrough": false,"color": "gold","bold": true}]},"model": {"type": "minecraft:model","model": "minetorio/0_ui/ui_return"}}
+            {"when": {"text": "","extra": [{"text": "Return","obfuscated": false,"italic": false,"underlined": false,"strikethrough": false,"color": "gold","bold": true}]},"model": {"type": "minecraft:model","model": "minetorio:item/0_ui/ui_return"}}
 
           ],
           "fallback": {
@@ -52,7 +52,7 @@
                 "threshold": 64,
                 "model": {
                   "type": "minecraft:model",
-                  "model": "jackstar/2_items/arrow_spectral_full"
+                  "model": "jackstar:item/2_items/arrow_spectral_full"
                 }
               }
             ]

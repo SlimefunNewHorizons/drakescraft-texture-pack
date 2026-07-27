@@ -11,8 +11,7 @@
       {
         "threshold": 3009006,
         "model": {
-          "type": "minecraft:model",
-          "model": "jackstar:item/coronalis/tower_segment"
+          "type": "minecraft:model"
         }
       }
     ]

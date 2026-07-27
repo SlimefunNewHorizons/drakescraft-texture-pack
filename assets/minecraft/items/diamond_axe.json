@@ -11,7 +11,7 @@
 	"entries": [
 	{"threshold": 0, "model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_name",
 	"cases": [
-		{"when": {"text":"Hammer"}, "model": {"type": "minecraft:model", "model": "jackstar/1_handheld/axes/hammer_diamond"}},
+		{"when": {"text":"Hammer"}, "model": {"type": "minecraft:model", "model": "jackstar:item/1_handheld/axes/hammer_diamond"}},
 
 		{"when": {"text":"","extra":[{"text":"Lumber Axe","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"gold","bold":false}]}, "model": {"type": "minecraft:model", "model": "slimefun/4_tools/lumber_axe"}},
 		{"when": {"text":"","extra":[{"text":"Soulbound Axe","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"red","bold":false}]}, "model": {"type": "minecraft:model", "model": "slimefun/4_tools/soulbound_axe"}},

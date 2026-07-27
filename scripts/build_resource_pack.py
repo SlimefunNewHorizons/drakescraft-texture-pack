@@ -12,6 +12,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 EXCLUDED_BASE_ENTRIES = {"assets/minecraft/template.json"}
+EXCLUDED_BASE_PREFIXES = ("assets/minecraft/models/slimefun/coronalis/",)
 
 
 def source_files() -> Iterator[tuple[str, bytes]]:
@@ -31,7 +32,9 @@ def read_base(base_pack: Path) -> dict[str, bytes]:
         return {
             entry.filename: archive.read(entry)
             for entry in archive.infolist()
-            if not entry.is_dir() and entry.filename not in EXCLUDED_BASE_ENTRIES
+            if not entry.is_dir()
+            and entry.filename not in EXCLUDED_BASE_ENTRIES
+            and not entry.filename.startswith(EXCLUDED_BASE_PREFIXES)
         }
 
 
@@ -43,6 +46,35 @@ def add_missing_slimefun_assets(entries: dict[str, bytes], asset_root: Path | No
         if path.is_file():
             target = "assets/slimefun/" + path.relative_to(asset_root).as_posix()
             entries.setdefault(target, path.read_bytes())
+
+
+def add_flat_item_models(entries: dict[str, bytes]) -> None:
+    """Generate standard item models for namespace textures without a model file.
+
+    Legacy DrakesCraft assets ship several UI textures but no 1.21 item-model
+    documents. The new item definitions resolve ``namespace:item/path`` and
+    therefore need a small generated model for each texture.
+    """
+    texture_prefix = "assets/"
+    texture_marker = "/textures/item/"
+    for name in sorted(tuple(entries)):
+        if not name.startswith(texture_prefix) or texture_marker not in name or not name.endswith(".png"):
+            continue
+        namespace = name[len(texture_prefix) :].split("/", 1)[0]
+        if namespace in {"minecraft", "slimefun"}:
+            continue
+        item_path = name.split(texture_marker, 1)[1][:-4]
+        model_name = f"assets/{namespace}/models/item/{item_path}.json"
+        entries.setdefault(
+            model_name,
+            json.dumps(
+                {
+                    "parent": "minecraft:item/generated",
+                    "textures": {"layer0": f"{namespace}:item/{item_path}"},
+                },
+                separators=(",", ":"),
+            ).encode("utf-8"),
+        )
 
 
 def parse_reference(value: object, default_namespace: str = "minecraft") -> tuple[str, str] | None:
@@ -66,7 +98,7 @@ def walk_mapping(value: object) -> Iterator[tuple[str, object]]:
 
 
 def validate(entries: Mapping[str, bytes]) -> None:
-    """Reject malformed JSON and unresolved custom Slimefun resource references."""
+    """Reject malformed JSON and unresolved resource references owned by this pack."""
     documents: dict[str, object] = {}
     for name, content in entries.items():
         if name.startswith("assets/") and name.endswith(".json"):
@@ -88,12 +120,24 @@ def validate(entries: Mapping[str, bytes]) -> None:
                         target = f"assets/minecraft/models/{path}.json"
                         if target not in entries:
                             missing.add(target)
+                    # The legacy Slimefun model tree is namespaced as
+                    # minecraft/slimefun while its textures use slimefun.
+                    # Some historical base-pack entries still use the latter
+                    # in model metadata, so only validate external namespaces.
+                    elif namespace not in {"minecraft", "slimefun"}:
+                        target = f"assets/{namespace}/models/{path}.json"
+                        if target not in entries:
+                            missing.add(target)
             if key in {"layer0", "layer1", "layer2", "particle"}:
                 reference = parse_reference(value)
                 if reference is not None:
                     namespace, path = reference
                     if namespace == "slimefun":
                         target = f"assets/slimefun/textures/{path}.png"
+                        if target not in entries:
+                            missing.add(target)
+                    elif namespace != "minecraft":
+                        target = f"assets/{namespace}/textures/{path}.png"
                         if target not in entries:
                             missing.add(target)
     if missing:
@@ -104,6 +148,7 @@ def build(base_pack: Path, output: Path, slimefun_assets: Path | None) -> None:
     entries = read_base(base_pack)
     entries.update(dict(source_files()))
     add_missing_slimefun_assets(entries, slimefun_assets)
+    add_flat_item_models(entries)
     validate(entries)
     output.parent.mkdir(parents=True, exist_ok=True)
     with zipfile.ZipFile(output, "w", compression=zipfile.ZIP_DEFLATED) as archive:

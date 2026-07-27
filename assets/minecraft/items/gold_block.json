@@ -14,7 +14,7 @@
 		{"when": {"text":"","extra":[{"text":"Nice Block","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"#DBCEA9","bold":false}]}, "model": {"type": "minecraft:model", "model": "slimefun/23_slime_tinker/materials/nice_block"}},
 		{"when": {"text":"","extra":[{"text":"Anniversarium Block","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"#DBCEA9","bold":false}]}, "model": {"type": "minecraft:model", "model": "slimefun/23_slime_tinker/materials/anniversarium_block"}},
 
-		{"when": {"text":"","extra":[{"text":"Whats Premium?","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"gold","bold":true}]}, "model": {"type": "minecraft:model", "model": "minetorio/0_ui/ui_premium"}}
+		{"when": {"text":"","extra":[{"text":"Whats Premium?","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"gold","bold":true}]}, "model": {"type": "minecraft:model", "model": "minetorio:item/0_ui/ui_premium"}}
 	],
 
 

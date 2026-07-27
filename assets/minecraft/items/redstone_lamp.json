@@ -11,7 +11,7 @@
 	"entries": [
 	{"threshold": 0, "model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_name",
 	"cases": [
-		{"when": {"text":"","extra":[{"text":"Device Information","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"white","bold":true}]}, "model": {"type": "minecraft:model", "model": "minetorio/0_ui/ui_device_information_orange"}}
+		{"when": {"text":"","extra":[{"text":"Device Information","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"white","bold":true}]}, "model": {"type": "minecraft:model", "model": "minetorio:item/0_ui/ui_device_information_orange"}}
 	],
 
 

@@ -45,15 +45,13 @@
       {
         "threshold": 3009001,
         "model": {
-          "type": "minecraft:model",
-          "model": "jackstar:item/coronalis/signal_core"
+          "type": "minecraft:model"
         }
       },
       {
         "threshold": 3009005,
         "model": {
-          "type": "minecraft:model",
-          "model": "jackstar:item/coronalis/foundation_anchor"
+          "type": "minecraft:model"
         }
       }
     ]

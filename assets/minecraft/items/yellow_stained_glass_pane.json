@@ -11,7 +11,7 @@
 	"entries": [
 	{"threshold": 0, "model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_name",
 	"cases": [
-		{"when": {"text":"","extra":[{"text":" "}]}, "model": {"type": "minecraft:model", "model": "jackstar/0_ui/ui_background_yellow"}}
+		{"when": {"text":"","extra":[{"text":" "}]}, "model": {"type": "minecraft:model", "model": "jackstar:item/0_ui/ui_background_yellow"}}
 
 	],
 

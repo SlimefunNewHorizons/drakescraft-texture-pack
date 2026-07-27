@@ -11,7 +11,7 @@
 	"entries": [
 	{"threshold": 0, "model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_name",
 	"cases": [
-		{"when": {"text":"","extra":[{"text":"Authorize User","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"green","bold":true}]}, "model": {"type": "minecraft:model", "model": "minetorio/0_ui/ui_authorize"}}
+		{"when": {"text":"","extra":[{"text":"Authorize User","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"green","bold":true}]}, "model": {"type": "minecraft:model", "model": "minetorio:item/0_ui/ui_authorize"}}
 
 	],
 

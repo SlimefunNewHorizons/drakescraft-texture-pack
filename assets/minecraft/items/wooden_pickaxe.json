@@ -11,8 +11,8 @@
 	"entries": [
 	{"threshold": 0, "model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_name",
 	"cases": [
-		{"when": {"text":"Fortune"}, "model": {"type": "minecraft:model", "model": "jackstar/1_handheld/pickaxes/fortune_wooden"}},
-		{"when": {"text":"Silk"}, "model": {"type": "minecraft:model", "model": "jackstar/1_handheld/pickaxes/silk_wooden"}}
+		{"when": {"text":"Fortune"}, "model": {"type": "minecraft:model", "model": "jackstar:item/1_handheld/pickaxes/fortune_wooden"}},
+		{"when": {"text":"Silk"}, "model": {"type": "minecraft:model", "model": "jackstar:item/1_handheld/pickaxes/silk_wooden"}}
 	],
 
 

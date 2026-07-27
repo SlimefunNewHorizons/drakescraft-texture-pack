@@ -19,7 +19,7 @@
         "threshold":64,
         "model": {
           "type": "minecraft:model",
-          "model": "jackstar/2_items/arrow_full"
+          "model": "jackstar:item/2_items/arrow_full"
         }
       }
     ]

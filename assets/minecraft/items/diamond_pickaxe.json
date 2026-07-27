@@ -11,8 +11,8 @@
 	"entries": [
 	{"threshold": 0, "model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_name",
 	"cases": [
-		{"when": {"text":"Fortune"}, "model": {"type": "minecraft:model", "model": "jackstar/1_handheld/pickaxes/fortune_diamond"}},
-		{"when": {"text":"Silk"}, "model": {"type": "minecraft:model", "model": "jackstar/1_handheld/pickaxes/silk_diamond"}},
+		{"when": {"text":"Fortune"}, "model": {"type": "minecraft:model", "model": "jackstar:item/1_handheld/pickaxes/fortune_diamond"}},
+		{"when": {"text":"Silk"}, "model": {"type": "minecraft:model", "model": "jackstar:item/1_handheld/pickaxes/silk_diamond"}},
 	
 		{"when": {"text":"","extra":[{"text":"Tools","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"yellow","bold":false}]}, "model": {"type": "minecraft:model", "model": "slimefun/4_tools/smelters_pickaxe"}},
 		{"when": {"text":"","extra":[{"text":"Advanced Industrial Miner","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"red","bold":false}]}, "model": {"type": "minecraft:model", "model": "slimefun/3_basic_machines/advanced_industrial_miner"}},

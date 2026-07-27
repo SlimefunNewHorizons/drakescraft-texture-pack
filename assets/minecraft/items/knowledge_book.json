@@ -16,7 +16,7 @@
 		{"when": {"text":"","extra":[{"text":"View this Item on the official Slimefun Wiki","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"white","bold":false}]}, "model": {"type": "minecraft:model", "model": "slimefun/0_ui/ui_wiki"}},
 		{"when": {"text":"","extra":[{"text":"View this item on the wiki","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"white","bold":false}]}, "model": {"type": "minecraft:model", "model": "slimefun/0_ui/ui_wiki"}},
 
-		{"when": {"text":"","extra":[{"text":"Minetorio Guide","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"gold","bold":true}]}, "model": {"type": "minecraft:model", "model": "minetorio/0_ui/minetorio_guide"}}
+		{"when": {"text":"","extra":[{"text":"Minetorio Guide","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"gold","bold":true}]}, "model": {"type": "minecraft:model", "model": "minetorio:item/0_ui/minetorio_guide"}}
 
 	],
 

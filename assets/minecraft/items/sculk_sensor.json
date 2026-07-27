@@ -11,15 +11,13 @@
       {
         "threshold": 3009002,
         "model": {
-          "type": "minecraft:model",
-          "model": "jackstar:item/coronalis/signal_amplifier"
+          "type": "minecraft:model"
         }
       },
       {
         "threshold": 3009010,
         "model": {
-          "type": "minecraft:model",
-          "model": "jackstar:item/coronalis/signal_repeater"
+          "type": "minecraft:model"
         }
       }
     ]

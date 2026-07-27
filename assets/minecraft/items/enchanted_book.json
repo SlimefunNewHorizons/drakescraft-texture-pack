@@ -16,7 +16,7 @@
               },
               "model": {
                 "type": "minecraft:model",
-                "model": "jackstar/2_items/books/aqua_affinity"
+                "model": "jackstar:item/2_items/books/aqua_affinity"
               }
             },
             {
@@ -39,7 +39,7 @@
               ],
               "model": {
                 "type": "minecraft:model",
-                "model": "jackstar/2_items/books/bane_of_arthropods"
+                "model": "jackstar:item/2_items/books/bane_of_arthropods"
               }
             },
             {
@@ -59,7 +59,7 @@
               ],
               "model": {
                 "type": "minecraft:model",
-                "model": "jackstar/2_items/books/protection"
+                "model": "jackstar:item/2_items/books/protection"
               }
             },
             {
@@ -79,7 +79,7 @@
               ],
               "model": {
                 "type": "minecraft:model",
-                "model": "jackstar/2_items/books/fire_protection"
+                "model": "jackstar:item/2_items/books/fire_protection"
               }
             },
             {
@@ -99,7 +99,7 @@
               ],
               "model": {
                 "type": "minecraft:model",
-                "model": "jackstar/2_items/books/feather_falling"
+                "model": "jackstar:item/2_items/books/feather_falling"
               }
             },
             {
@@ -119,7 +119,7 @@
               ],
               "model": {
                 "type": "minecraft:model",
-                "model": "jackstar/2_items/books/blast_protection"
+                "model": "jackstar:item/2_items/books/blast_protection"
               }
             },
             {
@@ -139,7 +139,7 @@
               ],
               "model": {
                 "type": "minecraft:model",
-                "model": "jackstar/2_items/books/projectile_protection"
+                "model": "jackstar:item/2_items/books/projectile_protection"
               }
             },
             {
@@ -156,7 +156,7 @@
               ],
               "model": {
                 "type": "minecraft:model",
-                "model": "jackstar/2_items/books/respiration"
+                "model": "jackstar:item/2_items/books/respiration"
               }
             },
             {
@@ -173,7 +173,7 @@
               ],
               "model": {
                 "type": "minecraft:model",
-                "model": "jackstar/2_items/books/thorns"
+                "model": "jackstar:item/2_items/books/thorns"
               }
             },
             {
@@ -190,7 +190,7 @@
               ],
               "model": {
                 "type": "minecraft:model",
-                "model": "jackstar/2_items/books/depth_strider"
+                "model": "jackstar:item/2_items/books/depth_strider"
               }
             },
             {
@@ -204,7 +204,7 @@
               ],
               "model": {
                 "type": "minecraft:model",
-                "model": "jackstar/2_items/books/frost_walker"
+                "model": "jackstar:item/2_items/books/frost_walker"
               }
             },
             {
@@ -215,7 +215,7 @@
               ],
               "model": {
                 "type": "minecraft:model",
-                "model": "jackstar/2_items/books/curse_of_binding"
+                "model": "jackstar:item/2_items/books/curse_of_binding"
               }
             },
             {
@@ -232,7 +232,7 @@
               ],
               "model": {
                 "type": "minecraft:model",
-                "model": "jackstar/2_items/books/soul_speed"
+                "model": "jackstar:item/2_items/books/soul_speed"
               }
             },
             {
@@ -249,7 +249,7 @@
               ],
               "model": {
                 "type": "minecraft:model",
-                "model": "jackstar/2_items/books/swift_sneak"
+                "model": "jackstar:item/2_items/books/swift_sneak"
               }
             },
             {
@@ -272,7 +272,7 @@
               ],
               "model": {
                 "type": "minecraft:model",
-                "model": "jackstar/2_items/books/sharpness"
+                "model": "jackstar:item/2_items/books/sharpness"
               }
             },
             {
@@ -295,7 +295,7 @@
               ],
               "model": {
                 "type": "minecraft:model",
-                "model": "jackstar/2_items/books/smite"
+                "model": "jackstar:item/2_items/books/smite"
               }
             },
             {
@@ -309,7 +309,7 @@
               ],
               "model": {
                 "type": "minecraft:model",
-                "model": "jackstar/2_items/books/knockback"
+                "model": "jackstar:item/2_items/books/knockback"
               }
             },
             {
@@ -323,7 +323,7 @@
               ],
               "model": {
                 "type": "minecraft:model",
-                "model": "jackstar/2_items/books/fire_aspect"
+                "model": "jackstar:item/2_items/books/fire_aspect"
               }
             },
             {
@@ -340,7 +340,7 @@
               ],
               "model": {
                 "type": "minecraft:model",
-                "model": "jackstar/2_items/books/looting"
+                "model": "jackstar:item/2_items/books/looting"
               }
             },
             {
@@ -357,7 +357,7 @@
               ],
               "model": {
                 "type": "minecraft:model",
-                "model": "jackstar/2_items/books/sweeping_edge"
+                "model": "jackstar:item/2_items/books/sweeping_edge"
               }
             },
             {
@@ -380,7 +380,7 @@
               ],
               "model": {
                 "type": "minecraft:model",
-                "model": "jackstar/2_items/books/efficiency"
+                "model": "jackstar:item/2_items/books/efficiency"
               }
             },
             {
@@ -391,7 +391,7 @@
               ],
               "model": {
                 "type": "minecraft:model",
-                "model": "jackstar/2_items/books/silk_touch"
+                "model": "jackstar:item/2_items/books/silk_touch"
               }
             },
             {
@@ -408,7 +408,7 @@
               ],
               "model": {
                 "type": "minecraft:model",
-                "model": "jackstar/2_items/books/unbreaking"
+                "model": "jackstar:item/2_items/books/unbreaking"
               }
             },
             {
@@ -425,7 +425,7 @@
               ],
               "model": {
                 "type": "minecraft:model",
-                "model": "jackstar/2_items/books/fortune"
+                "model": "jackstar:item/2_items/books/fortune"
               }
             },
             {
@@ -448,7 +448,7 @@
               ],
               "model": {
                 "type": "minecraft:model",
-                "model": "jackstar/2_items/books/power"
+                "model": "jackstar:item/2_items/books/power"
               }
             },
             {
@@ -462,7 +462,7 @@
               ],
               "model": {
                 "type": "minecraft:model",
-                "model": "jackstar/2_items/books/punch"
+                "model": "jackstar:item/2_items/books/punch"
               }
             },
             {
@@ -473,7 +473,7 @@
               ],
               "model": {
                 "type": "minecraft:model",
-                "model": "jackstar/2_items/books/flame"
+                "model": "jackstar:item/2_items/books/flame"
               }
             },
             {
@@ -484,7 +484,7 @@
               ],
               "model": {
                 "type": "minecraft:model",
-                "model": "jackstar/2_items/books/infinity"
+                "model": "jackstar:item/2_items/books/infinity"
               }
             },
             {
@@ -501,7 +501,7 @@
               ],
               "model": {
                 "type": "minecraft:model",
-                "model": "jackstar/2_items/books/luck_of_the_sea"
+                "model": "jackstar:item/2_items/books/luck_of_the_sea"
               }
             },
             {
@@ -518,7 +518,7 @@
               ],
               "model": {
                 "type": "minecraft:model",
-                "model": "jackstar/2_items/books/lure"
+                "model": "jackstar:item/2_items/books/lure"
               }
             },
             {
@@ -535,7 +535,7 @@
               ],
               "model": {
                 "type": "minecraft:model",
-                "model": "jackstar/2_items/books/loyalty"
+                "model": "jackstar:item/2_items/books/loyalty"
               }
             },
             {
@@ -558,7 +558,7 @@
               ],
               "model": {
                 "type": "minecraft:model",
-                "model": "jackstar/2_items/books/impaling"
+                "model": "jackstar:item/2_items/books/impaling"
               }
             },
             {
@@ -575,7 +575,7 @@
               ],
               "model": {
                 "type": "minecraft:model",
-                "model": "jackstar/2_items/books/riptide"
+                "model": "jackstar:item/2_items/books/riptide"
               }
             },
             {
@@ -586,7 +586,7 @@
               ],
               "model": {
                 "type": "minecraft:model",
-                "model": "jackstar/2_items/books/channeling"
+                "model": "jackstar:item/2_items/books/channeling"
               }
             },
             {
@@ -597,7 +597,7 @@
               ],
               "model": {
                 "type": "minecraft:model",
-                "model": "jackstar/2_items/books/multishot"
+                "model": "jackstar:item/2_items/books/multishot"
               }
             },
             {
@@ -614,7 +614,7 @@
               ],
               "model": {
                 "type": "minecraft:model",
-                "model": "jackstar/2_items/books/quick_charge"
+                "model": "jackstar:item/2_items/books/quick_charge"
               }
             },
             {
@@ -634,7 +634,7 @@
               ],
               "model": {
                 "type": "minecraft:model",
-                "model": "jackstar/2_items/books/piercing"
+                "model": "jackstar:item/2_items/books/piercing"
               }
             },
             {
@@ -657,7 +657,7 @@
               ],
               "model": {
                 "type": "minecraft:model",
-                "model": "jackstar/2_items/books/density"
+                "model": "jackstar:item/2_items/books/density"
               }
             },
             {
@@ -677,7 +677,7 @@
               ],
               "model": {
                 "type": "minecraft:model",
-                "model": "jackstar/2_items/books/breach"
+                "model": "jackstar:item/2_items/books/breach"
               }
             },
             {
@@ -694,7 +694,7 @@
               ],
               "model": {
                 "type": "minecraft:model",
-                "model": "jackstar/2_items/books/wind_burst"
+                "model": "jackstar:item/2_items/books/wind_burst"
               }
             },
             {
@@ -711,7 +711,7 @@
               ],
               "model": {
                 "type": "minecraft:model",
-                "model": "jackstar/2_items/books/lunge"
+                "model": "jackstar:item/2_items/books/lunge"
               }
             },
             {
@@ -722,7 +722,7 @@
               ],
               "model": {
                 "type": "minecraft:model",
-                "model": "jackstar/2_items/books/mending"
+                "model": "jackstar:item/2_items/books/mending"
               }
             },
             {
@@ -744,7 +744,7 @@
               ],
               "model": {
                 "type": "minecraft:model",
-                "model": "jackstar/2_items/books/curse_of_vanishing"
+                "model": "jackstar:item/2_items/books/curse_of_vanishing"
               }
             },
             {

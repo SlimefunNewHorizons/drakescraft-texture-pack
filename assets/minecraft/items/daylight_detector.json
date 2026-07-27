@@ -145,8 +145,7 @@
       {
         "threshold": 3009009,
         "model": {
-          "type": "minecraft:model",
-          "model": "jackstar:item/coronalis/parabolic_dish"
+          "type": "minecraft:model"
         }
       }
     ]

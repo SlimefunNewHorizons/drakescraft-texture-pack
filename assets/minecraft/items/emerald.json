@@ -11,7 +11,7 @@
 	"entries": [
 	{"threshold": 0, "model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_name",
 	"cases": [
-		{"when": {"text":"Ruby"}, "model": {"type": "minecraft:model", "model": "jackstar/2_items/ruby"}},
+		{"when": {"text":"Ruby"}, "model": {"type": "minecraft:model", "model": "jackstar:item/2_items/ruby"}},
 
 		{"when": {"text":"","extra":[{"text":"Synthetic Emerald","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"aqua","bold":false}]}, "model": {"type": "minecraft:model", "model": "slimefun/5_resources/synthetic_emerald"}},
 		{"when": {"text":"","extra":[{"text":"Common Talisman","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"gold","bold":false}]}, "model": {"type": "minecraft:model", "model": "slimefun/8_magical_items/common_talisman"}},

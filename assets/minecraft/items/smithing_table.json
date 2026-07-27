@@ -220,8 +220,7 @@
       {
         "threshold": 3009007,
         "model": {
-          "type": "minecraft:model",
-          "model": "jackstar:item/coronalis/watch_platform"
+          "type": "minecraft:model"
         }
       }
     ]

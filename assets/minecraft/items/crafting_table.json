@@ -20,7 +20,7 @@
 		{"when": {"text":"","extra":[{"text":"Auto Crafting Table","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"gold","bold":false}]}, "model": {"type": "minecraft:model", "model": "slimefun/34_fluffy_machines/auto_crafting_table"}},
 		{"when": {"text":"","extra":[{"text":"Auto Enhanced Crafting Table","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"yellow","bold":false}]}, "model": {"type": "minecraft:model", "model": "slimefun/34_fluffy_machines/auto_enhanced_crafting_table"}},
 
-		{"when": {"text":"","extra":[{"text":"Device Information","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"white","bold":true}]}, "model": {"type": "minecraft:model", "model": "minetorio/0_ui/ui_device_information_white"}}
+		{"when": {"text":"","extra":[{"text":"Device Information","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"white","bold":true}]}, "model": {"type": "minecraft:model", "model": "minetorio:item/0_ui/ui_device_information_white"}}
 
 	],
 

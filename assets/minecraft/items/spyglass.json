@@ -50,7 +50,7 @@
               },
               "model": {
                 "type": "minecraft:model",
-                "model": "minetorio/0_ui/ui_lookup"
+                "model": "minetorio:item/0_ui/ui_lookup"
               }
             }
           ],

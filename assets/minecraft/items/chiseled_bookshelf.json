@@ -11,8 +11,7 @@
       {
         "threshold": 3009003,
         "model": {
-          "type": "minecraft:model",
-          "model": "jackstar:item/coronalis/data_bank"
+          "type": "minecraft:model"
         }
       }
     ]

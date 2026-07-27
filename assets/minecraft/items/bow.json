@@ -88,28 +88,28 @@
 			"on_true": {"type": "minecraft:range_dispatch","property": "minecraft:use_duration","scale": 0.05,
             "entries": [
               {"threshold": 0,"model": {"type": "minecraft:model",
-                "model": "jackstar/1_handheld/bows/og_bow_pulling_0"}},
+                "model": "jackstar:item/1_handheld/bows/og_bow_pulling_0"}},
               {"threshold": 0.65,"model": {"type": "minecraft:model",
-                "model": "jackstar/1_handheld/bows/og_bow_pulling_1"}},
+                "model": "jackstar:item/1_handheld/bows/og_bow_pulling_1"}},
               {"threshold": 0.9,"model": {"type": "minecraft:model",
-                "model": "jackstar/1_handheld/bows/og_bow_pulling_2"}}]},
+                "model": "jackstar:item/1_handheld/bows/og_bow_pulling_2"}}]},
 			"on_false": {
             "type": "minecraft:model",
-            "model": "jackstar/1_handheld/bows/og_bow_standby"}}},
+            "model": "jackstar:item/1_handheld/bows/og_bow_standby"}}},
 			
 			{"when": {"text":"Fire Bow"},
             "model": {"type": "minecraft:condition","property": "minecraft:using_item",
 			"on_true": {"type": "minecraft:range_dispatch","property": "minecraft:use_duration","scale": 0.05,
             "entries": [
               {"threshold": 0,"model": {"type": "minecraft:model",
-                "model": "jackstar/1_handheld/bows/fire_bow_pulling_0"}},
+                "model": "jackstar:item/1_handheld/bows/fire_bow_pulling_0"}},
               {"threshold": 0.65,"model": {"type": "minecraft:model",
-                "model": "jackstar/1_handheld/bows/fire_bow_pulling_1"}},
+                "model": "jackstar:item/1_handheld/bows/fire_bow_pulling_1"}},
               {"threshold": 0.9,"model": {"type": "minecraft:model",
-                "model": "jackstar/1_handheld/bows/fire_bow_pulling_2"}}]},
+                "model": "jackstar:item/1_handheld/bows/fire_bow_pulling_2"}}]},
 			"on_false": {
             "type": "minecraft:model",
-            "model": "jackstar/1_handheld/bows/fire_bow_standby"}}}
+            "model": "jackstar:item/1_handheld/bows/fire_bow_standby"}}}
 
 				],
 

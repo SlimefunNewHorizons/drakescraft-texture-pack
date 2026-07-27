@@ -11,8 +11,7 @@
       {
         "threshold": 3009008,
         "model": {
-          "type": "minecraft:model",
-          "model": "jackstar:item/coronalis/radio_mast"
+          "type": "minecraft:model"
         }
       }
     ]
