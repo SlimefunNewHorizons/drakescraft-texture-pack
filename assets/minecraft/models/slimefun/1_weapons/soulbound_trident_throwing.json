@@ -1,7 +1,7 @@
 {
     "gui_light": "front",
     "textures": {
-        "particle": "slimefun:item/1_weapons/trident"
+        "particle": "minecraft:item/trident"
     },
     "display": {
         "thirdperson_righthand": {

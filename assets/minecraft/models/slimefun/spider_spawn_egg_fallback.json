@@ -1,6 +1,6 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "slimefun:item/spider_spawn_egg_fallback"
+        "layer0": "minecraft:item/spider_spawn_egg"
     }
 }
