@@ -77,6 +77,69 @@ def add_flat_item_models(entries: dict[str, bytes]) -> None:
         )
 
 
+def references_slimefun_model(value: object) -> bool:
+    """Return whether a definition branch points to a Slimefun model."""
+    if isinstance(value, Mapping):
+        return any(
+            key == "model"
+            and isinstance(child, str)
+            and (child.startswith("slimefun/") or child.startswith("minecraft:slimefun/"))
+            or references_slimefun_model(child)
+            for key, child in value.items()
+        )
+    if isinstance(value, list):
+        return any(references_slimefun_model(child) for child in value)
+    return False
+
+
+def keep_slimefun_cases(value: object) -> object:
+    """Drop item-definition selector cases that are not Slimefun entries."""
+    if isinstance(value, Mapping):
+        filtered: dict[str, object] = {}
+        for key, child in value.items():
+            if key == "cases" and isinstance(child, list):
+                filtered[key] = [
+                    keep_slimefun_cases(case)
+                    for case in child
+                    if references_slimefun_model(case)
+                ]
+            else:
+                filtered[key] = keep_slimefun_cases(child)
+        return filtered
+    if isinstance(value, list):
+        return [keep_slimefun_cases(child) for child in value]
+    return value
+
+
+def sf_only_source_files() -> Iterator[tuple[str, bytes]]:
+    """Yield a minimal pack: Slimefun assets plus its required item selectors."""
+    for name in ("pack.mcmeta", "pack.png"):
+        path = ROOT / name
+        if path.is_file():
+            yield name, path.read_bytes()
+
+    for directory in (
+        ROOT / "assets" / "minecraft" / "models" / "slimefun",
+        ROOT / "assets" / "slimefun",
+    ):
+        if not directory.is_dir():
+            continue
+        for path in sorted(directory.rglob("*")):
+            if path.is_file():
+                yield path.relative_to(ROOT).as_posix(), path.read_bytes()
+
+    item_root = ROOT / "assets" / "minecraft" / "items"
+    for path in sorted(item_root.glob("*.json")):
+        document = json.loads(path.read_text(encoding="utf-8-sig"))
+        if not references_slimefun_model(document):
+            continue
+        filtered = keep_slimefun_cases(document)
+        yield (
+            path.relative_to(ROOT).as_posix(),
+            json.dumps(filtered, ensure_ascii=False, separators=(",", ":")).encode("utf-8"),
+        )
+
+
 def parse_reference(value: object, default_namespace: str = "minecraft") -> tuple[str, str] | None:
     if not isinstance(value, str) or value.startswith("#"):
         return None
@@ -156,17 +219,40 @@ def build(base_pack: Path, output: Path, slimefun_assets: Path | None) -> None:
             archive.writestr(name, entries[name])
 
 
+def build_sf_only(output: Path, slimefun_assets: Path) -> None:
+    """Build a pack that changes only Slimefun items and their guide assets."""
+    entries = dict(sf_only_source_files())
+    add_missing_slimefun_assets(entries, slimefun_assets)
+    validate(entries)
+    output.parent.mkdir(parents=True, exist_ok=True)
+    with zipfile.ZipFile(output, "w", compression=zipfile.ZIP_DEFLATED) as archive:
+        for name in sorted(entries):
+            archive.writestr(name, entries[name])
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--base", required=True, type=Path, help="Complete prior resource-pack ZIP")
+    parser.add_argument("--base", type=Path, help="Complete prior resource-pack ZIP")
     parser.add_argument(
         "--slimefun-assets",
         type=Path,
         help="Canonical assets/slimefun directory used only for missing files",
     )
+    parser.add_argument(
+        "--sf-only",
+        action="store_true",
+        help="Build only Slimefun models, textures and item selectors",
+    )
     parser.add_argument("--output", required=True, type=Path, help="Output ZIP path")
     args = parser.parse_args()
-    build(args.base, args.output, args.slimefun_assets)
+    if args.sf_only:
+        if args.slimefun_assets is None:
+            parser.error("--sf-only requires --slimefun-assets")
+        build_sf_only(args.output, args.slimefun_assets)
+    elif args.base is None:
+        parser.error("--base is required unless --sf-only is used")
+    else:
+        build(args.base, args.output, args.slimefun_assets)
     print(f"Built {args.output}")
 
 
