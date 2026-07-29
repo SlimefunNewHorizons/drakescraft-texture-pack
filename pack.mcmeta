@@ -1,6 +1,7 @@
 {
   "pack": {
-    "pack_format": 34,
+    "min_format": [75, 0],
+    "max_format": [75, 0],
     "description": "§bSlimefun §6DrakesCraft §8| §7Ítems Slimefun"
   }
 }

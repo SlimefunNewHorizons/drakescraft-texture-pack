@@ -93,7 +93,7 @@ def references_slimefun_model(value: object) -> bool:
 
 
 def keep_slimefun_cases(value: object) -> object:
-    """Drop item-definition selector cases that are not Slimefun entries."""
+    """Drop selector and range-dispatch branches that are not Slimefun entries."""
     if isinstance(value, Mapping):
         filtered: dict[str, object] = {}
         for key, child in value.items():
@@ -103,12 +103,47 @@ def keep_slimefun_cases(value: object) -> object:
                     for case in child
                     if references_slimefun_model(case)
                 ]
+            elif key == "entries" and isinstance(child, list):
+                filtered[key] = [
+                    keep_slimefun_cases(entry)
+                    for entry in child
+                    if references_slimefun_model(entry)
+                ]
             else:
                 filtered[key] = keep_slimefun_cases(child)
         return filtered
     if isinstance(value, list):
         return [keep_slimefun_cases(child) for child in value]
     return value
+
+
+def simplify_slimefun_item_definition(value: object) -> object:
+    """Remove legacy CMD=0 dispatches that otherwise intercept every vanilla item.
+
+    DrakesCraft's legacy definitions used a ``custom_model_data`` range with a
+    threshold of zero solely to reach a custom-name selector. Minecraft treats
+    zero as a matching value for normal items, which makes the fallback fragile
+    and caused magenta vanilla models. A direct selector has the same Slimefun
+    behavior while vanilla items always reach their explicit fallback.
+    """
+    if not isinstance(value, Mapping):
+        return value
+    document = dict(value)
+    model = document.get("model")
+    if not isinstance(model, Mapping):
+        return document
+    entries = model.get("entries")
+    if (
+        model.get("type") == "minecraft:range_dispatch"
+        and model.get("property") == "minecraft:custom_model_data"
+        and isinstance(entries, list)
+        and len(entries) == 1
+        and entries[0].get("threshold") == 0
+        and isinstance(entries[0].get("model"), Mapping)
+        and entries[0]["model"].get("type") == "minecraft:select"
+    ):
+        document["model"] = entries[0]["model"]
+    return document
 
 
 def sf_only_source_files() -> Iterator[tuple[str, bytes]]:
@@ -133,7 +168,7 @@ def sf_only_source_files() -> Iterator[tuple[str, bytes]]:
         document = json.loads(path.read_text(encoding="utf-8-sig"))
         if not references_slimefun_model(document):
             continue
-        filtered = keep_slimefun_cases(document)
+        filtered = simplify_slimefun_item_definition(keep_slimefun_cases(document))
         yield (
             path.relative_to(ROOT).as_posix(),
             json.dumps(filtered, ensure_ascii=False, separators=(",", ":")).encode("utf-8"),
@@ -207,6 +242,19 @@ def validate(entries: Mapping[str, bytes]) -> None:
         raise ValueError("Missing custom assets:\n" + "\n".join(sorted(missing)))
 
 
+def validate_sf_only(entries: Mapping[str, bytes]) -> None:
+    """Guarantee that the published SF-only pack cannot override vanilla paths."""
+    for name, content in entries.items():
+        if not name.startswith("assets/minecraft/items/") or not name.endswith(".json"):
+            continue
+        document = json.loads(content.decode("utf-8-sig"))
+        for key, value in walk_mapping(document):
+            if key == "property" and value == "minecraft:custom_model_data":
+                raise ValueError(f"Unsafe custom-model-data dispatch remains in {name}")
+            if isinstance(value, str) and (value.startswith("jackstar:") or value.startswith("minetorio:")):
+                raise ValueError(f"Non-Slimefun model leaked into SF-only pack: {name}")
+
+
 def build(base_pack: Path, output: Path, slimefun_assets: Path | None) -> None:
     entries = read_base(base_pack)
     entries.update(dict(source_files()))
@@ -224,6 +272,7 @@ def build_sf_only(output: Path, slimefun_assets: Path) -> None:
     entries = dict(sf_only_source_files())
     add_missing_slimefun_assets(entries, slimefun_assets)
     validate(entries)
+    validate_sf_only(entries)
     output.parent.mkdir(parents=True, exist_ok=True)
     with zipfile.ZipFile(output, "w", compression=zipfile.ZIP_DEFLATED) as archive:
         for name in sorted(entries):
