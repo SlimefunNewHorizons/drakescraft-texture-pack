@@ -13,6 +13,7 @@
 	"cases": [
 		{"when": {"text":"","extra":[{"text":"Explosive Shovel","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"yellow","bold":false}]}, "model": {"type": "minecraft:model", "model": "slimefun/4_tools/explosive_shovel"}},
 		{"when": {"text":"","extra":[{"text":"Soulbound Shovel","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"red","bold":false}]}, "model": {"type": "minecraft:model", "model": "slimefun/4_tools/soulbound_shovel"}},
+		{"when": {"text":"","extra":[{"text":"Paxel","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"aqua","bold":false}]}, "model": {"type": "minecraft:model", "model": "slimefun/34_fluffy_machines/paxel"}},
 		{"when": {"text":"","extra":[{"text":"Upgraded Explosive Shovel","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"yellow","bold":true}]}, "model": {"type": "minecraft:model", "model": "slimefun/34_fluffy_machines/upgraded_explosive_shovel"}}
 	],
 

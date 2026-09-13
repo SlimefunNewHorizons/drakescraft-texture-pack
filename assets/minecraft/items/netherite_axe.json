@@ -13,6 +13,7 @@
 	"cases": [
 		{"when": {"text":"Hammer"}, "model": {"type": "minecraft:model", "model": "jackstar:item/1_handheld/axes/hammer_netherite"}},
 
+		{"when": {"text":"","extra":[{"text":"Paxel","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"aqua","bold":false}]}, "model": {"type": "minecraft:model", "model": "slimefun/34_fluffy_machines/paxel"}},
 		{"when": {"text":"","extra":[{"text":"Carbonado Fluffy Wrench","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"gray","bold":false}]}, "model": {"type": "minecraft:model", "model": "slimefun/34_fluffy_machines/carbonado_fluffy_wrench"}}
 	],
 

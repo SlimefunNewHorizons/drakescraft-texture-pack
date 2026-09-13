@@ -15,6 +15,7 @@
 
 		{"when": {"text":"","extra":[{"text":"Lumber Axe","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"gold","bold":false}]}, "model": {"type": "minecraft:model", "model": "slimefun/4_tools/lumber_axe"}},
 		{"when": {"text":"","extra":[{"text":"Soulbound Axe","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"red","bold":false}]}, "model": {"type": "minecraft:model", "model": "slimefun/4_tools/soulbound_axe"}},
+		{"when": {"text":"","extra":[{"text":"Paxel","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"aqua","bold":false}]}, "model": {"type": "minecraft:model", "model": "slimefun/34_fluffy_machines/paxel"}},
 		{"when": {"text":"","extra":[{"text":"Reinforced Fluffy Wrench","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"aqua","bold":false}]}, "model": {"type": "minecraft:model", "model": "slimefun/34_fluffy_machines/reinforced_fluffy_wrench"}},
 		{"when": {"text":"","extra":[{"text":"Upgraded Lumber Axe","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"gold","bold":true}]}, "model": {"type": "minecraft:model", "model": "slimefun/34_fluffy_machines/upgraded_lumber_axe"}}
 	],
