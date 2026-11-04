@@ -132,6 +132,87 @@ class LegacyShaderIsolationTests(unittest.TestCase):
                     build(self.base, self.output, digest, model_patches=patches)
                 self.assertEqual(self.output.read_bytes(), b"previous artifact")
 
+    def add_legacy_carrier(self, modern=False):
+        self.carrier = "assets/minecraft/models/item/red_dye.json"
+        self.item = "assets/minecraft/items/red_dye.json"
+        self.entries[self.carrier] = json.dumps({"parent": "minecraft:item/generated",
+            "overrides": [{"predicate": {"custom_model_data": value},
+                           "model": f"svm:item/power{value}"} for value in (1, 3, 7)]}).encode()
+        for value in (1, 3, 7):
+            self.entries[f"assets/svm/models/item/power{value}.json"] = b'{"parent":"item/generated"}'
+        if modern:
+            self.entries[self.item] = json.dumps({"hand_animation_on_swap": False, "model": {
+                "type": "minecraft:select", "property": "minecraft:component",
+                "component": "minecraft:custom_data", "cases": [{"when": {"sf": "KEEP"},
+                    "model": {"type": "model", "model": "slimefun:keep"}}],
+                "fallback": {"type": "model", "model": "item/red_dye"}}}).encode()
+
+    def test_legacy_bridge_matches_old_threshold_selection_and_preserves_source(self):
+        self.add_legacy_carrier()
+        digest = self.write_base()
+        result = build(self.base, self.output, digest, legacy_item_bridges=["red_dye"])
+        with zipfile.ZipFile(self.output) as z:
+            dispatch = json.loads(z.read(self.item))["model"]
+            for value in (0, 0.5, 1, 2, 3, 4, 6.99, 7, 100):
+                with self.subTest(cmd=value):
+                    expected = "minecraft:item/red_dye"
+                    for threshold in (1, 3, 7):
+                        if value >= threshold:
+                            expected = f"svm:item/power{threshold}"
+                    actual = dispatch["fallback"]["model"]
+                    for entry in dispatch["entries"]:
+                        if value >= entry["threshold"]:
+                            actual = entry["model"]["model"]
+                    self.assertEqual(actual, expected)
+            self.assertEqual(z.read(self.carrier), self.entries[self.carrier])
+            for name, data in self.entries.items():
+                if name != "pack.mcmeta" and "/shaders/" not in name:
+                    self.assertEqual(z.read(name), data)
+        first = self.output.read_bytes()
+        build(self.base, self.output, digest, legacy_item_bridges=["red_dye"])
+        self.assertEqual(self.output.read_bytes(), first)
+        self.assertEqual(result["bridged_items"], [self.item])
+
+    def test_legacy_bridge_preserves_slimefun_cases_and_vanilla_fallback(self):
+        self.add_legacy_carrier(modern=True)
+        before = json.loads(self.entries[self.item])
+        build(self.base, self.output, self.write_base(), legacy_item_bridges=["red_dye"])
+        with zipfile.ZipFile(self.output) as z:
+            after = json.loads(z.read(self.item))
+            self.assertEqual(after["model"]["fallback"]["fallback"], before["model"]["fallback"])
+            after["model"]["fallback"] = before["model"]["fallback"]
+            self.assertEqual(after, before)
+
+    def test_invalid_legacy_bridge_preserves_previous_output(self):
+        self.add_legacy_carrier(modern=True)
+        original = dict(self.entries)
+        for failure in ("missing", "extra_predicate", "descending", "duplicate", "zero", "nan", "overlay", "fallback"):
+            with self.subTest(failure=failure):
+                self.entries = dict(original)
+                legacy = json.loads(self.entries[self.carrier])
+                if failure == "missing":
+                    del self.entries["assets/svm/models/item/power1.json"]
+                elif failure == "extra_predicate":
+                    legacy["overrides"][0]["predicate"]["damage"] = 0.5
+                elif failure == "descending":
+                    legacy["overrides"].reverse()
+                elif failure == "duplicate":
+                    legacy["overrides"][1]["predicate"]["custom_model_data"] = 1
+                elif failure in ("zero", "nan"):
+                    legacy["overrides"][0]["predicate"]["custom_model_data"] = 0 if failure == "zero" else float("nan")
+                elif failure == "overlay":
+                    self.entries["modern/" + self.item] = self.entries[self.item]
+                else:
+                    item = json.loads(self.entries[self.item])
+                    item["model"]["fallback"]["model"] = "slimefun:preserve"
+                    self.entries[self.item] = json.dumps(item).encode()
+                self.entries[self.carrier] = json.dumps(legacy).encode()
+                digest = self.write_base()
+                self.output.write_bytes(b"previous artifact")
+                with self.assertRaises(ValueError):
+                    build(self.base, self.output, digest, legacy_item_bridges=["red_dye"])
+                self.assertEqual(self.output.read_bytes(), b"previous artifact")
+
 
 if __name__ == "__main__":
     unittest.main()

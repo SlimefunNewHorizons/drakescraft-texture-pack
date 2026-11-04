@@ -104,6 +104,29 @@ Esta referencia rota está confirmada en el pack; identificar visualmente el
 bloque de la captura del reporte y cargar el candidato en cliente sigue pendiente.
 El parche no amplía el rango de versiones ni está instalado en T2 o Dallas.
 
+### T2: modelos CMD de SVM Powers en clientes modernos (#577)
+
+`--legacy-item-bridges scripts/t2_legacy_item_bridges.json` convierte 53
+selecciones antiguas de `blue_dye`, `pink_dye`, `red_dye` y `tropical_fish` a
+`minecraft:range_dispatch`. Desde [Minecraft 1.21.4](https://www.minecraft.net/en-us/article/minecraft-java-edition-1-21-4),
+los `overrides` de los modelos ya no seleccionan el aspecto del ítem.
+El candidato conserva las selecciones Slimefun existentes de los tintes rosa
+y rojo, colocando el selector CMD solamente en su fallback. CMD ausente o cero
+conserva el modelo anterior; los modelos y texturas originales no cambian.
+
+La opción está apagada por defecto. Rechaza modelos de destino ausentes,
+predicados distintos de CMD, umbrales no positivos o desordenados, y selectores
+modernos u overlays que necesiten revisión. No convierte
+`warped_fungus_on_a_stick`: su CMD 67 referencia `fire_katana`, un modelo ausente;
+elegir otra geometría sin identificarla ocultaría ese fallo.
+
+Validación: 11 pruebas automáticas correctas, incluidos umbrales intermedios,
+prioridad Slimefun, fallback vanilla y conservación del candidato ante errores.
+Se añaden dos definiciones modernas y se modifican los fallbacks de otras dos.
+El rango sigue empezando en 64; esto es un avance parcial de #577, sin prueba
+visual de cliente ni instalación en el servidor. Se puede combinar con los
+parches de shaders, idiomas y textura nevada descritos arriba.
+
 ---
 
 ## 📄 License & Upstream Attribution

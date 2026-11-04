@@ -7,6 +7,7 @@ import argparse
 import copy
 import hashlib
 import json
+import math
 from pathlib import Path
 import re
 import zipfile
@@ -74,9 +75,76 @@ def digest(path: Path, algorithm: str) -> str:
         return hashlib.file_digest(source, algorithm).hexdigest()
 
 
+def bridge_legacy_items(source: zipfile.ZipFile, carriers: list[str]) -> dict[str, bytes]:
+    """Retain CMD-only overrides in modern items, behind existing SF selections."""
+    result = {}
+    if (not isinstance(carriers, list) or not all(isinstance(c, str) for c in carriers)
+            or len(carriers) != len(set(carriers))):
+        raise ValueError("Expected unique legacy item carriers")
+    names = set(source.namelist())
+    for carrier in carriers:
+        if not isinstance(carrier, str) or not re.fullmatch(r"[a-z0-9_]+", carrier):
+            raise ValueError(f"Invalid legacy item carrier: {carrier}")
+        legacy_path = f"assets/minecraft/models/item/{carrier}.json"
+        legacy = json.loads(source.read(legacy_path))
+        entries = []
+        previous = 0
+        for override in legacy.get("overrides", []):
+            predicate = override.get("predicate", {})
+            threshold = predicate.get("custom_model_data")
+            if (set(predicate) != {"custom_model_data"}
+                    or type(threshold) not in (int, float)
+                    or not math.isfinite(threshold) or threshold <= previous):
+                raise ValueError(f"Unsupported legacy predicate or order: {legacy_path}")
+            reference = override.get("model", "")
+            if not isinstance(reference, str):
+                raise ValueError(f"Invalid legacy model: {legacy_path}")
+            if ":" not in reference:
+                reference = "minecraft:" + reference
+            if not re.fullmatch(r"[a-z0-9_.-]+:[a-z0-9_./-]+", reference):
+                raise ValueError(f"Invalid legacy model reference: {reference}")
+            namespace, path = reference.split(":", 1)
+            if any(part in {".", "..", ""} for part in path.split("/")):
+                raise ValueError(f"Invalid legacy model reference: {reference}")
+            target = f"assets/{namespace}/models/{path}.json"
+            if target not in names or source.getinfo(target).is_dir():
+                raise ValueError(f"Missing legacy model: {target}")
+            entries.append({"threshold": threshold,
+                            "model": {"type": "minecraft:model", "model": reference}})
+            previous = threshold
+        if not entries:
+            raise ValueError(f"No legacy overrides: {legacy_path}")
+        item_path = f"assets/minecraft/items/{carrier}.json"
+        if any(name.endswith("/" + item_path) for name in names):
+            raise ValueError(f"Audit modern item in existing overlays: {item_path}")
+        vanilla = {"type": "minecraft:model", "model": f"minecraft:item/{carrier}"}
+        definition = json.loads(source.read(item_path)) if item_path in names else {"model": vanilla}
+        root = definition["model"]
+        # Only the existing vanilla fallback is replaced: SF cases keep priority.
+        selected = root
+        if root.get("type") in {"select", "minecraft:select"}:
+            if (root.get("property") != "minecraft:component"
+                    or root.get("component") != "minecraft:custom_data"):
+                raise ValueError(f"Audit modern item selector: {item_path}")
+            selected = root.get("fallback", {})
+        if (set(selected) != {"type", "model"}
+                or selected["type"] not in {"model", "minecraft:model"}
+                or selected["model"] not in {f"item/{carrier}", f"minecraft:item/{carrier}"}):
+            raise ValueError(f"Audit modern item fallback: {item_path}")
+        dispatch = {"type": "minecraft:range_dispatch", "property": "minecraft:custom_model_data",
+                    "index": 0, "entries": entries, "fallback": selected}
+        if selected is root:
+            definition["model"] = dispatch
+        else:
+            root["fallback"] = dispatch
+        result[item_path] = (json.dumps(definition, ensure_ascii=False, indent=2) + "\n").encode()
+    return result
+
+
 def build(base: Path, output: Path, expected_sha256: str,
           language_patches: dict | None = None,
-          model_patches: dict | None = None) -> dict[str, object]:
+          model_patches: dict | None = None,
+          legacy_item_bridges: list[str] | None = None) -> dict[str, object]:
     if base.resolve() == output.resolve():
         raise ValueError("The input pack must be preserved")
     if digest(base, "sha256") != expected_sha256:
@@ -87,7 +155,8 @@ def build(base: Path, output: Path, expected_sha256: str,
             raise ValueError("Duplicate ZIP entries")
         languages = patch_languages(source, language_patches or {})
         models = patch_model_textures(source, model_patches or {})
-        replacements = {**languages, **models}
+        items = bridge_legacy_items(source, legacy_item_bridges if legacy_item_bridges is not None else [])
+        replacements = {**languages, **models, **items}
         metadata = json.loads(source.read("pack.mcmeta"))
         overlays = metadata.setdefault("overlays", {}).setdefault("entries", [])
         if any(entry["directory"] == OVERLAY for entry in overlays):
@@ -118,6 +187,10 @@ def build(base: Path, output: Path, expected_sha256: str,
                 content = (json.dumps(metadata, ensure_ascii=False, indent=2) + "\n").encode() \
                     if name == "pack.mcmeta" else replacements.get(name, source.read(name))
                 target.writestr(info, content)
+            for name in sorted(set(items) - set(names)):
+                info = zipfile.ZipInfo(name, date_time=source.getinfo("pack.mcmeta").date_time)
+                info.compress_type = zipfile.ZIP_DEFLATED
+                target.writestr(info, items[name])
     return {
         "base_sha256": expected_sha256,
         "sha256": digest(output, "sha256"),
@@ -126,6 +199,7 @@ def build(base: Path, output: Path, expected_sha256: str,
         "legacy_shaders": shaders,
         "patched_languages": sorted(languages),
         "patched_models": sorted(models),
+        "bridged_items": sorted(items),
     }
 
 
@@ -138,10 +212,13 @@ def main() -> None:
                         help="Optional JSON mapping language paths to translation replacements")
     parser.add_argument("--model-patches", type=Path,
                         help="Optional JSON mapping model paths to existing texture-slot replacements")
+    parser.add_argument("--legacy-item-bridges", type=Path,
+                        help="Optional JSON list of CMD-only legacy carriers to bridge to modern items")
     args = parser.parse_args()
     patches = json.loads(args.language_patches.read_text()) if args.language_patches else None
     models = json.loads(args.model_patches.read_text()) if args.model_patches else None
-    print(json.dumps(build(args.base, args.output, args.base_sha256, patches, models), indent=2))
+    bridges = json.loads(args.legacy_item_bridges.read_text()) if args.legacy_item_bridges else None
+    print(json.dumps(build(args.base, args.output, args.base_sha256, patches, models, bridges), indent=2))
 
 
 if __name__ == "__main__":
