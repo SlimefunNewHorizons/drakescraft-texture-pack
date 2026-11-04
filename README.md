@@ -43,6 +43,35 @@ python3 scripts/build_resource_pack.py \
 - **Compatibilidad**: Minecraft Java 1.21 - 1.21.11
 - **Herramientas**: Python 3.11+ / Pillow
 
+## T2: aislamiento de shaders antiguos (#576)
+
+El pack combinado de T2 es distinto del SF-only de producción. Su shader
+`minecraft:core/item` usa sintaxis anterior al cambio a ShaderC/SPIR-V de
+[Minecraft 26.3](https://www.minecraft.net/en-us/article/minecraft-java-edition-26-3).
+El constructor específico conserva todos sus recursos y mueve los tres shaders
+antiguos a `overlay_legacy_shaders`, activo únicamente entre los formatos 64 y 88
+(hasta 26.2). Los clientes posteriores usan sus shaders originales. El efecto
+adicional de ojos brillantes del pack queda limitado a ese rango antiguo.
+
+```bash
+python3 scripts/build_t2_pack.py \
+  --base /ruta/al/t2-original.zip \
+  --base-sha256 d926125ce9fae17d7544e69b88d68008633c29dc371b13d8a63f6f44a810a643 \
+  --output /ruta/al/t2-corregido.zip
+python3 -m unittest discover -s scripts -p test_build_t2_pack.py -v
+```
+
+El ZIP base se conserva en el respaldo operativo; su hash identifica el ensamblado
+previo. El constructor rechaza una base distinta, duplicados o shaders adicionales
+en overlays que requieran auditoría. No incorpora los overrides del constructor
+SF-only ni modifica modelos, texturas, idiomas o los otros overlays.
+
+Validación del 4 de noviembre de 2026: cuatro pruebas automáticas correctas y
+12.297 contenidos idénticos al ZIP original; solo cambia la ubicación de los tres
+shaders y `pack.mcmeta`. **Pendiente: carga y comprobación visual en cliente 26.3.**
+Esto no certifica compatibilidad universal de 1.21 a 26.4 (#577): el rango anunciado
+por el pack base empieza en el formato 64 y debe auditarse por separado.
+
 ---
 
 ## 📄 License & Upstream Attribution
