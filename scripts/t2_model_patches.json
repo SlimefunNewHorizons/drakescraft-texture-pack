@@ -1,0 +1,5 @@
+{
+  "assets/stellarity/models/block/ender_grass_block_snowy.json": {
+    "side": "stellarity:block/ender_grass_block_side_snow"
+  }
+}

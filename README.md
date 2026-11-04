@@ -90,6 +90,20 @@ y [26.4 snapshot 7 el 102.0](https://www.minecraft.net/en-us/article/minecraft-2
 La versión final 26.4 y la carga visual por cliente siguen pendientes de prueba.
 El candidato no está instalado y no modifica el pack SF-only de Dallas.
 
+### T2: textura lateral de hierba nevada de Stellarity (#573)
+
+El modelo `ender_grass_block_snowy.json` apuntaba a
+`stellarity:block/ender_grass_block_snow`, una textura ausente. El parche opcional
+`--model-patches scripts/t2_model_patches.json` usa la textura existente
+`stellarity:block/ender_grass_block_side_snow`. Conserva los demás campos del
+modelo y los bytes de todas las texturas. El constructor exige que cada slot
+exista y que el PNG de reemplazo esté dentro del ZIP antes de abrir la salida.
+Se puede combinar con `--language-patches`.
+
+Esta referencia rota está confirmada en el pack; identificar visualmente el
+bloque de la captura del reporte y cargar el candidato en cliente sigue pendiente.
+El parche no amplía el rango de versiones ni está instalado en T2 o Dallas.
+
 ---
 
 ## 📄 License & Upstream Attribution

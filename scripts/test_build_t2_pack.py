@@ -100,6 +100,38 @@ class LegacyShaderIsolationTests(unittest.TestCase):
                     build(self.base, self.output, digest, patches)
                 self.assertEqual(self.output.read_bytes(), b"previous artifact")
 
+    def test_model_patch_repairs_missing_texture_and_preserves_model(self):
+        name = "assets/stellarity/models/block/ender_grass_block_snowy.json"
+        model = {"parent": "minecraft:block/cube_bottom_top", "textures": {
+            "side": "stellarity:block/missing", "top": "minecraft:block/snow"},
+            "display": {"gui": {"scale": [0.5, 0.5, 0.5]}}}
+        self.entries[name] = json.dumps(model).encode()
+        png = "assets/stellarity/textures/block/ender_grass_block_side_snow.png"
+        self.entries[png] = b"snow texture"
+        patches = {name: {"side": "stellarity:block/ender_grass_block_side_snow"}}
+        result = build(self.base, self.output, self.write_base(), model_patches=patches)
+        with zipfile.ZipFile(self.output) as z:
+            expected = json.loads(json.dumps(model))
+            expected["textures"]["side"] = patches[name]["side"]
+            self.assertEqual(json.loads(z.read(name)), expected)
+            self.assertEqual(z.read(png), self.entries[png])
+            self.assertEqual(z.read("assets/slimefun/textures/item/machine.png"), b"texture bytes")
+        self.assertEqual(result["patched_models"], [name])
+
+    def test_invalid_model_patch_leaves_output_untouched(self):
+        name = "assets/stellarity/models/block/snowy.json"
+        self.entries[name] = b'{"textures":{"side":"stellarity:block/missing"}}'
+        digest = self.write_base()
+        for patches in [{name: {"side": "stellarity:block/absent"}},
+                        {name: {"unknown": "minecraft:block/snow"}},
+                        {name: {"side": "stellarity:block/../snow"}},
+                        {name: {"side": "#side"}}, {"../pack.mcmeta": {}}]:
+            with self.subTest(patches=patches):
+                self.output.write_bytes(b"previous artifact")
+                with self.assertRaises(ValueError):
+                    build(self.base, self.output, digest, model_patches=patches)
+                self.assertEqual(self.output.read_bytes(), b"previous artifact")
+
 
 if __name__ == "__main__":
     unittest.main()

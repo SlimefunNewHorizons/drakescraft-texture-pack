@@ -44,13 +44,39 @@ def is_shader(name: str) -> bool:
     return len(parts) >= 4 and parts[0] == "assets" and parts[2] == "shaders"
 
 
+def patch_model_textures(source: zipfile.ZipFile, patches: dict) -> dict[str, bytes]:
+    """Replace existing texture slots only when the target PNG is in the pack."""
+    result = {}
+    for name, replacements in patches.items():
+        if (not re.fullmatch(r"assets/[a-z0-9_.-]+/models/[a-z0-9_./-]+\.json", name)
+                or any(part in {".", "..", ""} for part in name.split("/"))):
+            raise ValueError(f"Invalid model path: {name}")
+        model = json.loads(source.read(name))
+        textures = model.get("textures", {})
+        for slot, reference in replacements.items():
+            if slot not in textures or not isinstance(reference, str):
+                raise ValueError(f"Invalid texture slot: {name}: {slot}")
+            if not re.fullmatch(r"[a-z0-9_.-]+:[a-z0-9_./-]+", reference):
+                raise ValueError(f"Invalid texture reference: {reference}")
+            namespace, path = reference.split(":", 1)
+            if any(part in {".", "..", ""} for part in path.split("/")):
+                raise ValueError(f"Invalid texture reference: {reference}")
+            target = f"assets/{namespace}/textures/{path}.png"
+            if target not in source.namelist() or source.getinfo(target).is_dir():
+                raise ValueError(f"Missing replacement texture: {target}")
+            textures[slot] = reference
+        result[name] = (json.dumps(model, ensure_ascii=False, indent=2) + "\n").encode()
+    return result
+
+
 def digest(path: Path, algorithm: str) -> str:
     with path.open("rb") as source:
         return hashlib.file_digest(source, algorithm).hexdigest()
 
 
 def build(base: Path, output: Path, expected_sha256: str,
-          language_patches: dict | None = None) -> dict[str, object]:
+          language_patches: dict | None = None,
+          model_patches: dict | None = None) -> dict[str, object]:
     if base.resolve() == output.resolve():
         raise ValueError("The input pack must be preserved")
     if digest(base, "sha256") != expected_sha256:
@@ -60,6 +86,8 @@ def build(base: Path, output: Path, expected_sha256: str,
         if len(names) != len(set(names)):
             raise ValueError("Duplicate ZIP entries")
         languages = patch_languages(source, language_patches or {})
+        models = patch_model_textures(source, model_patches or {})
+        replacements = {**languages, **models}
         metadata = json.loads(source.read("pack.mcmeta"))
         overlays = metadata.setdefault("overlays", {}).setdefault("entries", [])
         if any(entry["directory"] == OVERLAY for entry in overlays):
@@ -88,7 +116,7 @@ def build(base: Path, output: Path, expected_sha256: str,
                 if name in shaders:
                     info.filename = f"{OVERLAY}/{name}"
                 content = (json.dumps(metadata, ensure_ascii=False, indent=2) + "\n").encode() \
-                    if name == "pack.mcmeta" else languages.get(name, source.read(name))
+                    if name == "pack.mcmeta" else replacements.get(name, source.read(name))
                 target.writestr(info, content)
     return {
         "base_sha256": expected_sha256,
@@ -97,6 +125,7 @@ def build(base: Path, output: Path, expected_sha256: str,
         "bytes": output.stat().st_size,
         "legacy_shaders": shaders,
         "patched_languages": sorted(languages),
+        "patched_models": sorted(models),
     }
 
 
@@ -107,9 +136,12 @@ def main() -> None:
     parser.add_argument("--output", required=True, type=Path)
     parser.add_argument("--language-patches", type=Path,
                         help="Optional JSON mapping language paths to translation replacements")
+    parser.add_argument("--model-patches", type=Path,
+                        help="Optional JSON mapping model paths to existing texture-slot replacements")
     args = parser.parse_args()
     patches = json.loads(args.language_patches.read_text()) if args.language_patches else None
-    print(json.dumps(build(args.base, args.output, args.base_sha256, patches), indent=2))
+    models = json.loads(args.model_patches.read_text()) if args.model_patches else None
+    print(json.dumps(build(args.base, args.output, args.base_sha256, patches, models), indent=2))
 
 
 if __name__ == "__main__":
