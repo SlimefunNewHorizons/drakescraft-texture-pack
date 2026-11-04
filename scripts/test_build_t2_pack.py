@@ -73,6 +73,33 @@ class LegacyShaderIsolationTests(unittest.TestCase):
             build(self.base, self.output, self.write_base())
         self.assertFalse(self.output.exists())
 
+    def test_language_patch_preserves_other_keys_resources_and_placeholders(self):
+        en = "assets/stellarity/lang/en_us.json"
+        es = "assets/stellarity/lang/es_es.json"
+        self.entries[en] = b'{"title":"title","tooltip":"%1$s: %2$s","other":"Keep"}'
+        self.entries[es] = b'{"title":"title","tooltip":"tooltip","other":"Conservar"}'
+        patches = {en: {"title": "Journey's End"}, es: {
+            "title": "El final del viaje", "tooltip": "%1$s: %2$s"}}
+        build(self.base, self.output, self.write_base(), patches)
+        with zipfile.ZipFile(self.output) as z:
+            self.assertEqual(json.loads(z.read(es)), {
+                "title": "El final del viaje", "tooltip": "%1$s: %2$s", "other": "Conservar"})
+            self.assertEqual(z.read("assets/slimefun/textures/item/machine.png"), b"texture bytes")
+            self.assertEqual(set(json.loads(z.read(en))), {"title", "tooltip", "other"})
+
+    def test_invalid_language_patch_leaves_output_untouched(self):
+        en = "assets/stellarity/lang/en_us.json"
+        self.entries[en] = b'{"tooltip":"%1$s: %2$s"}'
+        digest = self.write_base()
+        for patches in [{en: {"tooltip": "%1$s"}}, {en: {"missing": "text"}},
+                        {en: {"tooltip": "tooltip"}}, {"../pack.mcmeta": {}},
+                        {en: {"tooltip": " "}}]:
+            with self.subTest(patches=patches):
+                self.output.write_bytes(b"previous artifact")
+                with self.assertRaises(ValueError):
+                    build(self.base, self.output, digest, patches)
+                self.assertEqual(self.output.read_bytes(), b"previous artifact")
+
 
 if __name__ == "__main__":
     unittest.main()

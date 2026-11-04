@@ -8,11 +8,35 @@ import copy
 import hashlib
 import json
 from pathlib import Path
+import re
 import zipfile
 
 
 OVERLAY = "overlay_legacy_shaders"
 MAX_LEGACY_FORMAT = 88  # Minecraft 26.2; 26.3 uses ShaderC/SPIR-V.
+PLACEHOLDER = re.compile(r"%(?:\d+\$)?[sd]|%%")
+
+
+def patch_languages(source: zipfile.ZipFile, patches: dict) -> dict[str, bytes]:
+    """Validate all patches before writing; preserve existing translation keys."""
+    result = {}
+    for name, replacements in patches.items():
+        if not re.fullmatch(r"assets/[a-z0-9_.-]+/lang/[a-z]{2}_[a-z]{2}\.json", name):
+            raise ValueError(f"Invalid language path: {name}")
+        translations = json.loads(source.read(name))
+        for key, value in replacements.items():
+            if key not in translations or not isinstance(value, str) or not value.strip() or value == key:
+                raise ValueError(f"Invalid translation: {name}: {key}")
+            # A raw key has no reliable placeholders: compare against English.
+            reference = translations[key]
+            if reference == key:
+                english = json.loads(source.read(name.rsplit('/', 1)[0] + '/en_us.json'))
+                reference = english[key]
+            if sorted(PLACEHOLDER.findall(reference)) != sorted(PLACEHOLDER.findall(value)):
+                raise ValueError(f"Translation placeholders differ: {name}: {key}")
+            translations[key] = value
+        result[name] = (json.dumps(translations, ensure_ascii=False, indent=2) + "\n").encode()
+    return result
 
 
 def is_shader(name: str) -> bool:
@@ -25,7 +49,8 @@ def digest(path: Path, algorithm: str) -> str:
         return hashlib.file_digest(source, algorithm).hexdigest()
 
 
-def build(base: Path, output: Path, expected_sha256: str) -> dict[str, object]:
+def build(base: Path, output: Path, expected_sha256: str,
+          language_patches: dict | None = None) -> dict[str, object]:
     if base.resolve() == output.resolve():
         raise ValueError("The input pack must be preserved")
     if digest(base, "sha256") != expected_sha256:
@@ -34,6 +59,7 @@ def build(base: Path, output: Path, expected_sha256: str) -> dict[str, object]:
         names = source.namelist()
         if len(names) != len(set(names)):
             raise ValueError("Duplicate ZIP entries")
+        languages = patch_languages(source, language_patches or {})
         metadata = json.loads(source.read("pack.mcmeta"))
         overlays = metadata.setdefault("overlays", {}).setdefault("entries", [])
         if any(entry["directory"] == OVERLAY for entry in overlays):
@@ -62,7 +88,7 @@ def build(base: Path, output: Path, expected_sha256: str) -> dict[str, object]:
                 if name in shaders:
                     info.filename = f"{OVERLAY}/{name}"
                 content = (json.dumps(metadata, ensure_ascii=False, indent=2) + "\n").encode() \
-                    if name == "pack.mcmeta" else source.read(name)
+                    if name == "pack.mcmeta" else languages.get(name, source.read(name))
                 target.writestr(info, content)
     return {
         "base_sha256": expected_sha256,
@@ -70,6 +96,7 @@ def build(base: Path, output: Path, expected_sha256: str) -> dict[str, object]:
         "sha1": digest(output, "sha1"),
         "bytes": output.stat().st_size,
         "legacy_shaders": shaders,
+        "patched_languages": sorted(languages),
     }
 
 
@@ -78,8 +105,11 @@ def main() -> None:
     parser.add_argument("--base", required=True, type=Path)
     parser.add_argument("--base-sha256", required=True)
     parser.add_argument("--output", required=True, type=Path)
+    parser.add_argument("--language-patches", type=Path,
+                        help="Optional JSON mapping language paths to translation replacements")
     args = parser.parse_args()
-    print(json.dumps(build(args.base, args.output, args.base_sha256), indent=2))
+    patches = json.loads(args.language_patches.read_text()) if args.language_patches else None
+    print(json.dumps(build(args.base, args.output, args.base_sha256, patches), indent=2))
 
 
 if __name__ == "__main__":

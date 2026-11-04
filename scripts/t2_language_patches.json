@@ -1,0 +1,34 @@
+{
+  "assets/stellarity/lang/en_us.json": {
+    "advancements.stellarity.ambrosia": "Ambrosia",
+    "advancements.stellarity.ambrosia.description": "Transmute any applicable food item into its divine variant, and then eat it to gain a permanent buff",
+    "advancements.stellarity.anger_enderman": "It's Rude to Stare!",
+    "advancements.stellarity.anger_enderman.description": "Enrage an Enderman by looking at it",
+    "advancements.stellarity.imbuements": "Imbuements",
+    "advancements.stellarity.imbuements.description": "Use Dragon's Breath to brew a Lingering Potion",
+    "advancements.stellarity.kill_dragon.description": "The Beast is dead and The End is waiting for you to discover its secrets...",
+    "item.stellarity.dragon_eye": "Dragon's Eye",
+    "item.stellarity.empty_enchanted_book.description.5": "of what lies within"
+  },
+  "assets/stellarity/lang/es_es.json": {
+    "advancements.stellarity.altar_of_the_accursed_recipe_book": "Altar de los Malditos",
+    "advancements.stellarity.altar_of_the_accursed_recipe_book.description": "La oscura y siniestra mesa de trabajo",
+    "advancements.stellarity.journeys_end": "El final del viaje",
+    "advancements.stellarity.journeys_end.description": "Usa 12 ojos de Ender para activar el portal del End",
+    "item.stellarity.endonomicon.description": "Un tomo antiguo que contiene conocimientos sobre el End (en realidad no)",
+    "item.stellarity.harvester.ability.cryonics": "Criogenia",
+    "item.stellarity.harvester.ability.ebrittlement": "Fragilidad",
+    "item.stellarity.harvester.ability.echo": "Eco",
+    "item.stellarity.harvester.ability.frostburn": "Quemadura helada",
+    "item.stellarity.harvester.ability.hint": "Tu espada tiembla mientras absorbe esta alma...",
+    "item.stellarity.harvester.ability.known": "CONOCIDA",
+    "item.stellarity.harvester.ability.tooltip": "%1$s: %2$s",
+    "item.stellarity.harvester.description.6": "Te susurra... Quiere más",
+    "item.stellarity.harvester.description.7": "Se vuelve más pesada con cada alma que absorbe",
+    "item.stellarity.harvester.description.8": "Pero todavía le queda mucho por absorber",
+    "item.stellarity.harvester.description.9": "Se está volviendo muy pesada, aunque",
+    "item.stellarity.tamaris.disabled": "DESACTIVADO",
+    "message.stellarity.spellbook_ready": "El libro está listo.",
+    "stellarity.config.enable_totem_void_saving.description": "Permite que los tótems de inmortalidad te salven del vacío."
+  }
+}

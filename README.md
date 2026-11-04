@@ -72,6 +72,24 @@ shaders y `pack.mcmeta`. **Pendiente: carga y comprobación visual en cliente 26
 Esto no certifica compatibilidad universal de 1.21 a 26.4 (#577): el rango anunciado
 por el pack base empieza en el formato 64 y debe auditarse por separado.
 
+### T2: correcciones de idioma (#577)
+
+El constructor acepta `--language-patches scripts/t2_language_patches.json` para
+corregir 26 traducciones que devolvían su propia clave (9 en inglés y 17 en
+español), y traducir el título y la descripción de `journeys_end` al español.
+Los demás textos se conservan; esto no constituye una traducción completa.
+Se rechazan rutas ajenas a idiomas, claves desconocidas, valores vacíos y cambios
+de placeholders como `%1$s: %2$s`, antes de abrir el archivo de salida.
+
+Validación estática: seis pruebas, mismas claves de idioma y mismos bytes de
+modelos, texturas y demás recursos. El ZIP candidato conserva el mínimo 64:
+no se amplía un rango solo para ocultar el aviso de incompatibilidad.
+[26.2 usa el formato 88.0](https://www.minecraft.net/en-us/article/minecraft-java-edition-26-2),
+[26.3 el 97.1](https://www.minecraft.net/en-us/article/minecraft-java-edition-26-3)
+y [26.4 snapshot 7 el 102.0](https://www.minecraft.net/en-us/article/minecraft-26-4-snapshot-7).
+La versión final 26.4 y la carga visual por cliente siguen pendientes de prueba.
+El candidato no está instalado y no modifica el pack SF-only de Dallas.
+
 ---
 
 ## 📄 License & Upstream Attribution
