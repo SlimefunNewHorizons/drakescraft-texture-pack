@@ -127,6 +127,27 @@ El rango sigue empezando en 64; esto es un avance parcial de #577, sin prueba
 visual de cliente ni instalación en el servidor. Se puede combinar con los
 parches de shaders, idiomas y textura nevada descritos arriba.
 
+El candidato extendido permite convertir también las 124 selecciones de
+`warped_fungus_on_a_stick` con opciones explícitas:
+
+```bash
+--legacy-item-bridges scripts/t2_extended_item_bridges.json \
+--missing-model-fallbacks scripts/t2_missing_model_fallbacks.json
+```
+
+Esto sustituye únicamente la selección moderna CMD 67 por el modelo existente
+`fire_katana2`. Es una sustitución visual temporal: no recupera la geometría
+original de `fire_katana`. Conserva los otros 123 destinos, todos los umbrales,
+las selecciones Slimefun, los modelos antiguos y sus texturas. El constructor
+rechaza sustituciones de modelos que sí existen, destinos ausentes y entradas
+sin utilizar. El informe del ZIP enumera la sustitución aplicada.
+
+Ambas opciones quedan apagadas por defecto; el listado anterior de cuatro
+carriers conserva su comportamiento. Para volver al candidato anterior basta
+omitir `--missing-model-fallbacks` y usar `t2_legacy_item_bridges.json`.
+Validación del constructor: 13 pruebas automáticas correctas. Sigue pendiente
+la carga visual en cliente y la compatibilidad completa 1.21–26.4; no instalado.
+
 ---
 
 ## 📄 License & Upstream Attribution

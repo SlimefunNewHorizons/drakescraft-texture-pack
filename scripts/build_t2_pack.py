@@ -75,13 +75,33 @@ def digest(path: Path, algorithm: str) -> str:
         return hashlib.file_digest(source, algorithm).hexdigest()
 
 
-def bridge_legacy_items(source: zipfile.ZipFile, carriers: list[str]) -> dict[str, bytes]:
+def bridge_legacy_items(source: zipfile.ZipFile, carriers: list[str],
+                        missing_model_fallbacks: dict[str, str] | None = None) -> dict[str, bytes]:
     """Retain CMD-only overrides in modern items, behind existing SF selections."""
     result = {}
     if (not isinstance(carriers, list) or not all(isinstance(c, str) for c in carriers)
             or len(carriers) != len(set(carriers))):
         raise ValueError("Expected unique legacy item carriers")
     names = set(source.namelist())
+    fallbacks = missing_model_fallbacks if missing_model_fallbacks is not None else {}
+    if not isinstance(fallbacks, dict):
+        raise ValueError("Expected a mapping of missing models to existing models")
+    def model_path(reference):
+        if (not isinstance(reference, str)
+                or not re.fullmatch(r"[a-z0-9_.-]+:[a-z0-9_./-]+", reference)):
+            raise ValueError(f"Invalid fallback model reference: {reference}")
+        namespace, path = reference.split(":", 1)
+        if any(part in {".", "..", ""} for part in path.split("/")):
+            raise ValueError(f"Invalid fallback model reference: {reference}")
+        return f"assets/{namespace}/models/{path}.json"
+
+    for missing, replacement in fallbacks.items():
+        if model_path(missing) in names:
+            raise ValueError(f"Fallback would replace an existing model: {missing}")
+        target = model_path(replacement)
+        if target not in names or source.getinfo(target).is_dir():
+            raise ValueError(f"Missing fallback model: {target}")
+    used_fallbacks = set()
     for carrier in carriers:
         if not isinstance(carrier, str) or not re.fullmatch(r"[a-z0-9_]+", carrier):
             raise ValueError(f"Invalid legacy item carrier: {carrier}")
@@ -108,7 +128,10 @@ def bridge_legacy_items(source: zipfile.ZipFile, carriers: list[str]) -> dict[st
                 raise ValueError(f"Invalid legacy model reference: {reference}")
             target = f"assets/{namespace}/models/{path}.json"
             if target not in names or source.getinfo(target).is_dir():
-                raise ValueError(f"Missing legacy model: {target}")
+                if reference not in fallbacks:
+                    raise ValueError(f"Missing legacy model: {target}")
+                used_fallbacks.add(reference)
+                reference = fallbacks[reference]
             entries.append({"threshold": threshold,
                             "model": {"type": "minecraft:model", "model": reference}})
             previous = threshold
@@ -138,13 +161,16 @@ def bridge_legacy_items(source: zipfile.ZipFile, carriers: list[str]) -> dict[st
         else:
             root["fallback"] = dispatch
         result[item_path] = (json.dumps(definition, ensure_ascii=False, indent=2) + "\n").encode()
+    if used_fallbacks != set(fallbacks):
+        raise ValueError("Unused missing model fallbacks: audit the selected carriers")
     return result
 
 
 def build(base: Path, output: Path, expected_sha256: str,
           language_patches: dict | None = None,
           model_patches: dict | None = None,
-          legacy_item_bridges: list[str] | None = None) -> dict[str, object]:
+          legacy_item_bridges: list[str] | None = None,
+          missing_model_fallbacks: dict[str, str] | None = None) -> dict[str, object]:
     if base.resolve() == output.resolve():
         raise ValueError("The input pack must be preserved")
     if digest(base, "sha256") != expected_sha256:
@@ -155,7 +181,8 @@ def build(base: Path, output: Path, expected_sha256: str,
             raise ValueError("Duplicate ZIP entries")
         languages = patch_languages(source, language_patches or {})
         models = patch_model_textures(source, model_patches or {})
-        items = bridge_legacy_items(source, legacy_item_bridges if legacy_item_bridges is not None else [])
+        items = bridge_legacy_items(source, legacy_item_bridges if legacy_item_bridges is not None else [],
+                                    missing_model_fallbacks)
         replacements = {**languages, **models, **items}
         metadata = json.loads(source.read("pack.mcmeta"))
         overlays = metadata.setdefault("overlays", {}).setdefault("entries", [])
@@ -200,6 +227,7 @@ def build(base: Path, output: Path, expected_sha256: str,
         "patched_languages": sorted(languages),
         "patched_models": sorted(models),
         "bridged_items": sorted(items),
+        "missing_model_fallbacks": missing_model_fallbacks or {},
     }
 
 
@@ -214,11 +242,14 @@ def main() -> None:
                         help="Optional JSON mapping model paths to existing texture-slot replacements")
     parser.add_argument("--legacy-item-bridges", type=Path,
                         help="Optional JSON list of CMD-only legacy carriers to bridge to modern items")
+    parser.add_argument("--missing-model-fallbacks", type=Path,
+                        help="Optional explicit substitutions for absent legacy models (modern items only)")
     args = parser.parse_args()
     patches = json.loads(args.language_patches.read_text()) if args.language_patches else None
     models = json.loads(args.model_patches.read_text()) if args.model_patches else None
     bridges = json.loads(args.legacy_item_bridges.read_text()) if args.legacy_item_bridges else None
-    print(json.dumps(build(args.base, args.output, args.base_sha256, patches, models, bridges), indent=2))
+    fallbacks = json.loads(args.missing_model_fallbacks.read_text()) if args.missing_model_fallbacks else None
+    print(json.dumps(build(args.base, args.output, args.base_sha256, patches, models, bridges, fallbacks), indent=2))
 
 
 if __name__ == "__main__":

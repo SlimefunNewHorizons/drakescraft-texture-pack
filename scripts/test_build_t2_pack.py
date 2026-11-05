@@ -213,6 +213,46 @@ class LegacyShaderIsolationTests(unittest.TestCase):
                     build(self.base, self.output, digest, legacy_item_bridges=["red_dye"])
                 self.assertEqual(self.output.read_bytes(), b"previous artifact")
 
+    def test_explicit_missing_model_fallback_only_changes_modern_selection(self):
+        self.add_legacy_carrier(modern=True)
+        del self.entries["assets/svm/models/item/power3.json"]
+        fallbacks = {"svm:item/power3": "svm:item/power7"}
+        digest = self.write_base()
+        with self.assertRaisesRegex(ValueError, "Missing legacy model"):
+            build(self.base, self.output, digest, legacy_item_bridges=["red_dye"])
+        result = build(self.base, self.output, digest, legacy_item_bridges=["red_dye"],
+                       missing_model_fallbacks=fallbacks)
+        with zipfile.ZipFile(self.output) as z:
+            before = json.loads(self.entries[self.item])
+            after = json.loads(z.read(self.item))
+            dispatch = after["model"]["fallback"]
+            self.assertEqual([e["threshold"] for e in dispatch["entries"]], [1, 3, 7])
+            self.assertEqual([e["model"]["model"] for e in dispatch["entries"]],
+                             ["svm:item/power1", "svm:item/power7", "svm:item/power7"])
+            after["model"]["fallback"] = before["model"]["fallback"]
+            self.assertEqual(after, before)
+            self.assertEqual(z.read(self.carrier), self.entries[self.carrier])
+            self.assertEqual(z.read("assets/svm/models/item/power7.json"),
+                             self.entries["assets/svm/models/item/power7.json"])
+        self.assertEqual(result["missing_model_fallbacks"], fallbacks)
+
+    def test_fallback_rejects_typos_existing_models_and_missing_targets_before_output(self):
+        self.add_legacy_carrier()
+        del self.entries["assets/svm/models/item/power3.json"]
+        digest = self.write_base()
+        for fallbacks in (["svm:item/power3"],
+                          {"svm:item/power3": "svm:item/absent"},
+                          {"svm:item/power1": "svm:item/power7"},
+                          {"svm:item/power3": "svm:item/../power7"},
+                          {"svm:item/../power3": "svm:item/power7"},
+                          {"svm:item/power3": "svm:item/power7", "svm:item/typo": "svm:item/power7"}):
+            with self.subTest(fallbacks=fallbacks):
+                self.output.write_bytes(b"previous artifact")
+                with self.assertRaises(ValueError):
+                    build(self.base, self.output, digest, legacy_item_bridges=["red_dye"],
+                          missing_model_fallbacks=fallbacks)
+                self.assertEqual(self.output.read_bytes(), b"previous artifact")
+
 
 if __name__ == "__main__":
     unittest.main()
