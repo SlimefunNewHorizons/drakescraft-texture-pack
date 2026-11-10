@@ -1,7 +1,90 @@
 {
   "pack": {
-    "min_format": [75, 0],
-    "max_format": [75, 0],
-    "description": "§bSlimefun §6DrakesCraft §8| §7Ítems Slimefun"
+    "pack_format": 64,
+    "description": [
+      "§6DrakesCraft §bSovereign Pack §7(1.20 - 26.2+)",
+      "\n§eStarSuites §8· §fSlimefun §8· §dHUD & Audio Overhaul"
+    ],
+    "supported_formats": {
+      "min_inclusive": 15,
+      "max_inclusive": 120
+    },
+    "min_format": [
+      15,
+      0
+    ],
+    "max_format": [
+      120,
+      99
+    ]
+  },
+  "overlays": {
+    "entries": [
+      {
+        "directory": "overlay_1_21_6_plus",
+        "formats": {
+          "min_inclusive": 55,
+          "max_inclusive": 500
+        },
+        "min_format": [
+          55,
+          0
+        ],
+        "max_format": [
+          500,
+          0
+        ]
+      },
+      {
+        "directory": "overlay_1_21_11",
+        "formats": {
+          "min_inclusive": 75,
+          "max_inclusive": 500
+        },
+        "min_format": [
+          75,
+          0
+        ],
+        "max_format": [
+          500,
+          0
+        ]
+      },
+      {
+        "directory": "overlay_26_1_2",
+        "formats": {
+          "min_inclusive": 84,
+          "max_inclusive": 500
+        },
+        "min_format": [
+          84,
+          0
+        ],
+        "max_format": [
+          500,
+          0
+        ]
+      }
+    ]
+  },
+  "Credits": {
+    "Raulh22": "https://www.planetminecraft.com/texture-pack/slimefun-texture-by-raulh22/",
+    "Den4enko": "https://github.com/Den4enko/Slimefun-Resourcepack",
+    "LoneDev": " https://www.spigotmc.org/resources/addon-slimefun4-textures-for-itemsadder.83877/",
+    "Caribax": "https://github.com/Mooy1/InfinityExpansion/releases/tag/v1",
+    "ybw0014": "https://gzss.link/sf-texture",
+    "DragonMysterious": "On Discord",
+    "AnsonYK": "On Discord",
+    "Sofia Redmond": "https://github.com/SofiaRedmond",
+    "Jerry": "https://github.com/Keeywe",
+    "haiman": "https://github.com/haiman233",
+    "RelativoBR": "https://github.com/RelativoBR",
+    "Filosofas154": "https://github.com/Filosofas154",
+    "JustAHuman-xD": "https://github.com/JustAHuman-xD",
+    "MathMelo": "https://www.planetminecraft.com/texture-pack/slimefun-supreme-resource-pack",
+    "Pandicka": "https://github.com/AlmostPanda",
+    "FromTheFog": "Lunar Eclipse Studios",
+    "SVMPowers": "SVM Powers",
+    "Stellarity": "Stellarity (Modrinth)"
   }
 }

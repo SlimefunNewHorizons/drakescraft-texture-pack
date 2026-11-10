@@ -1,0 +1,162 @@
+{
+  "block.grass.step": {
+    "sounds": [
+      {
+        "name": "step/grass1",
+        "volume": 0.65
+      },
+      {
+        "name": "step/grass2",
+        "volume": 0.65
+      },
+      {
+        "name": "step/grass3",
+        "volume": 0.65
+      },
+      {
+        "name": "step/grass4",
+        "volume": 0.65
+      },
+      {
+        "name": "step/grass5",
+        "volume": 0.65
+      },
+      {
+        "name": "step/grass6",
+        "volume": 0.65
+      }
+    ]
+  },
+  "block.stone.step": {
+    "sounds": [
+      {
+        "name": "step/stone1",
+        "volume": 0.7
+      },
+      {
+        "name": "step/stone2",
+        "volume": 0.7
+      },
+      {
+        "name": "step/stone3",
+        "volume": 0.7
+      },
+      {
+        "name": "step/stone4",
+        "volume": 0.7
+      },
+      {
+        "name": "step/stone5",
+        "volume": 0.7
+      },
+      {
+        "name": "step/stone6",
+        "volume": 0.7
+      }
+    ]
+  },
+  "block.wood.step": {
+    "sounds": [
+      {
+        "name": "step/wood1",
+        "volume": 0.65
+      },
+      {
+        "name": "step/wood2",
+        "volume": 0.65
+      },
+      {
+        "name": "step/wood3",
+        "volume": 0.65
+      },
+      {
+        "name": "step/wood4",
+        "volume": 0.65
+      },
+      {
+        "name": "step/wood5",
+        "volume": 0.65
+      },
+      {
+        "name": "step/wood6",
+        "volume": 0.65
+      }
+    ]
+  },
+  "block.glass.step": {
+    "sounds": [
+      {
+        "name": "step/glass1",
+        "volume": 0.5
+      },
+      {
+        "name": "step/glass2",
+        "volume": 0.5
+      },
+      {
+        "name": "step/glass3",
+        "volume": 0.5
+      }
+    ]
+  },
+  "block.azalea_leaves.step": {
+    "sounds": [
+      {
+        "name": "step/leaves1",
+        "volume": 0.6
+      },
+      {
+        "name": "step/leaves2",
+        "volume": 0.6
+      },
+      {
+        "name": "step/leaves3",
+        "volume": 0.6
+      },
+      {
+        "name": "step/leaves4",
+        "volume": 0.6
+      },
+      {
+        "name": "step/leaves5",
+        "volume": 0.6
+      },
+      {
+        "name": "step/leaves6",
+        "volume": 0.6
+      }
+    ]
+  },
+  "weather.rain": {
+    "sounds": [
+      {
+        "name": "ambient/weather/rain1",
+        "volume": 0.55,
+        "stream": true
+      },
+      {
+        "name": "ambient/weather/rain2",
+        "volume": 0.55,
+        "stream": true
+      },
+      {
+        "name": "ambient/weather/rain3",
+        "volume": 0.55,
+        "stream": true
+      },
+      {
+        "name": "ambient/weather/rain4",
+        "volume": 0.55,
+        "stream": true
+      }
+    ]
+  },
+  "ui.button.click": {
+    "sounds": [
+      {
+        "name": "ui/button_click",
+        "volume": 0.75
+      }
+    ]
+  }
+}
