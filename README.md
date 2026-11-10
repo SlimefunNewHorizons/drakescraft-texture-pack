@@ -40,8 +40,48 @@ python3 scripts/build_resource_pack.py \
 
 ## 🛠️ Entorno
 
-- **Compatibilidad**: Minecraft Java 1.21 - 1.21.11
-- **Herramientas**: Python 3.11+ / Pillow
+- **Compatibilidad**: Minecraft Java 1.20 a 1.21.11 / Purpur Core 26.2+ (`supported_formats: 15..120`) & Bedrock Edition (Geyser)
+- **Herramientas**: Python 3.11+ / Pillow / FFmpeg
+
+---
+
+## 🏛️ Sistema Integral de Overhaul Visual & Sonoro (Noviembre 2026)
+
+El paquete incluye una renovación integral de interfaz, diseño sonoro orgánico y símbolos de servidor:
+
+### 1. HUD & Barras de Estado Soberanas
+* **Barra de XP Espectral Arcoíris (`experience_bar_progress.png`)**: Gradiente continuo de alta fidelidad (Rubí $\to$ Naranja $\to$ Oro $\to$ Esmeralda $\to$ Cian $\to$ Zafiro $\to$ Amatista) con base de obsidiana biselada y greca dorada protectora.
+* **Hotbar Soberana (`hotbar.png`)**: Fondos en obsidiana cósmica `#101626` con tachonado dorado. Insignias heráldicas talladas en los extremos: ala de dragón de DrakesCraft a la izquierda y estrella de 4 puntas de JackStar a la derecha.
+* **Corazones & Burbujas**: Corazones tallados en rubí facetado (`heart/full.png`, `hardcore_full.png`) y burbujas de aire cristalinas etéreas.
+
+### 2. Estaciones de Trabajo, Slimefun Maquinaria & Contenedores
+* **Mesa de Crafteo (`crafting_table.png`)**: Flecha de crafteo con energía celeste cian luminosa, greca griega dorada en moldura superior y marco en obsidiana de noche profunda.
+* **Mesa Mejorada Slimefun / Dispensador (`dispenser.png`)**: Punto de inicio de la tecnología Slimefun. Cuadrícula 3×3 flanqueada por runas de resonancia cuántica (cian y amatista) y sello estelar de JackStar.
+* **Hornos, Ahumadores y Altos Hornos (`furnace.png`, `smoker.png`, `blast_furnace.png`)**: Fuego sagrado celeste en gradiente cian a amatista mística.
+* **Cofres de 54 Ranuras (`generic_54.png`)**: GUI unificada de obsidiana pulida con marco de greca dorada, 100% compatible con los menús y almacenes cuánticos de Slimefun.
+* **Ender Chest (`ender_chest.png`)**: Ribetes místicos en amatista real sobre panel abisal.
+* **Yunques, Mesas de Encantamiento & Tolvas**: Rediseñados bajo la estética clásica helénica-obsidiana para armonía total.
+
+### 3. Insignias Vectoriales de Rangos con Fallback Cero-Cajas (Zero-Box Degradation)
+Para evitar caracteres rotos (`[]` o cajas vacías) en jugadores sin paquete de recursos, se implementó el estándar de traducción nativo de Minecraft (`{"translate": "drakescraft.rank.<id>", "fallback": "✦ <RANGO> ✦ "}`).
+* **Glifos Oficiales (`\uE140` a `\uE148`)**:
+  * `\uE140` ➔ **Owner** (Corona triple dorada sobre púrpura regio)
+  * `\uE141` ➔ **Admin** (Escudo heráldico carmesí con gema solar)
+  * `\uE142` ➔ **Dev** (Diamante en cian eléctrico y runas binarias)
+  * `\uE143` ➔ **Mod** (Mazo de la justicia en esmeralda viva)
+  * `\uE144` ➔ **Builder** (Piqueta y cincel en oro ámbar y zafiro)
+  * `\uE145` ➔ **Polis** (Columna dórica griega en mármol de Paros)
+  * `\uE146` ➔ **Zeus** (Rayo olímpico electrizante en oro puro)
+  * `\uE147` ➔ **Streamer** (Prisma magenta de transmisión y orbe radiante)
+  * `\uE148` ➔ **SFMaster** (Núcleo de reactor Slimefun en verde lima radiactivo)
+* **Compatibilidad Vainilla**: Si un cliente juega sin el paquete de recursos, el motor del cliente sustituye automáticamente el glifo por el texto legible enriquecido sin desfigurar el chat ni la tablist.
+
+### 4. Micro-Diseño de Audio Orgánico y Sutil (Foley)
+* **Pasos (`step.*`)**: Pisadas acústicas en hierba mullida, losas de piedra noble, madera cálida, follaje y tintineo delicado de vidrio (30 clips OGG mono 44.1 kHz, ~350 KB totales).
+* **Ambiente**: Lluvia suave relajante y brisa de viento en las copas de los árboles.
+* **UI**: Clic de botón en madera suave táctil (`ui/button_click.ogg`).
+
+---
 
 ## T2: aislamiento de shaders antiguos (#576)
 
