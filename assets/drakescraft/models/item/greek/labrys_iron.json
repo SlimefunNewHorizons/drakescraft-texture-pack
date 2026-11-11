@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/handheld",
+  "credit": "DrakesCraft Greek Arsenal - Labrys Acero Mic\u00e9nico by JackStar",
+  "textures": {
+    "layer0": "drakescraft:item/greek/labrys_iron"
+  }
+}

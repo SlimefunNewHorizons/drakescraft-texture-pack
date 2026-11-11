@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/handheld",
+  "credit": "DrakesCraft Greek Arsenal - Labrys Cristal Poseid\u00f3n by JackStar",
+  "textures": {
+    "layer0": "drakescraft:item/greek/labrys_diamond"
+  }
+}

@@ -1,11 +1,21 @@
 {
-	"parent": "minecraft:item/handheld",
-	"author": "Jackstar (DrakesCraft Labs)",
-	"textures": {
-		"layer0": "item/iron_axe"
-	},
-	
-	"overrides": [
-		{ "predicate": { "custom_model_data": 3000104}, "model": "minecraft:slimefun/1_weapons/seismic_axe"}
-	]
+  "parent": "minecraft:item/handheld",
+  "author": "Jackstar (DrakesCraft Labs)",
+  "textures": {
+    "layer0": "item/iron_axe"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "custom_model_data": 770203
+      },
+      "model": "drakescraft:item/greek/labrys_iron"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 3000104
+      },
+      "model": "minecraft:slimefun/1_weapons/seismic_axe"
+    }
+  ]
 }

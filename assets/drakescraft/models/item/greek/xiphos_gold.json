@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/handheld",
+  "credit": "DrakesCraft Greek Arsenal - Xiphos Apolo Solar by JackStar",
+  "textures": {
+    "layer0": "drakescraft:item/greek/xiphos_gold"
+  }
+}

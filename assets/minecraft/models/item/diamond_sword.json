@@ -1,11 +1,21 @@
 {
-	"parent": "minecraft:item/handheld",
-	"author": "Jackstar (DrakesCraft Labs)",
-	"textures": {
-		"layer0": "item/diamond_sword"
-	},
-	
-	"overrides": [
-		{ "predicate": { "custom_model_data": 3000105}, "model": "minecraft:slimefun/1_weapons/soulbound_sword"}
-	]
+  "parent": "minecraft:item/handheld",
+  "author": "Jackstar (DrakesCraft Labs)",
+  "textures": {
+    "layer0": "item/diamond_sword"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "custom_model_data": 770105
+      },
+      "model": "drakescraft:item/greek/xiphos_diamond"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 3000105
+      },
+      "model": "minecraft:slimefun/1_weapons/soulbound_sword"
+    }
+  ]
 }

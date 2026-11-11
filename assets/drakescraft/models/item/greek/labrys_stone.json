@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/handheld",
+  "credit": "DrakesCraft Greek Arsenal - Labrys M\u00e1rmol Espartano by JackStar",
+  "textures": {
+    "layer0": "drakescraft:item/greek/labrys_stone"
+  }
+}

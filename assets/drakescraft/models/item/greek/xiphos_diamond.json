@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/handheld",
+  "credit": "DrakesCraft Greek Arsenal - Xiphos Cristal Poseid\u00f3n by JackStar",
+  "textures": {
+    "layer0": "drakescraft:item/greek/xiphos_diamond"
+  }
+}

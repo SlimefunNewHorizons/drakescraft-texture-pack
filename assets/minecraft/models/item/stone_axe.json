@@ -1,0 +1,15 @@
+{
+  "parent": "minecraft:item/handheld",
+  "author": "Jackstar (DrakesCraft Labs)",
+  "textures": {
+    "layer0": "minecraft:item/stone_axe"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "custom_model_data": 770202
+      },
+      "model": "drakescraft:item/greek/labrys_stone"
+    }
+  ]
+}

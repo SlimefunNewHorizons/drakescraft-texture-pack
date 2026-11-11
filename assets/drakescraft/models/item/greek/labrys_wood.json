@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/handheld",
+  "credit": "DrakesCraft Greek Arsenal - Labrys Roble Sagrado / Olivo by JackStar",
+  "textures": {
+    "layer0": "drakescraft:item/greek/labrys_wood"
+  }
+}
