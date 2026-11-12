@@ -12,7 +12,7 @@
         ],
         "model": {
           "type": "minecraft:model",
-          "model": "drakescraft:item/gear3d/iron_spear"
+          "model": "item/iron_spear"
         }
       }
     ],

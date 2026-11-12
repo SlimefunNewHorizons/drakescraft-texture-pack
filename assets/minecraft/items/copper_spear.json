@@ -12,7 +12,7 @@
         ],
         "model": {
           "type": "minecraft:model",
-          "model": "drakescraft:item/gear3d/copper_spear"
+          "model": "item/copper_spear"
         }
       }
     ],
