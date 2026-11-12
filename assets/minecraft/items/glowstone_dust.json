@@ -15,7 +15,7 @@
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"GCE_EXCITATION_CATALYST"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/netheopoiesis/nps_quartz_blank"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"GCE_GLOWSTONE_DUST_CHICKEN_ICON"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/potionexpansion/quartz_powder"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"GCE_GOLD_DUST_CHICKEN_ICON"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/potionexpansion/gold_powder"}},
-		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"GCE_SULFATE_CHICKEN_ICON"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/geneticchickengineering/gce_feather_chicken_icon"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"GCE_SULFATE_CHICKEN_ICON"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/potionexpansion/quartz_sight"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"GOLD_POWDER"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/potionexpansion/gold_powder"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"STB_ENERGIZEDGOLDDUST"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/potionexpansion/gold_powder"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"STB_GOLDDUST"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/potionexpansion/gold_powder"}},

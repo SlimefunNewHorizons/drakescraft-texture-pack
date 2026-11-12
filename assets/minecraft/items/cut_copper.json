@@ -1,7 +1,7 @@
 {
 	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
 	"cases": [
-		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CRY_STAVE_CONFIGURATOR"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/crystamaehistoria/cry_guide_liquefaction"}}
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CRY_STAVE_CONFIGURATOR"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/crystamaehistoria/cry_stave_configurator"}}
 	],
 	"fallback": {"type":"minecraft:range_dispatch","property":"minecraft:custom_model_data","index":0,"fallback":{"type":"minecraft:model","model":"minecraft:item/cut_copper"},"entries":[{"threshold":3009006,"model":{"type":"minecraft:model"}}]}
 	}

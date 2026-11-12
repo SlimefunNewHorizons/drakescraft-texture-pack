@@ -3,7 +3,7 @@
 	"cases": [
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CRY_MOB_PLATE_4"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/crystamaehistoria/cry_mob_plate_4"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"DEMONIC_PLATE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/foxymachines/demonic_plate"}},
-		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"TESLA_STEP_EMITTER"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/quaptics/qp_guide_what_is_quaptics"}}
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"TESLA_STEP_EMITTER"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/quaptics/qp_launchpad"}}
 	],
 	"fallback": {"type":"minecraft:range_dispatch","property":"minecraft:custom_model_data","index":0,"fallback":{"type":"minecraft:model","model":"minecraft:item/light_weighted_pressure_plate"},"entries":[{"threshold":0,"model":{"type":"minecraft:select","property":"minecraft:component","component":"minecraft:custom_name","cases":[{"when":{"text":"","extra":[{"text":"Demonic Plate","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"red","bold":false}]},"model":{"type":"minecraft:model","model":"slimefun/27_foxy_machines/demonic_plate"}}],"fallback":{"type":"minecraft:model","model":"minecraft:item/light_weighted_pressure_plate"}}}]}
 	},

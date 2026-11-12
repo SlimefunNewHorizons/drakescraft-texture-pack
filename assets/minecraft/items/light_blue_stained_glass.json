@@ -5,7 +5,7 @@
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"QP_BEACON_COMPUTER"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/quaptics/qp_beacon_computer"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"QP_DIELECTRIC_2"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/quaptics/qp_dielectric_2"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"QP_ITEM_PROJECTOR"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/quaptics/qp_item_projector"}},
-		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"SOLIDIFIER"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/netheopoiesis/nps_harmonised_crystal_water"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"SOLIDIFIER"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/liquid/solidifier"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"SOUL_MANIPULATOR"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/foxymachines/sacrificial_altar_soul_torch"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"WF_GLASS_GENERATOR_2"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimeframe/wf_glass_generator_2"}}
 	],

@@ -5,7 +5,7 @@
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"BLOCK_ASSIGNER"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/dynatech/dynatech_diamond_machine_core"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CHEMICAL_DISSOLVER"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimechem/chemical_dissolver"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CRYSTALLIZER"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimetinker/mod_diamond_dummy"}},
-		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CRY_EXALTED_FERTILITY_PHARO"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/crystamaehistoria/cry_guide_liquefaction"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CRY_EXALTED_FERTILITY_PHARO"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/crystamaehistoria/cry_stave_configurator"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"FMG_GENERATOR_DIAMOND"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/fnamplifications/fmg_generator_diamond_broken"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"FMG_GENERATOR_DIAMOND_BROKEN"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/fnamplifications/fmg_generator_diamond_broken"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"JC_DIAMOND_BLOCK_1"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/compressioncraft/jc_diamond_block_1"}},

@@ -3,7 +3,7 @@
 	"cases": [
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CRY_CROP_GLASS_3"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/crystamaehistoria/cry_crop_glass_3"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"NTW_POWER_DISPLAY"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/networksv6_drake/ntw_power_display"}},
-		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"STELLAR_FLUX_LENS"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimechem/molecule_sulfate"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"STELLAR_FLUX_LENS"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/spiritsunchained/su_spirit_lenses"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"SU_SOUL_STAINED_GLASS"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/spiritsunchained/su_soul_stained_glass"}}
 	],
 	"fallback": {"type":"minecraft:model","model":"minecraft:block/tinted_glass"}

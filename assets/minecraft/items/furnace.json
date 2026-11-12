@@ -5,7 +5,7 @@
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CLT_COUNTER_OVEN"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/cultivation/clt_counter_oven"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"DUST_EXTRACTOR"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/infinityexpansion/dust_extractor"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"FM_FAST_FURNACE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/fastmachines/fm_fast_furnace"}},
-		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"GN_ELECTRIC_KITCHEN_I"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/quaptics/qp_guide_what_is_quaptics"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"GN_ELECTRIC_KITCHEN_I"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/quaptics/qp_launchpad"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"GN_ELECTRIC_KITCHEN_II"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/quaptics/qp_splitter_2"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"GN_ELECTRIC_KITCHEN_III"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/quaptics/qp_splitter_3"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"INFINITY_DUST_EXTRACTOR"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/infinityexpansion/dust_extractor"}},

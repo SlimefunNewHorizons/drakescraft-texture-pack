@@ -137,6 +137,16 @@ PROCESOS = {"chopped": ("pieces", None), "mashed": ("bowl", None), "sliced": ("s
 
 # (regex sobre el nombre en minusculas, (motivo, parametro)); el primero que coincide gana.
 REGLAS = [
+    (r"\bdisc\b|^sf_disc|record", ("disc", None)),
+    (r"molecule|acid\b|caffeine|chlorophyll|cellulose|sucrose|protein|oxide|sulfide|sulfate|nitrate|carbonate|silicate|telluride|antimonide", ("vial", None)),
+    (r"\bbell\b", ("bell", None)),
+    (r"guide|^what is|^getting started|viewing connection|^burnout|^increasing freq|^building multi|^general tips", ("book", None)),
+    (r"import bus|export bus|^import|^export", ("module", None)),
+    (r"solidifier|beealyzer", ("machine", None)),
+    (r"charged (quartz|pillar|stairs)|smooth charged", ("cube", None)),
+    (r"graphite", ("carbon", None)),
+    (r"borium", ("ingot", None)),
+    (r"napalm", ("flame", None)),
     (r"helmet|crown|\bhat\b|\bcap\b", ("helmet", None)),
     (r"chestplate|\bvest\b|tunic|\bjacket", ("chest", None)),
     (r"leggings|\bpants\b", ("legs", None)),

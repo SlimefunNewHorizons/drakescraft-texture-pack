@@ -3,8 +3,8 @@
 	"cases": [
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"BUMP_OLD_CPU"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/bump/bump_old_cpu"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"GCE_PRISMARINE_CRYSTALS_CHICKEN_ICON"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/geneticchickengineering/gce_prismarine_shard_chicken_icon"}},
-		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"PROGRAMMABLE_NANOCELL"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/drakes_nanotechnology_stark_engineering/programmable_nanocell"}},
-		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"PULSE_BARRIER_EMITTER"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/drakes_nanotechnology_stark_engineering/programmable_nanocell"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"PROGRAMMABLE_NANOCELL"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/liquid/solidifier"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"PULSE_BARRIER_EMITTER"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/liquid/solidifier"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"QP_ENTANGLED_FREQUENCY_CRYSTAL"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/netheopoiesis/nps_harmonised_crystal_water"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"QP_INFUSED_FREQUENCY_CRYSTAL"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/netheopoiesis/nps_harmonised_crystal_water"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"WF_SALVAGE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimeframe/wf_travoride"}}

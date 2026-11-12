@@ -2,7 +2,7 @@
 	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
 	"cases": [
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"AV_EVIL_ESSENCE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/alchimiavitae/av_good_essence"}},
-		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"BORIUM"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/simplestorage/material_chromium_dust"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"BORIUM"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimefun/vitamins"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"COAL_POWDER"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/litexpansion/coal_dust"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"ETC_ANOMALOUS_COAL_DUST"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/litexpansion/coal_dust"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"ETC_DEVIANT_COAL_DUST"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/litexpansion/coal_dust"}},
@@ -11,7 +11,7 @@
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"GCE_GUNPOWDER_CHICKEN_ICON"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/potionexpansion/quartz_powder"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"GCE_IRON_DUST_CHICKEN_ICON"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/potionexpansion/iron_powder"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"GCE_LEAD_DUST_CHICKEN_ICON"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/geneticchickengineering/gce_lead_dust_chicken_icon"}},
-		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"GRAPHITE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/simplestorage/material_chromium_dust"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"GRAPHITE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/betterreactor/graphite"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"GUNPOWDER"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimefunwarfare/nitrogen_triiodide"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"IRON_POWDER"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/potionexpansion/iron_powder"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"LAPIS_POWDER"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/potionexpansion/lapis_powder"}},

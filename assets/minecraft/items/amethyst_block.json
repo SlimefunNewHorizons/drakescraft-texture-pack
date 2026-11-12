@@ -8,7 +8,7 @@
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"JC_AMETHYST_BLOCK_3"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/quaptics/qp_lens_3"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"JC_AMETHYST_BLOCK_4"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/quaptics/qp_lens_4"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"JC_AMETHYST_BLOCK_5"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/compressioncraft/jc_amethyst_shard_5"}},
-		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"JC_AMETHYST_BLOCK_6"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimechem/molecule_sulfate"}}
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"JC_AMETHYST_BLOCK_6"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/spiritsunchained/su_spirit_lenses"}}
 	],
 	"fallback": {"type":"minecraft:model","model":"minecraft:block/amethyst_block"}
 	},

@@ -363,6 +363,22 @@ def m_capacitor(t, p):
 
 
 # ---------------------------------------------------------------- objetos varios
+def m_disc(t, p):
+    b = glow(64, 64, 56) + C(64, 64, 52, "url(#dk)" if False else "url(#m)")
+    for r in (44, 36, 28):
+        b += f'<circle cx="64" cy="64" r="{r}" fill="none" stroke="#0d0a14" stroke-opacity=".45" stroke-width="2"/>'
+    b += C(64, 64, 17, "url(#gem)") + C(64, 64, 5, "#0d0a14", 1)
+    b += HL("M26 54 C30 36 44 24 62 20", 0.8, 4)
+    return b
+
+
+def m_bell(t, p):
+    b = P("M64 10 C50 10 44 22 44 36 C44 62 34 72 22 90 H106 C94 72 84 62 84 36 C84 22 78 10 64 10 Z", "url(#m)")
+    b += R(18, 90, 92, 10, "url(#gold)" if False else "url(#m)", 4) + C(64, 108, 9, "url(#gem)")
+    b += HL("M52 20 C48 36 48 56 38 76", 0.7, 4)
+    return b
+
+
 def m_vial(t, p):
     b = R(52, 6, 24, 16, "url(#wd)", 3) + P("M54 22 H74 V40 C94 52 100 72 94 94 C90 108 76 116 64 116 C52 116 38 108 34 94 C28 72 34 52 54 40 Z", "url(#gl)", 3, 'fill-opacity=".35"')
     b += f'<path d="M36 78 C38 70 44 66 52 68 C60 72 68 64 76 68 C84 70 92 72 92 80 C94 100 82 112 64 112 C46 112 34 100 36 78 Z" fill="url(#ab)" stroke="none"/>'

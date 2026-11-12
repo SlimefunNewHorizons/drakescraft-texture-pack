@@ -5,7 +5,7 @@
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"ANCIENT_RUNE_THERMAL_WALK"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/liquid/molten_ancient_debris"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CRINGLE_FADED_SOUL"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/foxymachines/sacrificial_altar_soul_torch"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CRINGLE_FADING_SOUL"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/foxymachines/sacrificial_altar_soul_torch"}},
-		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"MICRO_MISSILE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/drakes_nanotechnology_stark_engineering/micro_missile_rack"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"MICRO_MISSILE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/drakes_nanotechnology_stark_engineering/micro_missile"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"STB_SILICONWAFER"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/sensibletoolbox/stb_paintcan"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"SU_SPIRIT_RUNE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/liquid/molten_ancient_debris"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"SU_UNIDENTIFIED_SPIRIT"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimeframe/wf_pyrol"}},
