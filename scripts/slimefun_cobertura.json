@@ -1,0 +1,441 @@
+{
+ "total": 15986,
+ "por_clase": {
+  "cubierto": 1156,
+  "cabeza": 2935,
+  "diseno": 3327,
+  "fantasma": 376,
+  "variante-ender": 8192
+ },
+ "por_addon": {
+  "Slimefun": {
+   "cubierto": 421,
+   "cabeza": 123,
+   "diseno": 10
+  },
+  "SlimyTreeTaps": {
+   "cubierto": 6,
+   "diseno": 6,
+   "cabeza": 2
+  },
+  "LiteXpansion": {
+   "diseno": 62,
+   "cabeza": 2
+  },
+  "ExoticGarden": {
+   "cubierto": 115,
+   "cabeza": 149
+  },
+  "InfinityExpansion": {
+   "diseno": 53,
+   "cubierto": 94,
+   "cabeza": 9
+  },
+  "DynaTech": {
+   "diseno": 104,
+   "cabeza": 19
+  },
+  "SimpleMaterialGenerators": {
+   "diseno": 19
+  },
+  "TranscEndence": {
+   "cabeza": 19,
+   "diseno": 15
+  },
+  "SlimefunWarfare": {
+   "cubierto": 41,
+   "diseno": 35,
+   "cabeza": 22
+  },
+  "FluffyMachines": {
+   "cubierto": 32,
+   "cabeza": 4,
+   "diseno": 16
+  },
+  "GeneticChickengineering": {
+   "cabeza": 6,
+   "diseno": 98
+  },
+  "Netheopoiesis": {
+   "diseno": 200,
+   "cabeza": 73
+  },
+  "ElementManipulation": {
+   "diseno": 126
+  },
+  "ElectricSpawners": {
+   "cabeza": 27
+  },
+  "Supreme": {
+   "cabeza": 248,
+   "cubierto": 196,
+   "diseno": 66
+  },
+  "FNAmplifications": {
+   "cabeza": 59,
+   "diseno": 134
+  },
+  "AlchimiaVitae": {
+   "diseno": 32,
+   "cabeza": 1
+  },
+  "FoxyMachines": {
+   "diseno": 72,
+   "cabeza": 2,
+   "cubierto": 2,
+   "fantasma": 376
+  },
+  "Cultivation": {
+   "cabeza": 278,
+   "diseno": 1077,
+   "cubierto": 46
+  },
+  "ExtraTools": {
+   "diseno": 8
+  },
+  "SlimeTinker": {
+   "cubierto": 144,
+   "diseno": 96,
+   "cabeza": 1136
+  },
+  "SlimeFrame": {
+   "cabeza": 65,
+   "diseno": 113
+  },
+  "NetworksV6-Drake": {
+   "diseno": 75,
+   "cabeza": 5
+  },
+  "WorldEditSlimefun": {
+   "diseno": 1
+  },
+  "VillagerUtil": {
+   "diseno": 6,
+   "cabeza": 1
+  },
+  "SoulJars": {
+   "cabeza": 87,
+   "diseno": 43
+  },
+  "SlimyBees": {
+   "diseno": 31,
+   "cabeza": 52
+  },
+  "SlimefunOreChunks": {
+   "cabeza": 11
+  },
+  "SlimefunLuckyBlocks": {
+   "cabeza": 4
+  },
+  "SimpleUtils": {
+   "diseno": 3,
+   "cubierto": 1
+  },
+  "SFPortalGunsExtension": {
+   "diseno": 3
+  },
+  "SensibleToolbox": {
+   "diseno": 88
+  },
+  "RelicsOfCthonia": {
+   "cabeza": 38
+  },
+  "RandomExpansion": {
+   "diseno": 9
+  },
+  "PrivateStorage": {
+   "cabeza": 24
+  },
+  "PotionExpansion": {
+   "diseno": 22
+  },
+  "ObsidianExpansion": {
+   "diseno": 26
+  },
+  "Obsidian-Armor": {
+   "diseno": 5
+  },
+  "NotEnoughAddons": {
+   "diseno": 11,
+   "cabeza": 1
+  },
+  "Nexcavate": {
+   "diseno": 13
+  },
+  "MobCapturer": {
+   "cabeza": 77,
+   "diseno": 1
+  },
+  "MagicXpansion": {
+   "diseno": 20,
+   "cabeza": 10
+  },
+  "InfernalExpansion": {
+   "diseno": 8
+  },
+  "IDreamOfEasy": {
+   "diseno": 39,
+   "cabeza": 13
+  },
+  "HotbarPets": {
+   "cabeza": 27,
+   "diseno": 4
+  },
+  "Galaxyfun": {
+   "cabeza": 27,
+   "diseno": 73
+  },
+  "FlowerPower": {
+   "diseno": 22,
+   "cabeza": 1
+  },
+  "FastMachines": {
+   "diseno": 22
+  },
+  "ExtraGear": {
+   "cubierto": 58,
+   "diseno": 1
+  },
+  "EquivalencyTech": {
+   "cabeza": 6,
+   "diseno": 2
+  },
+  "EcoPower": {
+   "cabeza": 17,
+   "diseno": 1
+  },
+  "DyedBackpacks": {
+   "cabeza": 96
+  },
+  "DyeBench": {
+   "diseno": 17
+  },
+  "Drugfun": {
+   "diseno": 1
+  },
+  "DrakesNanotech": {
+   "diseno": 143,
+   "cabeza": 15
+  },
+  "DemonicExpansion": {
+   "diseno": 8,
+   "cabeza": 1
+  },
+  "DankTech2": {
+   "cabeza": 27,
+   "diseno": 2
+  },
+  "CrystamaeHistoria": {
+   "diseno": 178,
+   "cabeza": 141
+  },
+  "ColoredEnderChests": {
+   "variante-ender": 8192
+  },
+  "ChestTerminal": {
+   "diseno": 5,
+   "cabeza": 4
+  },
+  "Bump": {
+   "diseno": 37,
+   "cabeza": 1
+  },
+  "BreweryMenu": {
+   "diseno": 23
+  },
+  "BetterChests": {
+   "diseno": 38
+  },
+  "AdvancedTech": {
+   "cabeza": 5,
+   "diseno": 4
+  }
+ },
+ "texturas_unicas": 1619,
+ "cases_nuevos": 11385,
+ "materiales_omitidos": {
+  "dead_bush": 1,
+  "flower_pot": 2,
+  "decorated_pot": 1,
+  "chorus_flower": 1,
+  "wither_skeleton_skull": 1,
+  "wither_rose": 1,
+  "turtle_spawn_egg": 2,
+  "strider_spawn_egg": 2,
+  "green_shulker_box": 1,
+  "cactus": 1,
+  "fire_coral": 1,
+  "horn_coral": 1,
+  "tube_coral": 1,
+  "ladder": 1,
+  "torch": 2,
+  "splash_potion": 1,
+  "skeleton_skull": 2,
+  "soul_torch": 2,
+  "tripwire_hook": 2,
+  "campfire": 1,
+  "acacia_sapling": 3,
+  "jungle_sapling": 3,
+  "warped_button": 2,
+  "lingering_potion": 1,
+  "pitcher_pod": 1,
+  "turtle_egg": 1,
+  "armor_stand": 5,
+  "painting": 1,
+  "item_frame": 6,
+  "glow_item_frame": 2,
+  "twisting_vines": 1,
+  "weeping_vines": 2,
+  "birch_sign": 2,
+  "dark_oak_sign": 2,
+  "firework_rocket": 2,
+  "end_portal_frame": 2,
+  "conduit": 2,
+  "shulker_box": 1,
+  "iron_chain": 1,
+  "dark_oak_boat": 1,
+  "pointed_dripstone": 1,
+  "allium": 1,
+  "recovery_compass": 1,
+  "red_shulker_box": 2,
+  "sculk_catalyst": 2,
+  "amethyst_cluster": 1,
+  "tipped_arrow": 34,
+  "ominous_trial_key": 1,
+  "heavy_core": 2,
+  "red_banner": 1,
+  "trial_key": 1,
+  "copper_bulb": 1,
+  "vault": 1,
+  "warped_fence": 2,
+  "glow_lichen": 1,
+  "soul_lantern": 4,
+  "light_blue_banner": 1,
+  "crimson_pressure_plate": 1,
+  "warped_pressure_plate": 1,
+  "dark_oak_pressure_plate": 1,
+  "black_candle": 1,
+  "brown_candle": 1,
+  "white_candle": 1,
+  "magenta_candle": 1,
+  "soul_campfire": 1,
+  "spruce_sapling": 1
+ },
+ "origen_del_motivo": {
+  "nombre": 1622,
+  "grupo": 477,
+  "id": 191,
+  "material": 3,
+  "clase": 1016,
+  "DEFECTO": 18
+ },
+ "motivos": {
+  "helmet": 21,
+  "chest": 26,
+  "legs": 11,
+  "boots": 11,
+  "ingot": 115,
+  "fruit": 64,
+  "vial": 48,
+  "rune": 39,
+  "trident": 3,
+  "scrap": 5,
+  "pieces": 129,
+  "bowl": 144,
+  "core": 64,
+  "machine": 406,
+  "drill": 4,
+  "wool": 5,
+  "forge": 26,
+  "crate": 50,
+  "generator": 55,
+  "book": 8,
+  "alloy": 30,
+  "pane": 18,
+  "plate": 42,
+  "cable": 21,
+  "battery": 11,
+  "pcb": 16,
+  "gem": 113,
+  "reactor": 23,
+  "sword": 23,
+  "dust": 203,
+  "fibre": 4,
+  "mesh": 5,
+  "panel": 11,
+  "pedestal": 24,
+  "orb": 150,
+  "cube": 81,
+  "flower": 14,
+  "tank": 19,
+  "miner": 14,
+  "flame": 11,
+  "pick": 90,
+  "card": 2,
+  "apiary": 38,
+  "seed": 127,
+  "egg": 21,
+  "carbon": 7,
+  "module": 58,
+  "lens": 3,
+  "bullet": 6,
+  "grenade": 1,
+  "backpack": 9,
+  "fillet": 154,
+  "leaf": 20,
+  "staff": 36,
+  "mush": 2,
+  "pepper": 1,
+  "pod": 5,
+  "axe": 1,
+  "stick": 14,
+  "bow": 11,
+  "hoe": 6,
+  "motor": 12,
+  "shell": 6,
+  "scroll": 2,
+  "slices": 127,
+  "glass": 127,
+  "pot": 127,
+  "pan": 127,
+  "hammer": 4,
+  "nugget": 27,
+  "kit": 22,
+  "capacitor": 4,
+  "frame": 9,
+  "trash": 1,
+  "scythe": 1,
+  "talisman": 25,
+  "shovel": 2,
+  "rocket": 6,
+  "ring": 5,
+  "door": 1,
+  "chip": 3,
+  "banner": 1,
+  "key": 1,
+  "shield": 8
+ },
+ "ids_en_motivo_por_defecto": [
+  "SlimefunWarfare:NITROGEN_TRIIODIDE (dust)",
+  "SlimefunWarfare:AZIDOAZIDE_AZIDE (dust)",
+  "SlimyBees:BEEALYZER (gem)",
+  "DemonicExpansion:DX_NAPALM (dust)",
+  "ChestTerminal:MILKY_QUARTZ (gem)",
+  "Bump:BUMP_MECHA_GEAR (gem)",
+  "Bump:BUMP_KSF_STUFF (gem)",
+  "Bump:BUMP_APPRAISAL_PAPER_DAMAGE (gem)",
+  "BreweryMenu:TMAVY_LEZAK (gem)",
+  "BreweryMenu:CERVENE_VINO (gem)",
+  "BreweryMenu:BILE_VINO (gem)",
+  "BreweryMenu:MEDOVINA (gem)",
+  "BreweryMenu:JABLECNA_MEDOVINA (gem)",
+  "BreweryMenu:JABLECNY_MOST (gem)",
+  "BreweryMenu:GIN (gem)",
+  "BreweryMenu:TEQUILA2 (gem)",
+  "BreweryMenu:ABSINTH (gem)",
+  "BreweryMenu:ZELENY_ABSINTH (gem)",
+  "BreweryMenu:BRAMBOROVA_POLEVKA (gem)",
+  "BreweryMenu:KAVA (gem)",
+  "BetterChests:BC_TTTTTTTTTTTTTTTTTTTTIP_ITEM (gem)"
+ ]
+}
