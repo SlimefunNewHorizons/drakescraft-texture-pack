@@ -1,0 +1,7 @@
+{
+	"parent": "item/generated",
+	"author": "Jackstar (DrakesCraft Labs)",
+	"textures": {
+		"layer0": "drakescraft:heads/wf_concrete_gen_3_core"
+	}
+}
