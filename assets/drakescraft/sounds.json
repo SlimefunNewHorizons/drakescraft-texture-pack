@@ -1,0 +1,206 @@
+{
+  "tech.hum": {
+    "sounds": [
+      {
+        "name": "minecraft:tech/hum1",
+        "volume": 0.5
+      },
+      {
+        "name": "minecraft:tech/hum2",
+        "volume": 0.5
+      },
+      {
+        "name": "minecraft:tech/hum3",
+        "volume": 0.5
+      }
+    ]
+  },
+  "tech.engine": {
+    "sounds": [
+      {
+        "name": "minecraft:tech/engine1",
+        "volume": 0.5
+      },
+      {
+        "name": "minecraft:tech/engine2",
+        "volume": 0.5
+      }
+    ]
+  },
+  "tech.computer": {
+    "sounds": [
+      {
+        "name": "minecraft:tech/computer1",
+        "volume": 0.5
+      },
+      {
+        "name": "minecraft:tech/computer2",
+        "volume": 0.5
+      },
+      {
+        "name": "minecraft:tech/computer3",
+        "volume": 0.5
+      }
+    ]
+  },
+  "tech.spark": {
+    "sounds": [
+      {
+        "name": "minecraft:tech/spark1",
+        "volume": 0.6
+      },
+      {
+        "name": "minecraft:tech/spark2",
+        "volume": 0.6
+      },
+      {
+        "name": "minecraft:tech/spark3",
+        "volume": 0.6
+      },
+      {
+        "name": "minecraft:tech/spark4",
+        "volume": 0.6
+      },
+      {
+        "name": "minecraft:tech/spark5",
+        "volume": 0.6
+      }
+    ]
+  },
+  "tech.zap": {
+    "sounds": [
+      {
+        "name": "minecraft:tech/spark1",
+        "volume": 0.6
+      },
+      {
+        "name": "minecraft:tech/spark2",
+        "volume": 0.6
+      },
+      {
+        "name": "minecraft:tech/spark3",
+        "volume": 0.6
+      }
+    ]
+  },
+  "tech.power_up": {
+    "sounds": [
+      {
+        "name": "minecraft:tech/power_up1",
+        "volume": 0.6
+      },
+      {
+        "name": "minecraft:tech/power_up2",
+        "volume": 0.6
+      },
+      {
+        "name": "minecraft:tech/power_up3",
+        "volume": 0.6
+      }
+    ]
+  },
+  "tech.power_down": {
+    "sounds": [
+      {
+        "name": "minecraft:tech/power_down1",
+        "volume": 0.6
+      },
+      {
+        "name": "minecraft:tech/power_down2",
+        "volume": 0.6
+      }
+    ]
+  },
+  "tech.charge": {
+    "sounds": [
+      {
+        "name": "minecraft:tech/charge1",
+        "volume": 0.6
+      },
+      {
+        "name": "minecraft:tech/charge2",
+        "volume": 0.6
+      }
+    ]
+  },
+  "tech.force_field": {
+    "sounds": [
+      {
+        "name": "minecraft:tech/force1",
+        "volume": 0.5
+      },
+      {
+        "name": "minecraft:tech/force2",
+        "volume": 0.5
+      },
+      {
+        "name": "minecraft:tech/force3",
+        "volume": 0.5
+      }
+    ]
+  },
+  "tech.gears": {
+    "sounds": [
+      {
+        "name": "minecraft:tech/gear1",
+        "volume": 0.6
+      },
+      {
+        "name": "minecraft:tech/gear2",
+        "volume": 0.6
+      },
+      {
+        "name": "minecraft:tech/gear3",
+        "volume": 0.6
+      },
+      {
+        "name": "minecraft:tech/gear4",
+        "volume": 0.6
+      }
+    ]
+  },
+  "tech.laser": {
+    "sounds": [
+      {
+        "name": "minecraft:tech/laser1",
+        "volume": 0.5
+      },
+      {
+        "name": "minecraft:tech/laser2",
+        "volume": 0.5
+      },
+      {
+        "name": "minecraft:tech/laser3",
+        "volume": 0.5
+      }
+    ]
+  },
+  "tech.teleport": {
+    "sounds": [
+      {
+        "name": "minecraft:tech/teleport",
+        "volume": 0.6
+      }
+    ]
+  },
+  "tech.explosion": {
+    "sounds": [
+      {
+        "name": "minecraft:entity/explode_low1",
+        "volume": 0.7
+      },
+      {
+        "name": "minecraft:entity/explode_low2",
+        "volume": 0.7
+      },
+      {
+        "name": "minecraft:entity/explode1",
+        "volume": 0.7
+      },
+      {
+        "name": "minecraft:entity/explode2",
+        "volume": 0.7
+      }
+    ]
+  }
+}
