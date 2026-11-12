@@ -1,6 +1,6 @@
 # Minimapa sin mods con TerraLense (investigacion, 2026-11-12)
 
-Estado: investigacion, nada integrado aun. Se leyo el codigo de https://github.com/AlphaNodesDev/TerraLense (clon superficial, solo lectura). No se probo en un cliente real: lo marcado como "por probar" hay que verificarlo en Horizon 26.3 y en un cliente vanilla 26.2.
+Estado: fork parcheado y assets fusionados en el repo (ver seccion 7). Falta prueba en cliente y despliegue. Lo siguiente fue la investigacion original. Se leyo el codigo de https://github.com/AlphaNodesDev/TerraLense (clon superficial, solo lectura). No se probo en un cliente real: lo marcado como "por probar" hay que verificarlo en Horizon 26.3 y en un cliente vanilla 26.2.
 
 ## 1. Resumen
 
@@ -151,3 +151,24 @@ Recomendacion: TerraLense (pack trivial de fusionar, sin riesgo ShaderC, MIT, wa
 - Mapa no pegado a la esquina: aceptado o buscar alternativa shader.
 - Comprobar uso de boss bars por otros plugins (Odysseia, eventos).
 - Fork propio de TerraLense para el parche (default-off, `on|off`, alias `/mapa`, `/wp`).
+
+## 7. Hecho (2026-11-12) y config final
+
+Fork: https://github.com/SlimefunNewHorizons/TerraLense-Drake (rama `main`, MIT conservado, cambios documentados en su README). Commit `a98efa6`.
+
+- Parches: mapa apagado por defecto; `/mapa on|off|escala|pos|modo|grande` y `/wp add|del|list|tp` (alias que reescriben a `/terralense`, mismos permisos); bloqueo Bedrock via Floodgate (softdepend por reflexion); mensajes `es` por defecto + `en` (`general.language`); aviso "requiere cliente 26.2, ViaVersion no garantizado" al entrar y en `/mapa on`.
+- Compilacion: `./gradlew build` con Java 25: OK. 269 tests, 0 fallos (incluye alias, claves es/en iguales, default apagado, Floodgate ausente).
+- Arranque real: Purpur 26.2 local temporal (puerto 25999, fuera de Dallas/Star) carga el jar sin errores; en `mode: generate` + `self-host.enabled: false` genero el zip y **no abrio el 8123**.
+- Pack: zip generado con 139 entradas (pack.mcmeta + 2 fuentes + 136 PNG); SHA-1 del zip `b63f3903d90f6832bbeddf4cdaab29f9f97e10fa` (hud.size 96, circle, boss-bar, pin-to-bar-edge). Fusionados 138 ficheros (sin pack.mcmeta): `assets/minecraft/font/terralense_hud.json`, `terralense_hud_top.json` y `assets/terralense/textures/font/` (24 `cell_*`, 16 `arrow_*`, 96 `marker_*`). `default.json` intacto, sin shaders ni overlays.
+- Reproducible: `python3 scripts/merge_terralense.py --zip <TerraLense-Pack.zip> [--check]` valida conteos, namespace y texturas. Construir el pack con `python3 scripts/build_t2_pack.py ... --with-terralense` (los ficheros van en la raiz de `assets/`, no en overlay). Test: `scripts/test_build_t2_pack.py`.
+- Si se cambia `hud.size/shape/margin/position` hay que regenerar y volver a correr el merge (las fuentes se hornean).
+
+Config final recomendada en prod (`plugins/TerraLense/config.yml`):
+```yaml
+general: {language: es, join-message: true, update-check: {enabled: false}}
+resource-pack: {mode: external, url: '', pack-format: 88, self-host: {enabled: false}}   # 8123 cerrado
+hud: {size: 96, shape: circle, anchor: boss-bar, pin-to-bar-edge: true}
+```
+Plugin jar: construir del fork (`build/libs/TerraLense-0.1.0.jar`). Odysseia sigue enviando el unico pack (`t2-vN+1.zip` construido con `--with-terralense`).
+
+Pendiente: prueba en cliente (vanilla 26.2, Horizon 26.3, 1.21.x por Via, Bedrock bloqueado); decidir `hud.size` definitivo; boss bars de otros plugins; luego despliegue/anuncio segun el flujo (no hecho aqui).

@@ -253,6 +253,23 @@ class LegacyShaderIsolationTests(unittest.TestCase):
                           missing_model_fallbacks=fallbacks)
                 self.assertEqual(self.output.read_bytes(), b"previous artifact")
 
+    def test_terralense_assets_land_in_root_not_overlay_and_keep_default_font(self):
+        from merge_terralense import collect, EXPECTED, FONTS, TEX_DIR
+        files = collect()
+        self.assertTrue(FONTS <= files.keys())
+        self.assertEqual(sum(n.startswith(TEX_DIR) for n in files), sum(EXPECTED.values()))
+        self.entries["assets/minecraft/font/default.json"] = b'{"providers": []}'
+        result = build(self.base, self.output, self.write_base(), extra_files=files)
+        with zipfile.ZipFile(self.output) as z:
+            names = z.namelist()
+            for name, data in files.items():
+                self.assertIn(name, names)
+                self.assertEqual(z.read(name), data)
+            self.assertFalse([n for n in names if n.startswith(OVERLAY + "/") and "terralense" in n])
+            self.assertEqual(z.read("assets/minecraft/font/default.json"), b'{"providers": []}')
+            self.assertNotIn("assets/terralense/pack.mcmeta", names)
+        self.assertEqual(len(result["legacy_shaders"]), 2)
+
 
 if __name__ == "__main__":
     unittest.main()

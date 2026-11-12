@@ -251,9 +251,14 @@ def main() -> None:
                         help="Optional explicit substitutions for absent legacy models (modern items only)")
     parser.add_argument("--extra-dir", type=Path,
                         help="Directory whose files (relative to it, under assets/) are added or replace base files")
+    parser.add_argument("--with-terralense", action="store_true",
+                        help="Add the merged TerraLense minimap assets (see scripts/merge_terralense.py)")
     args = parser.parse_args()
     extra = {p.relative_to(args.extra_dir).as_posix(): p.read_bytes()
              for p in sorted(args.extra_dir.rglob("*")) if p.is_file()} if args.extra_dir else None
+    if args.with_terralense:
+        from merge_terralense import collect
+        extra = {**(extra or {}), **collect()}
     patches = json.loads(args.language_patches.read_text()) if args.language_patches else None
     models = json.loads(args.model_patches.read_text()) if args.model_patches else None
     bridges = json.loads(args.legacy_item_bridges.read_text()) if args.legacy_item_bridges else None

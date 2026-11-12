@@ -1,0 +1,999 @@
+{
+  "providers": [
+{
+  "type": "bitmap",
+  "file": "terralense:font/cell_0.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE000"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/cell_1.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE001"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/cell_2.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE002"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/cell_3.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE003"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/cell_4.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE004"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/cell_5.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE005"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/cell_6.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE006"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/cell_7.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE007"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/cell_8.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE008"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/cell_9.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE009"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/cell_10.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE00A"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/cell_11.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE00B"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/cell_12.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE00C"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/cell_13.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE00D"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/cell_14.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE00E"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/cell_15.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE00F"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/cell_16.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE010"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/cell_17.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE011"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/cell_18.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE012"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/cell_19.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE013"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/cell_20.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE014"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/cell_21.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE015"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/cell_22.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE016"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/cell_23.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE017"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/arrow_0.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE30C"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/arrow_1.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE38C"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/arrow_2.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE40C"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/arrow_3.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE48C"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/arrow_4.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE50C"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/arrow_5.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE58C"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/arrow_6.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE60C"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/arrow_7.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE68C"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/arrow_8.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE70C"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/arrow_9.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE78C"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/arrow_10.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE80C"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/arrow_11.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE88C"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/arrow_12.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE90C"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/arrow_13.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE98C"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/arrow_14.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uEA0C"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/arrow_15.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uEA8C"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/marker_diamond_0.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE400"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/marker_diamond_1.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE401"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/marker_diamond_2.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE402"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/marker_diamond_3.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE403"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/marker_diamond_4.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE404"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/marker_diamond_5.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE405"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/marker_diamond_6.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE406"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/marker_diamond_7.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE407"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/marker_diamond_8.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE408"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/marker_diamond_9.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE409"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/marker_diamond_10.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE40A"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/marker_diamond_11.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE40B"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/marker_diamond_12.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE40C"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/marker_diamond_13.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE40D"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/marker_diamond_14.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE40E"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/marker_diamond_15.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE40F"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/marker_diamond_16.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE410"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/marker_diamond_17.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE411"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/marker_diamond_18.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE412"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/marker_diamond_19.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE413"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/marker_diamond_20.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE414"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/marker_diamond_21.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE415"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/marker_diamond_22.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE416"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/marker_diamond_23.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE417"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/marker_dot_0.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE480"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/marker_dot_1.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE481"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/marker_dot_2.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE482"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/marker_dot_3.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE483"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/marker_dot_4.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE484"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/marker_dot_5.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE485"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/marker_dot_6.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE486"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/marker_dot_7.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE487"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/marker_dot_8.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE488"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/marker_dot_9.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE489"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/marker_dot_10.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE48A"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/marker_dot_11.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE48B"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/marker_dot_12.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE48C"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/marker_dot_13.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE48D"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/marker_dot_14.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE48E"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/marker_dot_15.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE48F"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/marker_dot_16.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE490"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/marker_dot_17.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE491"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/marker_dot_18.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE492"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/marker_dot_19.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE493"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/marker_dot_20.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE494"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/marker_dot_21.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE495"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/marker_dot_22.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE496"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/marker_dot_23.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE497"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/marker_ring_0.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE500"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/marker_ring_1.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE501"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/marker_ring_2.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE502"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/marker_ring_3.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE503"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/marker_ring_4.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE504"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/marker_ring_5.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE505"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/marker_ring_6.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE506"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/marker_ring_7.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE507"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/marker_ring_8.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE508"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/marker_ring_9.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE509"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/marker_ring_10.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE50A"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/marker_ring_11.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE50B"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/marker_ring_12.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE50C"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/marker_ring_13.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE50D"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/marker_ring_14.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE50E"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/marker_ring_15.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE50F"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/marker_ring_16.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE510"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/marker_ring_17.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE511"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/marker_ring_18.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE512"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/marker_ring_19.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE513"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/marker_ring_20.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE514"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/marker_ring_21.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE515"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/marker_ring_22.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE516"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/marker_ring_23.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE517"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/marker_cross_0.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE580"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/marker_cross_1.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE581"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/marker_cross_2.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE582"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/marker_cross_3.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE583"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/marker_cross_4.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE584"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/marker_cross_5.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE585"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/marker_cross_6.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE586"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/marker_cross_7.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE587"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/marker_cross_8.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE588"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/marker_cross_9.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE589"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/marker_cross_10.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE58A"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/marker_cross_11.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE58B"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/marker_cross_12.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE58C"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/marker_cross_13.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE58D"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/marker_cross_14.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE58E"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/marker_cross_15.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE58F"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/marker_cross_16.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE590"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/marker_cross_17.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE591"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/marker_cross_18.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE592"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/marker_cross_19.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE593"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/marker_cross_20.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE594"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/marker_cross_21.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE595"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/marker_cross_22.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE596"]
+},
+{
+  "type": "bitmap",
+  "file": "terralense:font/marker_cross_23.png",
+  "ascent": 0,
+  "height": 128,
+  "chars": ["\uE597"]
+},
+{
+  "type": "space",
+  "advances": {
+    "\uE200": -4,
+        "\uE201": -8,
+        "\uE202": -16,
+        "\uE203": -32,
+        "\uE204": -64,
+        "\uE205": -128,
+        "\uE206": -256,
+        "\uE207": -512,
+        "\uE208": -1024,
+        "\uE209": -2048,
+        "\uE20A": -4096,
+        "\uE20B": -8192,
+        "\uE20C": -16384,
+        "\uE20D": -32768,
+        "\uE20E": -65536,
+        "\uE20F": -131072,
+        "\uE2F0": -1
+  }
+},
+{
+  "type": "space",
+  "advances": {
+    "\uE280": 4,
+        "\uE281": 8,
+        "\uE282": 16,
+        "\uE283": 32,
+        "\uE284": 64,
+        "\uE285": 128,
+        "\uE286": 256,
+        "\uE287": 512,
+        "\uE288": 1024,
+        "\uE289": 2048,
+        "\uE28A": 4096,
+        "\uE28B": 8192,
+        "\uE28C": 16384,
+        "\uE28D": 32768,
+        "\uE28E": 65536,
+        "\uE28F": 131072
+  }
+}
+  ]
+}
