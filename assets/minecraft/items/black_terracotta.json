@@ -1,7 +1,10 @@
 {
 	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
 	"cases": [
-		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"NTW_QUANTUM_STORAGE_5"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/networksv6_drake/ntw_control_v"}}
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"NTW_QUANTUM_STORAGE_5"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/networksv6_drake/ntw_control_v"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"QP_TRANSFORMER_1"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/quaptics/qp_transformer_1"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"QP_TRANSFORMER_2"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/quaptics/qp_transformer_2"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"QP_TRANSFORMER_3"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/quaptics/qp_transformer_3"}}
 	],
 	"fallback": {"type":"minecraft:range_dispatch","property":"minecraft:custom_model_data","index":0,"fallback":{"type":"minecraft:model","model":"minecraft:block/black_terracotta"},"entries":[{"threshold":0,"model":{"type":"minecraft:select","property":"minecraft:component","component":"minecraft:custom_name","cases":[{"when":{"text":"","extra":[{"text":"Venus"}]},"model":{"type":"minecraft:model","model":"slimefun/24_galactifun/universe/venus"}},{"when":{"text":"","extra":[{"text":"Fluid Pump","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"blue","bold":false}]},"model":{"type":"minecraft:model","model":"slimefun/28_energy_and_electricity/fluid_pump"}}],"fallback":{"type":"minecraft:model","model":"minecraft:block/black_terracotta"}}}]}
 	},

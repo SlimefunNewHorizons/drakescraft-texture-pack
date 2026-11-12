@@ -1,6 +1,11 @@
 {
 	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
 	"cases": [
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"QP_BEACON_CONTROLLER_1"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/quaptics/qp_beacon_controller_1"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"QP_BEACON_CONTROLLER_2"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/quaptics/qp_beacon_controller_2"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"QP_BEACON_CONTROLLER_3"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/quaptics/qp_beacon_controller_3"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"QP_INDUSTRIAL_INFUSION_PILLAR"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/potionexpansion/lapis_sight"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"QP_INFUSION_PILLAR"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/potionexpansion/lapis_sight"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"QUIRP_CYCLER"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/transcendence/quirp_oscillator"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"SUPREME_BASIC_AQUA_GENERATOR"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/supreme/supreme_generator_mob_basic"}}
 	],

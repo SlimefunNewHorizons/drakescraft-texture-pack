@@ -1,7 +1,7 @@
 {
 	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
 	"cases": [
-		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"UNIVERSAL_FORGE_KEY"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/drakesnanotech/universal_forge_key"}}
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"UNIVERSAL_FORGE_KEY"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/drakes_nanotechnology_stark_engineering/universal_forge_key"}}
 	],
 	"fallback": {"type":"minecraft:model","model":"minecraft:item/trial_key"}
 	},

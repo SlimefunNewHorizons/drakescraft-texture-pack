@@ -7,7 +7,7 @@
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"GOLD_CABLE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/litexpansion/gold_cable"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"NTW_OPTIC_CABLE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/networksv6_drake/ntw_optic_cable"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"REINFORCED_STRING"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/foxymachines/reinforced_string"}},
-		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"SELF_REPAIRING_WEAVE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/dynatech/dynatech_aluminum_bronzemineralized_apiary"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"SELF_REPAIRING_WEAVE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimefun/vitamins"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"STB_TAPEMEASURE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/sensibletoolbox/stb_paintcan"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"TIN_CABLE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/litexpansion/tin_cable"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"UNINSULATED_COPPER_CABLE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/litexpansion/uninsulated_copper_cable"}},

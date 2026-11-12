@@ -2,9 +2,10 @@
 	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
 	"cases": [
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"GCE_ECHO_SHARD_ICON"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/geneticchickengineering/gce_prismarine_shard_chicken_icon"}},
-		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"GOD_PRISON_POWER_CELL"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/drakesnanotech/god_prison_power_cell"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"GOD_PRISON_POWER_CELL"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/drakes_nanotechnology_stark_engineering/god_prison_power_cell"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"IDOE_MAGNETOID"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/idreamofeasy/idoe_magnetoid"}},
-		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"NANOCARBON_MATRIX"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/drakesnanotech/nanocarbon_matrix"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"MAGIC_8_BALL_FRAGMENT"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimechem/element_helium"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"NANOCARBON_MATRIX"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/villagerutil/vu_essence"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"WF_BOOSTED_TELLURIUM"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimeframe/wf_travoride"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"WF_TELLURIUM"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimeframe/wf_travoride"}}
 	],

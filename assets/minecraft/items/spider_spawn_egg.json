@@ -1,7 +1,7 @@
 {
 	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
 	"cases": [
-		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"HEADLESS_HORSEMAN_SPAWN_EGG"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/geneticchickengineering/gce_water_egg"}}
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"HEADLESS_HORSEMAN_SPAWN_EGG"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/foxymachines/pixie_queen_spawn_egg"}}
 	],
 	"fallback": {"type":"minecraft:range_dispatch","property":"minecraft:custom_model_data","index":0,"fallback":{"type":"minecraft:model","model":"slimefun/spider_spawn_egg_fallback"},"entries":[{"threshold":0,"model":{"type":"minecraft:select","property":"minecraft:component","component":"minecraft:custom_name","cases":[{"when":{"text":"","extra":[{"text":"Headless Horseman Spawn Egg","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"red","bold":false}]},"model":{"type":"minecraft:model","model":"slimefun/27_foxy_machines/headless_horseman_spawn_egg"}}],"fallback":{"type":"minecraft:model","model":"slimefun/spider_spawn_egg_fallback"}}}]}
 	},

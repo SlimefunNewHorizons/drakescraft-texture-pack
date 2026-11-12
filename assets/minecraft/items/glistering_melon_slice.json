@@ -1,0 +1,9 @@
+{
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
+	"cases": [
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"GN_ENCHANTED_GLISTERING_MELON_SLICE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/cultivation/clt_orange_juice"}}
+	],
+	"fallback": {"type":"minecraft:model","model":"minecraft:item/glistering_melon_slice"}
+	},
+	"oversized_in_gui": true
+}

@@ -4,7 +4,8 @@
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"ANGEL_BLOCK"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/notenoughaddons/angel_block"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"GCE_FEATHER_CHICKEN_ICON"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/geneticchickengineering/gce_feather_chicken_icon"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"OMC_PHANTOM_SCALE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/obsidianexpansion/omc_dragon_scale"}},
-		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"PARROT_FEATHER"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/foxymachines/blood"}}
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"PARROT_FEATHER"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/foxymachines/blood"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"SU_INFUSED_FEATHER"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimefun/vitamins"}}
 	],
 	"fallback": {"type":"minecraft:range_dispatch","property":"minecraft:custom_model_data","index":0,"fallback":{"type":"minecraft:model","model":"minecraft:item/feather"},"entries":[{"threshold":0,"model":{"type":"minecraft:select","property":"minecraft:component","component":"minecraft:custom_name","cases":[{"when":{"text":"","extra":[{"text":"Elytra Scale","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"aqua","bold":false}]},"model":{"type":"minecraft:model","model":"slimefun/15_magical_gadgets/elytra_scale"}},{"when":{"text":"","extra":[{"text":"Parrot Feather","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"green","bold":false}]},"model":{"type":"minecraft:model","model":"slimefun/27_foxy_machines/parrot_feather"}}],"fallback":{"type":"minecraft:model","model":"minecraft:item/feather"}}}]}
 	},

@@ -1,0 +1,9 @@
+{
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
+	"cases": [
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"GN_CHOCOLATE_TRUFFLE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/gastronomicon/gn_fried_shrimp"}}
+	],
+	"fallback": {"type":"model","model":"item/brown_mushroom"}
+	},
+	"oversized_in_gui": true
+}

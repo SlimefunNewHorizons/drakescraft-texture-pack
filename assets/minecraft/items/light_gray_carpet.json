@@ -1,7 +1,9 @@
 {
 	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
 	"cases": [
-		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"FN_MACHINERY_REINFORCED_CASING"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/litexpansion/gold_plate"}}
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"FN_MACHINERY_REINFORCED_CASING"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/litexpansion/gold_plate"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"MATERIAL_DIE_BASIC"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/simplestorage/material_die_basic"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"MATERIAL_PEWTER_PLATE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/simplestorage/material_pewter_plate"}}
 	],
 	"fallback": {"type":"model","model":"block/light_gray_carpet"}
 	},

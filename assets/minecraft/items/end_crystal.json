@@ -1,9 +1,9 @@
 {
 	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
 	"cases": [
-		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"ANTI_GRAVITON_PROJECTOR"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/fnamplifications/fn_machinery_aluminum_plating"}},
-		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"ENERGY_WEAVE_EMITTER"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/drakesnanotech/energy_weave_emitter"}},
-		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"SINGULARITY_WARHEAD"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/drakesnanotech/micro_missile_rack"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"ANTI_GRAVITON_PROJECTOR"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/quaptics/qp_guide_what_is_quaptics"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"ENERGY_WEAVE_EMITTER"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/drakes_nanotechnology_stark_engineering/energy_weave_emitter"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"SINGULARITY_WARHEAD"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/drakes_nanotechnology_stark_engineering/singularity_warhead"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"ULTRON_INFINITY_CORE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimetinker/block_cast_infinity"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"WF_ARGON_CRYSTAL"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/litexpansion/iridium"}}
 	],

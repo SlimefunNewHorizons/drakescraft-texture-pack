@@ -1,7 +1,7 @@
 {
 	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
 	"cases": [
-		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CRY_SIMPLE_DISPLACER"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/magicxpansion/reinforced_shulker_box"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CRY_SIMPLE_DISPLACER"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/crystamaehistoria/cry_recall_lattice"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"FN_THROWABLE_TORCH"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/fnamplifications/fn_gem_upgrader"}}
 	],
 	"fallback": {"type":"minecraft:model","model":"minecraft:item/torch"}

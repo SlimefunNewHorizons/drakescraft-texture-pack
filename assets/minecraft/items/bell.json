@@ -3,6 +3,12 @@
 	"cases": [
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"BUMP_APPRAISAL"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/bump/bump_appraisal"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"BUMP_SUN_ENERGY"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/bump/bump_sun_energy"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CRINGLE_CHAOS_BELL"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimechem/molecule_sulfate"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CRINGLE_CORRUPT_BELL"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimechem/molecule_sulfate"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CRINGLE_HOLY_BELL"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimechem/molecule_sulfate"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CRINGLE_OLD_BELL"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimefun/elytra"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CRINGLE_PRIMORDIAL_BELL"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimechem/molecule_sulfate"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CRINGLE_ROGUE_BELL"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimechem/molecule_sulfate"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CRY_MYSTICAL_ATTITUDINIZER"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/crystamaehistoria/cry_arcane_sigil"}}
 	],
 	"fallback": {"type":"minecraft:range_dispatch","property":"minecraft:custom_model_data","index":0,"fallback":{"type":"minecraft:model","model":"minecraft:item/bell"},"entries":[{"threshold":0,"model":{"type":"minecraft:select","property":"minecraft:component","component":"minecraft:custom_name","cases":[{"when":{"text":"","extra":[{"text":"Info","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"green","bold":true}]},"model":{"type":"minecraft:model","model":"minetorio:item/0_ui/ui_info"}},{"when":{"text":"","extra":[{"text":"Info","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"gold","bold":true}]},"model":{"type":"minecraft:model","model":"minetorio:item/0_ui/ui_info"}}],"fallback":{"type":"minecraft:model","model":"minecraft:item/bell"}}}]}

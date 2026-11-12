@@ -5,7 +5,8 @@
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"AV_PLANT_INFUSION_CHAMBER"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/alchimiavitae/av_plant_infusion_chamber"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"DYNATECH_GROWTH_CHAMBER_MARK_2"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/dynatech/dynatech_growth_chamber_mark_2"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"NTW_INPUT_ONLY_MONITOR"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/networksv6_drake/ntw_controller"}},
-		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"NTW_VANILLA_PUSHER"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/networksv6_drake/ntw_vanilla_grabber"}}
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"NTW_VANILLA_PUSHER"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/networksv6_drake/ntw_vanilla_grabber"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"QP_TRANSMITTER_2"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/quaptics/qp_transmitter_2"}}
 	],
 	"fallback": {"type":"minecraft:model","model":"minecraft:block/lime_stained_glass"}
 	},

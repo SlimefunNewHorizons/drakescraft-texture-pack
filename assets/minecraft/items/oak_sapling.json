@@ -1,7 +1,7 @@
 {
 	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
 	"cases": [
-		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"AV_EVIL_MAGIC_PLANT"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/alchimiavitae/av_evil_magic_plant"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"AV_EVIL_MAGIC_PLANT"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/simplestorage/machine_enderator"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"AV_GOOD_MAGIC_PLANT"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/alchimiavitae/av_good_magic_plant"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CLT_TREE_CHERRY"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/cultivation/clt_tree_cherry"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CLT_TREE_CHESTNUT"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/cultivation/clt_tree_chestnut"}},

@@ -4,9 +4,10 @@
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"ADVANCED_AUTO_DISENCHANTER"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/fluffymachines/advanced_auto_disenchanter"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"AUTO_ANCIENT_ALTAR"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/fluffymachines/auto_ancient_altar"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"AV_DIVINE_ALTAR"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/alchimiavitae/av_divine_altar"}},
-		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"FM_FAST_ANCIENT_ALTAR"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/fastmachines/fm_stacked_ancient_pedestal"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CRINGLE_SUMMONING_ALTAR"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/quaptics/qp_beacon_beam"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"FM_FAST_ANCIENT_ALTAR"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/quaptics/qp_polariser"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"FN_STICK_ALTAR"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/fnamplifications/fn_mystery_stick_6"}},
-		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"GCE_MUTAGENIC_SPLICER"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/fluffymachines/smart_factory"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"GCE_MUTAGENIC_SPLICER"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/netheopoiesis/nps_quartz_blank"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"SUPREME_FORGE_MAGICAL_I"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/litexpansion/refined_smeltery"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"SUPREME_FORGE_MAGICAL_II"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/supreme/supreme_forge_magical_ii"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"SUPREME_FORGE_MAGICAL_III"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/supreme/supreme_forge_magical_iii"}}

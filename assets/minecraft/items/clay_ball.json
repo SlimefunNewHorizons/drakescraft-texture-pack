@@ -1,7 +1,13 @@
 {
 	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
 	"cases": [
-		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"EM_CLAY"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/elementmanipulation/em_oxygen"}}
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"EM_CLAY"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/elementmanipulation/em_oxygen"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"JC_CLAY_BALL_1"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/compressioncraft/jc_clay_ball_1"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"JC_CLAY_BALL_2"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/compressioncraft/jc_clay_ball_2"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"JC_CLAY_BALL_3"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/compressioncraft/jc_clay_ball_3"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"JC_CLAY_BALL_4"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/compressioncraft/jc_clay_ball_4"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"JC_CLAY_BALL_5"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/compressioncraft/jc_clay_ball_5"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"JC_CLAY_BALL_6"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimechem/element_helium"}}
 	],
 	"fallback": {"type":"minecraft:model","model":"minecraft:item/clay_ball"}
 	},

@@ -4,7 +4,18 @@
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"DYNATECH_COAL_COKE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/dynatech/dynatech_coal_coke"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"EM_COAL"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/dynatech/dynatech_coal_coke"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"EM_RUBBER_PISTOL"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimytreetaps/rubber_factory"}},
-		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"GCE_COAL_CHICKEN_ICON"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/dynatech/dynatech_coal_coke"}}
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"ETC_ANOMALOUS_COAL"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/dynatech/dynatech_coal_coke"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"ETC_DEVIANT_COAL"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/dynatech/dynatech_coal_coke"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"ETC_DIVERGENT_COAL"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/dynatech/dynatech_coal_coke"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"ETC_PERFECTED_COAL"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/dynatech/dynatech_coal_coke"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"ETC_UNORTHODOX_COAL"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/dynatech/dynatech_coal_coke"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"GCE_COAL_CHICKEN_ICON"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/dynatech/dynatech_coal_coke"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"JC_COAL_1"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/compressioncraft/jc_charcoal_1"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"JC_COAL_2"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/compressioncraft/jc_charcoal_2"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"JC_COAL_3"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/compressioncraft/jc_charcoal_3"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"JC_COAL_4"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/compressioncraft/jc_charcoal_4"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"JC_COAL_5"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/compressioncraft/jc_charcoal_5"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"JC_COAL_6"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/dynatech/dynatech_coal_coke"}}
 	],
 	"fallback": {"type":"model","model":"item/coal"}
 	},

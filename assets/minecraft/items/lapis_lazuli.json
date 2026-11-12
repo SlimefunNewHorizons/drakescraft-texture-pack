@@ -3,8 +3,14 @@
 	"cases": [
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"EM_LAPIS"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/elementmanipulation/em_oxygen"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"GCE_LAPIS_CHICKEN_ICON"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/geneticchickengineering/gce_lapis_chicken_icon"}},
-		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"MICRO_ARC_CAPACITOR"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/drakesnanotech/cosmic_circuit"}},
-		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"MOD_LAPIS_DUMMY"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/elementmanipulation/em_syringe"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"JC_LAPIS_LAZULI_1"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/compressioncraft/jc_lapis_lazuli_1"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"JC_LAPIS_LAZULI_2"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/compressioncraft/jc_lapis_lazuli_2"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"JC_LAPIS_LAZULI_3"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/compressioncraft/jc_lapis_lazuli_3"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"JC_LAPIS_LAZULI_4"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/compressioncraft/jc_lapis_lazuli_4"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"JC_LAPIS_LAZULI_5"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/compressioncraft/jc_lapis_lazuli_5"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"JC_LAPIS_LAZULI_6"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/compressioncraft/jc_lapis_lazuli_6"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"MICRO_ARC_CAPACITOR"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/drakes_nanotechnology_stark_engineering/micro_arc_capacitor"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"MOD_LAPIS_DUMMY"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimetinker/mod_lapis_dummy"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"WF_TRAVORIDE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimeframe/wf_travoride"}}
 	],
 	"fallback": {"type":"minecraft:range_dispatch","property":"minecraft:custom_model_data","index":0,"fallback":{"type":"minecraft:model","model":"minecraft:item/lapis_lazuli"},"entries":[{"threshold":0,"model":{"type":"minecraft:select","property":"minecraft:component","component":"minecraft:custom_name","cases":[{"when":{"text":"","extra":[{"text":"[Lapis Lazuli] Oscillator","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"aqua","bold":false}]},"model":{"type":"minecraft:model","model":"slimefun/29_infinity_expansion/materials/oscillator_lapis_lazuli"}}],"fallback":{"type":"minecraft:model","model":"minecraft:item/lapis_lazuli"}}}]}

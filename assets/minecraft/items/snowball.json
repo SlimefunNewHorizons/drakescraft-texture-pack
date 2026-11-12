@@ -3,6 +3,12 @@
 	"cases": [
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"AZIDOAZIDE_AZIDE_GRENADE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimefunwarfare/azidoazide_azide_grenade"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"GCE_SNOWBALL_CHICKEN_ICON"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/geneticchickengineering/gce_feather_chicken_icon"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"JC_SNOW_BALL_1"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/compressioncraft/jc_clay_ball_1"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"JC_SNOW_BALL_2"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/compressioncraft/jc_clay_ball_2"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"JC_SNOW_BALL_3"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/compressioncraft/jc_clay_ball_3"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"JC_SNOW_BALL_4"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/compressioncraft/jc_clay_ball_4"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"JC_SNOW_BALL_5"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/compressioncraft/jc_clay_ball_5"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"JC_SNOW_BALL_6"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimechem/element_helium"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"NPS_NETHEO_BALL_ANCHOVY"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/netheopoiesis/nps_netheo_ball_sweet"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"NPS_NETHEO_BALL_ASTRINGENT"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/netheopoiesis/nps_netheo_ball_sweet"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"NPS_NETHEO_BALL_BAD"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/netheopoiesis/nps_netheo_ball_sweet"}},

@@ -1,15 +1,16 @@
 {
 	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
 	"cases": [
-		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"ARC_REACTOR_CORE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/drakesnanotech/arc_reactor_core"}},
-		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CRY_RECALL_LATTICE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/magicxpansion/reinforced_shulker_box"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"ARC_REACTOR_CORE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimytreetaps/amber_block"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CRINGLE_GLISTENING_SOUL"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/foxymachines/sacrificial_altar_soul_torch"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CRY_RECALL_LATTICE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/crystamaehistoria/cry_recall_lattice"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"DYNATECH_STAR_DUST"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/dynatech/dynatech_star_dust"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"GCE_NETHER_STAR_ICON"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/geneticchickengineering/gce_nether_star_icon"}},
-		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"MARK_LXXXV_NANOCORE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/drakesnanotech/nanomass_canister"}},
-		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"NTW_OPTIC_STAR"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/networksv6_drake/ntw_optic_star"}},
-		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"NTW_RADIOACTIVE_OPTIC_STAR"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/networksv6_drake/ntw_optic_star"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"MARK_LXXXV_NANOCORE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimefun/chain_chestplate"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"NTW_OPTIC_STAR"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimechem/chemical_dissolver"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"NTW_RADIOACTIVE_OPTIC_STAR"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimechem/chemical_dissolver"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"PORTABLE_NETHER_TELEPORTER"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/netheopoiesis/nps_purification_scanner"}},
-		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"SYNTHETHEZOID_MATRIX"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/drakesnanotech/nanocarbon_matrix"}}
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"SYNTHETHEZOID_MATRIX"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/villagerutil/vu_essence"}}
 	],
 	"fallback": {"type":"minecraft:range_dispatch","property":"minecraft:custom_model_data","index":0,"fallback":{"type":"minecraft:model","model":"minecraft:item/nether_star"},"entries":[{"threshold":0,"model":{"type":"minecraft:select","property":"minecraft:component","component":"minecraft:custom_name","cases":[{"when":{"text":"","extra":[{"text":"Fortune Singularity","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"gold","bold":false}]},"model":{"type":"minecraft:model","model":"slimefun/29_infinity_expansion/materials/singularity_fortune"}},{"when":{"text":"","extra":[{"text":"Magic Singularity","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"light_purple","bold":false}]},"model":{"type":"minecraft:model","model":"slimefun/29_infinity_expansion/materials/singularity_magic"}},{"when":{"text":"","extra":[{"text":"Earth Singularity","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"green","bold":false}]},"model":{"type":"minecraft:model","model":"slimefun/29_infinity_expansion/materials/singularity_earth"}},{"when":{"text":"","extra":[{"text":"Metal Singularity","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"dark_gray","bold":false}]},"model":{"type":"minecraft:model","model":"slimefun/29_infinity_expansion/materials/singularity_metal"}}],"fallback":{"type":"minecraft:model","model":"minecraft:item/nether_star"}}}]}
 	},

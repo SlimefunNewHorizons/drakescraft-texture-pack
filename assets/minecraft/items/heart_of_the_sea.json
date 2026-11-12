@@ -1,9 +1,13 @@
 {
 	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
 	"cases": [
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CRINGLE_ROYAL_GEL"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimytreetaps/resin_extractor"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"IDOE_IDOL_TORRENT"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/idreamofeasy/idoe_idol_torrent"}},
-		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"NANITE_AUREOLE_PROJECTOR"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/drakesnanotech/nanomass_canister"}},
-		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"PORTABLE_ARC_REACTOR"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/drakesnanotech/portable_arc_reactor"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"MATERIAL_CHEST_CORE_ADVANCED"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/litexpansion/advanced_machine_block"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"MATERIAL_CHEST_CORE_BASIC"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/simplestorage/material_chest_core_basic"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"MATERIAL_CHEST_CORE_REINFORCED"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimytreetaps/amber_block"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"NANITE_AUREOLE_PROJECTOR"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimefun/chain_chestplate"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"PORTABLE_ARC_REACTOR"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/simplematerialgenerators/smg_generator_multiblock"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"POSEIDONS_BLESSING"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/foxymachines/poseidons_blessing"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"WATER_SPRINKLER_CHUNK_UPGRADE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/fluffymachines/water_sprinkler_chunk_upgrade"}}
 	],

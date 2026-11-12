@@ -4,6 +4,10 @@
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"DYNATECH_NETHER_GROWTH_CHAMBER"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/dynatech/dynatech_nether_growth_chamber"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"DYNATECH_NETHER_GROWTH_CHAMBER_MARK_2"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/dynatech/dynatech_nether_growth_chamber_mark_2"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"NTW_IMPORT"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/networksv6_drake/ntw_controller"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"QP_RECEIVER_2"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/quaptics/qp_receiver_2"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"QP_REPEATER_1"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/quaptics/qp_repeater_1"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"QP_REPEATER_2"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/quaptics/qp_repeater_2"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"QP_REPEATER_3"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/quaptics/qp_repeater_3"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"STB_TENKBATTERYBOX"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/sensibletoolbox/stb_fiftykenergycell"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"VAPORIZER"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/extratools/vaporizer"}}
 	],

@@ -1,0 +1,14 @@
+{
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
+	"cases": [
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"DISC_MOLD"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimechem/molecule_sulfate"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"SF_DISC_ALBATRAOZ"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimechem/molecule_sulfate"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"SF_DISC_BOHEMIAN"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimechem/molecule_sulfate"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"SF_DISC_LONELY_DAY"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimechem/molecule_sulfate"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"SF_DISC_MEZMERIZER"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimechem/molecule_sulfate"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"SF_DISC_SOLIDER_SIDE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimechem/molecule_sulfate"}}
+	],
+	"fallback": {"type":"minecraft:model","model":"minecraft:item/music_disc_cat"}
+	},
+	"oversized_in_gui": true
+}

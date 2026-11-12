@@ -1,6 +1,7 @@
 {
 	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
 	"cases": [
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"STB_SOUNDMUFFLER"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/sensibletoolbox/stb_paintcan"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"SUPER_FAN"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/galaxyfun/ion_engine"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"WF_WOOL_GEN"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimeframe/wf_wool_gen"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"WF_WOOL_GEN_2"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimeframe/wf_wool_gen_2"}},

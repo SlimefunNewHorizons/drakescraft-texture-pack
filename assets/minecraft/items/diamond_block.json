@@ -2,9 +2,18 @@
 	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
 	"cases": [
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"ADVANCED_MACHINE_BLOCK"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/litexpansion/advanced_machine_block"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"BLOCK_ASSIGNER"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/dynatech/dynatech_diamond_machine_core"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CHEMICAL_DISSOLVER"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimechem/chemical_dissolver"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CRYSTALLIZER"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimetinker/mod_diamond_dummy"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CRY_EXALTED_FERTILITY_PHARO"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/crystamaehistoria/cry_guide_liquefaction"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"FMG_GENERATOR_DIAMOND"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/fnamplifications/fmg_generator_diamond_broken"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"FMG_GENERATOR_DIAMOND_BROKEN"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/fnamplifications/fmg_generator_diamond_broken"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"JC_DIAMOND_BLOCK_1"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/compressioncraft/jc_diamond_block_1"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"JC_DIAMOND_BLOCK_2"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/compressioncraft/jc_diamond_block_2"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"JC_DIAMOND_BLOCK_3"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/compressioncraft/jc_diamond_block_3"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"JC_DIAMOND_BLOCK_4"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/compressioncraft/jc_diamond_block_4"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"JC_DIAMOND_BLOCK_5"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/compressioncraft/jc_diamond_block_5"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"JC_DIAMOND_BLOCK_6"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/dynatech/dynatech_diamond_machine_core"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"MULTI_FUNCTIONAL_STORAGE_UNIT"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/litexpansion/multi_functional_electric_storage_unit"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"WF_PRISMATIC_ENERGIZED_CORE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimeframe/wf_prismatic_energized_core"}}
 	],

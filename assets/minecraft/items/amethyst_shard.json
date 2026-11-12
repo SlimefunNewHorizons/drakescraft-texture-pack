@@ -3,9 +3,16 @@
 	"cases": [
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"BC_CHEST_COLORER"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/betterchests/bc_chest_colorer"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"IDOE_IDOL_DIVINE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/idreamofeasy/idoe_idol_torrent"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"JC_AMETHYST_SHARD_1"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/quaptics/qp_lens_1"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"JC_AMETHYST_SHARD_2"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/quaptics/qp_lens_2"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"JC_AMETHYST_SHARD_3"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/quaptics/qp_lens_3"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"JC_AMETHYST_SHARD_4"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/quaptics/qp_lens_4"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"JC_AMETHYST_SHARD_5"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/compressioncraft/jc_amethyst_shard_5"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"JC_AMETHYST_SHARD_6"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimechem/molecule_sulfate"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"OMC_DRAGON_SCALE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/obsidianexpansion/omc_dragon_scale"}},
-		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"REPULSOR_MICRO_LENS"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/drakesnanotech/cosmic_circuit"}},
-		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"RESCUE_BARRIER_NODE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/drakesnanotech/mark_xlii_control_node"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"QP_MULTBLOCK_WAND"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/quaptics/qp_multblock_wand"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"REPULSOR_MICRO_LENS"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/drakes_nanotechnology_stark_engineering/cosmic_circuit"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"RESCUE_BARRIER_NODE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/drakes_nanotechnology_stark_engineering/mark_xlii_control_node"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"WF_HESPERON"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimeframe/wf_travoride"}}
 	],
 	"fallback": {"type":"minecraft:model","model":"minecraft:item/amethyst_shard"}

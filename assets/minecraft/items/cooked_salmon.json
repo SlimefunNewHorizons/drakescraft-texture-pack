@@ -1,0 +1,9 @@
+{
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
+	"cases": [
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"GN_PAN_SEARED_SALMON"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/cultivation/clt_grilled_spinach"}}
+	],
+	"fallback": {"type":"model","model":"item/cooked_salmon"}
+	},
+	"oversized_in_gui": true
+}

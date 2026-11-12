@@ -1,10 +1,11 @@
 {
 	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
 	"cases": [
-		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"ACB_UPGRADE_CARD"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/fluffymachines/acb_upgrade_card"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"ACB_UPGRADE_CARD"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimetinker/mod_quartz_dummy"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"ADVANCED_ALLOY"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/litexpansion/advanced_alloy"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"AIR_FILTER"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/galaxyfun/air_filter"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"ALUMINUM_COMPOSITE_SHEET"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/galaxyfun/aluminum_composite_sheet"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"APPRAISAL_PAPER_HORSE_ARMOR"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/bump/random_horse_armor"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"BC_TTTTTTTTTTTTTTTTTTTTIP_ITEM"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/fnamplifications/fn_gem_armor_impair"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"BUMP_APPRAISAL_PAPER_ARMOR"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/bump/bump_random_horse_armor"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"BUMP_APPRAISAL_PAPER_DAMAGE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/bump/bump_mecha_gear"}},
@@ -25,6 +26,7 @@
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"HEAVY_DUTY_SHEET"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/obsidianexpansion/omc_obsidian_plate"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"INFINITY_BANDAGE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/flowerpower/infinity_bandage"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"IRIDIUM_PLATE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/litexpansion/iridium_plate"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"QUALITY_IDENTIFIER"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/bump/quality_identifier"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"SPACE_GRADE_PLATE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/obsidianexpansion/omc_obsidian_plate"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"STB_BLANKMODULE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/sensibletoolbox/stb_hypersendermodule"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"ULTRA_DUTY_SHEET"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/obsidianexpansion/omc_obsidian_plate"}},
@@ -35,7 +37,7 @@
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"WF_FERSTEEL_ALLOY_PLATE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/litexpansion/iridium_plate"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"WF_HESPAZYM_ALLOY_PLATE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/litexpansion/iridium_plate"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"WF_PYROTIC_ALLOY_PLATE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimeframe/wf_pyrotic_alloy_plate"}},
-		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"WF_SOUL_CONTRACT"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/alchimiavitae/av_soul_collector"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"WF_SOUL_CONTRACT"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/foxymachines/sacrificial_altar_soul_torch"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"WF_THAUMIC_DISTILLATE_PLATE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/litexpansion/iridium_plate"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"WF_TRAVOCYTE_ALLOY_PLATE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/litexpansion/iridium_plate"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"WF_VENERDO_ALLOY_PLATE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/litexpansion/iridium_plate"}}

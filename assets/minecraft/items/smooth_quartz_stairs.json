@@ -1,0 +1,9 @@
+{
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
+	"cases": [
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"SU_SMOOTH_CHARGED_STAIRS_III"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/spiritsunchained/su_charged_quartz_iii"}}
+	],
+	"fallback": {"type":"minecraft:model","model":"minecraft:block/smooth_quartz_stairs"}
+	},
+	"oversized_in_gui": true
+}

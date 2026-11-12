@@ -4,7 +4,7 @@
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"DECOMPRESSOR"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/infinityexpansion/decompressor"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"NE_UPGRADE_CORE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/nexcavate/ne_upgrade_core"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"NTW_RECIPE_ENCODER"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/networksv6_drake/ntw_recipe_encoder"}},
-		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"WAR_MACHINE_TARGETING_CORE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/drakesnanotech/arc_reactor_core"}}
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"WAR_MACHINE_TARGETING_CORE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimytreetaps/amber_block"}}
 	],
 	"fallback": {"type":"minecraft:model","model":"minecraft:block/target"}
 	},

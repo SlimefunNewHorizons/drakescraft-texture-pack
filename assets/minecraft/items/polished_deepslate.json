@@ -1,0 +1,9 @@
+{
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
+	"cases": [
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"HEAT_SENSOR"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/betterreactor/heat_sensor"}}
+	],
+	"fallback": {"type":"minecraft:model","model":"minecraft:block/polished_deepslate"}
+	},
+	"oversized_in_gui": true
+}

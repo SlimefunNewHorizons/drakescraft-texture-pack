@@ -4,6 +4,9 @@
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"DYNATECH_OCEAN_GROWTH_CHAMBER"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/dynatech/dynatech_growth_chamber"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"NE_ITEM_HOLDER"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/nexcavate/ne_item_holder"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"NTW_NETWORK_WIRELESS_TRANSMITTER"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/networksv6_drake/ntw_optic_cable"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"QP_SCATTERER_1"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/danktech2/dk2_unloader_1"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"QP_SCATTERER_2"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/quaptics/qp_splitter_2"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"QP_SCATTERER_3"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/quaptics/qp_splitter_3"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"STB_SCURELAY"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/sensibletoolbox/stb_paintcan"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"STB_UNLINKEDSCURELAY"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/sensibletoolbox/stb_paintcan"}}
 	],

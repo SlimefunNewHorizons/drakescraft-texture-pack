@@ -2,6 +2,11 @@
 	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
 	"cases": [
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"DYNATECH_WEATHER_CONTROLLER"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/litexpansion/cargo_configurator"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"ETC_ANOMALOUS_MACHINE_FRAME"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/emctech/etc_unorthadox_machine_frame"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"ETC_DEVIANT_MACHINE_FRAME"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/emctech/etc_unorthadox_machine_frame"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"ETC_DIVERGENT_MACHINE_FRAME"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/emctech/etc_unorthadox_machine_frame"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"ETC_PERFECTED_MACHINE_FRAME"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/emctech/etc_unorthadox_machine_frame"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"ETC_UNORTHADOX_MACHINE_FRAME"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/emctech/etc_unorthadox_machine_frame"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"NTW_EXPORT"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/networksv6_drake/ntw_controller"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"WF_GLASS_GENERATOR_3"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimeframe/wf_glass_generator_3"}}
 	],

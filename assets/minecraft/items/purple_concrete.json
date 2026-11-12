@@ -1,7 +1,9 @@
 {
 	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
 	"cases": [
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"BLOCK_CAST_COSMIC_ALLOY"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/simplestorage/material_pewter"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CRY_SATCHEL_5"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/crystamaehistoria/cry_satchel_5"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"ETC_MATERIALIZER_4"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/emctech/etc_dematerializer_4"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"MASS_FABRICATOR_MACHINE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/litexpansion/mass_fabricator_machine"}}
 	],
 	"fallback": {"type":"minecraft:model","model":"minecraft:block/purple_concrete"}

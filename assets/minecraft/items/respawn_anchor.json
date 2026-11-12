@@ -1,15 +1,17 @@
 {
 	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
 	"cases": [
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CRINGLE_SUMMONING_PEDESTAL"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/quaptics/qp_beacon_beam"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"DYNATECH_DEGRADED_EGG_MILL_2"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/dynatech/dynatech_degraded_egg_mill_2"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"DYNATECH_EGG_MILL_2"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/dynatech/dynatech_degraded_egg_mill_2"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"DYNATECH_ENCHANTED_MACHINE_CORE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/litexpansion/machine_block"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"FM_FAST_INFINITY_WORKBENCH"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/infinityexpansion/infinity_constructor"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"GCE_EXCITATION_CHAMBER_4"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/geneticchickengineering/gce_excitation_chamber_4"}},
-		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"INFINITY_FORGE_CONTROLLER"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/drakesnanotech/infinity_forge_controller"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"INFINITY_FORGE_CONTROLLER"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/drakes_nanotechnology_stark_engineering/infinity_forge_controller"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"MACHINE_ENDERATOR"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/simplestorage/machine_enderator"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"NTW_CRAFTER_MATRIX"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/networksv6_drake/ntw_crafter_matrix"}},
-		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"PIGLIN_ATTRACTOR"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/infernalexpansion/ancient_rune_thermal_walk"}},
-		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"REALITY_FRACTURE_DEVICE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/fnamplifications/fn_machinery_aluminum_plating"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"PIGLIN_ATTRACTOR"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/liquid/molten_ancient_debris"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"REALITY_FRACTURE_DEVICE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/quaptics/qp_guide_what_is_quaptics"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"SUPREME_MOB_COLLECTOR_MACHINE_I"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/supreme/supreme_mob_collector_machine_i"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"SUPREME_MOB_COLLECTOR_MACHINE_II"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/supreme/supreme_mob_collector_machine_ii"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"SUPREME_MOB_COLLECTOR_MACHINE_III"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/supreme/supreme_mob_collector_machine_iii"}}

@@ -1,8 +1,8 @@
 {
 	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
 	"cases": [
-		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CRY_BRILLIANCE_SCOOP"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/magicxpansion/reinforced_shulker_box"}},
-		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CRY_LUMINESCENCE_SCOOP"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/magicxpansion/reinforced_shulker_box"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CRY_BRILLIANCE_SCOOP"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/crystamaehistoria/cry_recall_lattice"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CRY_LUMINESCENCE_SCOOP"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/crystamaehistoria/cry_recall_lattice"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CRY_MOB_LAMP_1"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/crystamaehistoria/cry_mob_lamp_1"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"ELECTROLYZER"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/infinityexpansion/powered_bedrock"}}
 	],

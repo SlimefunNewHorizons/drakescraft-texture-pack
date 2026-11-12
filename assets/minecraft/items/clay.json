@@ -4,7 +4,13 @@
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"DYNATECH_WIRELESS_CHARGER"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/litexpansion/copper_cable"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"FMG_GENERATOR_CLAY"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/fnamplifications/fmg_generator_multiblock"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"FMG_GENERATOR_CLAY_BROKEN"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/fnamplifications/fmg_generator_multiblock"}},
-		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"GCE_CLAY_CHICKEN_ICON"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/geneticchickengineering/gce_feather_chicken_icon"}}
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"GCE_CLAY_CHICKEN_ICON"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/geneticchickengineering/gce_feather_chicken_icon"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"JC_CLAY_1"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/compressioncraft/jc_compressor_1"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"JC_CLAY_2"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/compressioncraft/jc_compressor_2"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"JC_CLAY_3"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/compressioncraft/jc_compressor_3"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"JC_CLAY_4"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/compressioncraft/jc_compressor_4"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"JC_CLAY_5"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/compressioncraft/jc_compressor_5"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"JC_CLAY_6"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/simplestorage/machine_die_press"}}
 	],
 	"fallback": {"type":"minecraft:model","model":"minecraft:block/clay"}
 	},

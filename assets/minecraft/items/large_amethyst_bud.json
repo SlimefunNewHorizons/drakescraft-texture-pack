@@ -1,0 +1,14 @@
+{
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
+	"cases": [
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"JC_LARGE_AMETHYST_BUD_1"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/quaptics/qp_lens_1"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"JC_LARGE_AMETHYST_BUD_2"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/quaptics/qp_lens_2"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"JC_LARGE_AMETHYST_BUD_3"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/quaptics/qp_lens_3"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"JC_LARGE_AMETHYST_BUD_4"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/quaptics/qp_lens_4"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"JC_LARGE_AMETHYST_BUD_5"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/compressioncraft/jc_amethyst_shard_5"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"JC_LARGE_AMETHYST_BUD_6"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimechem/molecule_sulfate"}}
+	],
+	"fallback": {"type":"minecraft:model","model":"minecraft:item/large_amethyst_bud"}
+	},
+	"oversized_in_gui": true
+}

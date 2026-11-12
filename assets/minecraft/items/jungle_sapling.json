@@ -1,8 +1,8 @@
 {
 	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
 	"cases": [
-		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CLT_TREE_LIME"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/cultivation/clt_tree_lime"}},
-		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CLT_TREE_ORANGE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/cultivation/clt_tree_orange"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CLT_TREE_LIME"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/crystamaehistoria/cry_brush_lime_100"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CLT_TREE_ORANGE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/crystamaehistoria/cry_brush_orange_100"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CLT_TREE_PINEAPPLE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/cultivation/clt_tree_pineapple"}}
 	],
 	"fallback": {"type":"minecraft:model","model":"minecraft:item/jungle_sapling"}

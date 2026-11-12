@@ -5,6 +5,7 @@
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"ADVANCED_CHARGING_BENCH"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/fluffymachines/advanced_charging_bench"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"ASSEMBLY_TABLE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/galaxyfun/oxygen_filler"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"AUTO_ARMOR_FORGE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/litexpansion/refined_smeltery"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"BLOCKEXPANDER"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimytreetaps/amber_block"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"BOOMINATOR_9000"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimefunwarfare/air_liquefier"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CLT_COUNTER_CHOPPING"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/cultivation/clt_counter_chopping"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"ELEMENT_FORGE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/litexpansion/refined_smeltery"}},
@@ -16,6 +17,7 @@
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"OMC_OBSIDIAN_FORGE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/infinityexpansion/basic_obsidian_gen"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"RESIN_EXTRACTOR"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimytreetaps/resin_extractor"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"RESIN_EXTRACTOR_2"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimytreetaps/resin_extractor_2"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"SPRAY_SOLIDIFIER"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/liquid/spray_solidifier"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"SUPREME_ELECTRIC_GEAR_I"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/supreme/supreme_electric_magical_i"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"SUPREME_ELECTRIC_GEAR_II"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/supreme/supreme_electric_magical_ii"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"SUPREME_ELECTRIC_GEAR_III"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/supreme/supreme_electric_magical_iii"}}

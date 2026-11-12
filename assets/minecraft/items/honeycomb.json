@@ -1,6 +1,7 @@
 {
 	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
 	"cases": [
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CRINGLE_PURIFIED_SOUL"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/foxymachines/sacrificial_altar_soul_torch"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"DRY_COMB"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/fnamplifications/fmg_generator_honeycomb_broken"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"HONEYCOMB"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/fnamplifications/fmg_generator_honeycomb_broken"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"HONEY_COMB"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/fnamplifications/fmg_generator_honeycomb_broken"}},

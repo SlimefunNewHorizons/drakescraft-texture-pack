@@ -1,6 +1,7 @@
 {
 	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
 	"cases": [
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"ATTRIBUTE_GRINDSTONE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/bump/attribute_grindstone"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"BUMP_ATTRIBUTE_GRINDSTONE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/bump/bump_attribute_grindstone"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"FM_FAST_GRIND_STONE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/infinityexpansion/advanced_cobble_gen"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"SBEE_CENTRIFUGE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimybees/sbee_centrifuge"}},

@@ -1,7 +1,13 @@
 {
 	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
 	"cases": [
-		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"BEE_HIVE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/dynatech/dynatech_goldmineralized_apiary"}}
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"BEE_HIVE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/dynatech/dynatech_goldmineralized_apiary"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"JC_OAK_PLANKS_1"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/compressioncraft/jc_compressor_1"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"JC_OAK_PLANKS_2"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/compressioncraft/jc_compressor_2"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"JC_OAK_PLANKS_3"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/compressioncraft/jc_compressor_3"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"JC_OAK_PLANKS_4"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/compressioncraft/jc_compressor_4"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"JC_OAK_PLANKS_5"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/compressioncraft/jc_compressor_5"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"JC_OAK_PLANKS_6"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/simplestorage/machine_die_press"}}
 	],
 	"fallback": {"type":"minecraft:model","model":"minecraft:block/oak_planks"}
 	},

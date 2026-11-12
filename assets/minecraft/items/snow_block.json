@@ -2,6 +2,13 @@
 	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
 	"cases": [
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"DYNATECH_WIRELESS_ENERGY_BANK"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/litexpansion/copper_cable"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"JC_OBSIDIAN_1"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/compressioncraft/jc_obsidian_1"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"JC_SNOW_BLOCK_1"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/compressioncraft/jc_snow_block_1"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"JC_SNOW_BLOCK_2"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/compressioncraft/jc_snow_block_2"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"JC_SNOW_BLOCK_3"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/compressioncraft/jc_snow_block_3"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"JC_SNOW_BLOCK_4"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/compressioncraft/jc_snow_block_4"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"JC_SNOW_BLOCK_5"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/compressioncraft/jc_snow_block_5"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"JC_SNOW_BLOCK_6"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimytreetaps/amber_block"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"NPS_SNOWY_CRUX"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/simplematerialgenerators/smg_generator_netherrack"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"STABILIZED_BLISTERING_BLOCK"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/foxymachines/stabilized_blistering_block"}}
 	],

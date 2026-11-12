@@ -4,6 +4,7 @@
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"BLOCK_CAST_REINFORCED_SLIMESTEEL"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimetinker/block_cast_slimesteel"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"BLOCK_CAST_SLIMESTEEL"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimetinker/block_cast_slimesteel"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"IDOE_RADIATION_ABSORBER_3"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/idreamofeasy/idoe_radiation_absorber_3"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"SLIMY_ANVIL"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimyrepair/slimy_anvil"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"SUPREME_TECH_MUTATION_I"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/supreme/supreme_electric_magical_i"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"SUPREME_TECH_MUTATION_II"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/supreme/supreme_electric_magical_ii"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"SUPREME_TECH_MUTATION_III"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/supreme/supreme_electric_magical_iii"}}

@@ -2,6 +2,10 @@
 	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
 	"cases": [
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"GOLD_TRANSMUTER"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/extratools/gold_transmuter"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"QP_DIFFRACTION_GRATING_1"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/quaptics/qp_diffraction_grating_1"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"QP_DIFFRACTION_GRATING_2"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/quaptics/qp_diffraction_grating_2"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"QP_INTERFEROMETER"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/quaptics/qp_interferometer"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"QP_POLARISER"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/quaptics/qp_polariser"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"STB_AUTOBUILDER"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/sensibletoolbox/stb_paintcan"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"SULFUR_BLOCK"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/galaxyfun/sulfur_block"}}
 	],

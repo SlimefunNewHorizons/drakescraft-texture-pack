@@ -3,7 +3,7 @@
 	"cases": [
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"LANDING_HATCH"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/obsidianexpansion/omc_containment_ingot"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"NOZZLE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/galaxyfun/reinforced_channel"}},
-		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"VACUUM_SEAL_RING"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/drakesnanotech/sling_ring"}}
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"VACUUM_SEAL_RING"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/drakes_nanotechnology_stark_engineering/vacuum_seal_ring"}}
 	],
 	"fallback": {"type":"minecraft:range_dispatch","property":"minecraft:custom_model_data","index":0,"fallback":{"type":"minecraft:model","model":"minecraft:item/iron_trapdoor"},"entries":[{"threshold":0,"model":{"type":"minecraft:select","property":"minecraft:component","component":"minecraft:custom_name","cases":[{"when":{"text":"","extra":[{"text":"Landing Hatch","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"white","bold":false}]},"model":{"type":"minecraft:model","model":"slimefun/24_galactifun/galactifun/landing_hatch"}},{"when":{"text":"","extra":[{"text":"Nozzle","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"white","bold":false}]},"model":{"type":"minecraft:model","model":"slimefun/24_galactifun/components/nozzle"}}],"fallback":{"type":"minecraft:model","model":"minecraft:item/iron_trapdoor"}}}]}
 	},

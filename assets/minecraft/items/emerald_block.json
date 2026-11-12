@@ -1,10 +1,17 @@
 {
 	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
 	"cases": [
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CHEMICAL_COMBINER"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimechem/chemical_combiner"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CRY_EXALTED_FERTILITY_TOTEM"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/crystamaehistoria/cry_guide_liquefaction"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"FMG_GENERATOR_EMERALD"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/dynatech/dynatech_synthetic_emeraldmineralized_apiary"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"FMG_GENERATOR_EMERALD_BROKEN"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/dynatech/dynatech_synthetic_emeraldmineralized_apiary"}},
-		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"GEAR_TRANSFORMER"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/infinityexpansion/gear_transformer"}}
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"GEAR_TRANSFORMER"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/infinityexpansion/gear_transformer"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"JC_EMERALD_BLOCK_1"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/compressioncraft/jc_emerald_1"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"JC_EMERALD_BLOCK_2"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/compressioncraft/jc_emerald_2"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"JC_EMERALD_BLOCK_3"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/compressioncraft/jc_emerald_3"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"JC_EMERALD_BLOCK_4"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/compressioncraft/jc_emerald_4"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"JC_EMERALD_BLOCK_5"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/compressioncraft/jc_emerald_5"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"JC_EMERALD_BLOCK_6"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/dynatech/dynatech_synthetic_emeraldmineralized_apiary"}}
 	],
 	"fallback": {"type":"model","model":"block/emerald_block"}
 	},

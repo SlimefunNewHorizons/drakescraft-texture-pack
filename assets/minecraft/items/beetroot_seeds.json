@@ -129,7 +129,7 @@
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CLT_CHOPPED_VANILLA"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/cultivation/clt_chopped_vanilla"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CLT_CHOPPED_WASABI"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/cultivation/clt_chopped_wasabi"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CLT_CHOPPED_WHEAT"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/cultivation/clt_chopped_wheat"}},
-		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"EM_BEETROOT_SEEDS"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/elementmanipulation/em_pumpkin_seeds"}}
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"EM_BEETROOT_SEEDS"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/foxymachines/vile_seeds"}}
 	],
 	"fallback": {"type":"model","model":"item/beetroot_seeds"}
 	},

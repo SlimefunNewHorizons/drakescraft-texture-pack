@@ -3,7 +3,7 @@
 	"cases": [
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CELESTIAL_SHARD"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/foxymachines/celestial_shard"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"GCE_PRISMARINE_SHARD_CHICKEN_ICON"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/geneticchickengineering/gce_prismarine_shard_chicken_icon"}},
-		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"MIRROR_DIMENSION_PRISM"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/drakesnanotech/mirror_dimension_prism"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"MIRROR_DIMENSION_PRISM"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/drakes_nanotechnology_stark_engineering/mirror_dimension_prism"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"NPS_CRUDE_HARVESTING_TOOL"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/netheopoiesis/nps_crude_harvesting_tool"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"NPS_HARVESTING_TOOL"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/netheopoiesis/nps_crude_harvesting_tool"}}
 	],

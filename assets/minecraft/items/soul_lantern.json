@@ -1,10 +1,10 @@
 {
 	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
 	"cases": [
-		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CRY_LUSTRE_SCOOP"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/magicxpansion/reinforced_shulker_box"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CRY_LUSTRE_SCOOP"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/crystamaehistoria/cry_recall_lattice"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CRY_MOB_LAMP_2"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/crystamaehistoria/cry_mob_lamp_2"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CRY_MOB_LAMP_3"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/crystamaehistoria/cry_mob_lamp_3"}},
-		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CRY_RADIANCE_SCOOP"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/magicxpansion/reinforced_shulker_box"}}
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CRY_RADIANCE_SCOOP"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/crystamaehistoria/cry_recall_lattice"}}
 	],
 	"fallback": {"type":"minecraft:model","model":"minecraft:item/soul_lantern"}
 	},

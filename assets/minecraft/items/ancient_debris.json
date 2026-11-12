@@ -1,6 +1,7 @@
 {
 	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
 	"cases": [
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"BORIUM_ROD"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/betterreactor/borium_rod"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"FALLEN_METEOR"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/infinityexpansion/basic_obsidian_gen"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"GCE_ANCIENT_DEBRIS_ICON"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/fluffymachines/auto_ancient_altar"}}
 	],

@@ -1,0 +1,10 @@
+{
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
+	"cases": [
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"GN_MASHED_POTATOES"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/gastronomicon/gn_mashed_potatoes"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"GN_TEMPURA_BROCCOLI"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/gastronomicon/gn_fried_shrimp"}}
+	],
+	"fallback": {"type":"minecraft:model","model":"minecraft:item/baked_potato"}
+	},
+	"oversized_in_gui": true
+}

@@ -18,12 +18,12 @@
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CRY_BRUSH_LIGHT_BLUE_1000"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/crystamaehistoria/cry_brush_light_blue_100"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CRY_BRUSH_LIGHT_GRAY_100"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/crystamaehistoria/cry_brush_light_gray_100"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CRY_BRUSH_LIGHT_GRAY_1000"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/crystamaehistoria/cry_brush_light_gray_100"}},
-		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CRY_BRUSH_LIME_100"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/cultivation/clt_tree_lime"}},
-		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CRY_BRUSH_LIME_1000"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/cultivation/clt_tree_lime"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CRY_BRUSH_LIME_100"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/crystamaehistoria/cry_brush_lime_100"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CRY_BRUSH_LIME_1000"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/crystamaehistoria/cry_brush_lime_100"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CRY_BRUSH_MAGENTA_100"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/crystamaehistoria/cry_brush_magenta_100"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CRY_BRUSH_MAGENTA_1000"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/crystamaehistoria/cry_brush_magenta_100"}},
-		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CRY_BRUSH_ORANGE_100"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/cultivation/clt_tree_orange"}},
-		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CRY_BRUSH_ORANGE_1000"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/cultivation/clt_tree_orange"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CRY_BRUSH_ORANGE_100"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/crystamaehistoria/cry_brush_orange_100"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CRY_BRUSH_ORANGE_1000"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/crystamaehistoria/cry_brush_orange_100"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CRY_BRUSH_PINK_100"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/crystamaehistoria/cry_brush_pink_100"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CRY_BRUSH_PINK_1000"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/crystamaehistoria/cry_brush_pink_100"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CRY_BRUSH_PURPLE_100"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/crystamaehistoria/cry_brush_purple_100"}},
@@ -34,7 +34,7 @@
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CRY_BRUSH_WHITE_1000"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/crystamaehistoria/cry_brush_white_100"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CRY_BRUSH_YELLOW_100"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/crystamaehistoria/cry_brush_yellow_100"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CRY_BRUSH_YELLOW_1000"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/crystamaehistoria/cry_brush_yellow_100"}},
-		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"EMP_ARROW"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/fnamplifications/fn_machinery_aluminum_plating"}}
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"EMP_ARROW"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/quaptics/qp_guide_what_is_quaptics"}}
 	],
 	"fallback": {"type":"minecraft:model","model":"minecraft:item/tipped_arrow","tints":[{"type":"minecraft:potion","default":-13083194}]}
 	},

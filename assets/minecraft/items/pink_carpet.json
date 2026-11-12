@@ -1,0 +1,9 @@
+{
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
+	"cases": [
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"MATERIAL_COMBINED_PLATE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/simplestorage/material_pewter_plate"}}
+	],
+	"fallback": {"type":"minecraft:model","model":"minecraft:block/pink_carpet"}
+	},
+	"oversized_in_gui": true
+}

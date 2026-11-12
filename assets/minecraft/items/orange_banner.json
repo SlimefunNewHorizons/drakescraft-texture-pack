@@ -1,0 +1,13 @@
+{
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
+	"cases": [
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"QP_EXPERIENCE_MODULE_2"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/quaptics/qp_luck_module_2"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"QP_FIRE_RESISTANCE_MODULE_2"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/quaptics/qp_fire_resistance_module_2"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"QP_INVINCIBILITY_MODULE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/sensibletoolbox/stb_advancedsendermodule"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"QP_LUCK_MODULE_2"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/quaptics/qp_luck_module_2"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"QP_WIRELESS_CHARGER_MODULE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/quaptics/qp_wireless_charger_module"}}
+	],
+	"fallback": {"type":"minecraft:special","base":"minecraft:item/template_banner","model":{"type":"minecraft:banner","color":"orange"},"transformation":{"left_rotation":[0.0,-0.0,0.0,1.0],"right_rotation":[0.0,0.0,0.0,1.0],"scale":[0.6666667,-0.6666667,-0.6666667],"translation":[0.5,0.0,0.5]}}
+	},
+	"oversized_in_gui": true
+}

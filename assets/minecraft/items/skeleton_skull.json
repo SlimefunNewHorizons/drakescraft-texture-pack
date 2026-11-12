@@ -1,7 +1,7 @@
 {
 	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
 	"cases": [
-		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"DOOMBOT_NEURAL_MATRIX"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/drakesnanotech/nanocarbon_matrix"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"DOOMBOT_NEURAL_MATRIX"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/villagerutil/vu_essence"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"HUMAN_SKULL"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/foxymachines/blood"}}
 	],
 	"fallback": {"type":"minecraft:special","base":"minecraft:item/template_skull","model":{"type":"minecraft:head","kind":"skeleton"},"transformation":{"left_rotation":[1.0,0.0,0.0,-0.0],"right_rotation":[0.0,0.0,0.0,1.0],"scale":[1.0,1.0,1.0],"translation":[0.5,0.0,0.5]}}

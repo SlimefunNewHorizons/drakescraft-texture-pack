@@ -1,34 +1,9 @@
 {
-	"model": {
-	"type": "minecraft:range_dispatch",
-	"property": "minecraft:custom_model_data",
-	"index": 0,
-	"fallback": {
-		"type": "minecraft:model",
-		"model": "minecraft:item/gray_stained_glass_pane"},
-
-
-	"entries": [
-	{"threshold": 0, "model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_name",
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
 	"cases": [
-		{"when": {"text":"","extra":[{"text":" "}]}, "model": {"type": "minecraft:model", "model": "jackstar:item/0_ui/ui_background"}},
-
-		{"when": {"text":"","extra":[{"text":"\u21e9 Recipes made in this Machine \u21e9","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"gray","bold":false}]}, "model": {"type": "minecraft:model", "model": "jackstar:item/0_ui/ui_background"}},
-		{"when": {"text":"","extra":[{"text":"\u21e9 Recipes made in this machine \u21e9","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"gray","bold":false}]}, "model": {"type": "minecraft:model", "model": "jackstar:item/0_ui/ui_background"}},
-		{"when": {"text":"","extra":[{"text":"\u21e9 Available types of fuel \u21e9","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"gray","bold":false}]}, "model": {"type": "minecraft:model", "model": "jackstar:item/0_ui/ui_background"}},
-		{"when": {"text":"","extra":[{"text":"\u21e9 Resources you can obtain \u21e9","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"gray","bold":false}]}, "model": {"type": "minecraft:model", "model": "jackstar:item/0_ui/ui_background"}},
-		{"when": {"text":"","extra":[{"text":"\u21e9 Surfaces you can climb \u21e9","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"gray","bold":false}]}, "model": {"type": "minecraft:model", "model": "jackstar:item/0_ui/ui_background"}},
-		{"when": {"text":"","extra":[{"text":"Generates","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"gray","bold":false}]}, "model": {"type": "minecraft:model", "model": "jackstar:item/0_ui/ui_background"}},
-		{"when": {"text":"","extra":[{"text":"Collects:","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"gray","bold":false}]}, "model": {"type": "minecraft:model", "model": "jackstar:item/0_ui/ui_background"}},
-		{"when": {"text":"","extra":[{"text":"Harvests:","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"gray","bold":false}]}, "model": {"type": "minecraft:model", "model": "jackstar:item/0_ui/ui_background"}},
-		{"when": {"text":"","extra":[{"text":"Mines:","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"gray","bold":false}]}, "model": {"type": "minecraft:model", "model": "jackstar:item/0_ui/ui_background"}},
-		{"when": {"text":"","extra":[{"text":"\u21e9 Resources you can obtain with this Miner \u21e9","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"gray","bold":false}]}, "model": {"type": "minecraft:model", "model": "jackstar:item/0_ui/ui_background"}},
-		{"when": {"text":"","extra":[{"text":"\u21e9 Resources you can obtain with this miner \u21e9","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"gray","bold":false}]}, "model": {"type": "minecraft:model", "model": "jackstar:item/0_ui/ui_background"}}
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"MATERIAL_DISPLAY"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/simplestorage/material_display"}}
 	],
-
-
-	"fallback": {"type": "minecraft:model","model": "minecraft:item/gray_stained_glass_pane"}}}
-    ]
-  },
-  "oversized_in_gui": true
+	"fallback": {"type":"minecraft:range_dispatch","property":"minecraft:custom_model_data","index":0,"fallback":{"type":"minecraft:model","model":"minecraft:item/gray_stained_glass_pane"},"entries":[{"threshold":0,"model":{"type":"minecraft:select","property":"minecraft:component","component":"minecraft:custom_name","cases":[{"when":{"text":"","extra":[{"text":" "}]},"model":{"type":"minecraft:model","model":"jackstar:item/0_ui/ui_background"}},{"when":{"text":"","extra":[{"text":"⇩ Recipes made in this Machine ⇩","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"gray","bold":false}]},"model":{"type":"minecraft:model","model":"jackstar:item/0_ui/ui_background"}},{"when":{"text":"","extra":[{"text":"⇩ Recipes made in this machine ⇩","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"gray","bold":false}]},"model":{"type":"minecraft:model","model":"jackstar:item/0_ui/ui_background"}},{"when":{"text":"","extra":[{"text":"⇩ Available types of fuel ⇩","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"gray","bold":false}]},"model":{"type":"minecraft:model","model":"jackstar:item/0_ui/ui_background"}},{"when":{"text":"","extra":[{"text":"⇩ Resources you can obtain ⇩","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"gray","bold":false}]},"model":{"type":"minecraft:model","model":"jackstar:item/0_ui/ui_background"}},{"when":{"text":"","extra":[{"text":"⇩ Surfaces you can climb ⇩","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"gray","bold":false}]},"model":{"type":"minecraft:model","model":"jackstar:item/0_ui/ui_background"}},{"when":{"text":"","extra":[{"text":"Generates","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"gray","bold":false}]},"model":{"type":"minecraft:model","model":"jackstar:item/0_ui/ui_background"}},{"when":{"text":"","extra":[{"text":"Collects:","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"gray","bold":false}]},"model":{"type":"minecraft:model","model":"jackstar:item/0_ui/ui_background"}},{"when":{"text":"","extra":[{"text":"Harvests:","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"gray","bold":false}]},"model":{"type":"minecraft:model","model":"jackstar:item/0_ui/ui_background"}},{"when":{"text":"","extra":[{"text":"Mines:","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"gray","bold":false}]},"model":{"type":"minecraft:model","model":"jackstar:item/0_ui/ui_background"}},{"when":{"text":"","extra":[{"text":"⇩ Resources you can obtain with this Miner ⇩","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"gray","bold":false}]},"model":{"type":"minecraft:model","model":"jackstar:item/0_ui/ui_background"}},{"when":{"text":"","extra":[{"text":"⇩ Resources you can obtain with this miner ⇩","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"gray","bold":false}]},"model":{"type":"minecraft:model","model":"jackstar:item/0_ui/ui_background"}}],"fallback":{"type":"minecraft:model","model":"minecraft:item/gray_stained_glass_pane"}}}]}
+	},
+	"oversized_in_gui": true
 }

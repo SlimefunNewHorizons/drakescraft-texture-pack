@@ -1,9 +1,9 @@
 {
 	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
 	"cases": [
-		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"NTW_ADVANCED_NANOBOTS"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/networksv6_drake/ntw_advanced_nanobots"}},
-		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"NTW_SIMPLE_NANOBOTS"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/networksv6_drake/ntw_optic_star"}},
-		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"VILE_SEEDS"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/elementmanipulation/em_pumpkin_seeds"}}
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"NTW_ADVANCED_NANOBOTS"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/simplestorage/material_die_advanced"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"NTW_SIMPLE_NANOBOTS"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimechem/chemical_dissolver"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"VILE_SEEDS"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/foxymachines/vile_seeds"}}
 	],
 	"fallback": {"type":"minecraft:range_dispatch","property":"minecraft:custom_model_data","index":0,"fallback":{"type":"minecraft:model","model":"minecraft:item/melon_seeds"},"entries":[{"threshold":0,"model":{"type":"minecraft:select","property":"minecraft:component","component":"minecraft:custom_name","cases":[{"when":{"text":"","extra":[{"text":"Vile Seeds","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"red","bold":false}]},"model":{"type":"minecraft:model","model":"slimefun/27_foxy_machines/vile_seeds"}}],"fallback":{"type":"minecraft:model","model":"minecraft:item/melon_seeds"}}}]}
 	},

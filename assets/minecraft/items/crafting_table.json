@@ -9,7 +9,7 @@
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CRY_EPHEMERAL_WORKBENCH"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/crystamaehistoria/cry_ephemeral_craft_table"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"FM_FAST_CRAFTING_TABLE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/infinityexpansion/advanced_anvil"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"MODULE_MANIPULATOR"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimefunwarfare/module_manipulator"}},
-		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"SIMPLE_WORKBENCH"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/simpleutils/simple_workbench"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"SIMPLE_WORKBENCH"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimefun/crafter_smart_port"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"SUPREME_ELECTRIC_CRAFTER_I"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/supreme/supreme_electric_crafter_i"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"SUPREME_ELECTRIC_CRAFTER_II"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/supreme/supreme_electric_crafter_ii"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"SUPREME_ELECTRIC_CRAFTER_III"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/supreme/supreme_electric_crafter_iii"}},

@@ -1,6 +1,12 @@
 {
 	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
 	"cases": [
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"JC_REDSTONE_BLOCK_1"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/compressioncraft/jc_redstone_block_1"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"JC_REDSTONE_BLOCK_2"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/compressioncraft/jc_redstone_block_2"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"JC_REDSTONE_BLOCK_3"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/compressioncraft/jc_redstone_block_3"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"JC_REDSTONE_BLOCK_4"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/compressioncraft/jc_redstone_block_4"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"JC_REDSTONE_BLOCK_5"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/compressioncraft/jc_redstone_block_5"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"JC_REDSTONE_BLOCK_6"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/compressioncraft/jc_redstone_block_6"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"SMG_GENERATOR_REDSTONE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/simplematerialgenerators/smg_generator_redstone_badly_formed"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"SMG_GENERATOR_REDSTONE_BADLY_FORMED"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/simplematerialgenerators/smg_generator_redstone_badly_formed"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"SMG_GENERATOR_REDSTONE_BROKEN"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/simplematerialgenerators/smg_generator_redstone_badly_formed"}}

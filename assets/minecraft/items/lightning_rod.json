@@ -1,12 +1,12 @@
 {
 	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
 	"cases": [
-		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"ARC_CONTAINMENT_PYLON"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/fnamplifications/fn_machinery_aluminum_plating"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"ARC_CONTAINMENT_PYLON"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/quaptics/qp_guide_what_is_quaptics"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CRY_EXP_COLLECTOR_1"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/crystamaehistoria/cry_exp_collector_1"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CRY_EXP_COLLECTOR_2"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/crystamaehistoria/cry_exp_collector_2"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CRY_EXP_COLLECTOR_3"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/crystamaehistoria/cry_exp_collector_3"}},
-		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"ORBITAL_SKY_LANCE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/fnamplifications/fn_machinery_aluminum_plating"}},
-		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"WIDOW_BITE_GAUNTLET"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/drakesnanotech/widow_bite_gauntlet"}}
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"ORBITAL_SKY_LANCE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/quaptics/qp_guide_what_is_quaptics"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"WIDOW_BITE_GAUNTLET"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/drakes_nanotechnology_stark_engineering/widow_bite_gauntlet"}}
 	],
 	"fallback": {"type":"minecraft:range_dispatch","property":"minecraft:custom_model_data","index":0,"fallback":{"type":"minecraft:model","model":"minecraft:item/lightning_rod"},"entries":[{"threshold":3009008,"model":{"type":"minecraft:model"}}]}
 	}

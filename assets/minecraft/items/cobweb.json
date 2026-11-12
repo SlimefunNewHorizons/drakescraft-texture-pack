@@ -4,7 +4,8 @@
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"ADVANCED_CIRCUIT"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/litexpansion/advanced_circuit"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"ELECTRONIC_CIRCUIT"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/litexpansion/electronic_circuit"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"GCE_CHICKEN_NET"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/geneticchickengineering/gce_chicken_net"}},
-		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"SPIDER_WEB_FLUID"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/drakesnanotech/spider_web_fluid"}}
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"SPIDER_WEB_FLUID"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimefun/filled_flask_of_knowledge"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"SU_SPIRIT_NET"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/spiritsunchained/su_spirit_net"}}
 	],
 	"fallback": {"type":"minecraft:model","model":"minecraft:block/cobweb"}
 	},

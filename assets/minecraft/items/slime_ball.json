@@ -6,7 +6,8 @@
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"GCE_SLIME_BALL_CHICKEN_ICON"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimefunwarfare/slime_ball"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"IDOE_SLIMEMEAL"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/idreamofeasy/idoe_slimemeal"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"PORTAL_FLUID"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/sfportalgunsextension/portal_fluid"}},
-		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"SLIME_BALL"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimefunwarfare/slime_ball"}}
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"SLIME_BALL"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimefunwarfare/slime_ball"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"SU_ECTOPLASM"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/spiritsunchained/su_ectoplasm"}}
 	],
 	"fallback": {"type":"minecraft:model","model":"minecraft:item/slime_ball"}
 	},

@@ -3,6 +3,12 @@
 	"cases": [
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"EM_FLINT"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/elementmanipulation/em_oxygen"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"GCE_FLINT_CHICKEN_ICON"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/geneticchickengineering/gce_feather_chicken_icon"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"JC_FLINT_1"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/compressioncraft/jc_compressor_1"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"JC_FLINT_2"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/compressioncraft/jc_compressor_2"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"JC_FLINT_3"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/compressioncraft/jc_compressor_3"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"JC_FLINT_4"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/compressioncraft/jc_compressor_4"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"JC_FLINT_5"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/compressioncraft/jc_compressor_5"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"JC_FLINT_6"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/simplestorage/machine_die_press"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"PESTLE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/potionexpansion/pestle"}}
 	],
 	"fallback": {"type":"minecraft:range_dispatch","property":"minecraft:custom_model_data","index":0,"fallback":{"type":"minecraft:model","model":"minecraft:item/flint"},"entries":[{"threshold":0,"model":{"type":"minecraft:select","property":"minecraft:component","component":"minecraft:custom_name","cases":[{"when":{"text":"","extra":[{"text":"Hook","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"aqua","bold":false}]},"model":{"type":"minecraft:model","model":"slimefun/11_misc_items/hook"}},{"when":{"text":"","extra":[{"text":"Pestle","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"white","bold":true}]},"model":{"type":"minecraft:model","model":"slimefun/25_potion_expansion/pestle"}}],"fallback":{"type":"minecraft:model","model":"minecraft:item/flint"}}}]}

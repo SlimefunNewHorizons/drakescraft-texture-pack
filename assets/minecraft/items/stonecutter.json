@@ -2,6 +2,7 @@
 	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
 	"cases": [
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"AUTO_TABLE_SAW"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/fluffymachines/auto_table_saw"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"BLOCKREDUCER"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimytreetaps/amber_block"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"FM_FAST_TABLE_SAW"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/fastmachines/fm_fast_ore_crusher"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"FN_GEM_DOWNGRADER"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/fnamplifications/fn_gem_armor_impair"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"IDOE_ELECTRIC_LOG_STRIPPER"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/idreamofeasy/idoe_electric_smoker"}},

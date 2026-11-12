@@ -4,6 +4,12 @@
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"FMG_GENERATOR_DIRT"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/fnamplifications/fmg_generator_dirt_broken"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"FMG_GENERATOR_DIRT_BROKEN"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/fnamplifications/fmg_generator_dirt_broken"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"GCE_DIRT_CHICKEN_ICON"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/geneticchickengineering/gce_sand_chicken_icon"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"JC_DIRT_1"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/compressioncraft/jc_cobblestone_1"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"JC_DIRT_2"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/compressioncraft/jc_cobblestone_2"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"JC_DIRT_3"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/compressioncraft/jc_cobblestone_3"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"JC_DIRT_4"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/compressioncraft/jc_cobblestone_4"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"JC_DIRT_5"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/compressioncraft/jc_cobblestone_5"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"JC_DIRT_6"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/simplematerialgenerators/smg_generator_cobblestone"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"NPS_NETHER_DIRT"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/simplematerialgenerators/smg_generator_netherrack"}}
 	],
 	"fallback": {"type":"minecraft:model","model":"minecraft:block/dirt"}

@@ -1,0 +1,9 @@
+{
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
+	"cases": [
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"REACTOR_CORE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimytreetaps/amber_block"}}
+	],
+	"fallback": {"type":"minecraft:model","model":"minecraft:block/magenta_glazed_terracotta"}
+	},
+	"oversized_in_gui": true
+}

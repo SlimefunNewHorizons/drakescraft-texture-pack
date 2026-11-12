@@ -2,6 +2,7 @@
 	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
 	"cases": [
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CRY_EXALTED_SUN"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/crystamaehistoria/cry_prismatic_gilder"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"EXPORT_BUS"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/smallspace/export_bus"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"GEOTHERMAL_GENERATOR"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/litexpansion/refined_smeltery"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"VENTSTONE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/infinityexpansion/basic_obsidian_gen"}}
 	],

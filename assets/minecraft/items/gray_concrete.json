@@ -3,6 +3,16 @@
 	"cases": [
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CRY_SATCHEL_2"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/crystamaehistoria/cry_satchel_2"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"DYNATECH_IRON_MACHINE_CORE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/dynatech/dynatech_iron_machine_core"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"QP_BEACON_POWER_SUPPLY_1"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/quaptics/qp_transformer_coil_1"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"QP_BEACON_POWER_SUPPLY_2"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/quaptics/qp_energy_concentration_element_2"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"QP_BEACON_ROD"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/betterreactor/borium_rod"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"QP_ENERGY_CONCENTRATOR_1"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/quaptics/qp_transformer_coil_1"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"QP_ENERGY_CONCENTRATOR_2"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/quaptics/qp_energy_concentration_element_2"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"QP_ENERGY_CONCENTRATOR_3"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/quaptics/qp_energy_concentration_element_3"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"QP_ENERGY_CONCENTRATOR_4"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/quaptics/qp_energy_concentrator_4"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"QP_INDUSTRIAL_INFUSION_CONTAINER"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimefun/filled_flask_of_knowledge"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"QP_INFUSION_CONTAINER"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimefun/filled_flask_of_knowledge"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"QP_TURRET_BARREL"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/quaptics/qp_turret_barrel"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"REINFORCED_CONCRETE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimefunwarfare/reinforced_concrete"}}
 	],
 	"fallback": {"type":"minecraft:model","model":"minecraft:block/gray_concrete"}
