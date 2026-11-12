@@ -301,6 +301,48 @@ def totem(mat, uid):
     return S_flat(mat, uid, body)
 
 
+def shears(mat, uid):
+    l, m, d, o, e = pal("iron")
+    blade = lambda sx: (f'<g transform="rotate({sx*-9} 0 90) scale({sx} 1)">'
+                        f'<path d="M0 4 C10 20 12 50 4 92 L-6 92 C-2 56 -4 24 0 4 Z" fill="url(#metal{uid})" stroke="{o}" stroke-width="2.2"/>'
+                        f'<path d="M-1 12 C3 30 4 56 0 86" stroke="{l}" stroke-width="2" fill="none" opacity="0.9"/></g>')
+    loops = (f'<path d="M-4 92 C-30 96 -34 128 -12 140 C-2 144 6 136 6 126 L0 92 Z" fill="url(#wood{uid})" stroke="#1b1008" stroke-width="2.2"/>'
+             f'<path d="M4 92 C30 96 34 128 12 140 C2 144 -6 136 -6 126 L0 92 Z" fill="url(#wood{uid})" stroke="#1b1008" stroke-width="2.2" transform="translate(0 0)"/>'
+             f'<ellipse cx="-14" cy="122" rx="7" ry="10" fill="#1b1424" opacity="0.8"/><ellipse cx="14" cy="122" rx="7" ry="10" fill="#1b1424" opacity="0.8"/>')
+    pivot = f'<circle cx="0" cy="90" r="6" fill="url(#gold{uid})" stroke="#3a2a08" stroke-width="2"/><circle cx="0" cy="90" r="2.2" fill="url(#gem{uid})"/>'
+    return S("iron", uid, blade(1) + blade(-1) + loops + pivot + star(0, 40, 2.4, MATS["iron"][4]), "")
+
+
+def brush(mat, uid):
+    l, m, d, o, e = pal("copper")
+    handle = grip_wraps(-6, 6, 70, 150, uid, n=7, col="#145a66")
+    ferrule = f'<rect x="-11" y="56" width="22" height="18" rx="3" fill="url(#metalv{uid})" stroke="{o}" stroke-width="2.2"/><path d="M-11 64 L11 64" stroke="{o}" stroke-width="1.4" opacity="0.6"/>'
+    bristles = "".join(f'<path d="M{x} 58 C{x+(x/6)} 36 {x+(x/3)} 20 {x+(x/2)} {8+abs(x)}" fill="none" stroke="{c}" stroke-width="5" opacity="0.95"/>' for x, c in ((-8, "#7a5530"), (-4, "#b0834a"), (0, "#e0c08a"), (4, "#b0834a"), (8, "#7a5530")))
+    return S("copper", uid, handle + bristles + ferrule + star(0, 90, 2.6, "#3fd9b8"), "")
+
+
+def flint_and_steel(mat, uid):
+    l, m, d, o, e = pal("iron")
+    steel = (f'<path d="M-36 120 C-36 80 -10 70 18 74 C44 78 46 112 20 118 C4 122 -4 112 6 102 C16 92 4 88 -14 94 C-22 100 -20 118 -22 128 Z" fill="url(#metal{uid})" stroke="{o}" stroke-width="2.4"/>'
+             f'<path d="M-30 118 C-30 88 -10 78 16 80" stroke="{l}" stroke-width="2.2" fill="none" opacity="0.9"/>')
+    flint = (f'<path d="M30 40 L56 30 L74 54 L60 78 L34 70 Z" fill="#3a3a48" stroke="#0d0a14" stroke-width="2.4"/>'
+             f'<path d="M36 44 L56 36 L66 52" stroke="#9aa0b8" stroke-width="2" fill="none" opacity="0.85"/>')
+    sparks = star(26, 50, 7, "#ffd35a") + star(16, 34, 4.2, "#fff0a8") + star(40, 24, 3.4, "#ff9d3a")
+    return S_flat("iron", uid, f'<g transform="translate(26 14) scale(0.78)">{steel}{flint}{sparks}</g>')
+
+
+def fishing_rod(mat, uid, cast=False):
+    l, m, d, o, e = pal("wooden")
+    rod = grip_wraps(-3.4, 3.4, 8, 152, uid, n=16)
+    guides = "".join(f'<circle cx="0" cy="{y}" r="4" fill="none" stroke="url(#gold{uid})" stroke-width="2"/>' for y in (30, 62, 94))
+    reel = f'<rect x="-10" y="116" width="20" height="14" rx="3" fill="url(#metalv{uid})" stroke="#232733" stroke-width="2"/><circle cx="0" cy="123" r="3" fill="url(#gem{uid})"/>'
+    if cast:
+        line = f'<path d="M0 8 C40 30 70 70 70 150" fill="none" stroke="#e8e2f6" stroke-width="2.4"/>'
+    else:
+        line = f'<path d="M0 8 C30 10 44 40 44 76" fill="none" stroke="#e8e2f6" stroke-width="2.4"/><circle cx="44" cy="82" r="6" fill="#b3261e" stroke="#4a0f0b" stroke-width="1.8"/>'
+    return S("wooden", uid, line + rod + guides + reel, "")
+
+
 TOOLS = {"sword": sword, "pickaxe": pickaxe, "axe": axe, "shovel": shovel, "hoe": hoe, "spear": spear}
 SOLO = {"mace": (mace, "iron"), "trident": (trident, "diamond"),
         "bow": (lambda m, u: bow(m, u, -1), "wooden"), "bow_pulling_0": (lambda m, u: bow(m, u, 0), "wooden"),
@@ -314,7 +356,9 @@ SOLO = {"mace": (mace, "iron"), "trident": (trident, "diamond"),
         "arrow": (lambda m, u: arrow(m, u, "arrow"), "iron"), "spectral_arrow": (lambda m, u: arrow(m, u, "spectral"), "golden"),
         "tipped_arrow_base": (lambda m, u: arrow(m, u, "tipped_base"), "iron"), "tipped_arrow_head": (lambda m, u: arrow(m, u, "tipped_head"), "iron"),
         "elytra": (lambda m, u: elytra(m, u), "netherite"), "broken_elytra": (lambda m, u: elytra(m, u, True), "netherite"),
-        "totem_of_undying": (totem, "golden")}
+        "totem_of_undying": (totem, "golden"),
+        "shears": (shears, "iron"), "brush": (brush, "copper"), "flint_and_steel": (flint_and_steel, "iron"),
+        "fishing_rod": (lambda m, u: fishing_rod(m, u, False), "wooden"), "fishing_rod_cast": (lambda m, u: fishing_rod(m, u, True), "wooden")}
 for _m in MATS:
     if _m != "iron":
         SOLO[f"{_m}_mace"] = (mace, _m)
