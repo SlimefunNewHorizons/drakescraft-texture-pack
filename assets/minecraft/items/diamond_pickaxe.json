@@ -5,7 +5,7 @@
 	"index": 0,
 	"fallback": {
 		"type": "minecraft:model",
-		"model": "minecraft:item/diamond_pickaxe"},
+		"model": "drakescraft:item/gear3d/diamond_pickaxe"},
 
 
 	"entries": [
@@ -26,7 +26,7 @@
 	],
 
 
-	"fallback": {"type": "minecraft:model","model": "minecraft:item/diamond_pickaxe"}}}
+	"fallback": {"type": "minecraft:model","model": "drakescraft:item/gear3d/diamond_pickaxe"}}}
     ]
   },
   "oversized_in_gui": true

@@ -5,7 +5,7 @@
 	"index": 0,
 	"fallback": {
 		"type": "minecraft:model",
-		"model": "minecraft:item/diamond_sword"},
+		"model": "drakescraft:item/gear3d/diamond_sword"},
 
 
 	"entries": [
@@ -26,7 +26,7 @@
 	],
 
 
-	"fallback": {"type": "minecraft:model","model": "minecraft:item/diamond_sword"}}}
+	"fallback": {"type": "minecraft:model","model": "drakescraft:item/gear3d/diamond_sword"}}}
     ]
   },
   "oversized_in_gui": true
