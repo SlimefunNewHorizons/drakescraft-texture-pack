@@ -79,6 +79,15 @@ def rot(gl):  # 90 grados horario
     return ["".join(gl[len(gl) - 1 - r][c] for r in range(len(gl))) for c in range(len(gl[0]))]
 
 
+GLYPHS.update({
+    "leaf": [".....XX", "...XXXX", "..XXXX.", ".XXXX..", ".XXX...", "X.X....", "X......"],
+    "bee": [".X...X.", "XXX.XXX", ".XXXXX.", "X.X.X.X", "XXXXXXX", ".XXXXX.", "...X..."],
+    "seed": [".......", "...X...", "..XXX..", ".XXXXX.", "..XXX..", "...X...", "...X..."],
+    "book": ["XXXXXXX", "X.....X", "X.XXX.X", "X.....X", "X.XXX.X", "X.....X", "XXXXXXX"],
+    "fish": [".......", "..XXX.X", ".XXXXXX", "XXX.XXX", ".XXXXXX", "..XXX.X", "......."],
+    "crown": ["X.X.X.X", "XXXXXXX", "XXXXXXX", ".XXXXX.", ".......", ".......", "......."],
+    "egg": ["..XXX..", ".XXXXX.", ".XXXXX.", "XXXXXXX", "XXXXXXX", ".XXXXX.", "..XXX.."],
+})
 GLYPHS["right"] = rot(GLYPHS["up"])
 GLYPHS["down"] = rot(GLYPHS["right"])
 GLYPHS["left"] = rot(GLYPHS["down"])
@@ -209,7 +218,18 @@ def cell(g, th, n):
             g[(cx, cy)] = l
 
 
-CONT = {"slab": slab, "cube": cube, "orb": orb, "gem": gem, "can": can}
+def chest(g, th, gl):
+    b, l, d = THEMES[th]
+    bevel(g, 2, 5, 13, 13, th)
+    rect(g, 3, 4, 12, 4, b)
+    rect(g, 2, 8, 13, 8, d)
+    rect(g, 7, 7, 8, 10, "#e0ad3a")
+    g[(7, 7)] = "#fff1a8"
+    if gl:
+        glyph(g, gl, 4, 6, l)
+
+
+CONT = {"slab": slab, "cube": cube, "orb": orb, "gem": gem, "can": can, "chest": chest}
 
 # ---------------------------------------------------------------- datos
 # ID|nombre legacy|contenedor|glifo|tema
@@ -272,7 +292,11 @@ FN_MAGICAL_ITEMS_SPIRIT_RUNE|&fSpirit Rune|slab|ghost|
 FN_MAGICAL_ITEMS_UNBIND_RUNE|&6Unbind Rune|slab|ring|
 FRAMED_URANIUM|&dFramed Uranium|gem||green
 FUSION_REACTOR|&fFusion Reactor|cube|atom|
-HUMAN_SKULL|&cHuman Skull|orb|skull|white
+FN_GEM_FINE_JASPER_CRAFTING|&dFine Jasper Gemstone|gem||red
+FN_GEM_UPGRADES_DISPLAY_ITEM|&dGem Tier Upgrades|gem||gold
+FN_GEM_DOWNGRADE_DISPLAY_ITEM|&dGem Tier Downgrades|gem||gray
+THORIUM|Thorium|gem||green
+FOOD_SYNTHESIZER|Food Synthesizer|cube|mushroom|orange
 INFINITY_CAPACITOR|&bInfinite Capacitor|can|bolt|
 VOID_CAPACITOR|&8Void Capacitor|can|bolt|
 PANDORAS_BOX|&5Pandora"s Box|cube|star4|
@@ -334,21 +358,157 @@ LEGENDARY_RELIC_SAPPHIRE_RING|&6Sapphire Ring|slab|ring|blue
 LEGENDARY_RELIC_SKULL_OF_PROMETHEUS|&6Skull of Prometheus|orb|skull|
 LEGENDARY_RELIC_VOIDER|&6Legendary Relic Voider|slab|spiral|
 """
-ROMAN = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII"]
-TIER_THEMES = ["gray", "white", "green", "cyan", "blue", "purple", "pink", "gold"]
+ROMAN = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"]
+TIER_THEMES = ["gray", "white", "green", "cyan", "blue", "purple", "pink", "gold", "red"]
 POW_THEMES = ["gray", "white", "green", "cyan", "blue", "purple", "pink", "red", "orange", "gold", "white", "dark"]
+
+CATALOG = Path(__file__).with_name("heads_catalog.json")
+
+# ---- reglas automaticas (addons con muchas cabezas): primera coincidencia gana, sobre "id nombre" en minusculas
+THEME_KW = [
+    ("dark|black|obsidian|netherite|wither|shadow|bat|spider|nether(?!o)|blackstone|void(?!.*lens)", "dark"),
+    ("red|redstone|fire|ignis|magma|lava|tomato|pepper|chilli|cayenne|jalapeno|strawberry|radish|raddish|radicchio|blaze|ignited|volcanic|berserk|rhubarb|crimson|cinnab|combust|heat", "red"),
+    ("orange|terra|clay|dirt|terracotta|carrot|pumpkin|copper|cinnamon|ginger|red sand|cocoa|rust|tarnish", "orange"),
+    ("gold|yellow|wheat|corn|mustard|honey|wealth|sweet|valuable|treasure|lux|mace|vanilla|nugget|sand|royal|imperial|majestic|noble|cetrus lumium|golden", "gold"),
+    ("blue|lapis|water|aqua|wet|drowned|guardian|squid|ocean|sea|beach|nori|wave", "blue"),
+    ("cyan|diamond|air|ventus|ice|chilly|polar|crystalline|echo|nitrogen|quantum|mechanical|frozen|snow|spectrum|common", "cyan"),
+    ("purple|amethyst|void|ender|end stone|purpur|ethereal|hexed|enchanted|magic|arcane|power|philosoph|mythical|shulker|soul|spirit|celestial|lavender|grape|aubergine|eggplant|unique", "purple"),
+    ("pink|rainbow|prismatic|cute|porky|pig|bacon|kaleido|polychrom|motley|epic", "pink"),
+    ("white|light|quartz|milk|salt|iron|silver|steel|bone|skeleton|goat|chicken|feldspar|onion|garlic|cauliflower|turnip|parsnip|rice|cow|sheep|uncommon|human", "white"),
+    ("gray|grey|stone|cobble|gravel|diorite|granite|andesite|coal|deepslate|basalt|concrete|dust|scrap|metallic|smooth|stray|husky|alchemical|historical", "gray"),
+    ("green|emerald|grass|leaf|bush|lettuce|creeper|zombie|frog|slime|jungle|swamp|moss|vine|mint|basil|plant|sapling|forest|turtle|spinach|kale|cabbage|broccoli|celery|pea|bean|herb|cucumber|courgette|meadows|rare|animal|rotten", "green"),
+]
+GLYPH_KW = [
+    ("reina|queen|princess", "crown"), ("zángano|drone|bee", "bee"), ("seed", "seed"), ("rune|glass of milk", "star4"),
+    ("input|inlet", "left"), ("output|outlet", "right"), ("connector|home|wireless", "plus"),
+    ("golem", "helmet"), ("android", "chip"), ("miner|excavator|pickaxe|woodcutter|peeler|eater", "pick"),
+    ("farmer|flower|mangrove|cultivat|bush|plant|flora|vine|leaf|grass|sapling|moss|rose", "leaf"), ("fisher|fish|cod|salmon", "fish"),
+    ("butcher|sword|berserk|barbed|warfare", "swords"), ("mushroom|popcorn", "mushroom"),
+    ("turbine|rotor|motor|wheel|gear|cogwheel|piston|spring|crafter|forge|bench|winder|hydraulic|cushion", "gear"),
+    ("solar|radiant|lunar|sun|stimulator", "sun"), ("wind|air|cloud|lightning|receptor", "cloud"),
+    ("liquid|water|sprinkler|nitrogen|coolant|milk", "drop"), ("fire|lava|coal gen|ignis|blaze|magma|thermal", "flame"),
+    ("uranium|atom|nano|molecul|cyclotron|singularity|quantum|gamma|graviton|neutron|plutonium|thorium|element|carbyne|palladium|elemental|reactor|stellar|fabricator|accelerator", "atom"),
+    ("generator|battery|cell|capacitor|energy|electric|diode|magnet|power|press|dank", "bolt"),
+    ("skull|zombie|skeleton|death|inhibidor|repeller|enderman|terrifying|hate|spectrometer", "skull"),
+    ("shield|helmet|suit|armor|mask|jets|life support|sinks", "shield"), ("eye|intelligent|spectro", "eye"),
+    ("book|guide|how to", "book"), ("ring|band|charm", "ring"), ("lens|focus", "eye"),
+    ("control|module|chip|computer|intelligence|program|automation|cargo|manager|auto|synthes|chamber|regulator|extractor|producer|putrif|tree|trash", "chip"),
+    ("ore|alloy|shard|fossil|nugget|supreme|core of", "star4"), ("chicken|cow|pig|sheep|rabbit|squid|frog|goat|turtle|villager|animal|mob|egg|pet", "egg"),
+]
+CONT_KW = [
+    ("crystal|gem|diamond|emerald|ore|alloy|shard|lens|relic|lith |meso |neo |axi |prism|quartz|amethyst", "gem"),
+    ("rune|rune ", "slab"),
+    ("chest|cofre|caja|pack|basket|backpack|sack|vault|bóveda", "chest"),
+    ("seed|bush|plant|pearl|orb|soul|fossil|egg|sphere|reina|zángano|drone|bee|supreme|core of|moss|ring", "orb"),
+    ("cell|battery|capacitor|coolant|cartridge|liquid|nitrogen|power cell|steam|turbine", "can"),
+]
+ADDON_AUTO = {  # addons que se auto-generan desde heads_catalog.json (el resto de cabezas esta en ITEMS o ya mapeado por nombre)
+    "Cultivation", "Supreme", "CrystamaeHistoria", "Netheopoiesis", "SlimeFrame", "SlimyBees", "Slimefun", "DankTech2",
+    "PrivateStorage", "SlimefunWarfare", "DynaTech", "EcoPower", "DrakesNanotech", "IDreamOfEasy", "MagicXpansion",
+    "InfinityExpansion", "GeneticChickengineering", "EquivalencyTech", "NetworksV6-Drake", "SlimefunLuckyBlocks", "ExoticGarden",
+    "VillagerUtil", "NotEnoughAddons", "DemonicExpansion", "Bump", "AlchimiaVitae", "SlimefunOreChunks", "Galaxyfun", "FoxyMachines",
+    "FluffyMachines", "LiteXpansion", "FNAmplifications", "DrakesTech", "NetworksExpansion", "Gastronomicon", "Coronalis",
+}
+ADDON_CONT = {"Cultivation": "orb", "Supreme": "orb", "CrystamaeHistoria": "gem", "Netheopoiesis": "orb", "SlimyBees": "orb",
+              "DankTech2": "chest", "PrivateStorage": "chest", "SlimeFrame": "cube"}
+KIND_GLYPH = {"efficien": "bolt", "cloner": "plus", "accelerat": "up", "intellig": "eye", "berserk": "flame"}
+
+
+def h32(s):
+    v = 2166136261
+    for ch in s:
+        v = ((v ^ ord(ch)) * 16777619) & 0xFFFFFFFF
+    return v
+
+
+def tier_of(name):
+    m = re.search(r"\b(IX|VIII|VII|VI|IV|V|III|II|I)\s*$", name)
+    if m:
+        return ROMAN.index(m.group(1)) + 1
+    m = re.search(r"(?:tier|r)\s*(\d+)\s*$", name, re.I)
+    if m:
+        return int(m.group(1))
+    if name.endswith("★"):
+        return 9
+    return 0
+
+
+def auto_spec(i, name, addon):
+    t = (i + " " + name).lower().replace("_", " ")
+    n = name.lower()
+    gl = next((g for k, g in GLYPH_KW if re.search(k, n)), None)
+    if "bee" in n or "golem" in n:
+        gl = next((g for k, g in KIND_GLYPH.items() if k in n), gl)
+    cont = next((c for k, c in CONT_KW if re.search(k, n)), ADDON_CONT.get(addon, "cube"))
+    if re.search(r"\bcell\b|\bpower cell\b", n) and addon in ("SlimeFrame", "DankTech2"):
+        cont = "can"
+    if "golem" in n and "bee" not in n:
+        cont = "cube"
+    if re.search(r"module|control|neural|nexus|cogwheel|void shard", n):
+        cont = "cube"
+    if cont in ("gem", "orb") and gl in ("chip", "gear") and not re.search(r"supreme", n):
+        cont = "cube"
+    tr = tier_of(name)
+    if tr:
+        th = TIER_THEMES[(tr - 1) % len(TIER_THEMES)]
+    else:
+        th = next((c for k, c in THEME_KW if re.search(k, t)), None) or sorted(THEMES)[h32(i) % len(THEMES)]
+    # sin glifo en orbes/gemas: queda liso; cubos sin glifo -> chip
+    if cont == "cube" and not gl:
+        gl = "chip"
+    if cont == "slab" and not gl:
+        gl = "star4"
+    if cont in ("orb", "gem", "chest") and gl in ("chip", "gear") and addon in ("Cultivation", "Supreme"):
+        gl = None
+    return cont, gl or "", th
+
+
+def load_catalog():
+    return json.loads(CATALOG.read_text(encoding="utf-8"))
+
+
+def build_catalog(dump, base_json):
+    import gzip
+    d = json.load(gzip.open(dump))
+    base = Path(base_json).read_text(encoding="utf-8")
+    out = []
+    for x in d["items"]:
+        if x["material"] != "PLAYER_HEAD":
+            continue
+        covered = ('"text":"%s"' % x["name"]) in base
+        out.append({"id": x["id"], "name": x["name"], "addon": x["addon"], "covered": covered})
+    CATALOG.write_text(json.dumps(out, ensure_ascii=False, indent=0) + "\n", encoding="utf-8")
+    print(len(out), "cabezas en catalogo")
 
 
 def items():
-    out = []
+    """-> lista (id, nombre legacy o plano, contenedor, glifo, tema, n, resuelto_por_id)"""
+    cat = {c["id"]: c for c in load_catalog()}
+    out, seen = [], set()
     for ln in ITEMS.strip().splitlines():
         i, name, cont, gl, th = ln.split("|")
         th = th or CODE_THEME[name[1]]
-        out.append((i.lower(), name, cont, gl, th, None))
+        out.append((i, name, cont, gl, th, None, i in cat))
+        seen.add(i)
     for t in range(8):
-        out.append((f"fn_fal_generator_tier{t + 1}", f"&dFN Solar Generator Tier {ROMAN[t]}", "panel", None, TIER_THEMES[t], t + 1))
+        i = f"FN_FAL_GENERATOR_TIER{t + 1}"
+        out.append((i, f"&dFN Solar Generator Tier {ROMAN[t]}", "panel", None, TIER_THEMES[t], t + 1, i in cat))
+        seen.add(i)
     for n in range(1, 13):
-        out.append((f"fn_power_xpansion_power_r{n}", f"&d&lFN Power Xpansion R{n}", "cell", None, POW_THEMES[n - 1], n))
+        i = f"FN_POWER_XPANSION_POWER_R{n}"
+        out.append((i, f"&d&lFN Power Xpansion R{n}", "cell", None, POW_THEMES[n - 1], n, i in cat))
+        seen.add(i)
+    base = {o[0]: o for o in out}
+    for i, c in cat.items():  # variantes _SCRAP de las piezas FN: misma forma, tono oscuro
+        if i.startswith("FN_") and i.endswith("_SCRAP") and i not in seen and i[:-6] in base:
+            b = base[i[:-6]]
+            out.append((i, c["name"], b[2], b[3], "dark", None, True))
+            seen.add(i)
+    for i, c in cat.items():
+        if i in seen or c["covered"] or c["addon"] not in ADDON_AUTO:
+            continue
+        cont, gl, th = auto_spec(i, c["name"], c["addon"])
+        out.append((i, c["name"], cont, gl, th, None, True))
     return out
 
 
@@ -375,7 +535,9 @@ def svg(px):
 
 def component(name):
     """Nombre legacy (&c, &l) -> cuerpo de 'when' como lo emite Paper (mismo formato que el resto del pack)."""
-    extra, color, bold, buf = [], None, False, ""
+    extra, color, bold = [], None, False
+    parts = re.split(r"&([0-9a-fk-or])", name)
+    buf = parts[0]
 
     def flush():
         if buf:
@@ -384,8 +546,6 @@ def component(name):
                 e["color"] = color
             e["bold"] = bold
             extra.append(e)
-    parts = re.split(r"&([0-9a-fk-or])", name)
-    buf = parts[0]
     for k in range(1, len(parts), 2):
         flush()
         code, buf = parts[k], parts[k + 1]
@@ -400,14 +560,29 @@ def component(name):
 
 
 PREFIX = "slimefun/drakes_heads/"
+# Estructura: entries[0] = select por custom_data (id Slimefun, nuestros cases) -> fallback = select por custom_name (original) -> player_head.
+ID_HEAD = '{"threshold":0,"model":{"type":"minecraft:select","property":"minecraft:component","component":"minecraft:custom_data","cases":['
+NAME_HEAD = '{"threshold":0,"model":{"type":"minecraft:select","property":"minecraft:component","component":"minecraft:custom_name",'
+ID_END = '\n\t],"fallback":'
 
 
-def patch_items_json(path, lines):
+def patch_items_json(path, id_lines, name_lines):
     t = path.read_text(encoding="utf-8")
-    t = "\n".join(l for l in t.split("\n") if PREFIX not in l)
-    m = re.search(r'\n\s*\],\s*\n\s*"fallback"', t)
+    t = "\n".join(l for l in t.split("\n") if PREFIX not in l)  # quita cases propios previos (por id y por nombre)
+    if ID_HEAD not in t:  # primera vez: envuelve el select por nombre
+        assert NAME_HEAD in t and t.count(NAME_HEAD) == 1
+        t = t.replace(NAME_HEAD, ID_HEAD + ID_END + NAME_HEAD[len('{"threshold":0,"model":'):])
+        tail = re.search(r'("scale":\s*\[1,1,1\]\}\}\})\}(\s*\]\s*\},\s*"oversized_in_gui")', t)
+        assert tail, "cola inesperada"
+        t = t[:tail.end(1)] + "}}" + t[tail.start(2):]
+    a = t.index(ID_HEAD) + len(ID_HEAD)
+    b = t.index(ID_END, a)
+    t = t[:a] + "\n\t\t" + ",\n\t\t".join(id_lines) + t[b:]
+    m = re.search(r'\n\s*\],\s*\n\s*"fallback": \{"type": "minecraft:special"', t)
     head = t[:m.start()].rstrip().rstrip(",")
-    t = head + ",\n\n\t\t" + ",\n\t\t".join(lines) + t[m.start():]
+    if name_lines:
+        head += ",\n\n\t\t" + ",\n\t\t".join(name_lines)
+    t = head + t[m.start():]
     json.loads(t)  # valida
     path.write_text(t, encoding="utf-8")
 
@@ -416,29 +591,39 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--root", type=Path, default=Path("."))
     ap.add_argument("--no-png", action="store_true")
+    ap.add_argument("--build-catalog", nargs=2, metavar=("DUMP_GZ", "BASE_PLAYER_HEAD_JSON"),
+                    help="regenera scripts/heads_catalog.json desde Slimefun-Knowledge-Drake/data/slimefun-dump.json.gz")
     a = ap.parse_args()
+    if a.build_catalog:
+        build_catalog(*a.build_catalog)
+        return
     R = a.root
     tex, svgd = R / "assets/drakescraft/textures/heads", R / "assets/drakescraft/textures/heads/svg"
     mod = R / "assets/minecraft/models/slimefun/drakes_heads"
     for d in (tex, svgd, mod):
         d.mkdir(parents=True, exist_ok=True)
-    lines, seen = [], set()
-    for i, name, cont, gl, th, n in items():
+    id_lines, name_lines, seen, n_all = [], [], set(), 0
+    for i, name, cont, gl, th, n, by_id in items():
+        f = i.lower()
         px = draw(cont, gl, th, n)
-        (svgd / f"{i}.svg").write_text(svg(px))
+        (svgd / f"{f}.svg").write_text(svg(px))
         if not a.no_png:
-            subprocess.run(["rsvg-convert", "-w", "16", "-h", "16", str(svgd / f"{i}.svg"), "-o", str(tex / f"{i}.png")], check=True)
-        (mod / f"{i}.json").write_text(json.dumps({"parent": "item/generated", "author": "Jackstar (DrakesCraft Labs)",
-                                                   "textures": {"layer0": f"drakescraft:heads/{i}"}}, indent="\t") + "\n")
-        w = json.dumps(component(name), ensure_ascii=False, separators=(",", ":"))
-        if w in seen:
-            continue
-        seen.add(w)
-        lines.append('{"when": %s,"model":{"type":"minecraft:model","model":"%s%s"}}' % (w, PREFIX, i))
+            subprocess.run(["rsvg-convert", "-w", "16", "-h", "16", str(svgd / f"{f}.svg"), "-o", str(tex / f"{f}.png")], check=True)
+        (mod / f"{f}.json").write_text(json.dumps({"parent": "item/generated", "author": "Jackstar (DrakesCraft Labs)",
+                                                   "textures": {"layer0": f"drakescraft:heads/{f}"}}, indent="\t") + "\n")
+        n_all += 1
+        model = '"model":{"type":"minecraft:model","model":"%s%s"}' % (PREFIX, f)
+        if by_id:
+            id_lines.append('{"when": {"PublicBukkitValues":{"slimefun:slimefun_item":"%s"}},%s}' % (i, model))
+        else:  # respaldo por nombre: id no presente en el dump del servidor
+            w = json.dumps(component(name), ensure_ascii=False, separators=(",", ":"))
+            if w not in seen:
+                seen.add(w)
+                name_lines.append('{"when": %s,%s}' % (w, model))
     targets = [R / "assets/minecraft/items/player_head.json"] + sorted(R.glob("overlay_*/assets/minecraft/items/player_head.json"))
     for p in targets:
-        patch_items_json(p, lines)
-    print(f"{len(lines)} cases en {len(targets)} archivo(s); {len(items())} texturas")
+        patch_items_json(p, id_lines, name_lines)
+    print(f"{len(id_lines)} cases por id + {len(name_lines)} por nombre en {len(targets)} archivo(s); {n_all} texturas")
 
 
 if __name__ == "__main__":

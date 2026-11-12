@@ -1,26 +1,29 @@
 # Cabezas Slimefun: estado del pack
 
-## Cómo se emparejan
-`assets/minecraft/items/player_head.json` usa `select` por `minecraft:custom_name` (texto + color + negrita exactos), no por id.
-Por eso el nombre en `ITEMS` de `scripts/gen_heads_svg.py` debe ser idéntico al display name de Slimefun (código legacy `&`).
-Modelos nuevos: `assets/minecraft/models/slimefun/drakes_heads/<id>.json`; texturas: `assets/drakescraft/textures/heads/<id>.png` (SVG en `heads/svg/`).
-Los overlays (`overlay_1_21_6_plus`, `overlay_1_21_11`, `overlay_26_1_2`) están en `pack.mcmeta` pero NO existen en el repo: el script los parchea solos si aparecen (`overlay_*/assets/minecraft/items/player_head.json`).
+## Cómo se emparejan (por id)
+`assets/minecraft/items/player_head.json` ahora tiene, en `entries[0]`, un `select` por `minecraft:custom_data`
+(`{"PublicBukkitValues":{"slimefun:slimefun_item":"<ID>"}}`, mismo formato que `Slimefun-Texture-Drake/pack/.../player_head.json`).
+Su `fallback` es el `select` por `custom_name` original del pack (respaldo) y el de ese, la cabeza de jugador.
+Orden de resolución: id Slimefun, luego nombre, luego cabeza normal.
 
-## Hecho (139 cabezas)
-- FN-FAL Amplifications (49): generadores solares I-VIII, Power Xpansion R1-R12, 12 runas, piezas de maquinaria, altar, ensamblaje, reciclador, chatarra.
-- RelicsOfCthonia (38): comunes a legendarias + voiders.
-- TranscEndence (14 + 5 Daxi): Zot x8, Quirp x4, condensado, scatterer.
-- Coronalis (7), ChestTerminal (4), InfinityExpansion (3), AdvancedTech (5), GlobalWarming (3), SlimeChem RTG (2), Galactifun (2), FluffyMachines nodos ender (2), varios (Pandora, Human Skull, Steel Rotor, Stardust Meteor).
+- Modelos: `assets/minecraft/models/slimefun/drakes_heads/<id>.json` (id en minúscula), textura `drakescraft:heads/<id>`.
+- Texturas: `assets/drakescraft/textures/heads/<id>.png`; SVG editables en `.../heads/svg/`.
+- Overlays (`overlay_*`): no existen en este repo; el script los parchea solos si aparecen.
+- Respaldo por nombre (12 ids que no están en el dump del servidor): `CORONALIS_*`, `AIR_QUALITY_METER`, `CINNABARITE`, `RTG_1/2`, `THERMOMETER`.
+
+## Hecho (1191 cabezas: 1179 por id + 12 por nombre)
+- Curadas a mano en `ITEMS` (~140): FN-FAL (generadores I-VIII, Power Xpansion R1-R12, runas, piezas y sus `_SCRAP`, altar...), RelicsOfCthonia (38), TranscEndence (Zot/Quirp/Daxi), ChestTerminal, AdvancedTech, InfinityExpansion, RTG, nodos ender, `THORIUM`, `FOOD_SYNTHESIZER`, `FN_GEM_*`.
+- Automáticas por reglas (`auto_spec`) desde `scripts/heads_catalog.json`: Cultivation (257), Supreme (248), CrystamaeHistoria (141), Netheopoiesis (73), SlimeFrame (65), SlimyBees (52), Slimefun núcleo (29), DankTech2 (27), PrivateStorage (24), SlimefunWarfare (22), DynaTech, EcoPower, DrakesNanotech, IDreamOfEasy, MagicXpansion, GCE, EquivalencyTech, Networks, LuckyBlocks y otros menores.
+- Resueltos al emparejar por id: `_SCRAP` (id propio), `THORIUM`, `FOOD_SYNTHESIZER`, `Dank Pack`/`Prismatic Seed` duplicados por nombre.
 
 ## Falta
-- Simple-Storage (cofres, celdas, upgrades, chunks/materiales): el nombre sale vacío del código (se construye en runtime); hay que leer el nombre real en juego.
-- Duplicados por nombre: `Component Part`/`Funnel Part`/... y sus `_SCRAP` comparten nombre; una sola textura. Si en prod difieren, usar `custom_data`.
-- Ítems sin color legacy (`Thorium`, `Food Synthesizer`): el case por nombre es ambiguo, hacerlos por id con `custom_data`.
-- Nombres traducidos o con tokens dinámicos (ej. Better-Nuclear-Generator, `HEATED_COOLANT`, `REACTOR_HATCH`).
-- Addons no inventariados a fondo: PrivateStorage (parcial), FN-FAL display items, SlimeTinker, Gastronomicon, SlimeFrame, MissileWarfare, Magic-8-Ball, SmallSpace, LuckyBlocks, DrakesNanotech/DrakesTech (`CustomHeads`).
-- Validar en cliente real que el nombre emitido por Paper coincide (italic/bold); ajustar `component()` si no.
+- SlimeTinker (1136 cabezas: moldes `DIE_*`, partes por material): se resuelven mejor por material/tipo; no tocadas.
+- Ya mapeadas por nombre en el pack original y no migradas a id: DyedBackpacks, ExoticGarden, SoulJars, MobCapturer, ElectricSpawners, HotbarPets (conviven por el respaldo de nombre).
+- Fuera del dump del servidor (sin id verificable): Simple-Storage (`BLOCK_CHEST_*`, `MATERIAL_*`, `UPGRADE_BARREL`...), Better-Nuclear-Generator (`HEATED_COOLANT`, `REACTOR_HATCH`), Gastronomicon, DrakesTech `CustomHeads`. Se añaden con una línea en `ITEMS` cuando aparezcan en el dump.
+- Las reglas automáticas son heurísticas por palabra clave: retocar a mano (`ITEMS` tiene prioridad) los ítems con dibujo poco representativo.
+- Validar en cliente 1.21.6+ que el `select` por custom_data hace match (en prod `custom_data` debe contener solo `PublicBukkitValues`).
 
 ## Cómo continuar
-1. Añadir una línea a `ITEMS`: `ID|&nombre|contenedor|glifo|tema` (contenedores: slab, cube, orb, gem, can, panel, cell; glifos en `GLYPHS`; temas en `THEMES`).
-2. `python3 scripts/gen_heads_svg.py` desde la raíz (idempotente; regenera SVG, PNG, modelos y cases).
-3. Inventario: `rg 'new SlimefunItemStack\(' <repo>` y comparar nombres con `player_head.json`.
+1. Actualizar catálogo: `python3 scripts/gen_heads_svg.py --build-catalog <Slimefun-Knowledge-Drake>/data/slimefun-dump.json.gz <player_head.json original sin cases propios>` (marca como `covered` los ya mapeados por nombre).
+2. Cabeza manual: línea en `ITEMS` `ID|&nombre|contenedor|glifo|tema` (contenedores slab, cube, orb, gem, can, chest, panel, cell; glifos en `GLYPHS`; temas en `THEMES`). Sobrescribe a las reglas.
+3. `python3 scripts/gen_heads_svg.py` desde la raíz (idempotente, ~1 min por el rasterizado; `--no-png` para saltarlo).
