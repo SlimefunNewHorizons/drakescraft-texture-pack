@@ -1,0 +1,11 @@
+{
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
+	"cases": [
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"NTW_CAPACITOR_1"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/networksv6_drake/ntw_capacitor_1"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"SUPREME_LUMIUM_GENERATOR"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/supreme/supreme_tech_generator"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"WF_VOIDLIGHT_GEN"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimeframe/wf_voidlight_gen"}}
+	],
+	"fallback": {"type":"minecraft:model","model":"minecraft:block/brown_glazed_terracotta"}
+	},
+	"oversized_in_gui": true
+}

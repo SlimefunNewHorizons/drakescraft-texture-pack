@@ -1,0 +1,11 @@
+{
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
+	"cases": [
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"SPIDER_SENSE_NODE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/drakesnanotech/mark_xlii_control_node"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"STB_THOROUGHNESSUPGRADE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/sensibletoolbox/stb_hypersendermodule"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"WF_NEURODES"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimeframe/wf_travoride"}}
+	],
+	"fallback": {"type":"minecraft:model","model":"minecraft:item/spider_eye"}
+	},
+	"oversized_in_gui": true
+}

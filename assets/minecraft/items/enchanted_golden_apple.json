@@ -1,0 +1,9 @@
+{
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
+	"cases": [
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"ENCHANTED_GOLDEN_APPLE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimefun/enchanted_golden_apple"}}
+	],
+	"fallback": {"type":"minecraft:model","model":"minecraft:item/enchanted_golden_apple"}
+	},
+	"oversized_in_gui": true
+}

@@ -1,0 +1,10 @@
+{
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
+	"cases": [
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"COPPER_ITEM_CASING"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/litexpansion/copper_plate"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"COPPER_PLATE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/litexpansion/copper_plate"}}
+	],
+	"fallback": {"type":"model","model":"block/orange_carpet"}
+	},
+	"oversized_in_gui": true
+}

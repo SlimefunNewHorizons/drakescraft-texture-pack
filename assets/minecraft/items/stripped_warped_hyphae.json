@@ -1,0 +1,12 @@
+{
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
+	"cases": [
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"INFINITY_TREE_GROWER"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/infinityexpansion/infinite_void_harvester"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"SUPREME_VIRTUAL_GARDEN_I"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/supreme/supreme_virtual_garden_i"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"SUPREME_VIRTUAL_GARDEN_II"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/supreme/supreme_virtual_garden_ii"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"SUPREME_VIRTUAL_GARDEN_III"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/supreme/supreme_virtual_garden_iii"}}
+	],
+	"fallback": {"type":"minecraft:model","model":"minecraft:block/stripped_warped_hyphae"}
+	},
+	"oversized_in_gui": true
+}

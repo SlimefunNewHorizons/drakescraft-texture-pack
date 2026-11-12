@@ -1,0 +1,12 @@
+{
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
+	"cases": [
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"BUMP_ZONGZI"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/bump/bump_xuebi"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"DX_NAPALM"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/dynatech/dynatech_redstonemineralized_apiary"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"JC_GREEN_PIGMENT"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/dyebench/jc_white_pigment"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"NPS_DISSONANT_CRYSTAL_EARTH"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/netheopoiesis/nps_harmonised_crystal_water"}}
+	],
+	"fallback": {"type":"minecraft:model","model":"minecraft:item/green_dye"}
+	},
+	"oversized_in_gui": true
+}

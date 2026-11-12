@@ -1,0 +1,12 @@
+{
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
+	"cases": [
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"DYNATECH_COAL_COKE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/dynatech/dynatech_coal_coke"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"EM_COAL"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/dynatech/dynatech_coal_coke"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"EM_RUBBER_PISTOL"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimytreetaps/rubber_factory"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"GCE_COAL_CHICKEN_ICON"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/dynatech/dynatech_coal_coke"}}
+	],
+	"fallback": {"type":"model","model":"item/coal"}
+	},
+	"oversized_in_gui": true
+}

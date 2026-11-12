@@ -1,0 +1,15 @@
+{
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
+	"cases": [
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"JC_BLUE_PIGMENT"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/dyebench/jc_white_pigment"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"NPS_DISSONANT_CRYSTAL_WATER"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/netheopoiesis/nps_harmonised_crystal_water"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"NTW_CRAFTING_BLUEPRINT"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/networksv6_drake/ntw_crafting_grid"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"SOUL"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/alchimiavitae/av_soul_collector"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"SPACE_STONE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/drakesnanotech/power_stone"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"STB_SENDERMODULE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/sensibletoolbox/stb_hypersendermodule"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"WF_VENEROL"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimeframe/wf_travoride"}}
+	],
+	"fallback": {"type":"minecraft:model","model":"minecraft:item/blue_dye"}
+	},
+	"oversized_in_gui": true
+}

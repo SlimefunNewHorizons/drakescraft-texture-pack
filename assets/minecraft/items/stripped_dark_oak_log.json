@@ -1,0 +1,9 @@
+{
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
+	"cases": [
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CLT_COUNTER_NOTHING"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/cultivation/clt_counter_nothing"}}
+	],
+	"fallback": {"type":"minecraft:model","model":"minecraft:block/stripped_dark_oak_log"}
+	},
+	"oversized_in_gui": true
+}

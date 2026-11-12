@@ -1,0 +1,24 @@
+{
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
+	"cases": [
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"EM_ARGON"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/elementmanipulation/em_oxygen"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"EM_ASTATINE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/elementmanipulation/em_oxygen"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"EM_BROMINE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/elementmanipulation/em_oxygen"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"EM_CHANGE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/elementmanipulation/em_oxygen"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"EM_FLUORINE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/elementmanipulation/em_oxygen"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"EM_HELIUM"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/elementmanipulation/em_oxygen"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"EM_IODINE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/elementmanipulation/em_oxygen"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"EM_KRYPTON"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/elementmanipulation/em_oxygen"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"EM_NEON"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/elementmanipulation/em_oxygen"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"EM_OGANESSON"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/elementmanipulation/em_oxygen"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"EM_RADON"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/elementmanipulation/em_oxygen"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"EM_TENNESSINE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/elementmanipulation/em_oxygen"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"EM_XENON"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/elementmanipulation/em_oxygen"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"JC_CYAN_PIGMENT"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/dyebench/jc_white_pigment"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"NPS_HARMONISED_CRYSTAL_WATER"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/netheopoiesis/nps_harmonised_crystal_water"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"STB_HYPERSENDERMODULE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/sensibletoolbox/stb_hypersendermodule"}}
+	],
+	"fallback": {"type":"minecraft:model","model":"minecraft:item/cyan_dye"}
+	},
+	"oversized_in_gui": true
+}

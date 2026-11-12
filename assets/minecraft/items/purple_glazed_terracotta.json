@@ -1,22 +1,15 @@
 {
-	"model": {
-	"type": "minecraft:range_dispatch",
-	"property": "minecraft:custom_model_data",
-	"index": 0,
-	"fallback": {
-		"type": "minecraft:model",
-		"model": "minecraft:item/purple_glazed_terracotta"},
-
-
-	"entries": [
-	{"threshold": 0, "model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_name",
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
 	"cases": [
-		{"when": {"text":"","extra":[{"text":"Purple Crystal","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"dark_purple","bold":false}]}, "model": {"type": "minecraft:model", "model": "slimefun/22_flower_power/crystal_purple"}}	
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"NTW_ADVANCED_EXPORT"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/networksv6_drake/ntw_advanced_import"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"NTW_ADVANCED_GRABBER"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/networksv6_drake/ntw_advanced_import"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"NTW_CONTROL_V"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/networksv6_drake/ntw_control_v"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"PURPLE_CRYSTAL"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/dynatech/dynatech_synthetic_emeraldmineralized_apiary"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"SUPREME_SUPREME_GENERATOR"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/supreme/supreme_tech_generator"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"ULTIMATE_SOLAR_PANEL"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/litexpansion/ultimate_solar_panel"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"WF_PRIMORDIAL_REACTOR"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimeframe/wf_basalt_gen"}}
 	],
-
-
-	"fallback": {"type": "minecraft:model","model": "minecraft:item/purple_glazed_terracotta"}}}
-    ]
-  },
-  "oversized_in_gui": true
+	"fallback": {"type":"minecraft:range_dispatch","property":"minecraft:custom_model_data","index":0,"fallback":{"type":"minecraft:model","model":"minecraft:item/purple_glazed_terracotta"},"entries":[{"threshold":0,"model":{"type":"minecraft:select","property":"minecraft:component","component":"minecraft:custom_name","cases":[{"when":{"text":"","extra":[{"text":"Purple Crystal","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"dark_purple","bold":false}]},"model":{"type":"minecraft:model","model":"slimefun/22_flower_power/crystal_purple"}}],"fallback":{"type":"minecraft:model","model":"minecraft:item/purple_glazed_terracotta"}}}]}
+	},
+	"oversized_in_gui": true
 }

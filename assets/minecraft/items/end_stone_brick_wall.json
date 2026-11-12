@@ -1,0 +1,10 @@
+{
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
+	"cases": [
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CRY_WAYSTONE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/crystamaehistoria/cry_waystone"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"REINFORCED_HYDRO_GENERATOR"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/infinityexpansion/hydro_generator"}}
+	],
+	"fallback": {"type":"minecraft:model","model":"minecraft:block/end_stone_brick_wall_inventory"}
+	},
+	"oversized_in_gui": true
+}

@@ -1,24 +1,14 @@
 {
-	"model": {
-	"type": "minecraft:range_dispatch",
-	"property": "minecraft:custom_model_data",
-	"index": 0,
-	"fallback": {
-		"type": "minecraft:model",
-		"model": "minecraft:item/quartz_block"},
-
-
-	"entries": [
-	{"threshold": 0, "model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_name",
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
 	"cases": [
-		{"when": {"text":"","extra":[{"text":"Stargate Ring","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"blue","bold":false}]}, "model": {"type": "minecraft:model", "model": "slimefun/24_galactifun/components/stargate_ring"}},
-		{"when": {"text":"","extra":[{"text":"Oxygen Filler","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"white","bold":false}]}, "model": {"type": "minecraft:model", "model": "slimefun/24_galactifun/machines/oxygen_filler"}},
-		{"when": {"text":"","extra":[{"text":"Saturn"}]}, "model": {"type": "minecraft:model", "model": "slimefun/24_galactifun/universe/saturn"}}
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"FMG_GENERATOR_QUARTZ"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/fnamplifications/fmg_generator_quartz_broken"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"FMG_GENERATOR_QUARTZ_BROKEN"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/fnamplifications/fmg_generator_quartz_broken"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"NPS_QUARTZ_BLANK"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/fluffymachines/smart_factory"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"OXYGEN_FILLER"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/galaxyfun/oxygen_filler"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"SIMPLE_ELEVATOR"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/simpleutils/simple_elevator"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"STARGATE_RING"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/galaxyfun/stargate_ring"}}
 	],
-
-
-	"fallback": {"type": "minecraft:model","model": "minecraft:item/quartz_block"}}}
-    ]
-  },
-  "oversized_in_gui": true
+	"fallback": {"type":"minecraft:range_dispatch","property":"minecraft:custom_model_data","index":0,"fallback":{"type":"minecraft:model","model":"minecraft:item/quartz_block"},"entries":[{"threshold":0,"model":{"type":"minecraft:select","property":"minecraft:component","component":"minecraft:custom_name","cases":[{"when":{"text":"","extra":[{"text":"Stargate Ring","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"blue","bold":false}]},"model":{"type":"minecraft:model","model":"slimefun/24_galactifun/components/stargate_ring"}},{"when":{"text":"","extra":[{"text":"Oxygen Filler","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"white","bold":false}]},"model":{"type":"minecraft:model","model":"slimefun/24_galactifun/machines/oxygen_filler"}},{"when":{"text":"","extra":[{"text":"Saturn"}]},"model":{"type":"minecraft:model","model":"slimefun/24_galactifun/universe/saturn"}}],"fallback":{"type":"minecraft:model","model":"minecraft:item/quartz_block"}}}]}
+	},
+	"oversized_in_gui": true
 }

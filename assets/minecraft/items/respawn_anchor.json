@@ -1,23 +1,20 @@
 {
-	"model": {
-	"type": "minecraft:range_dispatch",
-	"property": "minecraft:custom_model_data",
-	"index": 0,
-	"fallback": {
-		"type": "minecraft:model",
-		"model": "minecraft:item/respawn_anchor"},
-
-
-	"entries": [
-	{"threshold": 0, "model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_name",
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
 	"cases": [
-		{"when": {"text":"","extra":[{"text":"Infinity Workbench","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"gold","bold":false}]}, "model": {"type": "minecraft:model", "model": "slimefun/29_infinity_expansion/materials/infinity_workbench"}},	
-		{"when": {"text":"","extra":[{"text":"Bottomless Fluffy Barrel","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"red","bold":false}]}, "model": {"type": "minecraft:model", "model": "slimefun/34_fluffy_machines/fluffy_barrel_bottomless"}}
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"DYNATECH_DEGRADED_EGG_MILL_2"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/dynatech/dynatech_degraded_egg_mill_2"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"DYNATECH_EGG_MILL_2"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/dynatech/dynatech_degraded_egg_mill_2"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"DYNATECH_ENCHANTED_MACHINE_CORE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/litexpansion/machine_block"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"FM_FAST_INFINITY_WORKBENCH"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/infinityexpansion/infinity_constructor"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"GCE_EXCITATION_CHAMBER_4"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/geneticchickengineering/gce_excitation_chamber_4"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"INFINITY_FORGE_CONTROLLER"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/drakesnanotech/infinity_forge_controller"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"NTW_CRAFTER_MATRIX"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/networksv6_drake/ntw_crafter_matrix"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"PIGLIN_ATTRACTOR"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/infernalexpansion/ancient_rune_thermal_walk"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"REALITY_FRACTURE_DEVICE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/fnamplifications/fn_machinery_aluminum_plating"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"SUPREME_MOB_COLLECTOR_MACHINE_I"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/supreme/supreme_mob_collector_machine_i"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"SUPREME_MOB_COLLECTOR_MACHINE_II"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/supreme/supreme_mob_collector_machine_ii"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"SUPREME_MOB_COLLECTOR_MACHINE_III"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/supreme/supreme_mob_collector_machine_iii"}}
 	],
-
-
-	"fallback": {"type": "minecraft:model","model": "minecraft:item/respawn_anchor"}}}
-    ]
-  },
-  "oversized_in_gui": true
+	"fallback": {"type":"minecraft:range_dispatch","property":"minecraft:custom_model_data","index":0,"fallback":{"type":"minecraft:model","model":"minecraft:item/respawn_anchor"},"entries":[{"threshold":0,"model":{"type":"minecraft:select","property":"minecraft:component","component":"minecraft:custom_name","cases":[{"when":{"text":"","extra":[{"text":"Infinity Workbench","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"gold","bold":false}]},"model":{"type":"minecraft:model","model":"slimefun/29_infinity_expansion/materials/infinity_workbench"}},{"when":{"text":"","extra":[{"text":"Bottomless Fluffy Barrel","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"red","bold":false}]},"model":{"type":"minecraft:model","model":"slimefun/34_fluffy_machines/fluffy_barrel_bottomless"}}],"fallback":{"type":"minecraft:model","model":"minecraft:item/respawn_anchor"}}}]}
+	},
+	"oversized_in_gui": true
 }

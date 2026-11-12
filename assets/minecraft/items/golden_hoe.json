@@ -1,6 +1,11 @@
 {
-  "model": {
-    "type": "minecraft:model",
-    "model": "drakescraft:item/gear3d/golden_hoe"
-  }
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
+	"cases": [
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"GRAVITY_GUN"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/sfportalgunsextension/gravity_gun"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"POWER_UNIT"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/litexpansion/power_unit"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"STB_GOLDCOMBINEHOE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/fnamplifications/fn_hoe_5x5"}}
+	],
+	"fallback": {"type":"minecraft:model","model":"minecraft:item/golden_hoe"}
+	},
+	"oversized_in_gui": true
 }

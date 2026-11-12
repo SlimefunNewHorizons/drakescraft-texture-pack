@@ -1,0 +1,10 @@
+{
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
+	"cases": [
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"ADVANCED_QUARRY"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/infinityexpansion/advanced_quarry"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CRY_REALISATION_ALTAR_3"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/crystamaehistoria/cry_realisation_altar_3"}}
+	],
+	"fallback": {"type":"minecraft:model","model":"minecraft:block/chiseled_red_sandstone"}
+	},
+	"oversized_in_gui": true
+}

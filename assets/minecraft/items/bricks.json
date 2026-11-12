@@ -1,22 +1,11 @@
 {
-	"model": {
-	"type": "minecraft:range_dispatch",
-	"property": "minecraft:custom_model_data",
-	"index": 0,
-	"fallback": {
-		"type": "minecraft:model",
-		"model": "minecraft:block/bricks"},
-
-
-	"entries": [
-	{"threshold": 0, "model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_name",
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
 	"cases": [
-		{"when": {"text":"","extra":[{"text":"Multiblock","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"aqua","bold":false}]}, "model": {"type": "minecraft:model", "model": "slimefun/0_ui/multiblock"}}
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"DYNATECH_EXTERNAL_HEATER"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/dynatech/dynatech_antigravity_bubble"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"STABLEBLOCK"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/infinityexpansion/void_block"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"WF_CONCRETE_GEN"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimeframe/wf_concrete_gen"}}
 	],
-
-
-	"fallback": {"type": "minecraft:model","model": "minecraft:block/bricks"}}}
-    ]
-  },
-  "oversized_in_gui": true
+	"fallback": {"type":"minecraft:range_dispatch","property":"minecraft:custom_model_data","index":0,"fallback":{"type":"minecraft:model","model":"minecraft:block/bricks"},"entries":[{"threshold":0,"model":{"type":"minecraft:select","property":"minecraft:component","component":"minecraft:custom_name","cases":[{"when":{"text":"","extra":[{"text":"Multiblock","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"aqua","bold":false}]},"model":{"type":"minecraft:model","model":"slimefun/0_ui/multiblock"}}],"fallback":{"type":"minecraft:model","model":"minecraft:block/bricks"}}}]}
+	},
+	"oversized_in_gui": true
 }

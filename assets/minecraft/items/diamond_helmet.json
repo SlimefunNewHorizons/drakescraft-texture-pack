@@ -1,0 +1,13 @@
+{
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
+	"cases": [
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"ADVANCEDLX_SOLAR_HELMET"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/litexpansion/advanced_solar_helmet"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"BUMP_RANDOM_HELMET"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/bump/bump_random_helmet"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"HYBRID_SOLAR_HELMET"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/litexpansion/hybrid_solar_helmet"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"OBSIDIAN_HELMET"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/obsidianexpansion/omc_helmet"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"ULTIMATE_SOLAR_HELMET"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/litexpansion/ultimate_solar_helmet"}}
+	],
+	"fallback": {"type":"model","model":"item/diamond_helmet"}
+	},
+	"oversized_in_gui": true
+}

@@ -1,6 +1,11 @@
 {
-  "model": {
-    "type": "minecraft:model",
-    "model": "drakescraft:item/gear3d/netherite_hoe"
-  }
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
+	"cases": [
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"DYNATECH_TESSERACT_BINDER"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/dynatech/dynatech_scoop"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"PORTAL_GUN"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/supreme/supreme_foundry_i"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"URU_CONTAINMENT_TONGS"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/drakesnanotech/uru_containment_tongs"}}
+	],
+	"fallback": {"type":"model","model":"item/netherite_hoe"}
+	},
+	"oversized_in_gui": true
 }

@@ -1,0 +1,12 @@
+{
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
+	"cases": [
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"ADVANCED_CIRCUIT"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/litexpansion/advanced_circuit"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"ELECTRONIC_CIRCUIT"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/litexpansion/electronic_circuit"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"GCE_CHICKEN_NET"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/geneticchickengineering/gce_chicken_net"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"SPIDER_WEB_FLUID"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/drakesnanotech/spider_web_fluid"}}
+	],
+	"fallback": {"type":"minecraft:model","model":"minecraft:block/cobweb"}
+	},
+	"oversized_in_gui": true
+}

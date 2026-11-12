@@ -1,22 +1,9 @@
 {
-	"model": {
-	"type": "minecraft:range_dispatch",
-	"property": "minecraft:custom_model_data",
-	"index": 0,
-	"fallback": {
-		"type": "minecraft:model",
-		"model": "slimefun/creeper_spawn_egg_fallback"},
-
-
-	"entries": [
-	{"threshold": 0, "model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_name",
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
 	"cases": [
-		{"when": {"text":"","extra":[{"text":"Pixie Queen Spawn Egg","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"green","bold":false}]}, "model": {"type": "minecraft:model", "model": "slimefun/27_foxy_machines/pixie_queen_spawn_egg"}}
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"PIXIE_QUEEN_SPAWN_EGG"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/geneticchickengineering/gce_water_egg"}}
 	],
-
-
-	"fallback": {"type": "minecraft:model","model": "slimefun/creeper_spawn_egg_fallback"}}}
-    ]
-  },
-  "oversized_in_gui": true
+	"fallback": {"type":"minecraft:range_dispatch","property":"minecraft:custom_model_data","index":0,"fallback":{"type":"minecraft:model","model":"slimefun/creeper_spawn_egg_fallback"},"entries":[{"threshold":0,"model":{"type":"minecraft:select","property":"minecraft:component","component":"minecraft:custom_name","cases":[{"when":{"text":"","extra":[{"text":"Pixie Queen Spawn Egg","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"green","bold":false}]},"model":{"type":"minecraft:model","model":"slimefun/27_foxy_machines/pixie_queen_spawn_egg"}}],"fallback":{"type":"minecraft:model","model":"slimefun/creeper_spawn_egg_fallback"}}}]}
+	},
+	"oversized_in_gui": true
 }

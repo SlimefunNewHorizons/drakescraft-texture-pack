@@ -1,25 +1,17 @@
 {
-	"model": {
-	"type": "minecraft:range_dispatch",
-	"property": "minecraft:custom_model_data",
-	"index": 0,
-	"fallback": {
-		"type": "minecraft:model",
-		"model": "minecraft:item/netherite_ingot"},
-
-
-	"entries": [
-	{"threshold": 0, "model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_name",
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
 	"cases": [
-		{"when": {"text":"","extra":[{"text":"Tungsten Ingot","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"aqua","bold":false}]}, "model": {"type": "minecraft:model", "model": "slimefun/24_galactifun/components/tungsten_ingot"}},
-		{"when": {"text":"","extra":[{"text":"Void Ingot","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"dark_gray","bold":false}]}, "model": {"type": "minecraft:model", "model": "slimefun/29_infinity_expansion/materials/void_ingot"}},
-		{"when": {"text":"","extra":[{"text":"Aquatic Netherite Ingot","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"aqua","bold":false}]}, "model": {"type": "minecraft:model", "model": "slimefun/27_foxy_machines/aquatic_netherite_ingot"}},
-		{"when": {"text":"","extra":[{"text":"Carbonado Portable Charger","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"dark_red","bold":false}]}, "model": {"type": "minecraft:model", "model": "slimefun/34_fluffy_machines/portable_charger_carbonado"}}
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"AQUATIC_NETHERITE_INGOT"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/geneticchickengineering/gce_netherite_chicken_icon"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"AV_DARKSTEEL"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/alchimiavitae/av_illumium"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"BLESSED_AQUATIC_NETHERITE_INGOT"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/geneticchickengineering/gce_netherite_chicken_icon"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"GCE_NETHERITE_CHICKEN_ICON"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/geneticchickengineering/gce_netherite_chicken_icon"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"NEW_ELEMENT_INGOT"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/dynatech/dynatech_aluminum_bronzemineralized_apiary"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"OMC_CONTAINMENT_INGOT"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/obsidianexpansion/omc_containment_ingot"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"OMC_OBSIDIAN_PLATE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/obsidianexpansion/omc_obsidian_plate"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"TUNGSTEN_INGOT"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/obsidianexpansion/omc_containment_ingot"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"WF_VENERDO_ALLOY"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimeframe/wf_adramal_alloy"}}
 	],
-
-
-	"fallback": {"type": "minecraft:model","model": "minecraft:item/netherite_ingot"}}}
-    ]
-  },
-  "oversized_in_gui": true
+	"fallback": {"type":"minecraft:range_dispatch","property":"minecraft:custom_model_data","index":0,"fallback":{"type":"minecraft:model","model":"minecraft:item/netherite_ingot"},"entries":[{"threshold":0,"model":{"type":"minecraft:select","property":"minecraft:component","component":"minecraft:custom_name","cases":[{"when":{"text":"","extra":[{"text":"Tungsten Ingot","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"aqua","bold":false}]},"model":{"type":"minecraft:model","model":"slimefun/24_galactifun/components/tungsten_ingot"}},{"when":{"text":"","extra":[{"text":"Void Ingot","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"dark_gray","bold":false}]},"model":{"type":"minecraft:model","model":"slimefun/29_infinity_expansion/materials/void_ingot"}},{"when":{"text":"","extra":[{"text":"Aquatic Netherite Ingot","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"aqua","bold":false}]},"model":{"type":"minecraft:model","model":"slimefun/27_foxy_machines/aquatic_netherite_ingot"}},{"when":{"text":"","extra":[{"text":"Carbonado Portable Charger","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"dark_red","bold":false}]},"model":{"type":"minecraft:model","model":"slimefun/34_fluffy_machines/portable_charger_carbonado"}}],"fallback":{"type":"minecraft:model","model":"minecraft:item/netherite_ingot"}}}]}
+	},
+	"oversized_in_gui": true
 }

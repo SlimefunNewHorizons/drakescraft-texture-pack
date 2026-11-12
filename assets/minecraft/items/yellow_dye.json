@@ -1,0 +1,20 @@
+{
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
+	"cases": [
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CLT_LEMON_DROP"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/cultivation/clt_lemon_drop"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"EM_BARIUM"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/elementmanipulation/em_oxygen"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"EM_BERYLLIUM"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/elementmanipulation/em_oxygen"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"EM_CALCIUM"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/elementmanipulation/em_oxygen"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"EM_MAGNESIUM"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/elementmanipulation/em_magnesium"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"EM_RADIUM"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/elementmanipulation/em_oxygen"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"EM_STRONTIUM"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/elementmanipulation/em_oxygen"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"FN_MAT_GEN_UPGRADES_FAST_PRODUCE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/fnamplifications/fn_gem_upgrader"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"JC_YELLOW_PIGMENT"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/dyebench/jc_white_pigment"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"MIND_STONE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/drakesnanotech/power_stone"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"STB_BREAKERMODULE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/sensibletoolbox/stb_hypersendermodule"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"STB_SILKYBREAKERMODULE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/sensibletoolbox/stb_hypersendermodule"}}
+	],
+	"fallback": {"type":"model","model":"item/yellow_dye"}
+	},
+	"oversized_in_gui": true
+}

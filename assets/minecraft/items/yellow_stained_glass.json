@@ -1,0 +1,12 @@
+{
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
+	"cases": [
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CRY_CROP_GLASS_2"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/crystamaehistoria/cry_crop_glass_2"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"FN_FAL_CONDENSER_1"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/fnamplifications/fn_fal_condenser_1"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"FN_FAL_CONDENSER_2"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/fnamplifications/fn_fal_condenser_2"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"FN_FAL_CONDENSER_3"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/fnamplifications/fn_fal_condenser_3"}}
+	],
+	"fallback": {"type":"minecraft:model","model":"minecraft:block/yellow_stained_glass"}
+	},
+	"oversized_in_gui": true
+}

@@ -1,0 +1,11 @@
+{
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
+	"cases": [
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"BC_CHEST_DISASSEMBLER"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/betterchests/bc_chest_disassembler"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CRY_SATCHEL_4"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/crystamaehistoria/cry_satchel_4"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"QUIRP_ANNIHILATOR"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/transcendence/quirp_oscillator"}}
+	],
+	"fallback": {"type":"minecraft:model","model":"minecraft:block/yellow_concrete"}
+	},
+	"oversized_in_gui": true
+}

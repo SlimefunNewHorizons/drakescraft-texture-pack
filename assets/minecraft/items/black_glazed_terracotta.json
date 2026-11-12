@@ -1,0 +1,14 @@
+{
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
+	"cases": [
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"ADVANCED_SOLAR_PANEL"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/litexpansion/advanced_solar_panel"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"NTW_AUTO_CRAFTER"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/networksv6_drake/ntw_crafting_grid"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"NTW_CAPACITOR_3"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/networksv6_drake/ntw_capacitor_3"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"STARK_NANO_VAULT"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/drakesnanotech/stark_storage_vault"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"SUPREME_THORNIUM_GENERATOR"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/supreme/supreme_tech_generator"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"WF_ASTRAL_PRIME_GEN"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimeframe/wf_basalt_gen"}}
+	],
+	"fallback": {"type":"minecraft:model","model":"minecraft:block/black_glazed_terracotta"}
+	},
+	"oversized_in_gui": true
+}

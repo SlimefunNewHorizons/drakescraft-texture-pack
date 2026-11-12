@@ -1,0 +1,11 @@
+{
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
+	"cases": [
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"FMG_GENERATOR_MULTIBLOCK"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/fnamplifications/fmg_generator_multiblock"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"OMC_ADVANCED_VOID_CORE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/infinityexpansion/void_block"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"SMG_GENERATOR_MULTIBLOCK"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/simplematerialgenerators/smg_generator_multiblock"}}
+	],
+	"fallback": {"type":"minecraft:model","model":"minecraft:block/bedrock"}
+	},
+	"oversized_in_gui": true
+}

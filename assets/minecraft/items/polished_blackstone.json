@@ -1,0 +1,12 @@
+{
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
+	"cases": [
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"OMC_OBSIDIAN_GEAR"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/infinityexpansion/basic_obsidian_gen"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"SUPREME_TECH_ROBOTIC"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/supreme/supreme_electric_magical_i"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"SUPREME_TECH_ROBOTIC_II"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/supreme/supreme_electric_magical_ii"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"SUPREME_TECH_ROBOTIC_III"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/supreme/supreme_electric_magical_iii"}}
+	],
+	"fallback": {"type":"minecraft:model","model":"minecraft:block/polished_blackstone"}
+	},
+	"oversized_in_gui": true
+}

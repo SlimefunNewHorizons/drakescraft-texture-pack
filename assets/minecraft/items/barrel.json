@@ -1,22 +1,20 @@
 {
-	"model": {
-	"type": "minecraft:range_dispatch",
-	"property": "minecraft:custom_model_data",
-	"index": 0,
-	"fallback": {
-		"type": "minecraft:model",
-		"model": "minecraft:block/barrel"},
-
-
-	"entries": [
-	{"threshold": 0, "model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_name",
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
 	"cases": [
-		{"when": {"text":"","extra":[{"text":"Medium Fluffy Barrel","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"gold","bold":false}]}, "model": {"type": "minecraft:model", "model": "slimefun/34_fluffy_machines/fluffy_barrel_medium"}}
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"BC_DRAWER_1"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/betterchests/bc_drawer_1"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"BC_DRAWER_10"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/betterchests/bc_chest_colorer"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"BC_DRAWER_2"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/betterchests/bc_drawer_2"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"BC_DRAWER_3"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/betterchests/bc_drawer_3"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"BC_DRAWER_4"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/betterchests/bc_drawer_4"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"BC_DRAWER_5"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/betterchests/bc_drawer_5"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"BC_DRAWER_6"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/betterchests/bc_chest_colorer"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"BC_DRAWER_7"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/betterchests/bc_chest_colorer"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"BC_DRAWER_8"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/betterchests/bc_chest_colorer"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"BC_DRAWER_9"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/betterchests/bc_chest_colorer"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"BC_DRAWER_MAX"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/betterchests/bc_chest_colorer"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"GCE_INDUSTRIAL_ROOST"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/fluffymachines/smart_factory"}}
 	],
-
-
-	"fallback": {"type": "minecraft:model","model": "minecraft:block/barrel"}}}
-    ]
-  },
-  "oversized_in_gui": true
+	"fallback": {"type":"minecraft:range_dispatch","property":"minecraft:custom_model_data","index":0,"fallback":{"type":"minecraft:model","model":"minecraft:block/barrel"},"entries":[{"threshold":0,"model":{"type":"minecraft:select","property":"minecraft:component","component":"minecraft:custom_name","cases":[{"when":{"text":"","extra":[{"text":"Medium Fluffy Barrel","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"gold","bold":false}]},"model":{"type":"minecraft:model","model":"slimefun/34_fluffy_machines/fluffy_barrel_medium"}}],"fallback":{"type":"minecraft:model","model":"minecraft:block/barrel"}}}]}
+	},
+	"oversized_in_gui": true
 }

@@ -1,6 +1,12 @@
 {
-  "model": {
-    "type": "minecraft:model",
-    "model": "drakescraft:item/gear3d/iron_shovel"
-  }
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
+	"cases": [
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"DYNATECH_SCOOP"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/dynatech/dynatech_scoop"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"MINING_DRILL"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/litexpansion/glass_cutter"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"STB_PAINTROLLER"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/sensibletoolbox/stb_paintcan"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"SUPREME_MOB_COLLECTOR_TOOL_I"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/supreme/mob_tech_collector_machine"}}
+	],
+	"fallback": {"type":"model","model":"item/iron_shovel"}
+	},
+	"oversized_in_gui": true
 }

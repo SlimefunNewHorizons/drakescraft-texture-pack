@@ -1,0 +1,13 @@
+{
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
+	"cases": [
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CONCRETE_FACTORY"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/extratools/cobblestone_generator"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CRY_FRAGMENTED_VOID"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/crystamaehistoria/cry_fragmented_void"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CRY_SHATTERED_VOID"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/crystamaehistoria/cry_fragmented_void"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"SCRAP_MACHINE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimytreetaps/tree_scraper"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"STABILIZER"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/transcendence/quirp_oscillator"}}
+	],
+	"fallback": {"type":"minecraft:model","model":"minecraft:block/black_concrete"}
+	},
+	"oversized_in_gui": true
+}

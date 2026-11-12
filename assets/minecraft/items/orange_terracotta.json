@@ -1,22 +1,11 @@
 {
-	"model": {
-	"type": "minecraft:range_dispatch",
-	"property": "minecraft:custom_model_data",
-	"index": 0,
-	"fallback": {
-		"type": "minecraft:model",
-		"model": "minecraft:item/orange_terracotta"},
-
-
-	"entries": [
-	{"threshold": 0, "model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_name",
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
 	"cases": [
-		{"when": {"text":"","extra":[{"text":"Rainbow Clay ","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"dark_purple","bold":false},{"text":"(Halloween)","italic":false,"color":"gray"}]}, "model": {"type": "minecraft:model", "model": "slimefun/halloween/rainbow_clay_halloween"}}
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CRY_MYSTERIOUS_TERRACOTTA"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/crystamaehistoria/cry_arcane_sigil"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"PULVERIZER"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/extratools/pulverizer"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"STB_HEATENGINE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/sensibletoolbox/stb_heatengine"}}
 	],
-
-
-	"fallback": {"type": "minecraft:model","model": "minecraft:item/orange_terracotta"}}}
-    ]
-  },
-  "oversized_in_gui": true
+	"fallback": {"type":"minecraft:range_dispatch","property":"minecraft:custom_model_data","index":0,"fallback":{"type":"minecraft:model","model":"minecraft:item/orange_terracotta"},"entries":[{"threshold":0,"model":{"type":"minecraft:select","property":"minecraft:component","component":"minecraft:custom_name","cases":[{"when":{"text":"","extra":[{"text":"Rainbow Clay ","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"dark_purple","bold":false},{"text":"(Halloween)","italic":false,"color":"gray"}]},"model":{"type":"minecraft:model","model":"slimefun/halloween/rainbow_clay_halloween"}}],"fallback":{"type":"minecraft:model","model":"minecraft:item/orange_terracotta"}}}]}
+	},
+	"oversized_in_gui": true
 }

@@ -1,0 +1,14 @@
+{
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
+	"cases": [
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"FN_FAL_COMPRESSOR_1"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/fnamplifications/fn_fal_compressor_1"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"FN_FAL_COMPRESSOR_2"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/fnamplifications/fn_fal_compressor_2"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"FN_FAL_COMPRESSOR_3"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/fnamplifications/fn_fal_compressor_3"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"IDOE_ELECTRIC_POISON_EXTRACTOR"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/idreamofeasy/idoe_jawn"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"NTW_CAPACITOR_2"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/networksv6_drake/ntw_capacitor_2"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"WF_AXIOM_ENGINE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimeframe/wf_axiom_engine"}}
+	],
+	"fallback": {"type":"minecraft:model","model":"minecraft:block/green_glazed_terracotta"}
+	},
+	"oversized_in_gui": true
+}

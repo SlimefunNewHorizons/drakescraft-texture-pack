@@ -1,0 +1,10 @@
+{
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
+	"cases": [
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"DYNATECH_ANCIENT_MACHINE_CORE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/dynatech/dynatech_ancient_machine_core"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"DYNATECH_BANDAID_MANAGER"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/dynatech/dynatech_antigravity_bubble"}}
+	],
+	"fallback": {"type":"model","model":"block/lapis_block"}
+	},
+	"oversized_in_gui": true
+}

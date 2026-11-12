@@ -1,0 +1,19 @@
+{
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
+	"cases": [
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"AV_CONDENSED_SOUL"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/alchimiavitae/av_soul_collector"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"EM_ANTIMONY"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/elementmanipulation/em_oxygen"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"EM_ARSENIC"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/elementmanipulation/em_oxygen"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"EM_BORON"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/elementmanipulation/em_oxygen"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"EM_GERMANIUM"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/elementmanipulation/em_oxygen"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"EM_POLONIUM"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/elementmanipulation/em_oxygen"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"EM_SILICON"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/elementmanipulation/em_oxygen"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"EM_TELLURIUM"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/elementmanipulation/em_oxygen"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"JC_LIGHT_BLUE_PIGMENT"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/dyebench/jc_white_pigment"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"NPS_DISCORDANT_CRYSTAL_WATER"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/netheopoiesis/nps_harmonised_crystal_water"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"STB_ADVANCEDSENDERMODULE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/sensibletoolbox/stb_advancedsendermodule"}}
+	],
+	"fallback": {"type":"model","model":"item/light_blue_dye"}
+	},
+	"oversized_in_gui": true
+}

@@ -1,38 +1,20 @@
 {
-	"model": {
-	"type": "minecraft:range_dispatch",
-	"property": "minecraft:custom_model_data",
-	"index": 0,
-	"fallback": {
-		"type": "minecraft:model",
-		"model": "minecraft:item/netherite_chestplate"},
-
-
-	"entries": [
-	{"threshold": 0, "model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_name",
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
 	"cases": [
-		{"when": {"text":"","extra":[{"text":"Wither Data Card","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"aqua","bold":false}]}, "model": {"type": "minecraft:model", "model": "slimefun/29_infinity_expansion/mob_simulation/data_card_wither"}},
-		{"when": {"text":"","extra":[{"text":"Ender Dragon Data Card","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"aqua","bold":false}]}, "model": {"type": "minecraft:model", "model": "slimefun/29_infinity_expansion/mob_simulation/data_card_ender_dragon"}},
-		{"when": {"text":"","extra":[{"text":"Resistant Chestplate","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"green","bold":false}]}, "model": {"type": "minecraft:model", "model": "slimefun/27_foxy_machines/resistant_chestplate"}}
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"DX_DEMONIC_CHESTPLATE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/demonicexpansion/dx_demonic_chestplate"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"EMPTY_NANOGAUNTLET"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/fnamplifications/fn_machinery_aluminum_plating"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"FN_GEAR_CHESTPLATE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/fnamplifications/fn_gear_chestplate"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"HULKBUSTER_FRAME"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/drakesnanotech/hulkbuster_frame"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"IRON_SPIDER_NANOCORE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/drakesnanotech/iron_spider_nanocore"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"MARK_L_NANOCORE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/drakesnanotech/nanomass_canister"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"MARK_XLVI_COMBAT_NANOCORE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/drakesnanotech/nanomass_canister"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"NANO_INFINITY_GAUNTLET"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/infinityexpansion/stoneworks_factory"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"OMC_CHEST"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/obsidianexpansion/omc_chest"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"RESISTANT_CHESTPLATE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/foxymachines/resistant_chestplate_frame"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"ULTRON_INFINITY_ARMOR"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/drakesnanotech/ultron_infinity_armor"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"ULTRON_PRIMARY_SHELL"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/drakesnanotech/ultron_primary_shell"}}
 	],
-
-
-	"fallback": {"type": "minecraft:select","property": "minecraft:trim_material",
-          "cases": [
-            {"when": "minecraft:quartz","model": {"type": "minecraft:model","model": "minecraft:item/netherite_chestplate_quartz_trim"}},
-            {"when": "minecraft:iron","model": {"type": "minecraft:model","model": "minecraft:item/netherite_chestplate_iron_trim"}},
-            {"when": "minecraft:netherite","model": {"type": "minecraft:model","model": "minecraft:item/netherite_chestplate_netherite_trim"}},
-            {"when": "minecraft:redstone","model": {"type": "minecraft:model","model": "minecraft:item/netherite_chestplate_redstone_trim"}},
-            {"when": "minecraft:copper","model": {"type": "minecraft:model","model": "minecraft:item/netherite_chestplate_copper_trim"}},
-            {"when": "minecraft:gold","model": {"type": "minecraft:model","model": "minecraft:item/netherite_chestplate_gold_trim"}},
-            {"when": "minecraft:emerald","model": {"type": "minecraft:model","model": "minecraft:item/netherite_chestplate_emerald_trim"}},
-            {"when": "minecraft:diamond","model": {"type": "minecraft:model","model": "minecraft:item/netherite_chestplate_diamond_trim"}},
-            {"when": "minecraft:lapis","model": {"type": "minecraft:model","model": "minecraft:item/netherite_chestplate_lapis_trim"}},
-            {"when": "minecraft:amethyst","model": {"type": "minecraft:model","model": "minecraft:item/netherite_chestplate_amethyst_trim"}},
-            {"when": "minecraft:resin","model": {"type": "minecraft:model","model": "minecraft:item/netherite_chestplate_resin_trim"}}
-			],
-		"fallback": {"type": "minecraft:model","model": "minecraft:item/netherite_chestplate"}}}}
-    ]
-  },
-  "oversized_in_gui": true
+	"fallback": {"type":"minecraft:range_dispatch","property":"minecraft:custom_model_data","index":0,"fallback":{"type":"minecraft:model","model":"minecraft:item/netherite_chestplate"},"entries":[{"threshold":0,"model":{"type":"minecraft:select","property":"minecraft:component","component":"minecraft:custom_name","cases":[{"when":{"text":"","extra":[{"text":"Wither Data Card","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"aqua","bold":false}]},"model":{"type":"minecraft:model","model":"slimefun/29_infinity_expansion/mob_simulation/data_card_wither"}},{"when":{"text":"","extra":[{"text":"Ender Dragon Data Card","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"aqua","bold":false}]},"model":{"type":"minecraft:model","model":"slimefun/29_infinity_expansion/mob_simulation/data_card_ender_dragon"}},{"when":{"text":"","extra":[{"text":"Resistant Chestplate","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"green","bold":false}]},"model":{"type":"minecraft:model","model":"slimefun/27_foxy_machines/resistant_chestplate"}}],"fallback":{"type":"minecraft:select","property":"minecraft:trim_material","cases":[{"when":"minecraft:quartz","model":{"type":"minecraft:model","model":"minecraft:item/netherite_chestplate_quartz_trim"}},{"when":"minecraft:iron","model":{"type":"minecraft:model","model":"minecraft:item/netherite_chestplate_iron_trim"}},{"when":"minecraft:netherite","model":{"type":"minecraft:model","model":"minecraft:item/netherite_chestplate_netherite_trim"}},{"when":"minecraft:redstone","model":{"type":"minecraft:model","model":"minecraft:item/netherite_chestplate_redstone_trim"}},{"when":"minecraft:copper","model":{"type":"minecraft:model","model":"minecraft:item/netherite_chestplate_copper_trim"}},{"when":"minecraft:gold","model":{"type":"minecraft:model","model":"minecraft:item/netherite_chestplate_gold_trim"}},{"when":"minecraft:emerald","model":{"type":"minecraft:model","model":"minecraft:item/netherite_chestplate_emerald_trim"}},{"when":"minecraft:diamond","model":{"type":"minecraft:model","model":"minecraft:item/netherite_chestplate_diamond_trim"}},{"when":"minecraft:lapis","model":{"type":"minecraft:model","model":"minecraft:item/netherite_chestplate_lapis_trim"}},{"when":"minecraft:amethyst","model":{"type":"minecraft:model","model":"minecraft:item/netherite_chestplate_amethyst_trim"}},{"when":"minecraft:resin","model":{"type":"minecraft:model","model":"minecraft:item/netherite_chestplate_resin_trim"}}],"fallback":{"type":"minecraft:model","model":"minecraft:item/netherite_chestplate"}}}}]}
+	},
+	"oversized_in_gui": true
 }

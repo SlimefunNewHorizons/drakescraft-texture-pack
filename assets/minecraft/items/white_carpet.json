@@ -1,0 +1,12 @@
+{
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
+	"cases": [
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"FN_MACHINERY_ALUMINUM_PLATING"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/fnamplifications/fn_machinery_aluminum_plating"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"IRON_PLATE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/litexpansion/iron_plate"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"TIN_ITEM_CASING"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/litexpansion/tin_plate"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"TIN_PLATE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/litexpansion/tin_plate"}}
+	],
+	"fallback": {"type":"minecraft:model","model":"minecraft:block/white_carpet"}
+	},
+	"oversized_in_gui": true
+}

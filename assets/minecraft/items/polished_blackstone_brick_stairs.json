@@ -1,0 +1,9 @@
+{
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
+	"cases": [
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"SACRIFICIAL_ALTAR_BLACKSTONE_BRICK_STAIRS"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/foxymachines/sacrificial_altar_blackstone_bricks"}}
+	],
+	"fallback": {"type":"minecraft:model","model":"minecraft:block/polished_blackstone_brick_stairs"}
+	},
+	"oversized_in_gui": true
+}

@@ -1,0 +1,10 @@
+{
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
+	"cases": [
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"NPS_BEACON_BASE_1"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/netheopoiesis/nps_beacon_base_1"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"WF_TELLURIUM_FRAGS_SYNTHESIZER"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimeframe/wf_tellurium_frags_synthesizer"}}
+	],
+	"fallback": {"type":"minecraft:model","model":"minecraft:block/nether_wart_block"}
+	},
+	"oversized_in_gui": true
+}

@@ -1,0 +1,22 @@
+{
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
+	"cases": [
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"EM_ALUMINUM"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/elementmanipulation/em_aluminum"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"EM_BISMUTH"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/elementmanipulation/em_oxygen"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"EM_FLEROVIUM"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/elementmanipulation/em_oxygen"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"EM_GALLIUM"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/elementmanipulation/em_gallium"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"EM_INDIUM"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/elementmanipulation/em_oxygen"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"EM_LEAD"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/elementmanipulation/em_lead"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"EM_LIVERMORIUM"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/elementmanipulation/em_oxygen"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"EM_MOSCOVIUM"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/elementmanipulation/em_oxygen"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"EM_NIHONIUM"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/elementmanipulation/em_oxygen"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"EM_THALLIUM"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/elementmanipulation/em_gallium"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"EM_TIN"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/elementmanipulation/em_tin"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"JC_GRAY_PIGMENT"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/dyebench/jc_white_pigment"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"NPS_DISSONANT_CRYSTAL_AIR"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/netheopoiesis/nps_crystalline_crux"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"STB_DROPPERMODULE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/sensibletoolbox/stb_hypersendermodule"}}
+	],
+	"fallback": {"type":"minecraft:model","model":"minecraft:item/gray_dye"}
+	},
+	"oversized_in_gui": true
+}

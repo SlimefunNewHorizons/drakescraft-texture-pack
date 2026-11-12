@@ -1,0 +1,12 @@
+{
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
+	"cases": [
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CRY_MYSTICAL_TINTANNO"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/crystamaehistoria/cry_arcane_sigil"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"SUPREME_VIRTUAL_AQUARIUM_I"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/supreme/supreme_virtual_aquarium_i"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"SUPREME_VIRTUAL_AQUARIUM_II"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/supreme/supreme_virtual_aquarium_ii"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"SUPREME_VIRTUAL_AQUARIUM_III"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/supreme/supreme_virtual_aquarium_iii"}}
+	],
+	"fallback": {"type":"minecraft:model","model":"minecraft:block/dark_prismarine"}
+	},
+	"oversized_in_gui": true
+}

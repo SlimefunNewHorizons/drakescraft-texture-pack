@@ -1,0 +1,11 @@
+{
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
+	"cases": [
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"IRON_ITEM_CASING"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/litexpansion/iron_plate"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"RED_ROOM_CLOAKING_MESH"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/drakesnanotech/red_room_cloaking_mesh"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"THORIUM_PLATE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/litexpansion/thorium_plate"}}
+	],
+	"fallback": {"type":"model","model":"block/gray_carpet"}
+	},
+	"oversized_in_gui": true
+}

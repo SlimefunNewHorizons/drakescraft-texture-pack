@@ -1,0 +1,9 @@
+{
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
+	"cases": [
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"BC_IE_STORAGE_UNIT_6"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/betterchests/bc_chest_colorer"}}
+	],
+	"fallback": {"type":"minecraft:model","model":"minecraft:block/mangrove_log"}
+	},
+	"oversized_in_gui": true
+}

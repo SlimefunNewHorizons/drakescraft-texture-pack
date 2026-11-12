@@ -1,0 +1,13 @@
+{
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
+	"cases": [
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CLT_TREE_APRICOT"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/cultivation/clt_tree_lemon"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CLT_TREE_GREEN_APPLE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimefun/enchanted_golden_apple"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CLT_TREE_KIWI"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/cultivation/clt_tree_kiwi"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CLT_TREE_PEACH"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/cultivation/clt_tree_peach"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CLT_TREE_PECAN"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/cultivation/clt_counter_blender"}}
+	],
+	"fallback": {"type":"model","model":"item/birch_sapling"}
+	},
+	"oversized_in_gui": true
+}

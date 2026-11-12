@@ -1,24 +1,33 @@
 {
-  "model": {
-    "type": "minecraft:range_dispatch",
-    "property": "minecraft:custom_model_data",
-    "index": 0,
-    "fallback": {
-      "type": "minecraft:model",
-      "model": "minecraft:item/glass"
-    },
-    "entries": [
-		{"threshold": 0, "model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_name",
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
 	"cases": [
-		{"when": {"text":"","extra":[{"text":"Pressure Chamber","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"aqua","bold":false}]}, "model": {"type": "minecraft:model", "model": "slimefun/3_basic_machines/pressure_chamber"}},
-		{"when": {"text":"","extra":[{"text":"Space Suit Helmet","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"white","bold":false}]}, "model": {"type": "minecraft:model", "model": "slimefun/24_galactifun/equipment/space_suit_helmet"}},
-		{"when": {"text":"","extra":[{"text":"Lunar Glass","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"white","bold":false}]}, "model": {"type": "minecraft:model", "model": "slimefun/24_galactifun/components/lunar_glass"}},
-		{"when": {"text":"","extra":[{"text":"Observatory","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"white","bold":false}]}, "model": {"type": "minecraft:model", "model": "slimefun/24_galactifun/machines/observatory"}}
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"BC_CHEST_27"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/betterchests/bc_chest_colorer"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"BC_CHEST_36"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/betterchests/bc_chest_colorer"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"BC_CHEST_45"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/betterchests/bc_chest_colorer"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"BC_CHEST_54"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/betterchests/bc_chest_colorer"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"BC_CHEST_INPUT_27"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/betterchests/bc_chest_colorer"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"BC_CHEST_INPUT_36"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/betterchests/bc_chest_colorer"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"BC_CHEST_INPUT_45"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/betterchests/bc_chest_colorer"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"BC_CHEST_INPUT_54"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/betterchests/bc_chest_colorer"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"BC_CHEST_OUTPUT_27"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/betterchests/bc_chest_colorer"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"BC_CHEST_OUTPUT_36"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/betterchests/bc_chest_colorer"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"BC_CHEST_OUTPUT_45"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/betterchests/bc_chest_colorer"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"BC_CHEST_OUTPUT_54"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/betterchests/bc_chest_colorer"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CLT_GARDEN_CLOCHE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/cultivation/clt_harvesting_tool_simple"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CRY_ANGEL_BLOCK"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/crystamaehistoria/cry_cargo_cover"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CRY_CROP_GLASS_1"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/crystamaehistoria/cry_crop_glass_1"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"DK2_UNLOADER_1"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/danktech2/dk2_unloader_1"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"EM_GLASS"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/elementmanipulation/em_glass"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"GCE_GLASS_CHICKEN_ICON"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/geneticchickengineering/gce_glass_chicken_icon"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"LUNAR_GLASS"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/galaxyfun/lunar_glass"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"NTW_OPTIC_GLASS"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/networksv6_drake/ntw_optic_glass"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"OBSERVATORY"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/galaxyfun/oxygen_filler"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"SMG_GENERATOR_GLASS"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/simplematerialgenerators/smg_generator_glass"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"SPACE_SUIT_HELMET"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/obsidianexpansion/omc_helmet"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"VOID_GLASS"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/infinityexpansion/void_glass"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"WF_GLASS_GENERATOR"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimeframe/wf_glass_generator"}}
 	],
-
-
-	"fallback": {"type": "minecraft:model","model": "minecraft:item/glass"}}}
-    ]
-  },
-  "oversized_in_gui": true
+	"fallback": {"type":"minecraft:range_dispatch","property":"minecraft:custom_model_data","index":0,"fallback":{"type":"minecraft:model","model":"minecraft:item/glass"},"entries":[{"threshold":0,"model":{"type":"minecraft:select","property":"minecraft:component","component":"minecraft:custom_name","cases":[{"when":{"text":"","extra":[{"text":"Pressure Chamber","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"aqua","bold":false}]},"model":{"type":"minecraft:model","model":"slimefun/3_basic_machines/pressure_chamber"}},{"when":{"text":"","extra":[{"text":"Space Suit Helmet","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"white","bold":false}]},"model":{"type":"minecraft:model","model":"slimefun/24_galactifun/equipment/space_suit_helmet"}},{"when":{"text":"","extra":[{"text":"Lunar Glass","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"white","bold":false}]},"model":{"type":"minecraft:model","model":"slimefun/24_galactifun/components/lunar_glass"}},{"when":{"text":"","extra":[{"text":"Observatory","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"white","bold":false}]},"model":{"type":"minecraft:model","model":"slimefun/24_galactifun/machines/observatory"}}],"fallback":{"type":"minecraft:model","model":"minecraft:item/glass"}}}]}
+	},
+	"oversized_in_gui": true
 }

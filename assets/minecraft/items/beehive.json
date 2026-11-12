@@ -1,20 +1,54 @@
 {
-	"model": {
-	"type": "minecraft:range_dispatch",
-	"property": "minecraft:custom_model_data",
-	"index": 0,
-	"fallback": {"type": "minecraft:select", "block_state_property": "honey_level", "cases": [{"model": {"type": "minecraft:model", "model": "minecraft:block/beehive_honey"}, "when": "5"}], "fallback": {"type": "minecraft:model","model": "minecraft:block/beehive_empty"}, "property": "minecraft:block_state"},
-
-
-	"entries": [
-	{"threshold": 0, "model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_name",
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
 	"cases": [
-		{"when": {"text":"","extra":[{"text":"Small Fluffy Barrel","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"yellow","bold":false}]}, "model": {"type": "minecraft:model", "model": "slimefun/34_fluffy_machines/fluffy_barrel_small"}}
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"DYNATECH_ALUMINUMMINERALIZED_APIARY"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/dynatech/dynatech_aluminummineralized_apiary"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"DYNATECH_ALUMINUM_BRASSMINERALIZED_APIARY"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/dynatech/dynatech_aluminummineralized_apiary"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"DYNATECH_ALUMINUM_BRONZEMINERALIZED_APIARY"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/dynatech/dynatech_aluminum_bronzemineralized_apiary"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"DYNATECH_BILLONMINERALIZED_APIARY"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/dynatech/dynatech_material_hive"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"DYNATECH_BRASSMINERALIZED_APIARY"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/dynatech/dynatech_material_hive"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"DYNATECH_CARBONADOMINERALIZED_APIARY"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/dynatech/dynatech_carbonadomineralized_apiary"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"DYNATECH_COALMINERALIZED_APIARY"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/dynatech/dynatech_coalmineralized_apiary"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"DYNATECH_COBALTMINERALIZED_APIARY"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/dynatech/dynatech_material_hive"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"DYNATECH_COPPERMINERALIZED_APIARY"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/dynatech/dynatech_material_hive"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"DYNATECH_CORINTHIAN_BRONZEMINERALIZED_APIARY"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/litexpansion/mixed_metal_ingot"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"DYNATECH_DAMASCUS_STEELMINERALIZED_APIARY"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/dynatech/dynatech_material_hive"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"DYNATECH_DIAMONDMINERALIZED_APIARY"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/dynatech/dynatech_synthetic_diamondmineralized_apiary"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"DYNATECH_DURALUMINMINERALIZED_APIARY"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/dynatech/dynatech_material_hive"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"DYNATECH_EMERALDMINERALIZED_APIARY"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/dynatech/dynatech_synthetic_emeraldmineralized_apiary"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"DYNATECH_FERROSILICONMINERALIZED_APIARY"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/dynatech/dynatech_material_hive"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"DYNATECH_GILDED_IRONMINERALIZED_APIARY"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/dynatech/dynatech_gilded_ironmineralized_apiary"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"DYNATECH_GOLDMINERALIZED_APIARY"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/dynatech/dynatech_goldmineralized_apiary"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"DYNATECH_HARDENED_METALMINERALIZED_APIARY"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/dynatech/dynatech_material_hive"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"DYNATECH_IRONMINERALIZED_APIARY"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/dynatech/dynatech_gilded_ironmineralized_apiary"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"DYNATECH_LAPIS_LAZULIMINERALIZED_APIARY"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/dynatech/dynatech_lapis_lazulimineralized_apiary"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"DYNATECH_LEADMINERALIZED_APIARY"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/dynatech/dynatech_leadmineralized_apiary"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"DYNATECH_MAGNESIUMMINERALIZED_APIARY"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/dynatech/dynatech_magnesiummineralized_apiary"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"DYNATECH_MATERIAL_HIVE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/dynatech/dynatech_material_hive"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"DYNATECH_NETHERITEMINERALIZED_APIARY"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/dynatech/dynatech_netheritemineralized_apiary"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"DYNATECH_NICKELMINERALIZED_APIARY"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/dynatech/dynatech_material_hive"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"DYNATECH_QUARTZMINERALIZED_APIARY"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/dynatech/dynatech_quartzmineralized_apiary"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"DYNATECH_REDSTONEMINERALIZED_APIARY"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/dynatech/dynatech_redstonemineralized_apiary"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"DYNATECH_REDSTONE_ALLOYMINERALIZED_APIARY"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/dynatech/dynatech_redstone_alloymineralized_apiary"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"DYNATECH_REINFORCED_ALLOYMINERALIZED_APIARY"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/dynatech/dynatech_reinforced_alloymineralized_apiary"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"DYNATECH_SILVERMINERALIZED_APIARY"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/dynatech/dynatech_silvermineralized_apiary"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"DYNATECH_SOLDERMINERALIZED_APIARY"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/dynatech/dynatech_material_hive"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"DYNATECH_STEELMINERALIZED_APIARY"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/dynatech/dynatech_material_hive"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"DYNATECH_SYNTHETIC_DIAMONDMINERALIZED_APIARY"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/dynatech/dynatech_synthetic_diamondmineralized_apiary"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"DYNATECH_SYNTHETIC_EMERALDMINERALIZED_APIARY"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/dynatech/dynatech_synthetic_emeraldmineralized_apiary"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"DYNATECH_SYNTHETIC_SAPPHIREMINERALIZED_APIARY"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/dynatech/dynatech_angel_gem"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"DYNATECH_TINMINERALIZED_APIARY"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/dynatech/dynatech_tinmineralized_apiary"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"DYNATECH_ZINCMINERALIZED_APIARY"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/dynatech/dynatech_zincmineralized_apiary"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"ENDER_BEE_NEST"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimybees/ender_bee_nest"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"FOREST_BEE_NEST"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/dynatech/dynatech_goldmineralized_apiary"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"GCE_PRIVATE_COOP"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/geneticchickengineering/gce_private_coop"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"MEADOWS_BEE_NEST"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/dynatech/dynatech_goldmineralized_apiary"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"NETHER_BEE_NEST"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimybees/nether_bee_nest"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"SANDY_BEE_NEST"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/dynatech/dynatech_goldmineralized_apiary"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"STONE_BEE_NEST"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/dynatech/dynatech_goldmineralized_apiary"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"STORAGE_FORGE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/litexpansion/refined_smeltery"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"WATER_BEE_NEST"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimybees/water_bee_nest"}}
 	],
-
-
-	"fallback": {"type": "minecraft:select", "block_state_property": "honey_level", "cases": [{"model": {"type": "minecraft:model", "model": "minecraft:block/beehive_honey"}, "when": "5"}], "fallback": {"type": "minecraft:model","model": "minecraft:block/beehive_empty"}, "property": "minecraft:block_state"}}}
-    ]
-  },
-  "oversized_in_gui": true
+	"fallback": {"type":"minecraft:range_dispatch","property":"minecraft:custom_model_data","index":0,"fallback":{"type":"minecraft:select","block_state_property":"honey_level","cases":[{"model":{"type":"minecraft:model","model":"minecraft:block/beehive_honey"},"when":"5"}],"fallback":{"type":"minecraft:model","model":"minecraft:block/beehive_empty"},"property":"minecraft:block_state"},"entries":[{"threshold":0,"model":{"type":"minecraft:select","property":"minecraft:component","component":"minecraft:custom_name","cases":[{"when":{"text":"","extra":[{"text":"Small Fluffy Barrel","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"yellow","bold":false}]},"model":{"type":"minecraft:model","model":"slimefun/34_fluffy_machines/fluffy_barrel_small"}}],"fallback":{"type":"minecraft:select","block_state_property":"honey_level","cases":[{"model":{"type":"minecraft:model","model":"minecraft:block/beehive_honey"},"when":"5"}],"fallback":{"type":"minecraft:model","model":"minecraft:block/beehive_empty"},"property":"minecraft:block_state"}}}]}
+	},
+	"oversized_in_gui": true
 }

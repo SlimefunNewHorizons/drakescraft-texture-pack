@@ -1,0 +1,9 @@
+{
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
+	"cases": [
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"EM_POISON_POTATO"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/elementmanipulation/em_potato"}}
+	],
+	"fallback": {"type":"minecraft:model","model":"minecraft:item/poisonous_potato"}
+	},
+	"oversized_in_gui": true
+}

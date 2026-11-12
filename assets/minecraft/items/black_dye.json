@@ -1,0 +1,15 @@
+{
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
+	"cases": [
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"COAL_DUST"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/litexpansion/coal_dust"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"FN_MAT_GEN_UPGRADES_REPAIR_ITEM"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/fnamplifications/fn_gem_upgrader"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"JC_BLACK_PIGMENT"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/dyebench/jc_white_pigment"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"NPS_DISCORDANT_CRYSTAL_EARTH"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/netheopoiesis/nps_harmonised_crystal_water"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"RAW_CARBON_FIBRE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/litexpansion/raw_carbon_fibre"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"RAW_CARBON_MESH"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/litexpansion/raw_carbon_mesh"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"STB_VACUUMMODULE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/sensibletoolbox/stb_hypersendermodule"}}
+	],
+	"fallback": {"type":"model","model":"item/black_dye"}
+	},
+	"oversized_in_gui": true
+}

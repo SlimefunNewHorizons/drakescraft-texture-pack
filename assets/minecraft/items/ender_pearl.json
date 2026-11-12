@@ -1,0 +1,13 @@
+{
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
+	"cases": [
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"BUMP_MECHA_GEAR"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/bump/bump_mecha_gear"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CRY_GILDED_PEARL"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/geneticchickengineering/gce_ender_pearl_chicken_icon"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CRY_UNCANNY_PEARL"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/geneticchickengineering/gce_ender_pearl_chicken_icon"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"FN_ORIENT_PEARL"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/geneticchickengineering/gce_ender_pearl_chicken_icon"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"GCE_ENDER_PEARL_CHICKEN_ICON"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/geneticchickengineering/gce_ender_pearl_chicken_icon"}}
+	],
+	"fallback": {"type":"model","model":"item/ender_pearl"}
+	},
+	"oversized_in_gui": true
+}

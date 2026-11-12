@@ -1,0 +1,11 @@
+{
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
+	"cases": [
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CRY_DISPLACED_VOID"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/crystamaehistoria/cry_displaced_void"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"DRUG_MORPHINE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimefun/filled_flask_of_knowledge"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"EM_COCOA"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/elementmanipulation/em_cocoa"}}
+	],
+	"fallback": {"type":"model","model":"item/cocoa_beans"}
+	},
+	"oversized_in_gui": true
+}

@@ -1,0 +1,10 @@
+{
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
+	"cases": [
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"GCE_DRAGON_BREATH_ICON"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/geneticchickengineering/gce_dragon_breath_icon"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"GCE_MUTAGENIC_SERUM"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/fluffymachines/smart_factory"}}
+	],
+	"fallback": {"type":"minecraft:model","model":"minecraft:item/dragon_breath"}
+	},
+	"oversized_in_gui": true
+}

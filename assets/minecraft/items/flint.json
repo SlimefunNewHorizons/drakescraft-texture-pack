@@ -1,23 +1,11 @@
 {
-	"model": {
-	"type": "minecraft:range_dispatch",
-	"property": "minecraft:custom_model_data",
-	"index": 0,
-	"fallback": {
-		"type": "minecraft:model",
-		"model": "minecraft:item/flint"},
-
-
-	"entries": [
-	{"threshold": 0, "model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_name",
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
 	"cases": [
-		{"when": {"text":"","extra":[{"text":"Hook","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"aqua","bold":false}]}, "model": {"type": "minecraft:model", "model": "slimefun/11_misc_items/hook"}},
-		{"when": {"text":"","extra":[{"text":"Pestle","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"white","bold":true}]}, "model": {"type": "minecraft:model", "model": "slimefun/25_potion_expansion/pestle"}}
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"EM_FLINT"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/elementmanipulation/em_oxygen"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"GCE_FLINT_CHICKEN_ICON"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/geneticchickengineering/gce_feather_chicken_icon"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"PESTLE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/potionexpansion/pestle"}}
 	],
-
-
-	"fallback": {"type": "minecraft:model","model": "minecraft:item/flint"}}}
-    ]
-  },
-  "oversized_in_gui": true
+	"fallback": {"type":"minecraft:range_dispatch","property":"minecraft:custom_model_data","index":0,"fallback":{"type":"minecraft:model","model":"minecraft:item/flint"},"entries":[{"threshold":0,"model":{"type":"minecraft:select","property":"minecraft:component","component":"minecraft:custom_name","cases":[{"when":{"text":"","extra":[{"text":"Hook","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"aqua","bold":false}]},"model":{"type":"minecraft:model","model":"slimefun/11_misc_items/hook"}},{"when":{"text":"","extra":[{"text":"Pestle","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"white","bold":true}]},"model":{"type":"minecraft:model","model":"slimefun/25_potion_expansion/pestle"}}],"fallback":{"type":"minecraft:model","model":"minecraft:item/flint"}}}]}
+	},
+	"oversized_in_gui": true
 }

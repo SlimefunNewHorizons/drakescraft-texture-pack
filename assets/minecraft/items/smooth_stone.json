@@ -1,22 +1,16 @@
 {
-	"model": {
-	"type": "minecraft:range_dispatch",
-	"property": "minecraft:custom_model_data",
-	"index": 0,
-	"fallback": {
-		"type": "minecraft:model",
-		"model": "minecraft:item/smooth_stone"},
-
-
-	"entries": [
-	{"threshold": 0, "model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_name",
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
 	"cases": [
-		{"when": {"text":"","extra":[{"text":"Basic ","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"blue","bold":false},{"text":"Cobble Generator","italic":false,"color":"dark_gray"}]}, "model": {"type": "minecraft:model", "model": "slimefun/29_infinity_expansion/basic_machines/basic_cobble_gen"}}
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"ADVANCED_COBBLE_GEN"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/infinityexpansion/advanced_cobble_gen"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"BASIC_COBBLE_GEN"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/infinityexpansion/basic_cobble_gen"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"BASIC_OBSIDIAN_GEN"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/infinityexpansion/basic_obsidian_gen"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"COBBLE_PRESS"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/infinityexpansion/infinity_cobble_gen"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"DYNATECH_STONE_MACHINE_CORE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/dynatech/dynatech_stone_machine_core"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"INFINITY_COBBLE_GEN"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/infinityexpansion/infinity_cobble_gen"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"SMG_GENERATOR_SMOOTH_STONE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/simplematerialgenerators/smg_generator_cobblestone"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"SMG_GENERATOR_SMOOTH_STONE_BROKEN"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/simplematerialgenerators/smg_generator_cobblestone"}}
 	],
-
-
-	"fallback": {"type": "minecraft:model","model": "minecraft:item/smooth_stone"}}}
-    ]
-  },
-  "oversized_in_gui": true
+	"fallback": {"type":"minecraft:range_dispatch","property":"minecraft:custom_model_data","index":0,"fallback":{"type":"minecraft:model","model":"minecraft:item/smooth_stone"},"entries":[{"threshold":0,"model":{"type":"minecraft:select","property":"minecraft:component","component":"minecraft:custom_name","cases":[{"when":{"text":"","extra":[{"text":"Basic ","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"blue","bold":false},{"text":"Cobble Generator","italic":false,"color":"dark_gray"}]},"model":{"type":"minecraft:model","model":"slimefun/29_infinity_expansion/basic_machines/basic_cobble_gen"}}],"fallback":{"type":"minecraft:model","model":"minecraft:item/smooth_stone"}}}]}
+	},
+	"oversized_in_gui": true
 }

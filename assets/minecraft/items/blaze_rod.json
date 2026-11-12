@@ -1,30 +1,48 @@
 {
-	"model": {
-	"type": "minecraft:range_dispatch",
-	"property": "minecraft:custom_model_data",
-	"index": 0,
-	"fallback": {
-		"type": "minecraft:model",
-		"model": "minecraft:item/blaze_rod"},
-
-
-	"entries": [
-	{"threshold": 0, "model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_name",
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
 	"cases": [
-		{"when": {"text":"","extra":[{"text":"Mob Capturing Cannon","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"gold","bold":false}]}, "model": {"type": "minecraft:model", "model": "slimefun/20_mob_capturer/mob_cannon"}},
-		{"when": {"text":"","extra":[{"text":"Electric Wind Staff","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"aqua","bold":false}]}, "model": {"type": "minecraft:model", "model": "slimefun/27_foxy_machines/electric_wind_staff"}},
-		{"when": {"text":"","extra":[{"text":"Electric Fire Staff","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"dark_red","bold":false}]}, "model": {"type": "minecraft:model", "model": "slimefun/27_foxy_machines/electric_fire_staff"}},
-		{"when": {"text":"","extra":[{"text":"Electric Fire Staff ","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"dark_red","bold":false},{"text":"- ","italic":false,"color":"gray"},{"text":"II","italic":false,"color":"yellow"}]}, "model": {"type": "minecraft:model", "model": "slimefun/27_foxy_machines/electric_fire_staff_2"}},
-		{"when": {"text":"","extra":[{"text":"Fill Wand","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"yellow","bold":false}]}, "model": {"type": "minecraft:model", "model": "slimefun/27_foxy_machines/fill_wand"}},
-		{"when": {"text":"","extra":[{"text":"Sponge Wand","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"yellow","bold":false}]}, "model": {"type": "minecraft:model", "model": "slimefun/27_foxy_machines/sponge_wand"}},
-		{"when": {"text":"","extra":[{"text":"Magical Wand","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"dark_purple","bold":false}]}, "model": {"type": "minecraft:model", "model": "slimefun/22_flower_power/magical_wand"}},
-		{"when": {"text":"","extra":[{"text":"Warp Pad Configurator","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"gold","bold":false}]}, "model": {"type": "minecraft:model", "model": "slimefun/34_fluffy_machines/warp_pad_configurator"}}
-
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"ELECTRIC_FIRE_STAFF"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/geneticchickengineering/gce_blaze_rod_chicken_icon"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"ELECTRIC_FIRE_STAFF_II"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/foxymachines/electric_fire_staff_ii"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"ELECTRIC_WIND_STAFF"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/foxymachines/electric_wind_staff"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"FILL_WAND"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/foxymachines/electric_wind_staff"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"FN_STAFF_AIR_STRIDER"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/fnamplifications/fn_staff_air_strider"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"FN_STAFF_AWARENESS"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/fnamplifications/fn_staff_air_strider"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"FN_STAFF_COBWEB"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/fnamplifications/fn_staff_air_strider"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"FN_STAFF_CONFUSION"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/fnamplifications/fn_staff_air_strider"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"FN_STAFF_DEEPFREEZE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/fnamplifications/fn_staff_air_strider"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"FN_STAFF_EXPLOSION"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/fnamplifications/fn_staff_air_strider"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"FN_STAFF_FANGS"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/fnamplifications/fn_staff_air_strider"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"FN_STAFF_FORCE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/fnamplifications/fn_staff_air_strider"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"FN_STAFF_GRAVITY"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/fnamplifications/fn_staff_air_strider"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"FN_STAFF_HEALING"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/fnamplifications/fn_staff_air_strider"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"FN_STAFF_HELLFIRE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/fnamplifications/fn_staff_air_strider"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"FN_STAFF_INVI"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/fnamplifications/fn_staff_air_strider"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"FN_STAFF_INVULNERABILITY"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/fnamplifications/fn_staff_air_strider"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"FN_STAFF_LOCOMOTION"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/fnamplifications/fn_staff_air_strider"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"FN_STAFF_MINERALS"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/fnamplifications/fn_staff_air_strider"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"FN_STAFF_MUSTER"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/fnamplifications/fn_staff_air_strider"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"FN_STAFF_SKULLS"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/fnamplifications/fn_staff_air_strider"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"FN_STAFF_STALLION"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/fnamplifications/fn_staff_air_strider"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"FN_STAFF_TP"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/fnamplifications/fn_staff_air_strider"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"GCE_BLAZE_ROD_CHICKEN_ICON"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/geneticchickengineering/gce_blaze_rod_chicken_icon"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"MAGICAL_WAND"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/flowerpower/magical_wand"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"MOB_CANNON"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/souljars/blaze_broken_spawner"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"NPS_CRUX_GATHERER"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/simplematerialgenerators/smg_generator_netherrack"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"NTW_CONFIGURATOR"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/networksv6_drake/ntw_controller"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"NTW_WIRELESS_CONFIGURATOR"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/networksv6_drake/ntw_optic_cable"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"PYROMANIAC_BLAZE_ROD"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/geneticchickengineering/gce_blaze_rod_chicken_icon"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"SPONGE_WAND"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/foxymachines/electric_wind_staff"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"STAFF_ENERGIZED_WIND"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/foxymachines/electric_wind_staff"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"VU_CURE_WAND"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/geneticchickengineering/gce_blaze_rod_chicken_icon"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"VU_NITWIT_WAND"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/geneticchickengineering/gce_blaze_rod_chicken_icon"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"VU_TRADE_WAND"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/geneticchickengineering/gce_blaze_rod_chicken_icon"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"VU_TRANSPORT_WAND"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/geneticchickengineering/gce_blaze_rod_chicken_icon"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"WF_INPUT_CONFIGURATOR"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimeframe/wf_nosam_pick"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"WF_PRIME_OROKIN_WAND"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimeframe/wf_orokin_wand"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"WF_SELECTOR_CONFIG"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimeframe/wf_sulfate_producer"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"WIDOW_BATON"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/fnamplifications/fn_machinery_aluminum_plating"}}
 	],
-
-
-	"fallback": {"type": "minecraft:model","model": "minecraft:item/blaze_rod"}}}
-    ]
-  },
-  "oversized_in_gui": true
+	"fallback": {"type":"minecraft:range_dispatch","property":"minecraft:custom_model_data","index":0,"fallback":{"type":"minecraft:model","model":"minecraft:item/blaze_rod"},"entries":[{"threshold":0,"model":{"type":"minecraft:select","property":"minecraft:component","component":"minecraft:custom_name","cases":[{"when":{"text":"","extra":[{"text":"Mob Capturing Cannon","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"gold","bold":false}]},"model":{"type":"minecraft:model","model":"slimefun/20_mob_capturer/mob_cannon"}},{"when":{"text":"","extra":[{"text":"Electric Wind Staff","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"aqua","bold":false}]},"model":{"type":"minecraft:model","model":"slimefun/27_foxy_machines/electric_wind_staff"}},{"when":{"text":"","extra":[{"text":"Electric Fire Staff","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"dark_red","bold":false}]},"model":{"type":"minecraft:model","model":"slimefun/27_foxy_machines/electric_fire_staff"}},{"when":{"text":"","extra":[{"text":"Electric Fire Staff ","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"dark_red","bold":false},{"text":"- ","italic":false,"color":"gray"},{"text":"II","italic":false,"color":"yellow"}]},"model":{"type":"minecraft:model","model":"slimefun/27_foxy_machines/electric_fire_staff_2"}},{"when":{"text":"","extra":[{"text":"Fill Wand","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"yellow","bold":false}]},"model":{"type":"minecraft:model","model":"slimefun/27_foxy_machines/fill_wand"}},{"when":{"text":"","extra":[{"text":"Sponge Wand","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"yellow","bold":false}]},"model":{"type":"minecraft:model","model":"slimefun/27_foxy_machines/sponge_wand"}},{"when":{"text":"","extra":[{"text":"Magical Wand","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"dark_purple","bold":false}]},"model":{"type":"minecraft:model","model":"slimefun/22_flower_power/magical_wand"}},{"when":{"text":"","extra":[{"text":"Warp Pad Configurator","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"gold","bold":false}]},"model":{"type":"minecraft:model","model":"slimefun/34_fluffy_machines/warp_pad_configurator"}}],"fallback":{"type":"minecraft:model","model":"minecraft:item/blaze_rod"}}}]}
+	},
+	"oversized_in_gui": true
 }
