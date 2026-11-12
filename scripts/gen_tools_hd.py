@@ -36,8 +36,25 @@ def defs(mat, uid):
         + g("gold", [(0, GOLD[0]), (0.5, GOLD[1]), (1, GOLD[2])])
         + g("goldv", [(0, GOLD[0]), (0.5, GOLD[1]), (1, GOLD[2])], "0", "1")
         + f'<radialGradient id="gem{uid}" cx="0.35" cy="0.3" r="0.8"><stop offset="0" stop-color="{GEM[0]}"/><stop offset="0.5" stop-color="{GEM[1]}"/><stop offset="1" stop-color="{GEM[2]}"/></radialGradient>'
+        + f'<filter id="noise{uid}" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="7"/><feColorMatrix type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1.4 -0.45"/></filter>'
         + f'<radialGradient id="glow{uid}" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="{e}" stop-opacity="0.9"/><stop offset="1" stop-color="{e}" stop-opacity="0"/></radialGradient>'
     )
+
+
+def shine(d, mat, uid, tag=""):
+    """bisel (luz arriba-izq, sombra abajo-der), grano fino y rayitas, recortado al contorno d"""
+    l, m, dk, o, e = MATS[mat]
+    cid = f"bv{uid}{tag}"
+    return (f'<clipPath id="{cid}"><path d="{d}"/></clipPath>'
+            f'<g clip-path="url(#{cid})">'
+            f'<path d="{d}" fill="none" stroke="{l}" stroke-width="3.4" opacity="0.55" transform="translate(1.7 1.7)"/>'
+            f'<path d="{d}" fill="none" stroke="{o}" stroke-width="3.4" opacity="0.5" transform="translate(-1.7 -1.7)"/>'
+            f'<rect x="-80" y="-10" width="160" height="200" filter="url(#noise{uid})" opacity="0.22"/>'
+            f'</g>')
+
+
+def star(x, y, r, c="#ffffff", op=0.9):
+    return f'<path d="M{x} {y-r} L{x+r*0.28} {y-r*0.28} L{x+r} {y} L{x+r*0.28} {y+r*0.28} L{x} {y+r} L{x-r*0.28} {y+r*0.28} L{x-r} {y} L{x-r*0.28} {y-r*0.28} Z" fill="{c}" opacity="{op}"/>'
 
 
 def finishings(mat, uid):
@@ -82,7 +99,10 @@ def sword(mat, uid):
              f'<path d="M0 8 L5 24 L5 94 L-5 94 L-5 24 Z" fill="url(#metalv{uid})" opacity="0.55"/>'
              f'<path d="M-9 24 L-9 97" stroke="{l}" stroke-width="1.6" opacity="0.9"/>'
              f'<path d="M0 12 L0 92" stroke="{o}" stroke-width="1" opacity="0.5"/>'
-             + finishings(mat, uid) + rune(0, 40, e) + rune(0, 60, e) + rune(0, 80, e))
+             + shine("M0 2 L10 22 L10 98 L-10 98 L-10 22 Z", mat, uid)
+             + finishings(mat, uid) + rune(0, 40, e) + rune(0, 60, e) + rune(0, 80, e)
+             + star(0, 30, 2.6, e) + star(0, 50, 2, e) + star(0, 70, 2.6, e) + star(0, 88, 2, e)
+             + f'<path d="M-7 98 L-7 104 M7 98 L7 104" stroke="{o}" stroke-width="2" opacity="0.6"/>')
     guard = (f'<path d="M-32 100 Q-34 94 -24 96 L24 96 Q34 94 32 100 Q30 108 20 106 L-20 106 Q-30 108 -32 100 Z" fill="url(#goldv{uid})" stroke="#3a2a08" stroke-width="2"/>'
              f'<circle cx="0" cy="101" r="5" fill="url(#gem{uid})" stroke="#2a1458" stroke-width="1.2"/>')
     handle = grip_wraps(-5, 5, 108, 140, uid)
@@ -96,7 +116,8 @@ def pickaxe(mat, uid):
     handle = grip_wraps(-4.5, 4.5, 46, 156, uid, n=10)
     head = (f'<path d="M-62 74 C-58 36 -30 22 0 22 C30 22 58 36 62 74 C54 56 30 42 0 42 C-30 42 -54 56 -62 74 Z" fill="url(#metalv{uid})" stroke="{o}" stroke-width="2.2"/>'
             f'<path d="M-52 62 C-36 42 -14 36 0 36 C14 36 36 42 52 62" stroke="{l}" stroke-width="1.6" fill="none" opacity="0.85"/>'
-            + finishings(mat, uid) + rune(-32, 52, e, 4) + rune(32, 52, e, 4))
+            + shine("M-62 74 C-58 36 -30 22 0 22 C30 22 58 36 62 74 C54 56 30 42 0 42 C-30 42 -54 56 -62 74 Z", mat, uid)
+            + finishings(mat, uid) + rune(-32, 52, e, 4) + rune(32, 52, e, 4) + star(-46, 56, 2.4, e) + star(46, 56, 2.4, e) + star(0, 30, 2.4, e))
     band = (f'<rect x="-10" y="30" width="20" height="20" rx="3" fill="url(#goldv{uid})" stroke="#3a2a08" stroke-width="2"/>'
             f'<circle cx="0" cy="40" r="4" fill="url(#gem{uid})" stroke="#2a1458" stroke-width="1"/>')
     clip = '<path d="M-62 74 C-58 36 -30 22 0 22 C30 22 58 36 62 74 C54 56 30 42 0 42 C-30 42 -54 56 -62 74 Z"/>'
@@ -105,13 +126,16 @@ def pickaxe(mat, uid):
 
 def axe(mat, uid):
     l, m, d, o, e = pal(mat)
-    handle = grip_wraps(-4.5, 4.5, 30, 156, uid, n=11)
-    head = (f'<path d="M4 24 C-14 14 -44 18 -56 36 C-62 50 -58 70 -50 82 C-34 78 -16 74 4 70 Z" fill="url(#metal{uid})" stroke="{o}" stroke-width="2.2"/>'
-            f'<path d="M-52 40 C-48 56 -48 68 -44 78" stroke="{l}" stroke-width="2.2" fill="none" opacity="0.95"/>'
-            f'<path d="M4 24 L16 28 L16 64 L4 70 Z" fill="url(#metalv{uid})" stroke="{o}" stroke-width="2"/>'
-            + finishings(mat, uid) + rune(-22, 50, e, 5))
-    band = f'<rect x="-9" y="22" width="18" height="52" rx="3" fill="url(#goldv{uid})" stroke="#3a2a08" stroke-width="1.8" opacity="0.0"/><rect x="-8" y="68" width="16" height="9" rx="2" fill="url(#goldv{uid})" stroke="#3a2a08" stroke-width="1.8"/>'
-    clip = '<path d="M4 24 C-14 14 -44 18 -56 36 C-62 50 -58 70 -50 82 C-34 78 -16 74 4 70 Z"/>'
+    handle = grip_wraps(-4.5, 4.5, 34, 156, uid, n=11)
+    hd = "M3 30 C-8 22 -26 22 -38 34 C-46 44 -44 58 -38 68 C-26 66 -12 62 3 58 Z"
+    head = (f'<path d="{hd}" fill="url(#metal{uid})" stroke="{o}" stroke-width="2.2"/>'
+            + shine(hd, mat, uid)
+            + f'<path d="M-36 36 C-40 48 -40 58 -36 66" stroke="{l}" stroke-width="2.4" fill="none" opacity="0.95"/>'
+            f'<path d="M-4 30 L-4 58" stroke="{o}" stroke-width="1" opacity="0.5"/>'
+            f'<path d="M3 36 L11 38 L11 50 L3 52 Z" fill="url(#metalv{uid})" stroke="{o}" stroke-width="1.8"/>'
+            + finishings(mat, uid) + rune(-20, 48, e, 5) + star(-30, 40, 3, e))
+    band = f'<rect x="-8" y="56" width="16" height="9" rx="2" fill="url(#goldv{uid})" stroke="#3a2a08" stroke-width="1.8"/>'
+    clip = f'<path d="{hd}"/>'
     return S(mat, uid, handle + head + band, clip)
 
 
@@ -122,7 +146,9 @@ def shovel(mat, uid):
     blade = (f'<path d="M0 2 C26 6 30 38 16 60 L-16 60 C-30 38 -26 6 0 2 Z" fill="url(#metal{uid})" stroke="{o}" stroke-width="2.2"/>'
              f'<path d="M0 8 L0 56" stroke="{o}" stroke-width="1.2" opacity="0.45"/>'
              f'<path d="M-18 14 C-24 30 -20 44 -12 56" stroke="{l}" stroke-width="2" fill="none" opacity="0.9"/>'
-             + finishings(mat, uid) + rune(0, 30, e, 6))
+             + shine("M0 2 C26 6 30 38 16 60 L-16 60 C-30 38 -26 6 0 2 Z", mat, uid)
+             + finishings(mat, uid) + rune(0, 30, e, 6) + star(0, 14, 2.4, e) + star(-9, 40, 2, e) + star(9, 40, 2, e)
+             + f'<path d="M-14 50 C-6 44 6 44 14 50" stroke="{o}" stroke-width="1.2" fill="none" opacity="0.5"/>')
     ferrule = f'<rect x="-11" y="58" width="22" height="12" rx="3" fill="url(#goldv{uid})" stroke="#3a2a08" stroke-width="2"/>'
     clip = '<path d="M0 2 C26 6 30 38 16 60 L-16 60 C-30 38 -26 6 0 2 Z"/>'
     return S(mat, uid, handle + loop + blade + ferrule, clip)
@@ -131,11 +157,15 @@ def shovel(mat, uid):
 def hoe(mat, uid):
     l, m, d, o, e = pal(mat)
     handle = grip_wraps(-4.5, 4.5, 40, 156, uid, n=10)
-    head = (f'<path d="M4 28 L-52 28 C-60 28 -62 36 -60 44 L-58 66 L-44 66 L-44 46 L4 46 Z" fill="url(#metal{uid})" stroke="{o}" stroke-width="2.2"/>'
-            f'<path d="M-52 31 L2 31" stroke="{l}" stroke-width="1.8" opacity="0.9"/>'
-            + finishings(mat, uid) + rune(-26, 40, e, 4))
-    band = f'<rect x="-8" y="26" width="16" height="22" rx="3" fill="url(#goldv{uid})" stroke="#3a2a08" stroke-width="2"/><circle cx="0" cy="37" r="3.6" fill="url(#gem{uid})"/>'
-    clip = '<path d="M4 28 L-52 28 C-60 28 -62 36 -60 44 L-58 66 L-44 66 L-44 46 L4 46 Z"/>'
+    neck = "M4 28 L-46 28 L-46 40 L4 42 Z"
+    blade = "M-62 28 L-40 28 L-38 62 L-48 84 L-60 74 L-64 50 Z"
+    head = (f'<path d="{neck}" fill="url(#metal{uid})" stroke="{o}" stroke-width="2.2"/>'
+            f'<path d="{blade}" fill="url(#metal{uid})" stroke="{o}" stroke-width="2.2"/>'
+            + shine(neck, mat, uid, "n") + shine(blade, mat, uid, "b")
+            + f'<path d="M-60 34 L-62 50 L-58 70" stroke="{l}" stroke-width="2.2" fill="none" opacity="0.95"/>'
+            + finishings(mat, uid) + rune(-50, 54, e, 4) + star(-20, 35, 2.4, e))
+    band = f'<rect x="-8" y="30" width="16" height="22" rx="3" fill="url(#goldv{uid})" stroke="#3a2a08" stroke-width="2"/><circle cx="0" cy="41" r="3.6" fill="url(#gem{uid})"/>'
+    clip = f'<path d="{neck} {blade}"/>'
     return S(mat, uid, handle + head + band, clip)
 
 
@@ -176,8 +206,118 @@ def trident(mat, uid):
     return S(mat, uid, handle + head, '<rect x="-30" y="0" width="60" height="58"/>')
 
 
+def S_flat(mat, uid, shapes, clip=""):
+    return (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">'
+            f'<defs>{defs(mat, uid)}<clipPath id="clip{uid}">{clip}</clipPath></defs>'
+            f'<g stroke-linejoin="round" stroke-linecap="round">{shapes}</g></svg>\n')
+
+
+def bow(mat, uid, pull=-1):
+    """pull=-1 reposo; 0..2 tensando (con flecha)"""
+    l, m, d, o, e = pal("wooden")
+    stave = "M8 8 C-34 32 -34 128 8 152"
+    px = [8, 14, 22, 30][pull + 1] if pull >= 0 else 8
+    body = (f'<path d="{stave}" fill="none" stroke="{o}" stroke-width="13"/>'
+            f'<path d="{stave}" fill="none" stroke="url(#wood{uid})" stroke-width="9"/>'
+            f'<path d="M6 12 C-30 34 -30 124 6 148" fill="none" stroke="{l}" stroke-width="2.4" opacity="0.8" transform="translate(-1.4 0)"/>'
+            f'<rect x="-30" y="66" width="12" height="28" rx="3" fill="#3b2a5a" stroke="#1b1008" stroke-width="1.6" transform="rotate(-6 -24 80)"/>'
+            f'<circle cx="8" cy="8" r="5" fill="url(#gold{uid})" stroke="#3a2a08" stroke-width="1.6"/>'
+            f'<circle cx="8" cy="152" r="5" fill="url(#gold{uid})" stroke="#3a2a08" stroke-width="1.6"/>'
+            + star(-26, 44, 2.6, "#c084fc") + star(-26, 116, 2.6, "#c084fc"))
+    string = f'<path d="M8 8 L{px} 80 L8 152" fill="none" stroke="#e8e2f6" stroke-width="2"/>'
+    arrow = ""
+    if pull >= 0:
+        arrow = (f'<path d="M{px} 80 L-44 80" stroke="#7a5530" stroke-width="3.6"/><path d="M-44 80 L-58 80" stroke="{o}" stroke-width="0"/>'
+                 f'<path d="M-44 74 L-62 80 L-44 86 Z" fill="url(#metal{uid})" stroke="{MATS["iron"][3]}" stroke-width="1.6"/>'
+                 f'<path d="M{px} 80 L{px+6} 74 L{px+12} 74 L{px+8} 80 L{px+12} 86 L{px+6} 86 Z" fill="#e8e2f6" stroke="{o}" stroke-width="1.2"/>')
+    return S(mat, uid, string + arrow + body, "")
+
+
+def crossbow(mat, uid, state="standby", string_y=66):
+    l, m, d, o, e = pal("wooden")
+    stock = (f'<path d="M-8 52 L8 52 L10 150 L-10 150 Z" fill="url(#wood{uid})" stroke="{o}" stroke-width="2.2"/>'
+             f'<path d="M-5 56 L-6 148" stroke="{l}" stroke-width="2" opacity="0.7"/>'
+             f'<rect x="-8" y="96" width="16" height="9" rx="2" fill="url(#goldv{uid})" stroke="#3a2a08" stroke-width="1.6"/>'
+             f'<path d="M-3 104 L-3 118 L3 118 L3 104" fill="#1b1008" opacity="0.75"/>'
+             + star(0, 134, 2.6, "#c084fc"))
+    prod = (f'<path d="M-62 50 C-34 30 34 30 62 50" fill="none" stroke="{o}" stroke-width="13"/>'
+            f'<path d="M-62 50 C-34 30 34 30 62 50" fill="none" stroke="url(#metalv{uid})" stroke-width="8"/>'
+            f'<path d="M-58 48 C-32 31 32 31 58 48" fill="none" stroke="{MATS["iron"][0]}" stroke-width="1.8" opacity="0.85"/>'
+            f'<circle cx="-62" cy="50" r="5" fill="url(#gold{uid})" stroke="#3a2a08" stroke-width="1.6"/><circle cx="62" cy="50" r="5" fill="url(#gold{uid})" stroke="#3a2a08" stroke-width="1.6"/>')
+    string = f'<path d="M-62 50 L0 {string_y} L62 50" fill="none" stroke="#e8e2f6" stroke-width="2"/>'
+    extra = ""
+    if state == "arrow":
+        extra = (f'<path d="M0 {string_y} L0 14" stroke="#7a5530" stroke-width="4"/><path d="M-8 22 L0 -2 L8 22 Z" fill="url(#metal{uid})" stroke="{MATS["iron"][3]}" stroke-width="1.6"/>'
+                 f'<path d="M0 {string_y} L-6 {string_y+10} M0 {string_y} L6 {string_y+10}" stroke="#e8e2f6" stroke-width="5" opacity="0.9"/>')
+    if state == "firework":
+        extra = (f'<rect x="-6" y="14" width="12" height="52" rx="3" fill="#b3261e" stroke="#4a0f0b" stroke-width="2"/>'
+                 f'<path d="M-6 14 L0 -4 L6 14 Z" fill="url(#goldv{uid})" stroke="#3a2a08" stroke-width="1.6"/>'
+                 f'<rect x="-6" y="34" width="12" height="6" fill="url(#gold{uid})"/>' + star(0, 52, 3, "#ffe08a"))
+    return S(mat, uid, stock + extra + string + prod, "")
+
+
+def arrow(mat, uid, kind="arrow"):
+    l, m, d, o, e = pal("iron")
+    head_fill = {"arrow": f"url(#metal{uid})", "spectral": f"url(#gold{uid})", "tipped_head": "#f4f1fb", "tipped_base": "none"}[kind]
+    head_stroke = {"tipped_base": "none"}.get(kind, o)
+    shaft = "" if kind == "tipped_head" else (f'<rect x="-3" y="26" width="6" height="104" rx="1.5" fill="url(#wood{uid})" stroke="#1b1008" stroke-width="1.6"/>')
+    feath_col = {"arrow": "#e8e2f6", "spectral": "#ffe08a", "tipped_base": "#e8e2f6", "tipped_head": "none"}[kind]
+    feathers = "" if kind == "tipped_head" else "".join(
+        f'<path d="M-3 {y} L-16 {y+14} L-16 {y+28} L-3 {y+16} Z M3 {y} L16 {y+14} L16 {y+28} L3 {y+16} Z" fill="{feath_col}" stroke="#2a2438" stroke-width="1.4"/>'
+        for y in (104, 118))
+    head = (f'<path d="M0 0 L12 28 L0 22 L-12 28 Z" fill="{head_fill}" stroke="{head_stroke}" stroke-width="2"/>'
+            + ('' if kind in ("tipped_head", "tipped_base") else f'<path d="M0 4 L0 22" stroke="{o}" stroke-width="1.2" opacity="0.6"/>'))
+    if kind == "spectral":
+        head += star(0, 14, 4, "#ffffff", 0.95) + f'<circle cx="0" cy="14" r="14" fill="url(#glow{uid})" opacity="0.7"/>'
+    return S(mat, uid, shaft + feathers + head, "")
+
+
+def elytra(mat, uid, broken=False):
+    wing = ("M-4 18 C-38 4 -76 20 -92 68 C-80 96 -52 112 -20 122 C-12 84 -10 50 -4 18 Z")
+    grad = (f'<linearGradient id="ely{uid}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#6b4fa0"/><stop offset="0.55" stop-color="#3b2a63"/><stop offset="1" stop-color="#17101f"/></linearGradient>')
+    ribs = "".join(f'<path d="M-6 {20+i*3} C-{34+i*8} {20+i*18} -{56+i*10} {52+i*14} -{18+i*22} {118-i*4}" fill="none" stroke="#bfa6ff" stroke-width="1.4" opacity="0.55"/>' for i in range(4))
+    tear = ('<path d="M-60 40 L-48 56 L-60 62 L-46 78 L-62 86" fill="none" stroke="#0d0a14" stroke-width="3"/>' if broken else "")
+    one = (f'<path d="{wing}" fill="url(#ely{uid})" stroke="#0d0a14" stroke-width="2.6"/>'
+           f'<path d="{wing}" fill="none" stroke="#d4c3ff" stroke-width="2" opacity="0.7" transform="translate(1.6 1.6)" clip-path="url(#ewc{uid})"/>'
+           + ribs + tear
+           + f'<circle cx="-14" cy="30" r="3.6" fill="url(#gold{uid})" stroke="#3a2a08" stroke-width="1.2"/><circle cx="-16" cy="56" r="3.2" fill="url(#gold{uid})" stroke="#3a2a08" stroke-width="1.2"/>'
+           + star(-48, 62, 3.4, "#e9d5ff") + star(-30, 90, 2.4, "#c084fc") + star(-70, 74, 2, "#ffffff"))
+    body = (f'<defs>{grad}<clipPath id="ewc{uid}"><path d="{wing}"/></clipPath></defs>'
+            f'<g transform="translate(64 14) scale(0.62)">{one}<g transform="scale(-1 1)">{one}</g></g>'
+            f'<path d="M64 24 L64 120" stroke="#0d0a14" stroke-width="3"/>')
+    doc = S_flat(mat, uid, body.replace("<defs>", "<defs>", 1))
+    return doc.replace("</defs><g", "</defs><g", 1)
+
+
+def totem(mat, uid):
+    body = (f'<circle cx="64" cy="64" r="58" fill="url(#glow{uid})" opacity="0.55"/>'
+            f'<path d="M64 8 C84 8 88 26 84 38 L112 52 L104 68 L84 62 L84 112 L44 112 L44 62 L24 68 L16 52 L44 38 C40 26 44 8 64 8 Z" fill="url(#gold{uid})" stroke="#3a2a08" stroke-width="3"/>'
+            f'<path d="M64 12 C80 12 82 26 79 36 L100 48" fill="none" stroke="#fff6c2" stroke-width="2.4" opacity="0.8" transform="translate(1 1)"/>'
+            f'<path d="M50 26 L58 24 L58 32 L52 32 Z M78 26 L70 24 L70 32 L76 32 Z" fill="#1b1008"/>'
+            f'<path d="M64 34 L64 42" stroke="#1b1008" stroke-width="2.4"/>'
+            f'<path d="M64 56 L74 70 L64 92 L54 70 Z" fill="url(#gem{uid})" stroke="#2a1458" stroke-width="2"/>'
+            f'<path d="M50 100 L78 100 M50 106 L78 106" stroke="#8f6a1c" stroke-width="2"/>'
+            + star(64, 74, 4, "#ffffff") + star(30, 54, 2.6, "#c084fc") + star(98, 54, 2.6, "#c084fc") + star(64, 12, 2.4, "#fff6c2"))
+    return S_flat(mat, uid, body)
+
+
 TOOLS = {"sword": sword, "pickaxe": pickaxe, "axe": axe, "shovel": shovel, "hoe": hoe, "spear": spear}
-SOLO = {"mace": (mace, "iron"), "trident": (trident, "diamond")}
+SOLO = {"mace": (mace, "iron"), "trident": (trident, "diamond"),
+        "bow": (lambda m, u: bow(m, u, -1), "wooden"), "bow_pulling_0": (lambda m, u: bow(m, u, 0), "wooden"),
+        "bow_pulling_1": (lambda m, u: bow(m, u, 1), "wooden"), "bow_pulling_2": (lambda m, u: bow(m, u, 2), "wooden"),
+        "crossbow_standby": (lambda m, u: crossbow(m, u, "standby", 66), "wooden"),
+        "crossbow_pulling_0": (lambda m, u: crossbow(m, u, "standby", 58), "wooden"),
+        "crossbow_pulling_1": (lambda m, u: crossbow(m, u, "standby", 62), "wooden"),
+        "crossbow_pulling_2": (lambda m, u: crossbow(m, u, "standby", 68), "wooden"),
+        "crossbow_arrow": (lambda m, u: crossbow(m, u, "arrow", 66), "wooden"),
+        "crossbow_firework": (lambda m, u: crossbow(m, u, "firework", 66), "wooden"),
+        "arrow": (lambda m, u: arrow(m, u, "arrow"), "iron"), "spectral_arrow": (lambda m, u: arrow(m, u, "spectral"), "golden"),
+        "tipped_arrow_base": (lambda m, u: arrow(m, u, "tipped_base"), "iron"), "tipped_arrow_head": (lambda m, u: arrow(m, u, "tipped_head"), "iron"),
+        "elytra": (lambda m, u: elytra(m, u), "netherite"), "broken_elytra": (lambda m, u: elytra(m, u, True), "netherite"),
+        "totem_of_undying": (totem, "golden")}
+for _m in MATS:
+    if _m != "iron":
+        SOLO[f"{_m}_mace"] = (mace, _m)
 
 
 def main():
