@@ -1,0 +1,19 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "drakescraft:tech_cyan"
+      }
+    ],
+    "humanoid_baby": [
+      {
+        "texture": "drakescraft:tech_cyan"
+      }
+    ],
+    "humanoid_leggings": [
+      {
+        "texture": "drakescraft:tech_cyan"
+      }
+    ]
+  }
+}
