@@ -1799,5 +1799,8474 @@
         "pitch": 0.7
       }
     ]
+  },
+  "block.sand.step": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "step/sand1",
+        "volume": 0.56
+      },
+      {
+        "name": "step/sand2",
+        "volume": 0.56
+      },
+      {
+        "name": "step/sand3",
+        "volume": 0.56
+      },
+      {
+        "name": "step/sand4",
+        "volume": 0.56
+      },
+      {
+        "name": "step/sand5",
+        "volume": 0.56
+      },
+      {
+        "name": "step/sand6",
+        "volume": 0.56
+      }
+    ]
+  },
+  "block.sand.hit": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "step/sand1",
+        "volume": 0.49
+      },
+      {
+        "name": "step/sand2",
+        "volume": 0.49
+      },
+      {
+        "name": "step/sand3",
+        "volume": 0.49
+      },
+      {
+        "name": "step/sand4",
+        "volume": 0.49
+      },
+      {
+        "name": "step/sand5",
+        "volume": 0.49
+      },
+      {
+        "name": "step/sand6",
+        "volume": 0.49
+      }
+    ]
+  },
+  "block.sand.break": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "step/sand1",
+        "volume": 0.7
+      },
+      {
+        "name": "step/sand2",
+        "volume": 0.7
+      },
+      {
+        "name": "step/sand3",
+        "volume": 0.7
+      },
+      {
+        "name": "step/sand4",
+        "volume": 0.7
+      },
+      {
+        "name": "step/sand5",
+        "volume": 0.7
+      },
+      {
+        "name": "step/sand6",
+        "volume": 0.7
+      }
+    ]
+  },
+  "block.sand.place": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "step/sand1",
+        "volume": 0.59
+      },
+      {
+        "name": "step/sand2",
+        "volume": 0.59
+      },
+      {
+        "name": "step/sand3",
+        "volume": 0.59
+      },
+      {
+        "name": "step/sand4",
+        "volume": 0.59
+      },
+      {
+        "name": "step/sand5",
+        "volume": 0.59
+      },
+      {
+        "name": "step/sand6",
+        "volume": 0.59
+      }
+    ]
+  },
+  "block.sand.fall": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "step/sand1",
+        "volume": 0.49
+      },
+      {
+        "name": "step/sand2",
+        "volume": 0.49
+      },
+      {
+        "name": "step/sand3",
+        "volume": 0.49
+      },
+      {
+        "name": "step/sand4",
+        "volume": 0.49
+      },
+      {
+        "name": "step/sand5",
+        "volume": 0.49
+      },
+      {
+        "name": "step/sand6",
+        "volume": 0.49
+      }
+    ]
+  },
+  "block.gravel.step": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "step/gravel1",
+        "volume": 0.56
+      },
+      {
+        "name": "step/gravel2",
+        "volume": 0.56
+      },
+      {
+        "name": "step/gravel3",
+        "volume": 0.56
+      },
+      {
+        "name": "step/gravel4",
+        "volume": 0.56
+      },
+      {
+        "name": "step/gravel5",
+        "volume": 0.56
+      },
+      {
+        "name": "step/gravel6",
+        "volume": 0.56
+      },
+      {
+        "name": "step/gravel7",
+        "volume": 0.56
+      },
+      {
+        "name": "step/gravel8",
+        "volume": 0.56
+      }
+    ]
+  },
+  "block.gravel.hit": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "dig/gravel1",
+        "volume": 0.49
+      },
+      {
+        "name": "dig/gravel2",
+        "volume": 0.49
+      },
+      {
+        "name": "dig/gravel3",
+        "volume": 0.49
+      },
+      {
+        "name": "dig/gravel4",
+        "volume": 0.49
+      }
+    ]
+  },
+  "block.gravel.break": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "dig/gravel1",
+        "volume": 0.7
+      },
+      {
+        "name": "dig/gravel2",
+        "volume": 0.7
+      },
+      {
+        "name": "dig/gravel3",
+        "volume": 0.7
+      },
+      {
+        "name": "dig/gravel4",
+        "volume": 0.7
+      },
+      {
+        "name": "step/gravel1",
+        "volume": 0.7
+      },
+      {
+        "name": "step/gravel2",
+        "volume": 0.7
+      },
+      {
+        "name": "step/gravel3",
+        "volume": 0.7
+      },
+      {
+        "name": "step/gravel4",
+        "volume": 0.7
+      },
+      {
+        "name": "step/gravel5",
+        "volume": 0.7
+      },
+      {
+        "name": "step/gravel6",
+        "volume": 0.7
+      },
+      {
+        "name": "step/gravel7",
+        "volume": 0.7
+      },
+      {
+        "name": "step/gravel8",
+        "volume": 0.7
+      }
+    ]
+  },
+  "block.gravel.place": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "dig/gravel1",
+        "volume": 0.59
+      },
+      {
+        "name": "dig/gravel2",
+        "volume": 0.59
+      },
+      {
+        "name": "dig/gravel3",
+        "volume": 0.59
+      },
+      {
+        "name": "dig/gravel4",
+        "volume": 0.59
+      }
+    ]
+  },
+  "block.gravel.fall": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "step/gravel1",
+        "volume": 0.49
+      },
+      {
+        "name": "step/gravel2",
+        "volume": 0.49
+      },
+      {
+        "name": "step/gravel3",
+        "volume": 0.49
+      },
+      {
+        "name": "step/gravel4",
+        "volume": 0.49
+      },
+      {
+        "name": "step/gravel5",
+        "volume": 0.49
+      },
+      {
+        "name": "step/gravel6",
+        "volume": 0.49
+      },
+      {
+        "name": "step/gravel7",
+        "volume": 0.49
+      },
+      {
+        "name": "step/gravel8",
+        "volume": 0.49
+      }
+    ]
+  },
+  "block.snow.step": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "step/snow1",
+        "volume": 0.56
+      },
+      {
+        "name": "step/snow2",
+        "volume": 0.56
+      },
+      {
+        "name": "step/snow3",
+        "volume": 0.56
+      },
+      {
+        "name": "step/snow4",
+        "volume": 0.56
+      },
+      {
+        "name": "step/snow5",
+        "volume": 0.56
+      },
+      {
+        "name": "step/snow6",
+        "volume": 0.56
+      },
+      {
+        "name": "step/snow7",
+        "volume": 0.56
+      },
+      {
+        "name": "step/snow8",
+        "volume": 0.56
+      }
+    ]
+  },
+  "block.snow.hit": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "dig/snow1",
+        "volume": 0.49
+      },
+      {
+        "name": "dig/snow2",
+        "volume": 0.49
+      },
+      {
+        "name": "dig/snow3",
+        "volume": 0.49
+      },
+      {
+        "name": "dig/snow4",
+        "volume": 0.49
+      }
+    ]
+  },
+  "block.snow.break": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "dig/snow1",
+        "volume": 0.7
+      },
+      {
+        "name": "dig/snow2",
+        "volume": 0.7
+      },
+      {
+        "name": "dig/snow3",
+        "volume": 0.7
+      },
+      {
+        "name": "dig/snow4",
+        "volume": 0.7
+      },
+      {
+        "name": "step/snow1",
+        "volume": 0.7
+      },
+      {
+        "name": "step/snow2",
+        "volume": 0.7
+      },
+      {
+        "name": "step/snow3",
+        "volume": 0.7
+      },
+      {
+        "name": "step/snow4",
+        "volume": 0.7
+      },
+      {
+        "name": "step/snow5",
+        "volume": 0.7
+      },
+      {
+        "name": "step/snow6",
+        "volume": 0.7
+      },
+      {
+        "name": "step/snow7",
+        "volume": 0.7
+      },
+      {
+        "name": "step/snow8",
+        "volume": 0.7
+      }
+    ]
+  },
+  "block.snow.place": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "dig/snow1",
+        "volume": 0.59
+      },
+      {
+        "name": "dig/snow2",
+        "volume": 0.59
+      },
+      {
+        "name": "dig/snow3",
+        "volume": 0.59
+      },
+      {
+        "name": "dig/snow4",
+        "volume": 0.59
+      }
+    ]
+  },
+  "block.snow.fall": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "step/snow1",
+        "volume": 0.49
+      },
+      {
+        "name": "step/snow2",
+        "volume": 0.49
+      },
+      {
+        "name": "step/snow3",
+        "volume": 0.49
+      },
+      {
+        "name": "step/snow4",
+        "volume": 0.49
+      },
+      {
+        "name": "step/snow5",
+        "volume": 0.49
+      },
+      {
+        "name": "step/snow6",
+        "volume": 0.49
+      },
+      {
+        "name": "step/snow7",
+        "volume": 0.49
+      },
+      {
+        "name": "step/snow8",
+        "volume": 0.49
+      }
+    ]
+  },
+  "block.powder_snow.step": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "step/snow1",
+        "volume": 0.48,
+        "pitch": 0.85
+      },
+      {
+        "name": "step/snow2",
+        "volume": 0.48,
+        "pitch": 0.85
+      },
+      {
+        "name": "step/snow3",
+        "volume": 0.48,
+        "pitch": 0.85
+      },
+      {
+        "name": "step/snow4",
+        "volume": 0.48,
+        "pitch": 0.85
+      },
+      {
+        "name": "step/snow5",
+        "volume": 0.48,
+        "pitch": 0.85
+      },
+      {
+        "name": "step/snow6",
+        "volume": 0.48,
+        "pitch": 0.85
+      },
+      {
+        "name": "step/snow7",
+        "volume": 0.48,
+        "pitch": 0.85
+      },
+      {
+        "name": "step/snow8",
+        "volume": 0.48,
+        "pitch": 0.85
+      }
+    ]
+  },
+  "block.powder_snow.hit": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "dig/snow1",
+        "volume": 0.42,
+        "pitch": 0.85
+      },
+      {
+        "name": "dig/snow2",
+        "volume": 0.42,
+        "pitch": 0.85
+      },
+      {
+        "name": "dig/snow3",
+        "volume": 0.42,
+        "pitch": 0.85
+      },
+      {
+        "name": "dig/snow4",
+        "volume": 0.42,
+        "pitch": 0.85
+      }
+    ]
+  },
+  "block.powder_snow.break": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "dig/snow1",
+        "volume": 0.6,
+        "pitch": 0.85
+      },
+      {
+        "name": "dig/snow2",
+        "volume": 0.6,
+        "pitch": 0.85
+      },
+      {
+        "name": "dig/snow3",
+        "volume": 0.6,
+        "pitch": 0.85
+      },
+      {
+        "name": "dig/snow4",
+        "volume": 0.6,
+        "pitch": 0.85
+      }
+    ]
+  },
+  "block.powder_snow.place": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "dig/snow1",
+        "volume": 0.51,
+        "pitch": 0.85
+      },
+      {
+        "name": "dig/snow2",
+        "volume": 0.51,
+        "pitch": 0.85
+      },
+      {
+        "name": "dig/snow3",
+        "volume": 0.51,
+        "pitch": 0.85
+      },
+      {
+        "name": "dig/snow4",
+        "volume": 0.51,
+        "pitch": 0.85
+      }
+    ]
+  },
+  "block.powder_snow.fall": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "step/snow1",
+        "volume": 0.42,
+        "pitch": 0.85
+      },
+      {
+        "name": "step/snow2",
+        "volume": 0.42,
+        "pitch": 0.85
+      },
+      {
+        "name": "step/snow3",
+        "volume": 0.42,
+        "pitch": 0.85
+      },
+      {
+        "name": "step/snow4",
+        "volume": 0.42,
+        "pitch": 0.85
+      },
+      {
+        "name": "step/snow5",
+        "volume": 0.42,
+        "pitch": 0.85
+      },
+      {
+        "name": "step/snow6",
+        "volume": 0.42,
+        "pitch": 0.85
+      },
+      {
+        "name": "step/snow7",
+        "volume": 0.42,
+        "pitch": 0.85
+      },
+      {
+        "name": "step/snow8",
+        "volume": 0.42,
+        "pitch": 0.85
+      }
+    ]
+  },
+  "block.wool.step": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "step/cloth1",
+        "volume": 0.56
+      },
+      {
+        "name": "step/cloth2",
+        "volume": 0.56
+      },
+      {
+        "name": "step/cloth3",
+        "volume": 0.56
+      },
+      {
+        "name": "step/cloth4",
+        "volume": 0.56
+      },
+      {
+        "name": "step/cloth5",
+        "volume": 0.56
+      },
+      {
+        "name": "step/cloth6",
+        "volume": 0.56
+      }
+    ]
+  },
+  "block.wool.hit": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "dig/cloth1",
+        "volume": 0.49
+      },
+      {
+        "name": "dig/cloth2",
+        "volume": 0.49
+      }
+    ]
+  },
+  "block.wool.break": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "dig/cloth1",
+        "volume": 0.7
+      },
+      {
+        "name": "dig/cloth2",
+        "volume": 0.7
+      },
+      {
+        "name": "step/cloth1",
+        "volume": 0.7
+      },
+      {
+        "name": "step/cloth2",
+        "volume": 0.7
+      },
+      {
+        "name": "step/cloth3",
+        "volume": 0.7
+      },
+      {
+        "name": "step/cloth4",
+        "volume": 0.7
+      },
+      {
+        "name": "step/cloth5",
+        "volume": 0.7
+      },
+      {
+        "name": "step/cloth6",
+        "volume": 0.7
+      }
+    ]
+  },
+  "block.wool.place": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "dig/cloth1",
+        "volume": 0.59
+      },
+      {
+        "name": "dig/cloth2",
+        "volume": 0.59
+      }
+    ]
+  },
+  "block.wool.fall": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "step/cloth1",
+        "volume": 0.49
+      },
+      {
+        "name": "step/cloth2",
+        "volume": 0.49
+      },
+      {
+        "name": "step/cloth3",
+        "volume": 0.49
+      },
+      {
+        "name": "step/cloth4",
+        "volume": 0.49
+      },
+      {
+        "name": "step/cloth5",
+        "volume": 0.49
+      },
+      {
+        "name": "step/cloth6",
+        "volume": 0.49
+      }
+    ]
+  },
+  "block.bone_block.step": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "dig/bone1",
+        "volume": 0.56
+      },
+      {
+        "name": "dig/bone2",
+        "volume": 0.56
+      },
+      {
+        "name": "dig/bone3",
+        "volume": 0.56
+      },
+      {
+        "name": "dig/bone4",
+        "volume": 0.56
+      },
+      {
+        "name": "dig/bone5",
+        "volume": 0.56
+      }
+    ]
+  },
+  "block.bone_block.hit": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "dig/bone1",
+        "volume": 0.49
+      },
+      {
+        "name": "dig/bone2",
+        "volume": 0.49
+      },
+      {
+        "name": "dig/bone3",
+        "volume": 0.49
+      },
+      {
+        "name": "dig/bone4",
+        "volume": 0.49
+      },
+      {
+        "name": "dig/bone5",
+        "volume": 0.49
+      }
+    ]
+  },
+  "block.bone_block.break": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "dig/bone1",
+        "volume": 0.7
+      },
+      {
+        "name": "dig/bone2",
+        "volume": 0.7
+      },
+      {
+        "name": "dig/bone3",
+        "volume": 0.7
+      },
+      {
+        "name": "dig/bone4",
+        "volume": 0.7
+      },
+      {
+        "name": "dig/bone5",
+        "volume": 0.7
+      }
+    ]
+  },
+  "block.bone_block.place": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "dig/bone1",
+        "volume": 0.59
+      },
+      {
+        "name": "dig/bone2",
+        "volume": 0.59
+      },
+      {
+        "name": "dig/bone3",
+        "volume": 0.59
+      },
+      {
+        "name": "dig/bone4",
+        "volume": 0.59
+      },
+      {
+        "name": "dig/bone5",
+        "volume": 0.59
+      }
+    ]
+  },
+  "block.bone_block.fall": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "dig/bone1",
+        "volume": 0.49
+      },
+      {
+        "name": "dig/bone2",
+        "volume": 0.49
+      },
+      {
+        "name": "dig/bone3",
+        "volume": 0.49
+      },
+      {
+        "name": "dig/bone4",
+        "volume": 0.49
+      },
+      {
+        "name": "dig/bone5",
+        "volume": 0.49
+      }
+    ]
+  },
+  "block.chain.step": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "block/chain1",
+        "volume": 0.48
+      },
+      {
+        "name": "block/chain2",
+        "volume": 0.48
+      }
+    ]
+  },
+  "block.chain.hit": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "block/chain_hit1",
+        "volume": 0.42
+      },
+      {
+        "name": "block/chain_hit2",
+        "volume": 0.42
+      },
+      {
+        "name": "block/chain_hit3",
+        "volume": 0.42
+      }
+    ]
+  },
+  "block.chain.break": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "block/chain_hit1",
+        "volume": 0.6
+      },
+      {
+        "name": "block/chain_hit2",
+        "volume": 0.6
+      },
+      {
+        "name": "block/chain_hit3",
+        "volume": 0.6
+      }
+    ]
+  },
+  "block.chain.place": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "block/chain1",
+        "volume": 0.51
+      },
+      {
+        "name": "block/chain2",
+        "volume": 0.51
+      }
+    ]
+  },
+  "block.chain.fall": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "block/chain1",
+        "volume": 0.42
+      },
+      {
+        "name": "block/chain2",
+        "volume": 0.42
+      }
+    ]
+  },
+  "block.amethyst_block.step": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "block/crystal_chime1",
+        "volume": 0.48
+      },
+      {
+        "name": "block/crystal_chime2",
+        "volume": 0.48
+      },
+      {
+        "name": "block/crystal_chime3",
+        "volume": 0.48
+      },
+      {
+        "name": "block/crystal_chime4",
+        "volume": 0.48
+      },
+      {
+        "name": "block/crystal_chime5",
+        "volume": 0.48
+      },
+      {
+        "name": "block/crystal_chime6",
+        "volume": 0.48
+      }
+    ]
+  },
+  "block.amethyst_block.hit": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "block/crystal_chime1",
+        "volume": 0.42
+      },
+      {
+        "name": "block/crystal_chime2",
+        "volume": 0.42
+      },
+      {
+        "name": "block/crystal_chime3",
+        "volume": 0.42
+      },
+      {
+        "name": "block/crystal_chime4",
+        "volume": 0.42
+      },
+      {
+        "name": "block/crystal_chime5",
+        "volume": 0.42
+      },
+      {
+        "name": "block/crystal_chime6",
+        "volume": 0.42
+      }
+    ]
+  },
+  "block.amethyst_block.break": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "dig/crystal1",
+        "volume": 0.6
+      },
+      {
+        "name": "dig/crystal2",
+        "volume": 0.6
+      },
+      {
+        "name": "dig/crystal3",
+        "volume": 0.6
+      },
+      {
+        "name": "dig/crystal4",
+        "volume": 0.6
+      },
+      {
+        "name": "dig/crystal5",
+        "volume": 0.6
+      }
+    ]
+  },
+  "block.amethyst_block.place": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "block/crystal_chime1",
+        "volume": 0.51
+      },
+      {
+        "name": "block/crystal_chime2",
+        "volume": 0.51
+      },
+      {
+        "name": "block/crystal_chime3",
+        "volume": 0.51
+      },
+      {
+        "name": "block/crystal_chime4",
+        "volume": 0.51
+      },
+      {
+        "name": "block/crystal_chime5",
+        "volume": 0.51
+      },
+      {
+        "name": "block/crystal_chime6",
+        "volume": 0.51
+      }
+    ]
+  },
+  "block.amethyst_block.fall": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "block/crystal_chime1",
+        "volume": 0.42
+      },
+      {
+        "name": "block/crystal_chime2",
+        "volume": 0.42
+      },
+      {
+        "name": "block/crystal_chime3",
+        "volume": 0.42
+      },
+      {
+        "name": "block/crystal_chime4",
+        "volume": 0.42
+      },
+      {
+        "name": "block/crystal_chime5",
+        "volume": 0.42
+      },
+      {
+        "name": "block/crystal_chime6",
+        "volume": 0.42
+      }
+    ]
+  },
+  "block.amethyst_cluster.step": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "block/crystal_chime1",
+        "volume": 0.48
+      },
+      {
+        "name": "block/crystal_chime2",
+        "volume": 0.48
+      },
+      {
+        "name": "block/crystal_chime3",
+        "volume": 0.48
+      },
+      {
+        "name": "block/crystal_chime4",
+        "volume": 0.48
+      },
+      {
+        "name": "block/crystal_chime5",
+        "volume": 0.48
+      },
+      {
+        "name": "block/crystal_chime6",
+        "volume": 0.48
+      }
+    ]
+  },
+  "block.amethyst_cluster.hit": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "block/crystal_chime1",
+        "volume": 0.42
+      },
+      {
+        "name": "block/crystal_chime2",
+        "volume": 0.42
+      },
+      {
+        "name": "block/crystal_chime3",
+        "volume": 0.42
+      },
+      {
+        "name": "block/crystal_chime4",
+        "volume": 0.42
+      },
+      {
+        "name": "block/crystal_chime5",
+        "volume": 0.42
+      },
+      {
+        "name": "block/crystal_chime6",
+        "volume": 0.42
+      }
+    ]
+  },
+  "block.amethyst_cluster.break": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "dig/crystal1",
+        "volume": 0.6
+      },
+      {
+        "name": "dig/crystal2",
+        "volume": 0.6
+      },
+      {
+        "name": "dig/crystal3",
+        "volume": 0.6
+      },
+      {
+        "name": "dig/crystal4",
+        "volume": 0.6
+      },
+      {
+        "name": "dig/crystal5",
+        "volume": 0.6
+      }
+    ]
+  },
+  "block.amethyst_cluster.place": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "block/crystal_chime1",
+        "volume": 0.51
+      },
+      {
+        "name": "block/crystal_chime2",
+        "volume": 0.51
+      },
+      {
+        "name": "block/crystal_chime3",
+        "volume": 0.51
+      },
+      {
+        "name": "block/crystal_chime4",
+        "volume": 0.51
+      },
+      {
+        "name": "block/crystal_chime5",
+        "volume": 0.51
+      },
+      {
+        "name": "block/crystal_chime6",
+        "volume": 0.51
+      }
+    ]
+  },
+  "block.amethyst_cluster.fall": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "block/crystal_chime1",
+        "volume": 0.5
+      },
+      {
+        "name": "block/crystal_chime2",
+        "volume": 0.5
+      },
+      {
+        "name": "block/crystal_chime3",
+        "volume": 0.5
+      },
+      {
+        "name": "block/crystal_chime4",
+        "volume": 0.5
+      },
+      {
+        "name": "block/crystal_chime5",
+        "volume": 0.5
+      },
+      {
+        "name": "block/crystal_chime6",
+        "volume": 0.5
+      }
+    ]
+  },
+  "block.slime_block.step": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "block/slime1",
+        "volume": 0.56
+      },
+      {
+        "name": "block/slime2",
+        "volume": 0.56
+      },
+      {
+        "name": "block/slime3",
+        "volume": 0.56
+      },
+      {
+        "name": "block/slime4",
+        "volume": 0.56
+      },
+      {
+        "name": "block/slime5",
+        "volume": 0.56
+      },
+      {
+        "name": "block/slime6",
+        "volume": 0.56
+      },
+      {
+        "name": "block/slime7",
+        "volume": 0.56
+      },
+      {
+        "name": "block/slime8",
+        "volume": 0.56
+      },
+      {
+        "name": "block/slime9",
+        "volume": 0.56
+      },
+      {
+        "name": "block/slime10",
+        "volume": 0.56
+      },
+      {
+        "name": "block/slime11",
+        "volume": 0.56
+      },
+      {
+        "name": "block/slime12",
+        "volume": 0.56
+      }
+    ]
+  },
+  "block.slime_block.hit": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "block/slime1",
+        "volume": 0.49
+      },
+      {
+        "name": "block/slime2",
+        "volume": 0.49
+      },
+      {
+        "name": "block/slime3",
+        "volume": 0.49
+      },
+      {
+        "name": "block/slime4",
+        "volume": 0.49
+      },
+      {
+        "name": "block/slime5",
+        "volume": 0.49
+      },
+      {
+        "name": "block/slime6",
+        "volume": 0.49
+      },
+      {
+        "name": "block/slime7",
+        "volume": 0.49
+      },
+      {
+        "name": "block/slime8",
+        "volume": 0.49
+      },
+      {
+        "name": "block/slime9",
+        "volume": 0.49
+      },
+      {
+        "name": "block/slime10",
+        "volume": 0.49
+      },
+      {
+        "name": "block/slime11",
+        "volume": 0.49
+      },
+      {
+        "name": "block/slime12",
+        "volume": 0.49
+      }
+    ]
+  },
+  "block.slime_block.break": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "block/slime1",
+        "volume": 0.7
+      },
+      {
+        "name": "block/slime2",
+        "volume": 0.7
+      },
+      {
+        "name": "block/slime3",
+        "volume": 0.7
+      },
+      {
+        "name": "block/slime4",
+        "volume": 0.7
+      },
+      {
+        "name": "block/slime5",
+        "volume": 0.7
+      },
+      {
+        "name": "block/slime6",
+        "volume": 0.7
+      },
+      {
+        "name": "block/slime7",
+        "volume": 0.7
+      },
+      {
+        "name": "block/slime8",
+        "volume": 0.7
+      },
+      {
+        "name": "block/slime9",
+        "volume": 0.7
+      },
+      {
+        "name": "block/slime10",
+        "volume": 0.7
+      },
+      {
+        "name": "block/slime11",
+        "volume": 0.7
+      },
+      {
+        "name": "block/slime12",
+        "volume": 0.7
+      }
+    ]
+  },
+  "block.slime_block.place": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "block/slime1",
+        "volume": 0.59
+      },
+      {
+        "name": "block/slime2",
+        "volume": 0.59
+      },
+      {
+        "name": "block/slime3",
+        "volume": 0.59
+      },
+      {
+        "name": "block/slime4",
+        "volume": 0.59
+      },
+      {
+        "name": "block/slime5",
+        "volume": 0.59
+      },
+      {
+        "name": "block/slime6",
+        "volume": 0.59
+      },
+      {
+        "name": "block/slime7",
+        "volume": 0.59
+      },
+      {
+        "name": "block/slime8",
+        "volume": 0.59
+      },
+      {
+        "name": "block/slime9",
+        "volume": 0.59
+      },
+      {
+        "name": "block/slime10",
+        "volume": 0.59
+      },
+      {
+        "name": "block/slime11",
+        "volume": 0.59
+      },
+      {
+        "name": "block/slime12",
+        "volume": 0.59
+      }
+    ]
+  },
+  "block.slime_block.fall": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "block/slime1",
+        "volume": 0.49
+      },
+      {
+        "name": "block/slime2",
+        "volume": 0.49
+      },
+      {
+        "name": "block/slime3",
+        "volume": 0.49
+      },
+      {
+        "name": "block/slime4",
+        "volume": 0.49
+      },
+      {
+        "name": "block/slime5",
+        "volume": 0.49
+      },
+      {
+        "name": "block/slime6",
+        "volume": 0.49
+      },
+      {
+        "name": "block/slime7",
+        "volume": 0.49
+      },
+      {
+        "name": "block/slime8",
+        "volume": 0.49
+      },
+      {
+        "name": "block/slime9",
+        "volume": 0.49
+      },
+      {
+        "name": "block/slime10",
+        "volume": 0.49
+      },
+      {
+        "name": "block/slime11",
+        "volume": 0.49
+      },
+      {
+        "name": "block/slime12",
+        "volume": 0.49
+      }
+    ]
+  },
+  "block.honey_block.step": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "block/slime1",
+        "volume": 0.48,
+        "pitch": 0.8
+      },
+      {
+        "name": "block/slime2",
+        "volume": 0.48,
+        "pitch": 0.8
+      },
+      {
+        "name": "block/slime3",
+        "volume": 0.48,
+        "pitch": 0.8
+      },
+      {
+        "name": "block/slime4",
+        "volume": 0.48,
+        "pitch": 0.8
+      },
+      {
+        "name": "block/slime5",
+        "volume": 0.48,
+        "pitch": 0.8
+      },
+      {
+        "name": "block/slime6",
+        "volume": 0.48,
+        "pitch": 0.8
+      },
+      {
+        "name": "block/slime7",
+        "volume": 0.48,
+        "pitch": 0.8
+      },
+      {
+        "name": "block/slime8",
+        "volume": 0.48,
+        "pitch": 0.8
+      },
+      {
+        "name": "block/slime9",
+        "volume": 0.48,
+        "pitch": 0.8
+      },
+      {
+        "name": "block/slime10",
+        "volume": 0.48,
+        "pitch": 0.8
+      },
+      {
+        "name": "block/slime11",
+        "volume": 0.48,
+        "pitch": 0.8
+      },
+      {
+        "name": "block/slime12",
+        "volume": 0.48,
+        "pitch": 0.8
+      }
+    ]
+  },
+  "block.honey_block.hit": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "block/slime1",
+        "volume": 0.42,
+        "pitch": 0.8
+      },
+      {
+        "name": "block/slime2",
+        "volume": 0.42,
+        "pitch": 0.8
+      },
+      {
+        "name": "block/slime3",
+        "volume": 0.42,
+        "pitch": 0.8
+      },
+      {
+        "name": "block/slime4",
+        "volume": 0.42,
+        "pitch": 0.8
+      },
+      {
+        "name": "block/slime5",
+        "volume": 0.42,
+        "pitch": 0.8
+      },
+      {
+        "name": "block/slime6",
+        "volume": 0.42,
+        "pitch": 0.8
+      },
+      {
+        "name": "block/slime7",
+        "volume": 0.42,
+        "pitch": 0.8
+      },
+      {
+        "name": "block/slime8",
+        "volume": 0.42,
+        "pitch": 0.8
+      },
+      {
+        "name": "block/slime9",
+        "volume": 0.42,
+        "pitch": 0.8
+      },
+      {
+        "name": "block/slime10",
+        "volume": 0.42,
+        "pitch": 0.8
+      },
+      {
+        "name": "block/slime11",
+        "volume": 0.42,
+        "pitch": 0.8
+      },
+      {
+        "name": "block/slime12",
+        "volume": 0.42,
+        "pitch": 0.8
+      }
+    ]
+  },
+  "block.honey_block.break": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "block/slime1",
+        "volume": 0.6,
+        "pitch": 0.8
+      },
+      {
+        "name": "block/slime2",
+        "volume": 0.6,
+        "pitch": 0.8
+      },
+      {
+        "name": "block/slime3",
+        "volume": 0.6,
+        "pitch": 0.8
+      },
+      {
+        "name": "block/slime4",
+        "volume": 0.6,
+        "pitch": 0.8
+      },
+      {
+        "name": "block/slime5",
+        "volume": 0.6,
+        "pitch": 0.8
+      },
+      {
+        "name": "block/slime6",
+        "volume": 0.6,
+        "pitch": 0.8
+      },
+      {
+        "name": "block/slime7",
+        "volume": 0.6,
+        "pitch": 0.8
+      },
+      {
+        "name": "block/slime8",
+        "volume": 0.6,
+        "pitch": 0.8
+      },
+      {
+        "name": "block/slime9",
+        "volume": 0.6,
+        "pitch": 0.8
+      },
+      {
+        "name": "block/slime10",
+        "volume": 0.6,
+        "pitch": 0.8
+      },
+      {
+        "name": "block/slime11",
+        "volume": 0.6,
+        "pitch": 0.8
+      },
+      {
+        "name": "block/slime12",
+        "volume": 0.6,
+        "pitch": 0.8
+      }
+    ]
+  },
+  "block.honey_block.place": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "block/slime1",
+        "volume": 0.51,
+        "pitch": 0.8
+      },
+      {
+        "name": "block/slime2",
+        "volume": 0.51,
+        "pitch": 0.8
+      },
+      {
+        "name": "block/slime3",
+        "volume": 0.51,
+        "pitch": 0.8
+      },
+      {
+        "name": "block/slime4",
+        "volume": 0.51,
+        "pitch": 0.8
+      },
+      {
+        "name": "block/slime5",
+        "volume": 0.51,
+        "pitch": 0.8
+      },
+      {
+        "name": "block/slime6",
+        "volume": 0.51,
+        "pitch": 0.8
+      },
+      {
+        "name": "block/slime7",
+        "volume": 0.51,
+        "pitch": 0.8
+      },
+      {
+        "name": "block/slime8",
+        "volume": 0.51,
+        "pitch": 0.8
+      },
+      {
+        "name": "block/slime9",
+        "volume": 0.51,
+        "pitch": 0.8
+      },
+      {
+        "name": "block/slime10",
+        "volume": 0.51,
+        "pitch": 0.8
+      },
+      {
+        "name": "block/slime11",
+        "volume": 0.51,
+        "pitch": 0.8
+      },
+      {
+        "name": "block/slime12",
+        "volume": 0.51,
+        "pitch": 0.8
+      }
+    ]
+  },
+  "block.honey_block.fall": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "block/slime1",
+        "volume": 0.42,
+        "pitch": 0.8
+      },
+      {
+        "name": "block/slime2",
+        "volume": 0.42,
+        "pitch": 0.8
+      },
+      {
+        "name": "block/slime3",
+        "volume": 0.42,
+        "pitch": 0.8
+      },
+      {
+        "name": "block/slime4",
+        "volume": 0.42,
+        "pitch": 0.8
+      },
+      {
+        "name": "block/slime5",
+        "volume": 0.42,
+        "pitch": 0.8
+      },
+      {
+        "name": "block/slime6",
+        "volume": 0.42,
+        "pitch": 0.8
+      },
+      {
+        "name": "block/slime7",
+        "volume": 0.42,
+        "pitch": 0.8
+      },
+      {
+        "name": "block/slime8",
+        "volume": 0.42,
+        "pitch": 0.8
+      },
+      {
+        "name": "block/slime9",
+        "volume": 0.42,
+        "pitch": 0.8
+      },
+      {
+        "name": "block/slime10",
+        "volume": 0.42,
+        "pitch": 0.8
+      },
+      {
+        "name": "block/slime11",
+        "volume": 0.42,
+        "pitch": 0.8
+      },
+      {
+        "name": "block/slime12",
+        "volume": 0.42,
+        "pitch": 0.8
+      }
+    ]
+  },
+  "block.mud.step": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "block/slime1",
+        "volume": 0.48,
+        "pitch": 0.7
+      },
+      {
+        "name": "block/slime2",
+        "volume": 0.48,
+        "pitch": 0.7
+      },
+      {
+        "name": "block/slime3",
+        "volume": 0.48,
+        "pitch": 0.7
+      },
+      {
+        "name": "block/slime4",
+        "volume": 0.48,
+        "pitch": 0.7
+      },
+      {
+        "name": "block/slime5",
+        "volume": 0.48,
+        "pitch": 0.7
+      },
+      {
+        "name": "block/slime6",
+        "volume": 0.48,
+        "pitch": 0.7
+      },
+      {
+        "name": "block/slime7",
+        "volume": 0.48,
+        "pitch": 0.7
+      },
+      {
+        "name": "block/slime8",
+        "volume": 0.48,
+        "pitch": 0.7
+      },
+      {
+        "name": "block/slime9",
+        "volume": 0.48,
+        "pitch": 0.7
+      },
+      {
+        "name": "block/slime10",
+        "volume": 0.48,
+        "pitch": 0.7
+      },
+      {
+        "name": "block/slime11",
+        "volume": 0.48,
+        "pitch": 0.7
+      },
+      {
+        "name": "block/slime12",
+        "volume": 0.48,
+        "pitch": 0.7
+      }
+    ]
+  },
+  "block.mud.hit": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "block/slime1",
+        "volume": 0.42,
+        "pitch": 0.7
+      },
+      {
+        "name": "block/slime2",
+        "volume": 0.42,
+        "pitch": 0.7
+      },
+      {
+        "name": "block/slime3",
+        "volume": 0.42,
+        "pitch": 0.7
+      },
+      {
+        "name": "block/slime4",
+        "volume": 0.42,
+        "pitch": 0.7
+      },
+      {
+        "name": "block/slime5",
+        "volume": 0.42,
+        "pitch": 0.7
+      },
+      {
+        "name": "block/slime6",
+        "volume": 0.42,
+        "pitch": 0.7
+      },
+      {
+        "name": "block/slime7",
+        "volume": 0.42,
+        "pitch": 0.7
+      },
+      {
+        "name": "block/slime8",
+        "volume": 0.42,
+        "pitch": 0.7
+      },
+      {
+        "name": "block/slime9",
+        "volume": 0.42,
+        "pitch": 0.7
+      },
+      {
+        "name": "block/slime10",
+        "volume": 0.42,
+        "pitch": 0.7
+      },
+      {
+        "name": "block/slime11",
+        "volume": 0.42,
+        "pitch": 0.7
+      },
+      {
+        "name": "block/slime12",
+        "volume": 0.42,
+        "pitch": 0.7
+      }
+    ]
+  },
+  "block.mud.break": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "block/slime1",
+        "volume": 0.6,
+        "pitch": 0.7
+      },
+      {
+        "name": "block/slime2",
+        "volume": 0.6,
+        "pitch": 0.7
+      },
+      {
+        "name": "block/slime3",
+        "volume": 0.6,
+        "pitch": 0.7
+      },
+      {
+        "name": "block/slime4",
+        "volume": 0.6,
+        "pitch": 0.7
+      },
+      {
+        "name": "block/slime5",
+        "volume": 0.6,
+        "pitch": 0.7
+      },
+      {
+        "name": "block/slime6",
+        "volume": 0.6,
+        "pitch": 0.7
+      },
+      {
+        "name": "block/slime7",
+        "volume": 0.6,
+        "pitch": 0.7
+      },
+      {
+        "name": "block/slime8",
+        "volume": 0.6,
+        "pitch": 0.7
+      },
+      {
+        "name": "block/slime9",
+        "volume": 0.6,
+        "pitch": 0.7
+      },
+      {
+        "name": "block/slime10",
+        "volume": 0.6,
+        "pitch": 0.7
+      },
+      {
+        "name": "block/slime11",
+        "volume": 0.6,
+        "pitch": 0.7
+      },
+      {
+        "name": "block/slime12",
+        "volume": 0.6,
+        "pitch": 0.7
+      }
+    ]
+  },
+  "block.mud.place": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "block/slime1",
+        "volume": 0.51,
+        "pitch": 0.7
+      },
+      {
+        "name": "block/slime2",
+        "volume": 0.51,
+        "pitch": 0.7
+      },
+      {
+        "name": "block/slime3",
+        "volume": 0.51,
+        "pitch": 0.7
+      },
+      {
+        "name": "block/slime4",
+        "volume": 0.51,
+        "pitch": 0.7
+      },
+      {
+        "name": "block/slime5",
+        "volume": 0.51,
+        "pitch": 0.7
+      },
+      {
+        "name": "block/slime6",
+        "volume": 0.51,
+        "pitch": 0.7
+      },
+      {
+        "name": "block/slime7",
+        "volume": 0.51,
+        "pitch": 0.7
+      },
+      {
+        "name": "block/slime8",
+        "volume": 0.51,
+        "pitch": 0.7
+      },
+      {
+        "name": "block/slime9",
+        "volume": 0.51,
+        "pitch": 0.7
+      },
+      {
+        "name": "block/slime10",
+        "volume": 0.51,
+        "pitch": 0.7
+      },
+      {
+        "name": "block/slime11",
+        "volume": 0.51,
+        "pitch": 0.7
+      },
+      {
+        "name": "block/slime12",
+        "volume": 0.51,
+        "pitch": 0.7
+      }
+    ]
+  },
+  "block.mud.fall": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "block/slime1",
+        "volume": 0.42,
+        "pitch": 0.7
+      },
+      {
+        "name": "block/slime2",
+        "volume": 0.42,
+        "pitch": 0.7
+      },
+      {
+        "name": "block/slime3",
+        "volume": 0.42,
+        "pitch": 0.7
+      },
+      {
+        "name": "block/slime4",
+        "volume": 0.42,
+        "pitch": 0.7
+      },
+      {
+        "name": "block/slime5",
+        "volume": 0.42,
+        "pitch": 0.7
+      },
+      {
+        "name": "block/slime6",
+        "volume": 0.42,
+        "pitch": 0.7
+      },
+      {
+        "name": "block/slime7",
+        "volume": 0.42,
+        "pitch": 0.7
+      },
+      {
+        "name": "block/slime8",
+        "volume": 0.42,
+        "pitch": 0.7
+      },
+      {
+        "name": "block/slime9",
+        "volume": 0.42,
+        "pitch": 0.7
+      },
+      {
+        "name": "block/slime10",
+        "volume": 0.42,
+        "pitch": 0.7
+      },
+      {
+        "name": "block/slime11",
+        "volume": 0.42,
+        "pitch": 0.7
+      },
+      {
+        "name": "block/slime12",
+        "volume": 0.42,
+        "pitch": 0.7
+      }
+    ]
+  },
+  "block.soul_sand.step": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "step/sand1",
+        "volume": 0.56,
+        "pitch": 0.7
+      },
+      {
+        "name": "step/sand2",
+        "volume": 0.56,
+        "pitch": 0.7
+      },
+      {
+        "name": "step/sand3",
+        "volume": 0.56,
+        "pitch": 0.7
+      },
+      {
+        "name": "step/sand4",
+        "volume": 0.56,
+        "pitch": 0.7
+      },
+      {
+        "name": "step/sand5",
+        "volume": 0.56,
+        "pitch": 0.7
+      },
+      {
+        "name": "step/sand6",
+        "volume": 0.56,
+        "pitch": 0.7
+      }
+    ]
+  },
+  "block.soul_sand.hit": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "step/sand1",
+        "volume": 0.49,
+        "pitch": 0.7
+      },
+      {
+        "name": "step/sand2",
+        "volume": 0.49,
+        "pitch": 0.7
+      },
+      {
+        "name": "step/sand3",
+        "volume": 0.49,
+        "pitch": 0.7
+      },
+      {
+        "name": "step/sand4",
+        "volume": 0.49,
+        "pitch": 0.7
+      },
+      {
+        "name": "step/sand5",
+        "volume": 0.49,
+        "pitch": 0.7
+      },
+      {
+        "name": "step/sand6",
+        "volume": 0.49,
+        "pitch": 0.7
+      }
+    ]
+  },
+  "block.soul_sand.break": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "step/sand1",
+        "volume": 0.7,
+        "pitch": 0.7
+      },
+      {
+        "name": "step/sand2",
+        "volume": 0.7,
+        "pitch": 0.7
+      },
+      {
+        "name": "step/sand3",
+        "volume": 0.7,
+        "pitch": 0.7
+      },
+      {
+        "name": "step/sand4",
+        "volume": 0.7,
+        "pitch": 0.7
+      },
+      {
+        "name": "step/sand5",
+        "volume": 0.7,
+        "pitch": 0.7
+      },
+      {
+        "name": "step/sand6",
+        "volume": 0.7,
+        "pitch": 0.7
+      }
+    ]
+  },
+  "block.soul_sand.place": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "step/sand1",
+        "volume": 0.59,
+        "pitch": 0.7
+      },
+      {
+        "name": "step/sand2",
+        "volume": 0.59,
+        "pitch": 0.7
+      },
+      {
+        "name": "step/sand3",
+        "volume": 0.59,
+        "pitch": 0.7
+      },
+      {
+        "name": "step/sand4",
+        "volume": 0.59,
+        "pitch": 0.7
+      },
+      {
+        "name": "step/sand5",
+        "volume": 0.59,
+        "pitch": 0.7
+      },
+      {
+        "name": "step/sand6",
+        "volume": 0.59,
+        "pitch": 0.7
+      }
+    ]
+  },
+  "block.soul_sand.fall": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "step/sand1",
+        "volume": 0.49,
+        "pitch": 0.7
+      },
+      {
+        "name": "step/sand2",
+        "volume": 0.49,
+        "pitch": 0.7
+      },
+      {
+        "name": "step/sand3",
+        "volume": 0.49,
+        "pitch": 0.7
+      },
+      {
+        "name": "step/sand4",
+        "volume": 0.49,
+        "pitch": 0.7
+      },
+      {
+        "name": "step/sand5",
+        "volume": 0.49,
+        "pitch": 0.7
+      },
+      {
+        "name": "step/sand6",
+        "volume": 0.49,
+        "pitch": 0.7
+      }
+    ]
+  },
+  "block.soul_soil.step": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "step/sand1",
+        "volume": 0.56,
+        "pitch": 0.8
+      },
+      {
+        "name": "step/sand2",
+        "volume": 0.56,
+        "pitch": 0.8
+      },
+      {
+        "name": "step/sand3",
+        "volume": 0.56,
+        "pitch": 0.8
+      },
+      {
+        "name": "step/sand4",
+        "volume": 0.56,
+        "pitch": 0.8
+      },
+      {
+        "name": "step/sand5",
+        "volume": 0.56,
+        "pitch": 0.8
+      },
+      {
+        "name": "step/sand6",
+        "volume": 0.56,
+        "pitch": 0.8
+      }
+    ]
+  },
+  "block.soul_soil.hit": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "step/sand1",
+        "volume": 0.49,
+        "pitch": 0.8
+      },
+      {
+        "name": "step/sand2",
+        "volume": 0.49,
+        "pitch": 0.8
+      },
+      {
+        "name": "step/sand3",
+        "volume": 0.49,
+        "pitch": 0.8
+      },
+      {
+        "name": "step/sand4",
+        "volume": 0.49,
+        "pitch": 0.8
+      },
+      {
+        "name": "step/sand5",
+        "volume": 0.49,
+        "pitch": 0.8
+      },
+      {
+        "name": "step/sand6",
+        "volume": 0.49,
+        "pitch": 0.8
+      }
+    ]
+  },
+  "block.soul_soil.break": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "step/sand1",
+        "volume": 0.7,
+        "pitch": 0.8
+      },
+      {
+        "name": "step/sand2",
+        "volume": 0.7,
+        "pitch": 0.8
+      },
+      {
+        "name": "step/sand3",
+        "volume": 0.7,
+        "pitch": 0.8
+      },
+      {
+        "name": "step/sand4",
+        "volume": 0.7,
+        "pitch": 0.8
+      },
+      {
+        "name": "step/sand5",
+        "volume": 0.7,
+        "pitch": 0.8
+      },
+      {
+        "name": "step/sand6",
+        "volume": 0.7,
+        "pitch": 0.8
+      }
+    ]
+  },
+  "block.soul_soil.place": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "step/sand1",
+        "volume": 0.59,
+        "pitch": 0.8
+      },
+      {
+        "name": "step/sand2",
+        "volume": 0.59,
+        "pitch": 0.8
+      },
+      {
+        "name": "step/sand3",
+        "volume": 0.59,
+        "pitch": 0.8
+      },
+      {
+        "name": "step/sand4",
+        "volume": 0.59,
+        "pitch": 0.8
+      },
+      {
+        "name": "step/sand5",
+        "volume": 0.59,
+        "pitch": 0.8
+      },
+      {
+        "name": "step/sand6",
+        "volume": 0.59,
+        "pitch": 0.8
+      }
+    ]
+  },
+  "block.soul_soil.fall": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "step/sand1",
+        "volume": 0.49,
+        "pitch": 0.8
+      },
+      {
+        "name": "step/sand2",
+        "volume": 0.49,
+        "pitch": 0.8
+      },
+      {
+        "name": "step/sand3",
+        "volume": 0.49,
+        "pitch": 0.8
+      },
+      {
+        "name": "step/sand4",
+        "volume": 0.49,
+        "pitch": 0.8
+      },
+      {
+        "name": "step/sand5",
+        "volume": 0.49,
+        "pitch": 0.8
+      },
+      {
+        "name": "step/sand6",
+        "volume": 0.49,
+        "pitch": 0.8
+      }
+    ]
+  },
+  "block.netherrack.step": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "step/stonef1",
+        "volume": 0.6,
+        "pitch": 0.8
+      },
+      {
+        "name": "step/stonef2",
+        "volume": 0.6,
+        "pitch": 0.8
+      },
+      {
+        "name": "step/stonef3",
+        "volume": 0.6,
+        "pitch": 0.8
+      },
+      {
+        "name": "step/stonef4",
+        "volume": 0.6,
+        "pitch": 0.8
+      },
+      {
+        "name": "step/stonef5",
+        "volume": 0.6,
+        "pitch": 0.8
+      },
+      {
+        "name": "step/stonef6",
+        "volume": 0.6,
+        "pitch": 0.8
+      }
+    ]
+  },
+  "block.netherrack.hit": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "step/stonef1",
+        "volume": 0.52,
+        "pitch": 0.8
+      },
+      {
+        "name": "step/stonef2",
+        "volume": 0.52,
+        "pitch": 0.8
+      },
+      {
+        "name": "step/stonef3",
+        "volume": 0.52,
+        "pitch": 0.8
+      },
+      {
+        "name": "step/stonef4",
+        "volume": 0.52,
+        "pitch": 0.8
+      },
+      {
+        "name": "step/stonef5",
+        "volume": 0.52,
+        "pitch": 0.8
+      },
+      {
+        "name": "step/stonef6",
+        "volume": 0.52,
+        "pitch": 0.8
+      }
+    ]
+  },
+  "block.netherrack.break": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "step/stonef1",
+        "volume": 0.75,
+        "pitch": 0.8
+      },
+      {
+        "name": "step/stonef2",
+        "volume": 0.75,
+        "pitch": 0.8
+      },
+      {
+        "name": "step/stonef3",
+        "volume": 0.75,
+        "pitch": 0.8
+      },
+      {
+        "name": "step/stonef4",
+        "volume": 0.75,
+        "pitch": 0.8
+      },
+      {
+        "name": "step/stonef5",
+        "volume": 0.75,
+        "pitch": 0.8
+      },
+      {
+        "name": "step/stonef6",
+        "volume": 0.75,
+        "pitch": 0.8
+      },
+      {
+        "name": "dig/stone_break1",
+        "volume": 0.75,
+        "pitch": 0.8
+      }
+    ]
+  },
+  "block.netherrack.place": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "step/stonef1",
+        "volume": 0.64,
+        "pitch": 0.8
+      },
+      {
+        "name": "step/stonef2",
+        "volume": 0.64,
+        "pitch": 0.8
+      },
+      {
+        "name": "step/stonef3",
+        "volume": 0.64,
+        "pitch": 0.8
+      },
+      {
+        "name": "step/stonef4",
+        "volume": 0.64,
+        "pitch": 0.8
+      },
+      {
+        "name": "step/stonef5",
+        "volume": 0.64,
+        "pitch": 0.8
+      },
+      {
+        "name": "step/stonef6",
+        "volume": 0.64,
+        "pitch": 0.8
+      }
+    ]
+  },
+  "block.netherrack.fall": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "step/stonef1",
+        "volume": 0.52,
+        "pitch": 0.8
+      },
+      {
+        "name": "step/stonef2",
+        "volume": 0.52,
+        "pitch": 0.8
+      },
+      {
+        "name": "step/stonef3",
+        "volume": 0.52,
+        "pitch": 0.8
+      },
+      {
+        "name": "step/stonef4",
+        "volume": 0.52,
+        "pitch": 0.8
+      },
+      {
+        "name": "step/stonef5",
+        "volume": 0.52,
+        "pitch": 0.8
+      },
+      {
+        "name": "step/stonef6",
+        "volume": 0.52,
+        "pitch": 0.8
+      }
+    ]
+  },
+  "block.basalt.step": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "step/stonef1",
+        "volume": 0.64,
+        "pitch": 0.9
+      },
+      {
+        "name": "step/stonef2",
+        "volume": 0.64,
+        "pitch": 0.9
+      },
+      {
+        "name": "step/stonef3",
+        "volume": 0.64,
+        "pitch": 0.9
+      },
+      {
+        "name": "step/stonef4",
+        "volume": 0.64,
+        "pitch": 0.9
+      },
+      {
+        "name": "step/stonef5",
+        "volume": 0.64,
+        "pitch": 0.9
+      },
+      {
+        "name": "step/stonef6",
+        "volume": 0.64,
+        "pitch": 0.9
+      }
+    ]
+  },
+  "block.basalt.hit": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "step/stonef1",
+        "volume": 0.56,
+        "pitch": 0.9
+      },
+      {
+        "name": "step/stonef2",
+        "volume": 0.56,
+        "pitch": 0.9
+      },
+      {
+        "name": "step/stonef3",
+        "volume": 0.56,
+        "pitch": 0.9
+      },
+      {
+        "name": "step/stonef4",
+        "volume": 0.56,
+        "pitch": 0.9
+      },
+      {
+        "name": "step/stonef5",
+        "volume": 0.56,
+        "pitch": 0.9
+      },
+      {
+        "name": "step/stonef6",
+        "volume": 0.56,
+        "pitch": 0.9
+      }
+    ]
+  },
+  "block.basalt.break": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "step/stonef1",
+        "volume": 0.8,
+        "pitch": 0.9
+      },
+      {
+        "name": "step/stonef2",
+        "volume": 0.8,
+        "pitch": 0.9
+      },
+      {
+        "name": "step/stonef3",
+        "volume": 0.8,
+        "pitch": 0.9
+      },
+      {
+        "name": "step/stonef4",
+        "volume": 0.8,
+        "pitch": 0.9
+      },
+      {
+        "name": "step/stonef5",
+        "volume": 0.8,
+        "pitch": 0.9
+      },
+      {
+        "name": "step/stonef6",
+        "volume": 0.8,
+        "pitch": 0.9
+      },
+      {
+        "name": "dig/stone_break1",
+        "volume": 0.8,
+        "pitch": 0.9
+      }
+    ]
+  },
+  "block.basalt.place": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "step/stonef1",
+        "volume": 0.68,
+        "pitch": 0.9
+      },
+      {
+        "name": "step/stonef2",
+        "volume": 0.68,
+        "pitch": 0.9
+      },
+      {
+        "name": "step/stonef3",
+        "volume": 0.68,
+        "pitch": 0.9
+      },
+      {
+        "name": "step/stonef4",
+        "volume": 0.68,
+        "pitch": 0.9
+      },
+      {
+        "name": "step/stonef5",
+        "volume": 0.68,
+        "pitch": 0.9
+      },
+      {
+        "name": "step/stonef6",
+        "volume": 0.68,
+        "pitch": 0.9
+      }
+    ]
+  },
+  "block.basalt.fall": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "step/stonef1",
+        "volume": 0.56,
+        "pitch": 0.9
+      },
+      {
+        "name": "step/stonef2",
+        "volume": 0.56,
+        "pitch": 0.9
+      },
+      {
+        "name": "step/stonef3",
+        "volume": 0.56,
+        "pitch": 0.9
+      },
+      {
+        "name": "step/stonef4",
+        "volume": 0.56,
+        "pitch": 0.9
+      },
+      {
+        "name": "step/stonef5",
+        "volume": 0.56,
+        "pitch": 0.9
+      },
+      {
+        "name": "step/stonef6",
+        "volume": 0.56,
+        "pitch": 0.9
+      }
+    ]
+  },
+  "block.nether_bricks.step": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "step/stonef1",
+        "volume": 0.6,
+        "pitch": 0.9
+      },
+      {
+        "name": "step/stonef2",
+        "volume": 0.6,
+        "pitch": 0.9
+      },
+      {
+        "name": "step/stonef3",
+        "volume": 0.6,
+        "pitch": 0.9
+      },
+      {
+        "name": "step/stonef4",
+        "volume": 0.6,
+        "pitch": 0.9
+      },
+      {
+        "name": "step/stonef5",
+        "volume": 0.6,
+        "pitch": 0.9
+      },
+      {
+        "name": "step/stonef6",
+        "volume": 0.6,
+        "pitch": 0.9
+      }
+    ]
+  },
+  "block.nether_bricks.hit": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "step/stonef1",
+        "volume": 0.52,
+        "pitch": 0.9
+      },
+      {
+        "name": "step/stonef2",
+        "volume": 0.52,
+        "pitch": 0.9
+      },
+      {
+        "name": "step/stonef3",
+        "volume": 0.52,
+        "pitch": 0.9
+      },
+      {
+        "name": "step/stonef4",
+        "volume": 0.52,
+        "pitch": 0.9
+      },
+      {
+        "name": "step/stonef5",
+        "volume": 0.52,
+        "pitch": 0.9
+      },
+      {
+        "name": "step/stonef6",
+        "volume": 0.52,
+        "pitch": 0.9
+      }
+    ]
+  },
+  "block.nether_bricks.break": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "step/stonef1",
+        "volume": 0.75,
+        "pitch": 0.9
+      },
+      {
+        "name": "step/stonef2",
+        "volume": 0.75,
+        "pitch": 0.9
+      },
+      {
+        "name": "step/stonef3",
+        "volume": 0.75,
+        "pitch": 0.9
+      },
+      {
+        "name": "step/stonef4",
+        "volume": 0.75,
+        "pitch": 0.9
+      },
+      {
+        "name": "step/stonef5",
+        "volume": 0.75,
+        "pitch": 0.9
+      },
+      {
+        "name": "step/stonef6",
+        "volume": 0.75,
+        "pitch": 0.9
+      }
+    ]
+  },
+  "block.nether_bricks.place": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "step/stonef1",
+        "volume": 0.64,
+        "pitch": 0.9
+      },
+      {
+        "name": "step/stonef2",
+        "volume": 0.64,
+        "pitch": 0.9
+      },
+      {
+        "name": "step/stonef3",
+        "volume": 0.64,
+        "pitch": 0.9
+      },
+      {
+        "name": "step/stonef4",
+        "volume": 0.64,
+        "pitch": 0.9
+      },
+      {
+        "name": "step/stonef5",
+        "volume": 0.64,
+        "pitch": 0.9
+      },
+      {
+        "name": "step/stonef6",
+        "volume": 0.64,
+        "pitch": 0.9
+      }
+    ]
+  },
+  "block.nether_bricks.fall": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "step/stonef1",
+        "volume": 0.52,
+        "pitch": 0.9
+      },
+      {
+        "name": "step/stonef2",
+        "volume": 0.52,
+        "pitch": 0.9
+      },
+      {
+        "name": "step/stonef3",
+        "volume": 0.52,
+        "pitch": 0.9
+      },
+      {
+        "name": "step/stonef4",
+        "volume": 0.52,
+        "pitch": 0.9
+      },
+      {
+        "name": "step/stonef5",
+        "volume": 0.52,
+        "pitch": 0.9
+      },
+      {
+        "name": "step/stonef6",
+        "volume": 0.52,
+        "pitch": 0.9
+      }
+    ]
+  },
+  "block.ancient_debris.step": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "block/chain_hit1",
+        "volume": 0.56,
+        "pitch": 0.7
+      },
+      {
+        "name": "block/chain_hit2",
+        "volume": 0.56,
+        "pitch": 0.7
+      },
+      {
+        "name": "block/chain_hit3",
+        "volume": 0.56,
+        "pitch": 0.7
+      }
+    ]
+  },
+  "block.ancient_debris.hit": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "block/chain_hit1",
+        "volume": 0.49,
+        "pitch": 0.7
+      },
+      {
+        "name": "block/chain_hit2",
+        "volume": 0.49,
+        "pitch": 0.7
+      },
+      {
+        "name": "block/chain_hit3",
+        "volume": 0.49,
+        "pitch": 0.7
+      }
+    ]
+  },
+  "block.ancient_debris.break": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "block/chain_hit1",
+        "volume": 0.7,
+        "pitch": 0.7
+      },
+      {
+        "name": "block/chain_hit2",
+        "volume": 0.7,
+        "pitch": 0.7
+      },
+      {
+        "name": "block/chain_hit3",
+        "volume": 0.7,
+        "pitch": 0.7
+      },
+      {
+        "name": "dig/metal_hit1",
+        "volume": 0.7,
+        "pitch": 0.7
+      }
+    ]
+  },
+  "block.ancient_debris.place": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "block/chain_hit1",
+        "volume": 0.59,
+        "pitch": 0.7
+      },
+      {
+        "name": "block/chain_hit2",
+        "volume": 0.59,
+        "pitch": 0.7
+      },
+      {
+        "name": "block/chain_hit3",
+        "volume": 0.59,
+        "pitch": 0.7
+      }
+    ]
+  },
+  "block.ancient_debris.fall": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "block/chain_hit1",
+        "volume": 0.49,
+        "pitch": 0.7
+      },
+      {
+        "name": "block/chain_hit2",
+        "volume": 0.49,
+        "pitch": 0.7
+      },
+      {
+        "name": "block/chain_hit3",
+        "volume": 0.49,
+        "pitch": 0.7
+      }
+    ]
+  },
+  "block.roots.step": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "step/grass1",
+        "volume": 0.48,
+        "pitch": 0.8
+      },
+      {
+        "name": "step/grass2",
+        "volume": 0.48,
+        "pitch": 0.8
+      },
+      {
+        "name": "step/grass3",
+        "volume": 0.48,
+        "pitch": 0.8
+      },
+      {
+        "name": "step/leaves1",
+        "volume": 0.48,
+        "pitch": 0.8
+      },
+      {
+        "name": "step/leaves2",
+        "volume": 0.48,
+        "pitch": 0.8
+      }
+    ]
+  },
+  "block.roots.hit": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "step/grass1",
+        "volume": 0.42,
+        "pitch": 0.8
+      },
+      {
+        "name": "step/grass2",
+        "volume": 0.42,
+        "pitch": 0.8
+      },
+      {
+        "name": "step/grass3",
+        "volume": 0.42,
+        "pitch": 0.8
+      },
+      {
+        "name": "step/leaves1",
+        "volume": 0.42,
+        "pitch": 0.8
+      },
+      {
+        "name": "step/leaves2",
+        "volume": 0.42,
+        "pitch": 0.8
+      }
+    ]
+  },
+  "block.roots.break": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "step/grass1",
+        "volume": 0.6,
+        "pitch": 0.8
+      },
+      {
+        "name": "step/grass2",
+        "volume": 0.6,
+        "pitch": 0.8
+      },
+      {
+        "name": "step/grass3",
+        "volume": 0.6,
+        "pitch": 0.8
+      },
+      {
+        "name": "step/leaves1",
+        "volume": 0.6,
+        "pitch": 0.8
+      },
+      {
+        "name": "step/leaves2",
+        "volume": 0.6,
+        "pitch": 0.8
+      }
+    ]
+  },
+  "block.roots.place": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "step/grass1",
+        "volume": 0.51,
+        "pitch": 0.8
+      },
+      {
+        "name": "step/grass2",
+        "volume": 0.51,
+        "pitch": 0.8
+      },
+      {
+        "name": "step/grass3",
+        "volume": 0.51,
+        "pitch": 0.8
+      },
+      {
+        "name": "step/leaves1",
+        "volume": 0.51,
+        "pitch": 0.8
+      },
+      {
+        "name": "step/leaves2",
+        "volume": 0.51,
+        "pitch": 0.8
+      }
+    ]
+  },
+  "block.roots.fall": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "step/grass1",
+        "volume": 0.42,
+        "pitch": 0.8
+      },
+      {
+        "name": "step/grass2",
+        "volume": 0.42,
+        "pitch": 0.8
+      },
+      {
+        "name": "step/grass3",
+        "volume": 0.42,
+        "pitch": 0.8
+      },
+      {
+        "name": "step/leaves1",
+        "volume": 0.42,
+        "pitch": 0.8
+      },
+      {
+        "name": "step/leaves2",
+        "volume": 0.42,
+        "pitch": 0.8
+      }
+    ]
+  },
+  "block.hanging_roots.step": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "step/leaves1",
+        "volume": 0.4,
+        "pitch": 0.9
+      },
+      {
+        "name": "step/leaves2",
+        "volume": 0.4,
+        "pitch": 0.9
+      },
+      {
+        "name": "step/leaves3",
+        "volume": 0.4,
+        "pitch": 0.9
+      }
+    ]
+  },
+  "block.hanging_roots.hit": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "step/leaves1",
+        "volume": 0.35,
+        "pitch": 0.9
+      },
+      {
+        "name": "step/leaves2",
+        "volume": 0.35,
+        "pitch": 0.9
+      },
+      {
+        "name": "step/leaves3",
+        "volume": 0.35,
+        "pitch": 0.9
+      }
+    ]
+  },
+  "block.hanging_roots.break": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "step/leaves1",
+        "volume": 0.5,
+        "pitch": 0.9
+      },
+      {
+        "name": "step/leaves2",
+        "volume": 0.5,
+        "pitch": 0.9
+      },
+      {
+        "name": "step/leaves3",
+        "volume": 0.5,
+        "pitch": 0.9
+      }
+    ]
+  },
+  "block.hanging_roots.place": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "step/leaves1",
+        "volume": 0.42,
+        "pitch": 0.9
+      },
+      {
+        "name": "step/leaves2",
+        "volume": 0.42,
+        "pitch": 0.9
+      },
+      {
+        "name": "step/leaves3",
+        "volume": 0.42,
+        "pitch": 0.9
+      }
+    ]
+  },
+  "block.hanging_roots.fall": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "step/leaves1",
+        "volume": 0.35,
+        "pitch": 0.9
+      },
+      {
+        "name": "step/leaves2",
+        "volume": 0.35,
+        "pitch": 0.9
+      },
+      {
+        "name": "step/leaves3",
+        "volume": 0.35,
+        "pitch": 0.9
+      }
+    ]
+  },
+  "block.rooted_dirt.step": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "step/gravel1",
+        "volume": 0.48,
+        "pitch": 0.8
+      },
+      {
+        "name": "step/gravel2",
+        "volume": 0.48,
+        "pitch": 0.8
+      },
+      {
+        "name": "step/gravel3",
+        "volume": 0.48,
+        "pitch": 0.8
+      },
+      {
+        "name": "step/gravel4",
+        "volume": 0.48,
+        "pitch": 0.8
+      },
+      {
+        "name": "step/gravel5",
+        "volume": 0.48,
+        "pitch": 0.8
+      },
+      {
+        "name": "step/gravel6",
+        "volume": 0.48,
+        "pitch": 0.8
+      },
+      {
+        "name": "step/gravel7",
+        "volume": 0.48,
+        "pitch": 0.8
+      },
+      {
+        "name": "step/gravel8",
+        "volume": 0.48,
+        "pitch": 0.8
+      }
+    ]
+  },
+  "block.rooted_dirt.hit": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "dig/gravel1",
+        "volume": 0.42,
+        "pitch": 0.8
+      },
+      {
+        "name": "dig/gravel2",
+        "volume": 0.42,
+        "pitch": 0.8
+      },
+      {
+        "name": "dig/gravel3",
+        "volume": 0.42,
+        "pitch": 0.8
+      },
+      {
+        "name": "dig/gravel4",
+        "volume": 0.42,
+        "pitch": 0.8
+      }
+    ]
+  },
+  "block.rooted_dirt.break": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "dig/gravel1",
+        "volume": 0.6,
+        "pitch": 0.8
+      },
+      {
+        "name": "dig/gravel2",
+        "volume": 0.6,
+        "pitch": 0.8
+      },
+      {
+        "name": "dig/gravel3",
+        "volume": 0.6,
+        "pitch": 0.8
+      },
+      {
+        "name": "dig/gravel4",
+        "volume": 0.6,
+        "pitch": 0.8
+      }
+    ]
+  },
+  "block.rooted_dirt.place": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "dig/gravel1",
+        "volume": 0.51,
+        "pitch": 0.8
+      },
+      {
+        "name": "dig/gravel2",
+        "volume": 0.51,
+        "pitch": 0.8
+      },
+      {
+        "name": "dig/gravel3",
+        "volume": 0.51,
+        "pitch": 0.8
+      },
+      {
+        "name": "dig/gravel4",
+        "volume": 0.51,
+        "pitch": 0.8
+      }
+    ]
+  },
+  "block.rooted_dirt.fall": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "step/gravel1",
+        "volume": 0.42,
+        "pitch": 0.8
+      },
+      {
+        "name": "step/gravel2",
+        "volume": 0.42,
+        "pitch": 0.8
+      },
+      {
+        "name": "step/gravel3",
+        "volume": 0.42,
+        "pitch": 0.8
+      },
+      {
+        "name": "step/gravel4",
+        "volume": 0.42,
+        "pitch": 0.8
+      },
+      {
+        "name": "step/gravel5",
+        "volume": 0.42,
+        "pitch": 0.8
+      },
+      {
+        "name": "step/gravel6",
+        "volume": 0.42,
+        "pitch": 0.8
+      },
+      {
+        "name": "step/gravel7",
+        "volume": 0.42,
+        "pitch": 0.8
+      },
+      {
+        "name": "step/gravel8",
+        "volume": 0.42,
+        "pitch": 0.8
+      }
+    ]
+  },
+  "block.moss.step": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "step/grass4",
+        "volume": 0.48,
+        "pitch": 0.8
+      },
+      {
+        "name": "step/grass5",
+        "volume": 0.48,
+        "pitch": 0.8
+      },
+      {
+        "name": "step/grass6",
+        "volume": 0.48,
+        "pitch": 0.8
+      }
+    ]
+  },
+  "block.moss.hit": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "step/grass4",
+        "volume": 0.42,
+        "pitch": 0.8
+      },
+      {
+        "name": "step/grass5",
+        "volume": 0.42,
+        "pitch": 0.8
+      },
+      {
+        "name": "step/grass6",
+        "volume": 0.42,
+        "pitch": 0.8
+      }
+    ]
+  },
+  "block.moss.break": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "step/grass4",
+        "volume": 0.6,
+        "pitch": 0.8
+      },
+      {
+        "name": "step/grass5",
+        "volume": 0.6,
+        "pitch": 0.8
+      },
+      {
+        "name": "step/grass6",
+        "volume": 0.6,
+        "pitch": 0.8
+      }
+    ]
+  },
+  "block.moss.place": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "step/grass4",
+        "volume": 0.51,
+        "pitch": 0.8
+      },
+      {
+        "name": "step/grass5",
+        "volume": 0.51,
+        "pitch": 0.8
+      },
+      {
+        "name": "step/grass6",
+        "volume": 0.51,
+        "pitch": 0.8
+      }
+    ]
+  },
+  "block.moss.fall": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "step/grass4",
+        "volume": 0.42,
+        "pitch": 0.8
+      },
+      {
+        "name": "step/grass5",
+        "volume": 0.42,
+        "pitch": 0.8
+      },
+      {
+        "name": "step/grass6",
+        "volume": 0.42,
+        "pitch": 0.8
+      }
+    ]
+  },
+  "block.vine.step": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "step/leaves4",
+        "volume": 0.4,
+        "pitch": 0.9
+      },
+      {
+        "name": "step/leaves5",
+        "volume": 0.4,
+        "pitch": 0.9
+      },
+      {
+        "name": "step/leaves6",
+        "volume": 0.4,
+        "pitch": 0.9
+      }
+    ]
+  },
+  "block.vine.hit": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "step/leaves4",
+        "volume": 0.35,
+        "pitch": 0.9
+      },
+      {
+        "name": "step/leaves5",
+        "volume": 0.35,
+        "pitch": 0.9
+      },
+      {
+        "name": "step/leaves6",
+        "volume": 0.35,
+        "pitch": 0.9
+      }
+    ]
+  },
+  "block.vine.break": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "step/leaves4",
+        "volume": 0.5,
+        "pitch": 0.9
+      },
+      {
+        "name": "step/leaves5",
+        "volume": 0.5,
+        "pitch": 0.9
+      },
+      {
+        "name": "step/leaves6",
+        "volume": 0.5,
+        "pitch": 0.9
+      }
+    ]
+  },
+  "block.vine.place": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "step/leaves4",
+        "volume": 0.42,
+        "pitch": 0.9
+      },
+      {
+        "name": "step/leaves5",
+        "volume": 0.42,
+        "pitch": 0.9
+      },
+      {
+        "name": "step/leaves6",
+        "volume": 0.42,
+        "pitch": 0.9
+      }
+    ]
+  },
+  "block.vine.fall": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "step/leaves4",
+        "volume": 0.35,
+        "pitch": 0.9
+      },
+      {
+        "name": "step/leaves5",
+        "volume": 0.35,
+        "pitch": 0.9
+      },
+      {
+        "name": "step/leaves6",
+        "volume": 0.35,
+        "pitch": 0.9
+      }
+    ]
+  },
+  "block.bamboo.step": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "dig/wood_hit1",
+        "volume": 0.56,
+        "pitch": 1.4
+      },
+      {
+        "name": "dig/wood_hit2",
+        "volume": 0.56,
+        "pitch": 1.4
+      },
+      {
+        "name": "dig/wood_hit3",
+        "volume": 0.56,
+        "pitch": 1.4
+      }
+    ]
+  },
+  "block.bamboo.hit": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "dig/wood_hit1",
+        "volume": 0.49,
+        "pitch": 1.4
+      },
+      {
+        "name": "dig/wood_hit2",
+        "volume": 0.49,
+        "pitch": 1.4
+      },
+      {
+        "name": "dig/wood_hit3",
+        "volume": 0.49,
+        "pitch": 1.4
+      }
+    ]
+  },
+  "block.bamboo.break": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "dig/wood_break1",
+        "volume": 0.7,
+        "pitch": 1.4
+      },
+      {
+        "name": "dig/wood_break2",
+        "volume": 0.7,
+        "pitch": 1.4
+      }
+    ]
+  },
+  "block.bamboo.place": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "dig/wood_hit1",
+        "volume": 0.59,
+        "pitch": 1.4
+      },
+      {
+        "name": "dig/wood_hit2",
+        "volume": 0.59,
+        "pitch": 1.4
+      },
+      {
+        "name": "dig/wood_hit3",
+        "volume": 0.59,
+        "pitch": 1.4
+      }
+    ]
+  },
+  "block.bamboo.fall": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "dig/wood_hit1",
+        "volume": 0.49,
+        "pitch": 1.4
+      },
+      {
+        "name": "dig/wood_hit2",
+        "volume": 0.49,
+        "pitch": 1.4
+      },
+      {
+        "name": "dig/wood_hit3",
+        "volume": 0.49,
+        "pitch": 1.4
+      }
+    ]
+  },
+  "block.bamboo_wood.step": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "step/wood1",
+        "volume": 0.56,
+        "pitch": 1.2
+      },
+      {
+        "name": "step/wood2",
+        "volume": 0.56,
+        "pitch": 1.2
+      },
+      {
+        "name": "step/wood3",
+        "volume": 0.56,
+        "pitch": 1.2
+      }
+    ]
+  },
+  "block.bamboo_wood.hit": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "step/wood1",
+        "volume": 0.49,
+        "pitch": 1.2
+      },
+      {
+        "name": "step/wood2",
+        "volume": 0.49,
+        "pitch": 1.2
+      },
+      {
+        "name": "step/wood3",
+        "volume": 0.49,
+        "pitch": 1.2
+      }
+    ]
+  },
+  "block.bamboo_wood.break": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "dig/wood_break3",
+        "volume": 0.7,
+        "pitch": 1.2
+      },
+      {
+        "name": "dig/wood_break4",
+        "volume": 0.7,
+        "pitch": 1.2
+      }
+    ]
+  },
+  "block.bamboo_wood.place": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "step/wood1",
+        "volume": 0.59,
+        "pitch": 1.2
+      },
+      {
+        "name": "step/wood2",
+        "volume": 0.59,
+        "pitch": 1.2
+      },
+      {
+        "name": "step/wood3",
+        "volume": 0.59,
+        "pitch": 1.2
+      }
+    ]
+  },
+  "block.bamboo_wood.fall": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "step/wood1",
+        "volume": 0.49,
+        "pitch": 1.2
+      },
+      {
+        "name": "step/wood2",
+        "volume": 0.49,
+        "pitch": 1.2
+      },
+      {
+        "name": "step/wood3",
+        "volume": 0.49,
+        "pitch": 1.2
+      }
+    ]
+  },
+  "block.scaffolding.step": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "dig/wood_hit4",
+        "volume": 0.56,
+        "pitch": 1.4
+      },
+      {
+        "name": "dig/wood_hit5",
+        "volume": 0.56,
+        "pitch": 1.4
+      }
+    ]
+  },
+  "block.scaffolding.hit": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "dig/wood_hit4",
+        "volume": 0.49,
+        "pitch": 1.4
+      },
+      {
+        "name": "dig/wood_hit5",
+        "volume": 0.49,
+        "pitch": 1.4
+      }
+    ]
+  },
+  "block.scaffolding.break": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "dig/wood_break5",
+        "volume": 0.7,
+        "pitch": 1.4
+      }
+    ]
+  },
+  "block.scaffolding.place": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "dig/wood_hit4",
+        "volume": 0.59,
+        "pitch": 1.4
+      },
+      {
+        "name": "dig/wood_hit5",
+        "volume": 0.59,
+        "pitch": 1.4
+      }
+    ]
+  },
+  "block.scaffolding.fall": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "dig/wood_hit4",
+        "volume": 0.49,
+        "pitch": 1.4
+      },
+      {
+        "name": "dig/wood_hit5",
+        "volume": 0.49,
+        "pitch": 1.4
+      }
+    ]
+  },
+  "block.cherry_wood.step": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "step/wood4",
+        "volume": 0.56,
+        "pitch": 1.1
+      },
+      {
+        "name": "step/wood5",
+        "volume": 0.56,
+        "pitch": 1.1
+      },
+      {
+        "name": "step/wood6",
+        "volume": 0.56,
+        "pitch": 1.1
+      }
+    ]
+  },
+  "block.cherry_wood.hit": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "step/wood4",
+        "volume": 0.49,
+        "pitch": 1.1
+      },
+      {
+        "name": "step/wood5",
+        "volume": 0.49,
+        "pitch": 1.1
+      },
+      {
+        "name": "step/wood6",
+        "volume": 0.49,
+        "pitch": 1.1
+      }
+    ]
+  },
+  "block.cherry_wood.break": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "dig/wood_break6",
+        "volume": 0.7,
+        "pitch": 1.1
+      }
+    ]
+  },
+  "block.cherry_wood.place": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "step/wood4",
+        "volume": 0.59,
+        "pitch": 1.1
+      },
+      {
+        "name": "step/wood5",
+        "volume": 0.59,
+        "pitch": 1.1
+      },
+      {
+        "name": "step/wood6",
+        "volume": 0.59,
+        "pitch": 1.1
+      }
+    ]
+  },
+  "block.cherry_wood.fall": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "step/wood4",
+        "volume": 0.49,
+        "pitch": 1.1
+      },
+      {
+        "name": "step/wood5",
+        "volume": 0.49,
+        "pitch": 1.1
+      },
+      {
+        "name": "step/wood6",
+        "volume": 0.49,
+        "pitch": 1.1
+      }
+    ]
+  },
+  "block.nether_wood.step": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "step/wood1",
+        "volume": 0.56,
+        "pitch": 0.8
+      },
+      {
+        "name": "step/wood2",
+        "volume": 0.56,
+        "pitch": 0.8
+      }
+    ]
+  },
+  "block.nether_wood.hit": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "step/wood1",
+        "volume": 0.49,
+        "pitch": 0.8
+      },
+      {
+        "name": "step/wood2",
+        "volume": 0.49,
+        "pitch": 0.8
+      }
+    ]
+  },
+  "block.nether_wood.break": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "dig/wood_break1",
+        "volume": 0.7,
+        "pitch": 0.8
+      }
+    ]
+  },
+  "block.nether_wood.place": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "step/wood1",
+        "volume": 0.59,
+        "pitch": 0.8
+      },
+      {
+        "name": "step/wood2",
+        "volume": 0.59,
+        "pitch": 0.8
+      }
+    ]
+  },
+  "block.nether_wood.fall": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "step/wood1",
+        "volume": 0.49,
+        "pitch": 0.8
+      },
+      {
+        "name": "step/wood2",
+        "volume": 0.49,
+        "pitch": 0.8
+      }
+    ]
+  },
+  "block.cherry_leaves.step": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "step/leaves1",
+        "volume": 0.48,
+        "pitch": 1.15
+      },
+      {
+        "name": "step/leaves2",
+        "volume": 0.48,
+        "pitch": 1.15
+      },
+      {
+        "name": "step/leaves3",
+        "volume": 0.48,
+        "pitch": 1.15
+      }
+    ]
+  },
+  "block.cherry_leaves.hit": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "step/leaves1",
+        "volume": 0.42,
+        "pitch": 1.15
+      },
+      {
+        "name": "step/leaves2",
+        "volume": 0.42,
+        "pitch": 1.15
+      },
+      {
+        "name": "step/leaves3",
+        "volume": 0.42,
+        "pitch": 1.15
+      }
+    ]
+  },
+  "block.cherry_leaves.break": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "step/leaves1",
+        "volume": 0.6,
+        "pitch": 1.15
+      },
+      {
+        "name": "step/leaves2",
+        "volume": 0.6,
+        "pitch": 1.15
+      },
+      {
+        "name": "step/leaves3",
+        "volume": 0.6,
+        "pitch": 1.15
+      }
+    ]
+  },
+  "block.cherry_leaves.place": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "step/leaves1",
+        "volume": 0.51,
+        "pitch": 1.15
+      },
+      {
+        "name": "step/leaves2",
+        "volume": 0.51,
+        "pitch": 1.15
+      },
+      {
+        "name": "step/leaves3",
+        "volume": 0.51,
+        "pitch": 1.15
+      }
+    ]
+  },
+  "block.cherry_leaves.fall": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "step/leaves1",
+        "volume": 0.42,
+        "pitch": 1.15
+      },
+      {
+        "name": "step/leaves2",
+        "volume": 0.42,
+        "pitch": 1.15
+      },
+      {
+        "name": "step/leaves3",
+        "volume": 0.42,
+        "pitch": 1.15
+      }
+    ]
+  },
+  "block.nether_wart.step": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "step/leaves1",
+        "volume": 0.48,
+        "pitch": 0.75
+      },
+      {
+        "name": "step/leaves2",
+        "volume": 0.48,
+        "pitch": 0.75
+      },
+      {
+        "name": "step/leaves3",
+        "volume": 0.48,
+        "pitch": 0.75
+      }
+    ]
+  },
+  "block.nether_wart.hit": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "step/leaves1",
+        "volume": 0.42,
+        "pitch": 0.75
+      },
+      {
+        "name": "step/leaves2",
+        "volume": 0.42,
+        "pitch": 0.75
+      },
+      {
+        "name": "step/leaves3",
+        "volume": 0.42,
+        "pitch": 0.75
+      }
+    ]
+  },
+  "block.nether_wart.break": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "step/leaves1",
+        "volume": 0.6,
+        "pitch": 0.75
+      },
+      {
+        "name": "step/leaves2",
+        "volume": 0.6,
+        "pitch": 0.75
+      },
+      {
+        "name": "step/leaves3",
+        "volume": 0.6,
+        "pitch": 0.75
+      }
+    ]
+  },
+  "block.nether_wart.place": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "step/leaves1",
+        "volume": 0.51,
+        "pitch": 0.75
+      },
+      {
+        "name": "step/leaves2",
+        "volume": 0.51,
+        "pitch": 0.75
+      },
+      {
+        "name": "step/leaves3",
+        "volume": 0.51,
+        "pitch": 0.75
+      }
+    ]
+  },
+  "block.nether_wart.fall": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "step/leaves1",
+        "volume": 0.42,
+        "pitch": 0.75
+      },
+      {
+        "name": "step/leaves2",
+        "volume": 0.42,
+        "pitch": 0.75
+      },
+      {
+        "name": "step/leaves3",
+        "volume": 0.42,
+        "pitch": 0.75
+      }
+    ]
+  },
+  "block.nylium.step": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "step/grass1",
+        "volume": 0.52,
+        "pitch": 0.85
+      },
+      {
+        "name": "step/grass2",
+        "volume": 0.52,
+        "pitch": 0.85
+      },
+      {
+        "name": "step/grass3",
+        "volume": 0.52,
+        "pitch": 0.85
+      }
+    ]
+  },
+  "block.nylium.hit": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "step/grass1",
+        "volume": 0.45,
+        "pitch": 0.85
+      },
+      {
+        "name": "step/grass2",
+        "volume": 0.45,
+        "pitch": 0.85
+      },
+      {
+        "name": "step/grass3",
+        "volume": 0.45,
+        "pitch": 0.85
+      }
+    ]
+  },
+  "block.nylium.break": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "step/grass1",
+        "volume": 0.65,
+        "pitch": 0.85
+      },
+      {
+        "name": "step/grass2",
+        "volume": 0.65,
+        "pitch": 0.85
+      },
+      {
+        "name": "step/grass3",
+        "volume": 0.65,
+        "pitch": 0.85
+      }
+    ]
+  },
+  "block.nylium.place": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "step/grass1",
+        "volume": 0.55,
+        "pitch": 0.85
+      },
+      {
+        "name": "step/grass2",
+        "volume": 0.55,
+        "pitch": 0.85
+      },
+      {
+        "name": "step/grass3",
+        "volume": 0.55,
+        "pitch": 0.85
+      }
+    ]
+  },
+  "block.nylium.fall": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "step/grass1",
+        "volume": 0.45,
+        "pitch": 0.85
+      },
+      {
+        "name": "step/grass2",
+        "volume": 0.45,
+        "pitch": 0.85
+      },
+      {
+        "name": "step/grass3",
+        "volume": 0.45,
+        "pitch": 0.85
+      }
+    ]
+  },
+  "block.wet_grass.step": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "step/grass4",
+        "volume": 0.48,
+        "pitch": 0.9
+      },
+      {
+        "name": "step/grass5",
+        "volume": 0.48,
+        "pitch": 0.9
+      },
+      {
+        "name": "step/grass6",
+        "volume": 0.48,
+        "pitch": 0.9
+      }
+    ]
+  },
+  "block.wet_grass.hit": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "step/grass4",
+        "volume": 0.42,
+        "pitch": 0.9
+      },
+      {
+        "name": "step/grass5",
+        "volume": 0.42,
+        "pitch": 0.9
+      },
+      {
+        "name": "step/grass6",
+        "volume": 0.42,
+        "pitch": 0.9
+      }
+    ]
+  },
+  "block.wet_grass.break": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "step/grass4",
+        "volume": 0.6,
+        "pitch": 0.9
+      },
+      {
+        "name": "step/grass5",
+        "volume": 0.6,
+        "pitch": 0.9
+      },
+      {
+        "name": "step/grass6",
+        "volume": 0.6,
+        "pitch": 0.9
+      }
+    ]
+  },
+  "block.wet_grass.place": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "step/grass4",
+        "volume": 0.51,
+        "pitch": 0.9
+      },
+      {
+        "name": "step/grass5",
+        "volume": 0.51,
+        "pitch": 0.9
+      },
+      {
+        "name": "step/grass6",
+        "volume": 0.51,
+        "pitch": 0.9
+      }
+    ]
+  },
+  "block.wet_grass.fall": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "step/grass4",
+        "volume": 0.42,
+        "pitch": 0.9
+      },
+      {
+        "name": "step/grass5",
+        "volume": 0.42,
+        "pitch": 0.9
+      },
+      {
+        "name": "step/grass6",
+        "volume": 0.42,
+        "pitch": 0.9
+      }
+    ]
+  },
+  "block.sweet_berry_bush.step": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "step/leaves4",
+        "volume": 0.4,
+        "pitch": 1.1
+      },
+      {
+        "name": "step/leaves5",
+        "volume": 0.4,
+        "pitch": 1.1
+      }
+    ]
+  },
+  "block.sweet_berry_bush.hit": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "step/leaves4",
+        "volume": 0.35,
+        "pitch": 1.1
+      },
+      {
+        "name": "step/leaves5",
+        "volume": 0.35,
+        "pitch": 1.1
+      }
+    ]
+  },
+  "block.sweet_berry_bush.break": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "step/leaves4",
+        "volume": 0.5,
+        "pitch": 1.1
+      },
+      {
+        "name": "step/leaves5",
+        "volume": 0.5,
+        "pitch": 1.1
+      }
+    ]
+  },
+  "block.sweet_berry_bush.place": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "step/leaves4",
+        "volume": 0.42,
+        "pitch": 1.1
+      },
+      {
+        "name": "step/leaves5",
+        "volume": 0.42,
+        "pitch": 1.1
+      }
+    ]
+  },
+  "block.sweet_berry_bush.fall": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "step/leaves4",
+        "volume": 0.35,
+        "pitch": 1.1
+      },
+      {
+        "name": "step/leaves5",
+        "volume": 0.35,
+        "pitch": 1.1
+      }
+    ]
+  },
+  "block.coral_block.step": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "step/stonef1",
+        "volume": 0.56,
+        "pitch": 1.2
+      },
+      {
+        "name": "step/stonef2",
+        "volume": 0.56,
+        "pitch": 1.2
+      },
+      {
+        "name": "step/stonef3",
+        "volume": 0.56,
+        "pitch": 1.2
+      },
+      {
+        "name": "step/stonef4",
+        "volume": 0.56,
+        "pitch": 1.2
+      },
+      {
+        "name": "step/stonef5",
+        "volume": 0.56,
+        "pitch": 1.2
+      },
+      {
+        "name": "step/stonef6",
+        "volume": 0.56,
+        "pitch": 1.2
+      }
+    ]
+  },
+  "block.coral_block.hit": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "step/stonef1",
+        "volume": 0.49,
+        "pitch": 1.2
+      },
+      {
+        "name": "step/stonef2",
+        "volume": 0.49,
+        "pitch": 1.2
+      },
+      {
+        "name": "step/stonef3",
+        "volume": 0.49,
+        "pitch": 1.2
+      },
+      {
+        "name": "step/stonef4",
+        "volume": 0.49,
+        "pitch": 1.2
+      },
+      {
+        "name": "step/stonef5",
+        "volume": 0.49,
+        "pitch": 1.2
+      },
+      {
+        "name": "step/stonef6",
+        "volume": 0.49,
+        "pitch": 1.2
+      }
+    ]
+  },
+  "block.coral_block.break": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "step/stonef1",
+        "volume": 0.7,
+        "pitch": 1.2
+      },
+      {
+        "name": "step/stonef2",
+        "volume": 0.7,
+        "pitch": 1.2
+      },
+      {
+        "name": "step/stonef3",
+        "volume": 0.7,
+        "pitch": 1.2
+      },
+      {
+        "name": "step/stonef4",
+        "volume": 0.7,
+        "pitch": 1.2
+      },
+      {
+        "name": "step/stonef5",
+        "volume": 0.7,
+        "pitch": 1.2
+      },
+      {
+        "name": "step/stonef6",
+        "volume": 0.7,
+        "pitch": 1.2
+      }
+    ]
+  },
+  "block.coral_block.place": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "step/stonef1",
+        "volume": 0.59,
+        "pitch": 1.2
+      },
+      {
+        "name": "step/stonef2",
+        "volume": 0.59,
+        "pitch": 1.2
+      },
+      {
+        "name": "step/stonef3",
+        "volume": 0.59,
+        "pitch": 1.2
+      },
+      {
+        "name": "step/stonef4",
+        "volume": 0.59,
+        "pitch": 1.2
+      },
+      {
+        "name": "step/stonef5",
+        "volume": 0.59,
+        "pitch": 1.2
+      },
+      {
+        "name": "step/stonef6",
+        "volume": 0.59,
+        "pitch": 1.2
+      }
+    ]
+  },
+  "block.coral_block.fall": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "step/stonef1",
+        "volume": 0.49,
+        "pitch": 1.2
+      },
+      {
+        "name": "step/stonef2",
+        "volume": 0.49,
+        "pitch": 1.2
+      },
+      {
+        "name": "step/stonef3",
+        "volume": 0.49,
+        "pitch": 1.2
+      },
+      {
+        "name": "step/stonef4",
+        "volume": 0.49,
+        "pitch": 1.2
+      },
+      {
+        "name": "step/stonef5",
+        "volume": 0.49,
+        "pitch": 1.2
+      },
+      {
+        "name": "step/stonef6",
+        "volume": 0.49,
+        "pitch": 1.2
+      }
+    ]
+  },
+  "block.sculk.step": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "block/slime1",
+        "volume": 0.32,
+        "pitch": 0.6
+      },
+      {
+        "name": "block/slime2",
+        "volume": 0.32,
+        "pitch": 0.6
+      },
+      {
+        "name": "block/slime3",
+        "volume": 0.32,
+        "pitch": 0.6
+      },
+      {
+        "name": "block/slime4",
+        "volume": 0.32,
+        "pitch": 0.6
+      },
+      {
+        "name": "block/slime5",
+        "volume": 0.32,
+        "pitch": 0.6
+      },
+      {
+        "name": "block/slime6",
+        "volume": 0.32,
+        "pitch": 0.6
+      },
+      {
+        "name": "block/slime7",
+        "volume": 0.32,
+        "pitch": 0.6
+      },
+      {
+        "name": "block/slime8",
+        "volume": 0.32,
+        "pitch": 0.6
+      },
+      {
+        "name": "block/slime9",
+        "volume": 0.32,
+        "pitch": 0.6
+      },
+      {
+        "name": "block/slime10",
+        "volume": 0.32,
+        "pitch": 0.6
+      },
+      {
+        "name": "block/slime11",
+        "volume": 0.32,
+        "pitch": 0.6
+      },
+      {
+        "name": "block/slime12",
+        "volume": 0.32,
+        "pitch": 0.6
+      }
+    ]
+  },
+  "block.sculk.hit": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "block/slime1",
+        "volume": 0.28,
+        "pitch": 0.6
+      },
+      {
+        "name": "block/slime2",
+        "volume": 0.28,
+        "pitch": 0.6
+      },
+      {
+        "name": "block/slime3",
+        "volume": 0.28,
+        "pitch": 0.6
+      },
+      {
+        "name": "block/slime4",
+        "volume": 0.28,
+        "pitch": 0.6
+      },
+      {
+        "name": "block/slime5",
+        "volume": 0.28,
+        "pitch": 0.6
+      },
+      {
+        "name": "block/slime6",
+        "volume": 0.28,
+        "pitch": 0.6
+      },
+      {
+        "name": "block/slime7",
+        "volume": 0.28,
+        "pitch": 0.6
+      },
+      {
+        "name": "block/slime8",
+        "volume": 0.28,
+        "pitch": 0.6
+      },
+      {
+        "name": "block/slime9",
+        "volume": 0.28,
+        "pitch": 0.6
+      },
+      {
+        "name": "block/slime10",
+        "volume": 0.28,
+        "pitch": 0.6
+      },
+      {
+        "name": "block/slime11",
+        "volume": 0.28,
+        "pitch": 0.6
+      },
+      {
+        "name": "block/slime12",
+        "volume": 0.28,
+        "pitch": 0.6
+      }
+    ]
+  },
+  "block.sculk.break": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "block/slime1",
+        "volume": 0.4,
+        "pitch": 0.6
+      },
+      {
+        "name": "block/slime2",
+        "volume": 0.4,
+        "pitch": 0.6
+      },
+      {
+        "name": "block/slime3",
+        "volume": 0.4,
+        "pitch": 0.6
+      },
+      {
+        "name": "block/slime4",
+        "volume": 0.4,
+        "pitch": 0.6
+      },
+      {
+        "name": "block/slime5",
+        "volume": 0.4,
+        "pitch": 0.6
+      },
+      {
+        "name": "block/slime6",
+        "volume": 0.4,
+        "pitch": 0.6
+      },
+      {
+        "name": "block/slime7",
+        "volume": 0.4,
+        "pitch": 0.6
+      },
+      {
+        "name": "block/slime8",
+        "volume": 0.4,
+        "pitch": 0.6
+      },
+      {
+        "name": "block/slime9",
+        "volume": 0.4,
+        "pitch": 0.6
+      },
+      {
+        "name": "block/slime10",
+        "volume": 0.4,
+        "pitch": 0.6
+      },
+      {
+        "name": "block/slime11",
+        "volume": 0.4,
+        "pitch": 0.6
+      },
+      {
+        "name": "block/slime12",
+        "volume": 0.4,
+        "pitch": 0.6
+      }
+    ]
+  },
+  "block.sculk.place": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "block/slime1",
+        "volume": 0.34,
+        "pitch": 0.6
+      },
+      {
+        "name": "block/slime2",
+        "volume": 0.34,
+        "pitch": 0.6
+      },
+      {
+        "name": "block/slime3",
+        "volume": 0.34,
+        "pitch": 0.6
+      },
+      {
+        "name": "block/slime4",
+        "volume": 0.34,
+        "pitch": 0.6
+      },
+      {
+        "name": "block/slime5",
+        "volume": 0.34,
+        "pitch": 0.6
+      },
+      {
+        "name": "block/slime6",
+        "volume": 0.34,
+        "pitch": 0.6
+      },
+      {
+        "name": "block/slime7",
+        "volume": 0.34,
+        "pitch": 0.6
+      },
+      {
+        "name": "block/slime8",
+        "volume": 0.34,
+        "pitch": 0.6
+      },
+      {
+        "name": "block/slime9",
+        "volume": 0.34,
+        "pitch": 0.6
+      },
+      {
+        "name": "block/slime10",
+        "volume": 0.34,
+        "pitch": 0.6
+      },
+      {
+        "name": "block/slime11",
+        "volume": 0.34,
+        "pitch": 0.6
+      },
+      {
+        "name": "block/slime12",
+        "volume": 0.34,
+        "pitch": 0.6
+      }
+    ]
+  },
+  "block.sculk.fall": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "block/slime1",
+        "volume": 0.28,
+        "pitch": 0.6
+      },
+      {
+        "name": "block/slime2",
+        "volume": 0.28,
+        "pitch": 0.6
+      },
+      {
+        "name": "block/slime3",
+        "volume": 0.28,
+        "pitch": 0.6
+      },
+      {
+        "name": "block/slime4",
+        "volume": 0.28,
+        "pitch": 0.6
+      },
+      {
+        "name": "block/slime5",
+        "volume": 0.28,
+        "pitch": 0.6
+      },
+      {
+        "name": "block/slime6",
+        "volume": 0.28,
+        "pitch": 0.6
+      },
+      {
+        "name": "block/slime7",
+        "volume": 0.28,
+        "pitch": 0.6
+      },
+      {
+        "name": "block/slime8",
+        "volume": 0.28,
+        "pitch": 0.6
+      },
+      {
+        "name": "block/slime9",
+        "volume": 0.28,
+        "pitch": 0.6
+      },
+      {
+        "name": "block/slime10",
+        "volume": 0.28,
+        "pitch": 0.6
+      },
+      {
+        "name": "block/slime11",
+        "volume": 0.28,
+        "pitch": 0.6
+      },
+      {
+        "name": "block/slime12",
+        "volume": 0.28,
+        "pitch": 0.6
+      }
+    ]
+  },
+  "block.amethyst_block.chime": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "block/crystal_chime1",
+        "volume": 0.6
+      },
+      {
+        "name": "block/crystal_chime2",
+        "volume": 0.6
+      },
+      {
+        "name": "block/crystal_chime3",
+        "volume": 0.6
+      },
+      {
+        "name": "block/crystal_chime4",
+        "volume": 0.6
+      },
+      {
+        "name": "block/crystal_chime5",
+        "volume": 0.6
+      },
+      {
+        "name": "block/crystal_chime6",
+        "volume": 0.6
+      }
+    ]
+  },
+  "block.amethyst_block.resonate": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "block/crystal_chime1",
+        "volume": 0.5,
+        "pitch": 0.6
+      },
+      {
+        "name": "block/crystal_chime2",
+        "volume": 0.5,
+        "pitch": 0.6
+      },
+      {
+        "name": "block/crystal_chime3",
+        "volume": 0.5,
+        "pitch": 0.6
+      },
+      {
+        "name": "block/crystal_chime4",
+        "volume": 0.5,
+        "pitch": 0.6
+      },
+      {
+        "name": "block/crystal_chime5",
+        "volume": 0.5,
+        "pitch": 0.6
+      },
+      {
+        "name": "block/crystal_chime6",
+        "volume": 0.5,
+        "pitch": 0.6
+      }
+    ]
+  },
+  "block.small_amethyst_bud.break": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "dig/crystal1",
+        "volume": 0.55
+      },
+      {
+        "name": "dig/crystal2",
+        "volume": 0.55
+      },
+      {
+        "name": "dig/crystal3",
+        "volume": 0.55
+      },
+      {
+        "name": "dig/crystal4",
+        "volume": 0.55
+      },
+      {
+        "name": "dig/crystal5",
+        "volume": 0.55
+      }
+    ]
+  },
+  "block.small_amethyst_bud.place": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "block/crystal_chime1",
+        "volume": 0.5
+      },
+      {
+        "name": "block/crystal_chime2",
+        "volume": 0.5
+      },
+      {
+        "name": "block/crystal_chime3",
+        "volume": 0.5
+      },
+      {
+        "name": "block/crystal_chime4",
+        "volume": 0.5
+      },
+      {
+        "name": "block/crystal_chime5",
+        "volume": 0.5
+      },
+      {
+        "name": "block/crystal_chime6",
+        "volume": 0.5
+      }
+    ]
+  },
+  "block.medium_amethyst_bud.break": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "dig/crystal1",
+        "volume": 0.55
+      },
+      {
+        "name": "dig/crystal2",
+        "volume": 0.55
+      },
+      {
+        "name": "dig/crystal3",
+        "volume": 0.55
+      },
+      {
+        "name": "dig/crystal4",
+        "volume": 0.55
+      },
+      {
+        "name": "dig/crystal5",
+        "volume": 0.55
+      }
+    ]
+  },
+  "block.medium_amethyst_bud.place": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "block/crystal_chime1",
+        "volume": 0.5
+      },
+      {
+        "name": "block/crystal_chime2",
+        "volume": 0.5
+      },
+      {
+        "name": "block/crystal_chime3",
+        "volume": 0.5
+      },
+      {
+        "name": "block/crystal_chime4",
+        "volume": 0.5
+      },
+      {
+        "name": "block/crystal_chime5",
+        "volume": 0.5
+      },
+      {
+        "name": "block/crystal_chime6",
+        "volume": 0.5
+      }
+    ]
+  },
+  "block.large_amethyst_bud.break": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "dig/crystal1",
+        "volume": 0.55
+      },
+      {
+        "name": "dig/crystal2",
+        "volume": 0.55
+      },
+      {
+        "name": "dig/crystal3",
+        "volume": 0.55
+      },
+      {
+        "name": "dig/crystal4",
+        "volume": 0.55
+      },
+      {
+        "name": "dig/crystal5",
+        "volume": 0.55
+      }
+    ]
+  },
+  "block.large_amethyst_bud.place": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "block/crystal_chime1",
+        "volume": 0.5
+      },
+      {
+        "name": "block/crystal_chime2",
+        "volume": 0.5
+      },
+      {
+        "name": "block/crystal_chime3",
+        "volume": 0.5
+      },
+      {
+        "name": "block/crystal_chime4",
+        "volume": 0.5
+      },
+      {
+        "name": "block/crystal_chime5",
+        "volume": 0.5
+      },
+      {
+        "name": "block/crystal_chime6",
+        "volume": 0.5
+      }
+    ]
+  },
+  "block.water.ambient": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "block/water_loop1",
+        "volume": 0.5
+      },
+      {
+        "name": "block/water_loop2",
+        "volume": 0.5
+      },
+      {
+        "name": "block/water_loop3",
+        "volume": 0.5
+      }
+    ]
+  },
+  "block.lava.ambient": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "ambient/lava1",
+        "volume": 0.5
+      },
+      {
+        "name": "ambient/lava2",
+        "volume": 0.5
+      }
+    ]
+  },
+  "block.lava.pop": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "block/lava_pop1",
+        "volume": 0.6
+      },
+      {
+        "name": "block/lava_pop2",
+        "volume": 0.6
+      },
+      {
+        "name": "block/lava_pop3",
+        "volume": 0.6
+      }
+    ]
+  },
+  "block.lava.extinguish": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "block/extinguish1",
+        "volume": 0.6
+      },
+      {
+        "name": "block/extinguish2",
+        "volume": 0.6
+      }
+    ]
+  },
+  "block.fire.extinguish": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "block/extinguish1",
+        "volume": 0.5
+      },
+      {
+        "name": "block/extinguish2",
+        "volume": 0.5
+      }
+    ]
+  },
+  "block.fire.ambient": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "block/fire_crackle1",
+        "volume": 0.5
+      },
+      {
+        "name": "block/fire_crackle2",
+        "volume": 0.5
+      },
+      {
+        "name": "block/fire_crackle3",
+        "volume": 0.5
+      },
+      {
+        "name": "block/fire_crackle4",
+        "volume": 0.5
+      }
+    ]
+  },
+  "block.furnace.fire_crackle": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "block/fire_crackle1",
+        "volume": 0.5
+      },
+      {
+        "name": "block/fire_crackle2",
+        "volume": 0.5
+      },
+      {
+        "name": "block/fire_crackle3",
+        "volume": 0.5
+      },
+      {
+        "name": "block/fire_crackle4",
+        "volume": 0.5
+      }
+    ]
+  },
+  "block.blastfurnace.fire_crackle": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "block/fire_crackle1",
+        "volume": 0.6,
+        "pitch": 0.85
+      },
+      {
+        "name": "block/fire_crackle2",
+        "volume": 0.6,
+        "pitch": 0.85
+      },
+      {
+        "name": "block/fire_crackle3",
+        "volume": 0.6,
+        "pitch": 0.85
+      },
+      {
+        "name": "block/fire_crackle4",
+        "volume": 0.6,
+        "pitch": 0.85
+      }
+    ]
+  },
+  "block.smoker.smoke": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "block/fire_crackle1",
+        "volume": 0.45,
+        "pitch": 1.1
+      },
+      {
+        "name": "block/fire_crackle2",
+        "volume": 0.45,
+        "pitch": 1.1
+      },
+      {
+        "name": "block/fire_crackle3",
+        "volume": 0.45,
+        "pitch": 1.1
+      },
+      {
+        "name": "block/fire_crackle4",
+        "volume": 0.45,
+        "pitch": 1.1
+      }
+    ]
+  },
+  "block.campfire.crackle": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "block/fire_crackle1",
+        "volume": 0.55
+      },
+      {
+        "name": "block/fire_crackle2",
+        "volume": 0.55
+      },
+      {
+        "name": "block/fire_crackle3",
+        "volume": 0.55
+      },
+      {
+        "name": "block/fire_crackle4",
+        "volume": 0.55
+      }
+    ]
+  },
+  "block.brewing_stand.brew": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "block/bubble1",
+        "volume": 0.5
+      },
+      {
+        "name": "block/bubble2",
+        "volume": 0.5
+      },
+      {
+        "name": "block/bubble3",
+        "volume": 0.5
+      },
+      {
+        "name": "ui/bubble1",
+        "volume": 0.5
+      },
+      {
+        "name": "ui/bubble2",
+        "volume": 0.5
+      },
+      {
+        "name": "ui/bubble3",
+        "volume": 0.5
+      }
+    ]
+  },
+  "block.bubble_column.bubble_pop": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "block/bubble1",
+        "volume": 0.5
+      },
+      {
+        "name": "block/bubble2",
+        "volume": 0.5
+      },
+      {
+        "name": "block/bubble3",
+        "volume": 0.5
+      }
+    ]
+  },
+  "block.bubble_column.upwards_ambient": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "ambient/bubbles1",
+        "volume": 0.4
+      },
+      {
+        "name": "ambient/bubbles2",
+        "volume": 0.4
+      }
+    ]
+  },
+  "block.bubble_column.upwards_inside": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "ambient/bubbles1",
+        "volume": 0.4
+      },
+      {
+        "name": "ambient/bubbles2",
+        "volume": 0.4
+      }
+    ]
+  },
+  "block.bubble_column.whirlpool_ambient": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "ambient/bubbles1",
+        "volume": 0.4,
+        "pitch": 0.8
+      },
+      {
+        "name": "ambient/bubbles2",
+        "volume": 0.4,
+        "pitch": 0.8
+      }
+    ]
+  },
+  "block.bubble_column.whirlpool_inside": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "ambient/bubbles1",
+        "volume": 0.4,
+        "pitch": 0.8
+      },
+      {
+        "name": "ambient/bubbles2",
+        "volume": 0.4,
+        "pitch": 0.8
+      }
+    ]
+  },
+  "ambient.underwater.loop.additions": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "block/bubble1",
+        "volume": 0.4
+      },
+      {
+        "name": "block/bubble2",
+        "volume": 0.4
+      },
+      {
+        "name": "block/bubble3",
+        "volume": 0.4
+      }
+    ]
+  },
+  "ambient.underwater.enter": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "entity/splash1",
+        "volume": 0.5
+      },
+      {
+        "name": "entity/splash2",
+        "volume": 0.5
+      },
+      {
+        "name": "entity/splash3",
+        "volume": 0.5
+      },
+      {
+        "name": "entity/splash4",
+        "volume": 0.5
+      },
+      {
+        "name": "entity/splash5",
+        "volume": 0.5
+      },
+      {
+        "name": "entity/splash6",
+        "volume": 0.5
+      },
+      {
+        "name": "entity/splash7",
+        "volume": 0.5
+      },
+      {
+        "name": "entity/splash8",
+        "volume": 0.5
+      }
+    ]
+  },
+  "ambient.underwater.exit": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "entity/splash1",
+        "volume": 0.5
+      },
+      {
+        "name": "entity/splash2",
+        "volume": 0.5
+      },
+      {
+        "name": "entity/splash3",
+        "volume": 0.5
+      },
+      {
+        "name": "entity/splash4",
+        "volume": 0.5
+      },
+      {
+        "name": "entity/splash5",
+        "volume": 0.5
+      },
+      {
+        "name": "entity/splash6",
+        "volume": 0.5
+      },
+      {
+        "name": "entity/splash7",
+        "volume": 0.5
+      },
+      {
+        "name": "entity/splash8",
+        "volume": 0.5
+      }
+    ]
+  },
+  "ui.hud.bubble_pop": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "ui/bubble1",
+        "volume": 0.6
+      },
+      {
+        "name": "ui/bubble2",
+        "volume": 0.6
+      },
+      {
+        "name": "ui/bubble3",
+        "volume": 0.6
+      }
+    ]
+  },
+  "entity.player.splash": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "entity/splash1",
+        "volume": 0.7
+      },
+      {
+        "name": "entity/splash2",
+        "volume": 0.7
+      },
+      {
+        "name": "entity/splash3",
+        "volume": 0.7
+      },
+      {
+        "name": "entity/splash4",
+        "volume": 0.7
+      },
+      {
+        "name": "entity/splash5",
+        "volume": 0.7
+      },
+      {
+        "name": "entity/splash6",
+        "volume": 0.7
+      },
+      {
+        "name": "entity/splash7",
+        "volume": 0.7
+      },
+      {
+        "name": "entity/splash8",
+        "volume": 0.7
+      }
+    ]
+  },
+  "entity.player.splash.high_speed": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "entity/splash_big1",
+        "volume": 0.8
+      },
+      {
+        "name": "entity/splash_big2",
+        "volume": 0.8
+      },
+      {
+        "name": "entity/splash_big3",
+        "volume": 0.8
+      }
+    ]
+  },
+  "entity.generic.splash": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "entity/splash1",
+        "volume": 0.6
+      },
+      {
+        "name": "entity/splash2",
+        "volume": 0.6
+      },
+      {
+        "name": "entity/splash3",
+        "volume": 0.6
+      },
+      {
+        "name": "entity/splash4",
+        "volume": 0.6
+      },
+      {
+        "name": "entity/splash5",
+        "volume": 0.6
+      },
+      {
+        "name": "entity/splash6",
+        "volume": 0.6
+      },
+      {
+        "name": "entity/splash7",
+        "volume": 0.6
+      },
+      {
+        "name": "entity/splash8",
+        "volume": 0.6
+      }
+    ]
+  },
+  "entity.player.swim": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "entity/splash1",
+        "volume": 0.4,
+        "pitch": 1.2
+      },
+      {
+        "name": "entity/splash2",
+        "volume": 0.4,
+        "pitch": 1.2
+      },
+      {
+        "name": "entity/splash3",
+        "volume": 0.4,
+        "pitch": 1.2
+      },
+      {
+        "name": "entity/splash4",
+        "volume": 0.4,
+        "pitch": 1.2
+      },
+      {
+        "name": "entity/splash5",
+        "volume": 0.4,
+        "pitch": 1.2
+      },
+      {
+        "name": "entity/splash6",
+        "volume": 0.4,
+        "pitch": 1.2
+      },
+      {
+        "name": "entity/splash7",
+        "volume": 0.4,
+        "pitch": 1.2
+      },
+      {
+        "name": "entity/splash8",
+        "volume": 0.4,
+        "pitch": 1.2
+      }
+    ]
+  },
+  "entity.boat.paddle_water": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "entity/splash1",
+        "volume": 0.4,
+        "pitch": 1.1
+      },
+      {
+        "name": "entity/splash2",
+        "volume": 0.4,
+        "pitch": 1.1
+      },
+      {
+        "name": "entity/splash3",
+        "volume": 0.4,
+        "pitch": 1.1
+      },
+      {
+        "name": "entity/splash4",
+        "volume": 0.4,
+        "pitch": 1.1
+      },
+      {
+        "name": "entity/splash5",
+        "volume": 0.4,
+        "pitch": 1.1
+      },
+      {
+        "name": "entity/splash6",
+        "volume": 0.4,
+        "pitch": 1.1
+      },
+      {
+        "name": "entity/splash7",
+        "volume": 0.4,
+        "pitch": 1.1
+      },
+      {
+        "name": "entity/splash8",
+        "volume": 0.4,
+        "pitch": 1.1
+      }
+    ]
+  },
+  "entity.fishing_bobber.splash": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "entity/splash1",
+        "volume": 0.5,
+        "pitch": 1.3
+      },
+      {
+        "name": "entity/splash2",
+        "volume": 0.5,
+        "pitch": 1.3
+      },
+      {
+        "name": "entity/splash3",
+        "volume": 0.5,
+        "pitch": 1.3
+      },
+      {
+        "name": "entity/splash4",
+        "volume": 0.5,
+        "pitch": 1.3
+      },
+      {
+        "name": "entity/splash5",
+        "volume": 0.5,
+        "pitch": 1.3
+      },
+      {
+        "name": "entity/splash6",
+        "volume": 0.5,
+        "pitch": 1.3
+      },
+      {
+        "name": "entity/splash7",
+        "volume": 0.5,
+        "pitch": 1.3
+      },
+      {
+        "name": "entity/splash8",
+        "volume": 0.5,
+        "pitch": 1.3
+      }
+    ]
+  },
+  "entity.fishing_bobber.retrieve": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "entity/splash1",
+        "volume": 0.5,
+        "pitch": 1.1
+      },
+      {
+        "name": "entity/splash2",
+        "volume": 0.5,
+        "pitch": 1.1
+      },
+      {
+        "name": "entity/splash3",
+        "volume": 0.5,
+        "pitch": 1.1
+      },
+      {
+        "name": "entity/splash4",
+        "volume": 0.5,
+        "pitch": 1.1
+      },
+      {
+        "name": "entity/splash5",
+        "volume": 0.5,
+        "pitch": 1.1
+      },
+      {
+        "name": "entity/splash6",
+        "volume": 0.5,
+        "pitch": 1.1
+      },
+      {
+        "name": "entity/splash7",
+        "volume": 0.5,
+        "pitch": 1.1
+      },
+      {
+        "name": "entity/splash8",
+        "volume": 0.5,
+        "pitch": 1.1
+      }
+    ]
+  },
+  "item.bucket.fill": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "entity/splash1",
+        "volume": 0.6,
+        "pitch": 0.9
+      },
+      {
+        "name": "entity/splash2",
+        "volume": 0.6,
+        "pitch": 0.9
+      },
+      {
+        "name": "entity/splash3",
+        "volume": 0.6,
+        "pitch": 0.9
+      },
+      {
+        "name": "entity/splash4",
+        "volume": 0.6,
+        "pitch": 0.9
+      },
+      {
+        "name": "entity/splash5",
+        "volume": 0.6,
+        "pitch": 0.9
+      },
+      {
+        "name": "entity/splash6",
+        "volume": 0.6,
+        "pitch": 0.9
+      },
+      {
+        "name": "entity/splash7",
+        "volume": 0.6,
+        "pitch": 0.9
+      },
+      {
+        "name": "entity/splash8",
+        "volume": 0.6,
+        "pitch": 0.9
+      }
+    ]
+  },
+  "item.bucket.empty": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "entity/splash_big1",
+        "volume": 0.7
+      },
+      {
+        "name": "entity/splash_big2",
+        "volume": 0.7
+      },
+      {
+        "name": "entity/splash_big3",
+        "volume": 0.7
+      }
+    ]
+  },
+  "item.bucket.fill_lava": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "block/lava_pop1",
+        "volume": 0.7
+      },
+      {
+        "name": "block/lava_pop2",
+        "volume": 0.7
+      },
+      {
+        "name": "block/lava_pop3",
+        "volume": 0.7
+      }
+    ]
+  },
+  "item.bucket.empty_lava": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "block/lava_pop1",
+        "volume": 0.8,
+        "pitch": 0.9
+      },
+      {
+        "name": "block/lava_pop2",
+        "volume": 0.8,
+        "pitch": 0.9
+      },
+      {
+        "name": "block/lava_pop3",
+        "volume": 0.8,
+        "pitch": 0.9
+      }
+    ]
+  },
+  "item.bottle.fill": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "block/bubble1",
+        "volume": 0.6
+      },
+      {
+        "name": "block/bubble2",
+        "volume": 0.6
+      },
+      {
+        "name": "block/bubble3",
+        "volume": 0.6
+      }
+    ]
+  },
+  "item.bottle.empty": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "block/bubble1",
+        "volume": 0.6,
+        "pitch": 0.9
+      },
+      {
+        "name": "block/bubble2",
+        "volume": 0.6,
+        "pitch": 0.9
+      },
+      {
+        "name": "block/bubble3",
+        "volume": 0.6,
+        "pitch": 0.9
+      }
+    ]
+  },
+  "item.firecharge.use": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "item/fire_use1",
+        "volume": 0.6
+      },
+      {
+        "name": "item/fire_use2",
+        "volume": 0.6
+      },
+      {
+        "name": "item/fire_use3",
+        "volume": 0.6
+      }
+    ]
+  },
+  "item.flintandsteel.use": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "item/fire_use1",
+        "volume": 0.5,
+        "pitch": 1.3
+      },
+      {
+        "name": "item/fire_use2",
+        "volume": 0.5,
+        "pitch": 1.3
+      },
+      {
+        "name": "item/fire_use3",
+        "volume": 0.5,
+        "pitch": 1.3
+      }
+    ]
+  },
+  "entity.splash_potion.break": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "step/glass1",
+        "volume": 0.7
+      },
+      {
+        "name": "step/glass2",
+        "volume": 0.7
+      },
+      {
+        "name": "entity/splash1",
+        "volume": 0.7
+      },
+      {
+        "name": "entity/splash2",
+        "volume": 0.7
+      },
+      {
+        "name": "entity/splash3",
+        "volume": 0.7
+      },
+      {
+        "name": "entity/splash4",
+        "volume": 0.7
+      },
+      {
+        "name": "entity/splash5",
+        "volume": 0.7
+      },
+      {
+        "name": "entity/splash6",
+        "volume": 0.7
+      },
+      {
+        "name": "entity/splash7",
+        "volume": 0.7
+      },
+      {
+        "name": "entity/splash8",
+        "volume": 0.7
+      }
+    ]
+  },
+  "entity.splash_potion.throw": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "entity/swish_light1",
+        "volume": 0.6
+      },
+      {
+        "name": "entity/swish_light2",
+        "volume": 0.6
+      },
+      {
+        "name": "entity/swish_light3",
+        "volume": 0.6
+      },
+      {
+        "name": "entity/swish_light4",
+        "volume": 0.6
+      }
+    ]
+  },
+  "entity.slime.squish": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "entity/slime1",
+        "volume": 0.7
+      },
+      {
+        "name": "entity/slime2",
+        "volume": 0.7
+      },
+      {
+        "name": "entity/slime3",
+        "volume": 0.7
+      },
+      {
+        "name": "entity/slime4",
+        "volume": 0.7
+      },
+      {
+        "name": "entity/slime5",
+        "volume": 0.7
+      },
+      {
+        "name": "entity/slime6",
+        "volume": 0.7
+      }
+    ]
+  },
+  "entity.slime.squish_small": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "entity/slime1",
+        "volume": 0.6,
+        "pitch": 1.3
+      },
+      {
+        "name": "entity/slime2",
+        "volume": 0.6,
+        "pitch": 1.3
+      },
+      {
+        "name": "entity/slime3",
+        "volume": 0.6,
+        "pitch": 1.3
+      },
+      {
+        "name": "entity/slime4",
+        "volume": 0.6,
+        "pitch": 1.3
+      },
+      {
+        "name": "entity/slime5",
+        "volume": 0.6,
+        "pitch": 1.3
+      },
+      {
+        "name": "entity/slime6",
+        "volume": 0.6,
+        "pitch": 1.3
+      }
+    ]
+  },
+  "entity.slime.jump": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "entity/slime1",
+        "volume": 0.6
+      },
+      {
+        "name": "entity/slime2",
+        "volume": 0.6
+      },
+      {
+        "name": "entity/slime3",
+        "volume": 0.6
+      },
+      {
+        "name": "entity/slime4",
+        "volume": 0.6
+      },
+      {
+        "name": "entity/slime5",
+        "volume": 0.6
+      },
+      {
+        "name": "entity/slime6",
+        "volume": 0.6
+      }
+    ]
+  },
+  "entity.slime.jump_small": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "entity/slime1",
+        "volume": 0.5,
+        "pitch": 1.3
+      },
+      {
+        "name": "entity/slime2",
+        "volume": 0.5,
+        "pitch": 1.3
+      },
+      {
+        "name": "entity/slime3",
+        "volume": 0.5,
+        "pitch": 1.3
+      },
+      {
+        "name": "entity/slime4",
+        "volume": 0.5,
+        "pitch": 1.3
+      },
+      {
+        "name": "entity/slime5",
+        "volume": 0.5,
+        "pitch": 1.3
+      },
+      {
+        "name": "entity/slime6",
+        "volume": 0.5,
+        "pitch": 1.3
+      }
+    ]
+  },
+  "entity.slime.attack": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "entity/slime1",
+        "volume": 0.7,
+        "pitch": 0.8
+      },
+      {
+        "name": "entity/slime2",
+        "volume": 0.7,
+        "pitch": 0.8
+      },
+      {
+        "name": "entity/slime3",
+        "volume": 0.7,
+        "pitch": 0.8
+      },
+      {
+        "name": "entity/slime4",
+        "volume": 0.7,
+        "pitch": 0.8
+      },
+      {
+        "name": "entity/slime5",
+        "volume": 0.7,
+        "pitch": 0.8
+      },
+      {
+        "name": "entity/slime6",
+        "volume": 0.7,
+        "pitch": 0.8
+      }
+    ]
+  },
+  "entity.magma_cube.squish": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "entity/slime1",
+        "volume": 0.6,
+        "pitch": 0.7
+      },
+      {
+        "name": "entity/slime2",
+        "volume": 0.6,
+        "pitch": 0.7
+      },
+      {
+        "name": "entity/slime3",
+        "volume": 0.6,
+        "pitch": 0.7
+      },
+      {
+        "name": "entity/slime4",
+        "volume": 0.6,
+        "pitch": 0.7
+      },
+      {
+        "name": "entity/slime5",
+        "volume": 0.6,
+        "pitch": 0.7
+      },
+      {
+        "name": "entity/slime6",
+        "volume": 0.6,
+        "pitch": 0.7
+      }
+    ]
+  },
+  "block.stone_button.click_on": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "block/click_on1",
+        "volume": 0.6
+      },
+      {
+        "name": "block/click_on2",
+        "volume": 0.6
+      },
+      {
+        "name": "block/click_on3",
+        "volume": 0.6
+      }
+    ]
+  },
+  "block.stone_button.click_off": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "block/click_off1",
+        "volume": 0.6
+      },
+      {
+        "name": "block/click_off2",
+        "volume": 0.6
+      },
+      {
+        "name": "block/click_off3",
+        "volume": 0.6
+      }
+    ]
+  },
+  "block.wooden_button.click_on": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "block/wood_click1",
+        "volume": 0.6
+      },
+      {
+        "name": "block/wood_click_b1",
+        "volume": 0.6
+      },
+      {
+        "name": "block/wood_click_b2",
+        "volume": 0.6
+      }
+    ]
+  },
+  "block.wooden_button.click_off": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "block/wood_click1",
+        "volume": 0.5,
+        "pitch": 0.85
+      },
+      {
+        "name": "block/wood_click_b1",
+        "volume": 0.5,
+        "pitch": 0.85
+      },
+      {
+        "name": "block/wood_click_b2",
+        "volume": 0.5,
+        "pitch": 0.85
+      }
+    ]
+  },
+  "block.stone_pressure_plate.click_on": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "block/plate_on1",
+        "volume": 0.6
+      },
+      {
+        "name": "block/plate_on2",
+        "volume": 0.6
+      },
+      {
+        "name": "block/plate_on3",
+        "volume": 0.6
+      }
+    ]
+  },
+  "block.stone_pressure_plate.click_off": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "block/plate_off1",
+        "volume": 0.6
+      },
+      {
+        "name": "block/plate_off2",
+        "volume": 0.6
+      },
+      {
+        "name": "block/plate_off3",
+        "volume": 0.6
+      }
+    ]
+  },
+  "block.wooden_pressure_plate.click_on": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "block/wood_click1",
+        "volume": 0.6,
+        "pitch": 0.8
+      },
+      {
+        "name": "block/wood_click_b1",
+        "volume": 0.6,
+        "pitch": 0.8
+      },
+      {
+        "name": "block/wood_click_b2",
+        "volume": 0.6,
+        "pitch": 0.8
+      }
+    ]
+  },
+  "block.wooden_pressure_plate.click_off": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "block/wood_click1",
+        "volume": 0.5,
+        "pitch": 0.7
+      },
+      {
+        "name": "block/wood_click_b1",
+        "volume": 0.5,
+        "pitch": 0.7
+      },
+      {
+        "name": "block/wood_click_b2",
+        "volume": 0.5,
+        "pitch": 0.7
+      }
+    ]
+  },
+  "block.metal_pressure_plate.click_on": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "block/metal_click1",
+        "volume": 0.6
+      },
+      {
+        "name": "block/metal_click2",
+        "volume": 0.6
+      }
+    ]
+  },
+  "block.metal_pressure_plate.click_off": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "block/metal_click1",
+        "volume": 0.5,
+        "pitch": 0.85
+      },
+      {
+        "name": "block/metal_click2",
+        "volume": 0.5,
+        "pitch": 0.85
+      }
+    ]
+  },
+  "block.comparator.click": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "block/click_on1",
+        "volume": 0.5,
+        "pitch": 1.3
+      },
+      {
+        "name": "block/click_on2",
+        "volume": 0.5,
+        "pitch": 1.3
+      },
+      {
+        "name": "block/click_on3",
+        "volume": 0.5,
+        "pitch": 1.3
+      }
+    ]
+  },
+  "block.dispenser.dispense": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "block/metal_click1",
+        "volume": 0.6
+      },
+      {
+        "name": "block/metal_click2",
+        "volume": 0.6
+      },
+      {
+        "name": "entity/swish_light1",
+        "volume": 0.6
+      },
+      {
+        "name": "entity/swish_light2",
+        "volume": 0.6
+      },
+      {
+        "name": "entity/swish_light3",
+        "volume": 0.6
+      },
+      {
+        "name": "entity/swish_light4",
+        "volume": 0.6
+      }
+    ]
+  },
+  "block.dispenser.fail": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "block/click_off1",
+        "volume": 0.6,
+        "pitch": 0.8
+      },
+      {
+        "name": "block/click_off2",
+        "volume": 0.6,
+        "pitch": 0.8
+      },
+      {
+        "name": "block/click_off3",
+        "volume": 0.6,
+        "pitch": 0.8
+      },
+      {
+        "name": "ui/error1",
+        "volume": 0.6,
+        "pitch": 0.8
+      },
+      {
+        "name": "ui/error2",
+        "volume": 0.6,
+        "pitch": 0.8
+      }
+    ]
+  },
+  "block.dispenser.launch": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "entity/swish_heavy1",
+        "volume": 0.7
+      },
+      {
+        "name": "entity/swish_heavy2",
+        "volume": 0.7
+      },
+      {
+        "name": "entity/swish_heavy3",
+        "volume": 0.7
+      },
+      {
+        "name": "entity/swish_heavy4",
+        "volume": 0.7
+      },
+      {
+        "name": "entity/swish_heavy5",
+        "volume": 0.7
+      },
+      {
+        "name": "entity/swish_heavy6",
+        "volume": 0.7
+      },
+      {
+        "name": "entity/swish_heavy7",
+        "volume": 0.7
+      },
+      {
+        "name": "entity/swish_heavy8",
+        "volume": 0.7
+      },
+      {
+        "name": "entity/swish_heavy9",
+        "volume": 0.7
+      }
+    ]
+  },
+  "block.ender_chest.open": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "tech/force1",
+        "volume": 0.6
+      },
+      {
+        "name": "tech/force2",
+        "volume": 0.6
+      },
+      {
+        "name": "tech/force3",
+        "volume": 0.6
+      }
+    ]
+  },
+  "block.ender_chest.close": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "tech/force1",
+        "volume": 0.6,
+        "pitch": 0.8
+      },
+      {
+        "name": "tech/force2",
+        "volume": 0.6,
+        "pitch": 0.8
+      },
+      {
+        "name": "tech/force3",
+        "volume": 0.6,
+        "pitch": 0.8
+      }
+    ]
+  },
+  "block.shulker_box.open": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "tech/force1",
+        "volume": 0.5,
+        "pitch": 1.1
+      },
+      {
+        "name": "tech/force2",
+        "volume": 0.5,
+        "pitch": 1.1
+      },
+      {
+        "name": "tech/force3",
+        "volume": 0.5,
+        "pitch": 1.1
+      }
+    ]
+  },
+  "block.shulker_box.close": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "tech/force1",
+        "volume": 0.5,
+        "pitch": 0.9
+      },
+      {
+        "name": "tech/force2",
+        "volume": 0.5,
+        "pitch": 0.9
+      },
+      {
+        "name": "tech/force3",
+        "volume": 0.5,
+        "pitch": 0.9
+      }
+    ]
+  },
+  "block.anvil.break": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "dig/metal_slam1",
+        "volume": 0.8
+      },
+      {
+        "name": "item/shield_block1",
+        "volume": 0.8
+      },
+      {
+        "name": "item/shield_block2",
+        "volume": 0.8
+      },
+      {
+        "name": "item/shield_block3",
+        "volume": 0.8
+      },
+      {
+        "name": "item/shield_block4",
+        "volume": 0.8
+      },
+      {
+        "name": "item/shield_block5",
+        "volume": 0.8
+      }
+    ]
+  },
+  "block.anvil.destroy": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "dig/metal_slam1",
+        "volume": 0.8,
+        "pitch": 0.9
+      },
+      {
+        "name": "item/shield_block1",
+        "volume": 0.8,
+        "pitch": 0.9
+      },
+      {
+        "name": "item/shield_block2",
+        "volume": 0.8,
+        "pitch": 0.9
+      },
+      {
+        "name": "item/shield_block3",
+        "volume": 0.8,
+        "pitch": 0.9
+      },
+      {
+        "name": "item/shield_block4",
+        "volume": 0.8,
+        "pitch": 0.9
+      },
+      {
+        "name": "item/shield_block5",
+        "volume": 0.8,
+        "pitch": 0.9
+      }
+    ]
+  },
+  "block.enchantment_table.use": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "tech/power_up1",
+        "volume": 0.6
+      },
+      {
+        "name": "tech/power_up2",
+        "volume": 0.6
+      },
+      {
+        "name": "tech/power_up3",
+        "volume": 0.6
+      }
+    ]
+  },
+  "block.beacon.ambient": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "tech/hum1",
+        "volume": 0.4
+      },
+      {
+        "name": "tech/hum2",
+        "volume": 0.4
+      },
+      {
+        "name": "tech/hum3",
+        "volume": 0.4
+      }
+    ]
+  },
+  "block.beacon.activate": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "tech/power_up1",
+        "volume": 0.7
+      },
+      {
+        "name": "tech/power_up2",
+        "volume": 0.7
+      },
+      {
+        "name": "tech/power_up3",
+        "volume": 0.7
+      }
+    ]
+  },
+  "block.beacon.deactivate": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "tech/power_down1",
+        "volume": 0.7
+      },
+      {
+        "name": "tech/power_down2",
+        "volume": 0.7
+      }
+    ]
+  },
+  "block.beacon.power_select": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "tech/charge1",
+        "volume": 0.7
+      },
+      {
+        "name": "tech/charge2",
+        "volume": 0.7
+      }
+    ]
+  },
+  "block.conduit.ambient": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "tech/force1",
+        "volume": 0.4
+      },
+      {
+        "name": "tech/force2",
+        "volume": 0.4
+      },
+      {
+        "name": "tech/force3",
+        "volume": 0.4
+      }
+    ]
+  },
+  "block.conduit.activate": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "tech/power_up1",
+        "volume": 0.6
+      },
+      {
+        "name": "tech/power_up2",
+        "volume": 0.6
+      },
+      {
+        "name": "tech/power_up3",
+        "volume": 0.6
+      }
+    ]
+  },
+  "block.conduit.deactivate": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "tech/power_down1",
+        "volume": 0.6
+      },
+      {
+        "name": "tech/power_down2",
+        "volume": 0.6
+      }
+    ]
+  },
+  "block.respawn_anchor.charge": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "tech/charge1",
+        "volume": 0.7
+      },
+      {
+        "name": "tech/charge2",
+        "volume": 0.7
+      }
+    ]
+  },
+  "block.respawn_anchor.deplete": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "tech/power_down1",
+        "volume": 0.7
+      },
+      {
+        "name": "tech/power_down2",
+        "volume": 0.7
+      }
+    ]
+  },
+  "block.respawn_anchor.set_spawn": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "tech/power_up1",
+        "volume": 0.7
+      },
+      {
+        "name": "tech/power_up2",
+        "volume": 0.7
+      },
+      {
+        "name": "tech/power_up3",
+        "volume": 0.7
+      }
+    ]
+  },
+  "block.end_portal.spawn": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "entity/explode_low1",
+        "volume": 0.8
+      },
+      {
+        "name": "entity/explode_low2",
+        "volume": 0.8
+      }
+    ]
+  },
+  "block.portal.travel": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "tech/teleport",
+        "volume": 0.6
+      }
+    ]
+  },
+  "entity.player.attack.weak": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "entity/swish_light1",
+        "volume": 0.7
+      },
+      {
+        "name": "entity/swish_light2",
+        "volume": 0.7
+      },
+      {
+        "name": "entity/swish_light3",
+        "volume": 0.7
+      },
+      {
+        "name": "entity/swish_light4",
+        "volume": 0.7
+      },
+      {
+        "name": "entity/slice1",
+        "volume": 0.7
+      },
+      {
+        "name": "entity/slice2",
+        "volume": 0.7
+      },
+      {
+        "name": "entity/dagger_swing1",
+        "volume": 0.7
+      }
+    ]
+  },
+  "entity.player.attack.strong": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "entity/swing1",
+        "volume": 0.75
+      },
+      {
+        "name": "entity/swing2",
+        "volume": 0.75
+      },
+      {
+        "name": "entity/swing3",
+        "volume": 0.75
+      },
+      {
+        "name": "entity/swish_heavy1",
+        "volume": 0.75
+      },
+      {
+        "name": "entity/swish_heavy2",
+        "volume": 0.75
+      },
+      {
+        "name": "entity/swish_heavy3",
+        "volume": 0.75
+      }
+    ]
+  },
+  "entity.player.attack.sweep": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "entity/swish_heavy1",
+        "volume": 0.75
+      },
+      {
+        "name": "entity/swish_heavy2",
+        "volume": 0.75
+      },
+      {
+        "name": "entity/swish_heavy3",
+        "volume": 0.75
+      },
+      {
+        "name": "entity/swish_heavy4",
+        "volume": 0.75
+      },
+      {
+        "name": "entity/swish_heavy5",
+        "volume": 0.75
+      },
+      {
+        "name": "entity/swish_heavy6",
+        "volume": 0.75
+      },
+      {
+        "name": "entity/swish_heavy7",
+        "volume": 0.75
+      },
+      {
+        "name": "entity/swish_heavy8",
+        "volume": 0.75
+      },
+      {
+        "name": "entity/swish_heavy9",
+        "volume": 0.75
+      },
+      {
+        "name": "entity/axe_swing1",
+        "volume": 0.75
+      }
+    ]
+  },
+  "entity.player.attack.crit": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "item/shield_block1",
+        "volume": 0.7,
+        "pitch": 1.2
+      },
+      {
+        "name": "item/shield_block2",
+        "volume": 0.7,
+        "pitch": 1.2
+      },
+      {
+        "name": "item/shield_block3",
+        "volume": 0.7,
+        "pitch": 1.2
+      },
+      {
+        "name": "entity/swing1",
+        "volume": 0.7,
+        "pitch": 1.2
+      },
+      {
+        "name": "entity/swing2",
+        "volume": 0.7,
+        "pitch": 1.2
+      },
+      {
+        "name": "entity/swing3",
+        "volume": 0.7,
+        "pitch": 1.2
+      }
+    ]
+  },
+  "entity.player.attack.knockback": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "dig/metal_slam1",
+        "volume": 0.75
+      },
+      {
+        "name": "entity/swish_heavy1",
+        "volume": 0.75
+      },
+      {
+        "name": "entity/swish_heavy2",
+        "volume": 0.75
+      }
+    ]
+  },
+  "entity.player.attack.nodamage": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "block/click_off1",
+        "volume": 0.5,
+        "pitch": 0.8
+      },
+      {
+        "name": "block/click_off2",
+        "volume": 0.5,
+        "pitch": 0.8
+      },
+      {
+        "name": "block/click_off3",
+        "volume": 0.5,
+        "pitch": 0.8
+      }
+    ]
+  },
+  "entity.arrow.shoot": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "entity/bow_shoot1",
+        "volume": 0.7
+      },
+      {
+        "name": "entity/bow_shoot2",
+        "volume": 0.7
+      }
+    ]
+  },
+  "entity.arrow.hit": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "entity/chop",
+        "volume": 0.6
+      },
+      {
+        "name": "dig/wood_hit1",
+        "volume": 0.6
+      },
+      {
+        "name": "dig/wood_hit2",
+        "volume": 0.6
+      }
+    ]
+  },
+  "entity.arrow.hit_player": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "block/click_on1",
+        "volume": 0.6
+      },
+      {
+        "name": "block/click_on2",
+        "volume": 0.6
+      },
+      {
+        "name": "block/click_on3",
+        "volume": 0.6
+      },
+      {
+        "name": "block/crystal_chime1",
+        "volume": 0.6
+      },
+      {
+        "name": "block/crystal_chime2",
+        "volume": 0.6
+      }
+    ]
+  },
+  "entity.skeleton.shoot": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "entity/bow_shoot1",
+        "volume": 0.6
+      },
+      {
+        "name": "entity/bow_shoot2",
+        "volume": 0.6
+      }
+    ]
+  },
+  "item.crossbow.shoot": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "entity/crossbow_shoot1",
+        "volume": 0.75
+      }
+    ]
+  },
+  "item.crossbow.loading_start": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "item/crossbow_load1",
+        "volume": 0.6
+      }
+    ]
+  },
+  "item.crossbow.loading_middle": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "item/crossbow_load2",
+        "volume": 0.6
+      }
+    ]
+  },
+  "item.crossbow.loading_end": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "item/crossbow_load3",
+        "volume": 0.6
+      }
+    ]
+  },
+  "item.crossbow.quick_charge_1": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "item/crossbow_load1",
+        "volume": 0.6,
+        "pitch": 1.2
+      }
+    ]
+  },
+  "item.crossbow.quick_charge_2": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "item/crossbow_load2",
+        "volume": 0.6,
+        "pitch": 1.2
+      }
+    ]
+  },
+  "item.crossbow.quick_charge_3": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "item/crossbow_load3",
+        "volume": 0.6,
+        "pitch": 1.2
+      }
+    ]
+  },
+  "item.crossbow.hit": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "entity/chop",
+        "volume": 0.6
+      },
+      {
+        "name": "dig/wood_hit3",
+        "volume": 0.6
+      }
+    ]
+  },
+  "item.trident.throw": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "entity/spear_swing1",
+        "volume": 0.7
+      }
+    ]
+  },
+  "item.trident.hit": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "entity/chop",
+        "volume": 0.7
+      },
+      {
+        "name": "dig/metal_hit1",
+        "volume": 0.7
+      },
+      {
+        "name": "dig/metal_hit2",
+        "volume": 0.7
+      }
+    ]
+  },
+  "item.trident.hit_ground": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "dig/metal_hit3",
+        "volume": 0.7
+      },
+      {
+        "name": "dig/metal_hit4",
+        "volume": 0.7
+      }
+    ]
+  },
+  "item.trident.return": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "entity/swish_heavy1",
+        "volume": 0.6,
+        "pitch": 1.1
+      },
+      {
+        "name": "entity/swish_heavy2",
+        "volume": 0.6,
+        "pitch": 1.1
+      },
+      {
+        "name": "entity/swish_heavy3",
+        "volume": 0.6,
+        "pitch": 1.1
+      }
+    ]
+  },
+  "item.trident.riptide_1": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "entity/swish_heavy1",
+        "volume": 0.7,
+        "pitch": 1.0
+      },
+      {
+        "name": "entity/swish_heavy2",
+        "volume": 0.7,
+        "pitch": 1.0
+      },
+      {
+        "name": "entity/swish_heavy3",
+        "volume": 0.7,
+        "pitch": 1.0
+      },
+      {
+        "name": "entity/swish_heavy4",
+        "volume": 0.7,
+        "pitch": 1.0
+      },
+      {
+        "name": "entity/swish_heavy5",
+        "volume": 0.7,
+        "pitch": 1.0
+      },
+      {
+        "name": "entity/swish_heavy6",
+        "volume": 0.7,
+        "pitch": 1.0
+      },
+      {
+        "name": "entity/swish_heavy7",
+        "volume": 0.7,
+        "pitch": 1.0
+      },
+      {
+        "name": "entity/swish_heavy8",
+        "volume": 0.7,
+        "pitch": 1.0
+      },
+      {
+        "name": "entity/swish_heavy9",
+        "volume": 0.7,
+        "pitch": 1.0
+      },
+      {
+        "name": "entity/splash1",
+        "volume": 0.7,
+        "pitch": 1.0
+      },
+      {
+        "name": "entity/splash2",
+        "volume": 0.7,
+        "pitch": 1.0
+      }
+    ]
+  },
+  "item.trident.riptide_2": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "entity/swish_heavy1",
+        "volume": 0.7,
+        "pitch": 0.9
+      },
+      {
+        "name": "entity/swish_heavy2",
+        "volume": 0.7,
+        "pitch": 0.9
+      },
+      {
+        "name": "entity/swish_heavy3",
+        "volume": 0.7,
+        "pitch": 0.9
+      },
+      {
+        "name": "entity/swish_heavy4",
+        "volume": 0.7,
+        "pitch": 0.9
+      },
+      {
+        "name": "entity/swish_heavy5",
+        "volume": 0.7,
+        "pitch": 0.9
+      },
+      {
+        "name": "entity/swish_heavy6",
+        "volume": 0.7,
+        "pitch": 0.9
+      },
+      {
+        "name": "entity/swish_heavy7",
+        "volume": 0.7,
+        "pitch": 0.9
+      },
+      {
+        "name": "entity/swish_heavy8",
+        "volume": 0.7,
+        "pitch": 0.9
+      },
+      {
+        "name": "entity/swish_heavy9",
+        "volume": 0.7,
+        "pitch": 0.9
+      },
+      {
+        "name": "entity/splash1",
+        "volume": 0.7,
+        "pitch": 0.9
+      },
+      {
+        "name": "entity/splash2",
+        "volume": 0.7,
+        "pitch": 0.9
+      }
+    ]
+  },
+  "item.trident.riptide_3": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "entity/swish_heavy1",
+        "volume": 0.7,
+        "pitch": 0.8
+      },
+      {
+        "name": "entity/swish_heavy2",
+        "volume": 0.7,
+        "pitch": 0.8
+      },
+      {
+        "name": "entity/swish_heavy3",
+        "volume": 0.7,
+        "pitch": 0.8
+      },
+      {
+        "name": "entity/swish_heavy4",
+        "volume": 0.7,
+        "pitch": 0.8
+      },
+      {
+        "name": "entity/swish_heavy5",
+        "volume": 0.7,
+        "pitch": 0.8
+      },
+      {
+        "name": "entity/swish_heavy6",
+        "volume": 0.7,
+        "pitch": 0.8
+      },
+      {
+        "name": "entity/swish_heavy7",
+        "volume": 0.7,
+        "pitch": 0.8
+      },
+      {
+        "name": "entity/swish_heavy8",
+        "volume": 0.7,
+        "pitch": 0.8
+      },
+      {
+        "name": "entity/swish_heavy9",
+        "volume": 0.7,
+        "pitch": 0.8
+      },
+      {
+        "name": "entity/splash1",
+        "volume": 0.7,
+        "pitch": 0.8
+      },
+      {
+        "name": "entity/splash2",
+        "volume": 0.7,
+        "pitch": 0.8
+      }
+    ]
+  },
+  "item.trident.thunder": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "entity/explode_low1",
+        "volume": 0.8
+      },
+      {
+        "name": "entity/explode_low2",
+        "volume": 0.8
+      }
+    ]
+  },
+  "item.shield.block": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "item/shield_block1",
+        "volume": 0.75
+      },
+      {
+        "name": "item/shield_block2",
+        "volume": 0.75
+      },
+      {
+        "name": "item/shield_block3",
+        "volume": 0.75
+      },
+      {
+        "name": "item/shield_block4",
+        "volume": 0.75
+      },
+      {
+        "name": "item/shield_block5",
+        "volume": 0.75
+      },
+      {
+        "name": "item/metal_pot1",
+        "volume": 0.75
+      },
+      {
+        "name": "item/metal_pot2",
+        "volume": 0.75
+      },
+      {
+        "name": "item/metal_pot3",
+        "volume": 0.75
+      }
+    ]
+  },
+  "item.shield.break": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "item/shield_block4",
+        "volume": 0.8
+      },
+      {
+        "name": "item/shield_block5",
+        "volume": 0.8
+      },
+      {
+        "name": "dig/wood_break1",
+        "volume": 0.8
+      }
+    ]
+  },
+  "item.elytra.flying": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "entity/swish_heavy5",
+        "volume": 0.3,
+        "pitch": 0.7
+      },
+      {
+        "name": "entity/swish_heavy6",
+        "volume": 0.3,
+        "pitch": 0.7
+      },
+      {
+        "name": "entity/swish_heavy7",
+        "volume": 0.3,
+        "pitch": 0.7
+      },
+      {
+        "name": "entity/swish_heavy8",
+        "volume": 0.3,
+        "pitch": 0.7
+      },
+      {
+        "name": "entity/swish_heavy9",
+        "volume": 0.3,
+        "pitch": 0.7
+      }
+    ]
+  },
+  "entity.item.break": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "item/shield_block1",
+        "volume": 0.7,
+        "pitch": 1.3
+      },
+      {
+        "name": "item/shield_block2",
+        "volume": 0.7,
+        "pitch": 1.3
+      },
+      {
+        "name": "item/shield_block3",
+        "volume": 0.7,
+        "pitch": 1.3
+      },
+      {
+        "name": "dig/metal_hit5",
+        "volume": 0.7,
+        "pitch": 1.3
+      }
+    ]
+  },
+  "entity.generic.explode": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "entity/explode1",
+        "volume": 0.8
+      },
+      {
+        "name": "entity/explode2",
+        "volume": 0.8
+      },
+      {
+        "name": "entity/explode3",
+        "volume": 0.8
+      },
+      {
+        "name": "entity/explode4",
+        "volume": 0.8
+      }
+    ]
+  },
+  "entity.lightning_bolt.impact": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "entity/explode_low1",
+        "volume": 0.8
+      },
+      {
+        "name": "entity/explode_low2",
+        "volume": 0.8
+      }
+    ]
+  },
+  "entity.horse.armor": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "block/chain1",
+        "volume": 0.6
+      },
+      {
+        "name": "block/chain2",
+        "volume": 0.6
+      }
+    ]
+  },
+  "entity.iron_golem.repair": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "dig/metal_hit1",
+        "volume": 0.7
+      },
+      {
+        "name": "dig/metal_hit2",
+        "volume": 0.7
+      },
+      {
+        "name": "item/hammer1",
+        "volume": 0.7
+      }
+    ]
+  },
+  "entity.generic.eat": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "entity/eat1",
+        "volume": 0.8
+      },
+      {
+        "name": "entity/eat2",
+        "volume": 0.8
+      },
+      {
+        "name": "entity/eat3",
+        "volume": 0.8
+      },
+      {
+        "name": "entity/eat4",
+        "volume": 0.8
+      },
+      {
+        "name": "entity/eat5",
+        "volume": 0.8
+      },
+      {
+        "name": "entity/eat6",
+        "volume": 0.8
+      },
+      {
+        "name": "entity/eat7",
+        "volume": 0.8
+      }
+    ]
+  },
+  "entity.generic.drink": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "entity/drink1",
+        "volume": 0.7
+      },
+      {
+        "name": "entity/drink2",
+        "volume": 0.7
+      },
+      {
+        "name": "entity/drink3",
+        "volume": 0.7
+      }
+    ]
+  },
+  "entity.player.burp": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "entity/burp",
+        "volume": 0.7
+      }
+    ]
+  },
+  "item.honey_bottle.drink": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "entity/drink1",
+        "volume": 0.7,
+        "pitch": 0.9
+      },
+      {
+        "name": "entity/drink2",
+        "volume": 0.7,
+        "pitch": 0.9
+      },
+      {
+        "name": "entity/drink3",
+        "volume": 0.7,
+        "pitch": 0.9
+      }
+    ]
+  },
+  "entity.experience_orb.pickup": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "entity/xp1",
+        "volume": 0.5
+      },
+      {
+        "name": "entity/xp2",
+        "volume": 0.5
+      },
+      {
+        "name": "entity/xp3",
+        "volume": 0.5
+      },
+      {
+        "name": "entity/xp4",
+        "volume": 0.5
+      },
+      {
+        "name": "entity/xp5",
+        "volume": 0.5
+      }
+    ]
+  },
+  "entity.player.levelup": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "entity/levelup",
+        "volume": 0.7
+      }
+    ]
+  },
+  "entity.item.pickup": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "entity/pickup1",
+        "volume": 0.5
+      },
+      {
+        "name": "entity/pickup2",
+        "volume": 0.5
+      },
+      {
+        "name": "entity/pickup3",
+        "volume": 0.5
+      }
+    ]
+  },
+  "item.book.page_turn": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "ui/page1",
+        "volume": 0.7
+      },
+      {
+        "name": "ui/page2",
+        "volume": 0.7
+      },
+      {
+        "name": "ui/page3",
+        "volume": 0.7
+      }
+    ]
+  },
+  "item.book.put": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "ui/book_put1",
+        "volume": 0.7
+      },
+      {
+        "name": "ui/book_put2",
+        "volume": 0.7
+      },
+      {
+        "name": "ui/book_put3",
+        "volume": 0.7
+      }
+    ]
+  },
+  "item.armor.equip_leather": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "armor/equip_leather1",
+        "volume": 0.7
+      },
+      {
+        "name": "armor/equip_leather2",
+        "volume": 0.7
+      },
+      {
+        "name": "armor/equip_leather3",
+        "volume": 0.7
+      }
+    ]
+  },
+  "item.armor.equip_generic": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "armor/equip_cloth1",
+        "volume": 0.7
+      },
+      {
+        "name": "armor/equip_cloth2",
+        "volume": 0.7
+      },
+      {
+        "name": "armor/equip_leather1",
+        "volume": 0.7
+      }
+    ]
+  },
+  "item.armor.equip_elytra": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "armor/equip_cloth1",
+        "volume": 0.7,
+        "pitch": 0.9
+      },
+      {
+        "name": "armor/equip_cloth2",
+        "volume": 0.7,
+        "pitch": 0.9
+      }
+    ]
+  },
+  "item.armor.equip_turtle": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "armor/equip_leather1",
+        "volume": 0.7,
+        "pitch": 0.8
+      },
+      {
+        "name": "armor/equip_leather2",
+        "volume": 0.7,
+        "pitch": 0.8
+      },
+      {
+        "name": "armor/equip_leather3",
+        "volume": 0.7,
+        "pitch": 0.8
+      }
+    ]
+  },
+  "ui.toast.in": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "ui/toast1",
+        "volume": 0.6
+      },
+      {
+        "name": "ui/toast2",
+        "volume": 0.6
+      },
+      {
+        "name": "ui/toast3",
+        "volume": 0.6
+      }
+    ]
+  },
+  "ui.toast.out": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "ui/close1",
+        "volume": 0.5
+      },
+      {
+        "name": "ui/close2",
+        "volume": 0.5
+      }
+    ]
+  },
+  "ui.toast.challenge_complete": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "ui/toast1",
+        "volume": 0.7
+      },
+      {
+        "name": "ui/toast2",
+        "volume": 0.7
+      },
+      {
+        "name": "ui/toast3",
+        "volume": 0.7
+      },
+      {
+        "name": "entity/levelup",
+        "volume": 0.7
+      }
+    ]
+  },
+  "ui.loom.select_pattern": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "ui/select1",
+        "volume": 0.6
+      },
+      {
+        "name": "ui/select2",
+        "volume": 0.6
+      },
+      {
+        "name": "ui/select3",
+        "volume": 0.6
+      }
+    ]
+  },
+  "ui.loom.take_result": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "ui/select1",
+        "volume": 0.6,
+        "pitch": 1.2
+      },
+      {
+        "name": "ui/select2",
+        "volume": 0.6,
+        "pitch": 1.2
+      },
+      {
+        "name": "ui/select3",
+        "volume": 0.6,
+        "pitch": 1.2
+      }
+    ]
+  },
+  "ui.stonecutter.select_recipe": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "ui/select1",
+        "volume": 0.5,
+        "pitch": 0.9
+      },
+      {
+        "name": "ui/select2",
+        "volume": 0.5,
+        "pitch": 0.9
+      },
+      {
+        "name": "ui/select3",
+        "volume": 0.5,
+        "pitch": 0.9
+      }
+    ]
+  },
+  "ui.stonecutter.take_result": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "block/plate_on1",
+        "volume": 0.6
+      },
+      {
+        "name": "block/plate_on2",
+        "volume": 0.6
+      },
+      {
+        "name": "block/plate_on3",
+        "volume": 0.6
+      }
+    ]
+  },
+  "ui.cartography_table.take_result": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "ui/page1",
+        "volume": 0.6
+      },
+      {
+        "name": "ui/page2",
+        "volume": 0.6
+      },
+      {
+        "name": "ui/page3",
+        "volume": 0.6
+      }
+    ]
+  },
+  "item.spyglass.use": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "ui/open1",
+        "volume": 0.5
+      },
+      {
+        "name": "ui/open2",
+        "volume": 0.5
+      }
+    ]
+  },
+  "item.spyglass.stop_using": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "ui/close1",
+        "volume": 0.5
+      },
+      {
+        "name": "ui/close2",
+        "volume": 0.5
+      }
+    ]
+  },
+  "item.lodestone_compass.lock": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "block/metal_click1",
+        "volume": 0.6
+      },
+      {
+        "name": "block/metal_click2",
+        "volume": 0.6
+      }
+    ]
+  },
+  "ambient.cave": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "ambient/cave1",
+        "volume": 0.45
+      },
+      {
+        "name": "ambient/cave2",
+        "volume": 0.45
+      },
+      {
+        "name": "ambient/cave3",
+        "volume": 0.45
+      },
+      {
+        "name": "ambient/cave4",
+        "volume": 0.45
+      },
+      {
+        "name": "ambient/cave5",
+        "volume": 0.45
+      },
+      {
+        "name": "ambient/cave6",
+        "volume": 0.45
+      },
+      {
+        "name": "ambient/cave7",
+        "volume": 0.45
+      },
+      {
+        "name": "ambient/cave8",
+        "volume": 0.45
+      }
+    ]
+  },
+  "ambient.basalt_deltas.additions": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "ambient/cave4",
+        "volume": 0.35,
+        "pitch": 0.7
+      },
+      {
+        "name": "ambient/cave5",
+        "volume": 0.35,
+        "pitch": 0.7
+      },
+      {
+        "name": "ambient/cave6",
+        "volume": 0.35,
+        "pitch": 0.7
+      },
+      {
+        "name": "ambient/cave7",
+        "volume": 0.35,
+        "pitch": 0.7
+      },
+      {
+        "name": "ambient/cave8",
+        "volume": 0.35,
+        "pitch": 0.7
+      }
+    ]
+  },
+  "ambient.crimson_forest.additions": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "ambient/cave4",
+        "volume": 0.35,
+        "pitch": 0.7
+      },
+      {
+        "name": "ambient/cave5",
+        "volume": 0.35,
+        "pitch": 0.7
+      },
+      {
+        "name": "ambient/cave6",
+        "volume": 0.35,
+        "pitch": 0.7
+      },
+      {
+        "name": "ambient/cave7",
+        "volume": 0.35,
+        "pitch": 0.7
+      },
+      {
+        "name": "ambient/cave8",
+        "volume": 0.35,
+        "pitch": 0.7
+      }
+    ]
+  },
+  "ambient.nether_wastes.additions": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "ambient/cave4",
+        "volume": 0.35,
+        "pitch": 0.7
+      },
+      {
+        "name": "ambient/cave5",
+        "volume": 0.35,
+        "pitch": 0.7
+      },
+      {
+        "name": "ambient/cave6",
+        "volume": 0.35,
+        "pitch": 0.7
+      },
+      {
+        "name": "ambient/cave7",
+        "volume": 0.35,
+        "pitch": 0.7
+      },
+      {
+        "name": "ambient/cave8",
+        "volume": 0.35,
+        "pitch": 0.7
+      }
+    ]
+  },
+  "ambient.soul_sand_valley.additions": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "ambient/cave4",
+        "volume": 0.35,
+        "pitch": 0.7
+      },
+      {
+        "name": "ambient/cave5",
+        "volume": 0.35,
+        "pitch": 0.7
+      },
+      {
+        "name": "ambient/cave6",
+        "volume": 0.35,
+        "pitch": 0.7
+      },
+      {
+        "name": "ambient/cave7",
+        "volume": 0.35,
+        "pitch": 0.7
+      },
+      {
+        "name": "ambient/cave8",
+        "volume": 0.35,
+        "pitch": 0.7
+      }
+    ]
+  },
+  "ambient.warped_forest.additions": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "ambient/cave4",
+        "volume": 0.35,
+        "pitch": 0.7
+      },
+      {
+        "name": "ambient/cave5",
+        "volume": 0.35,
+        "pitch": 0.7
+      },
+      {
+        "name": "ambient/cave6",
+        "volume": 0.35,
+        "pitch": 0.7
+      },
+      {
+        "name": "ambient/cave7",
+        "volume": 0.35,
+        "pitch": 0.7
+      },
+      {
+        "name": "ambient/cave8",
+        "volume": 0.35,
+        "pitch": 0.7
+      }
+    ]
   }
 }
