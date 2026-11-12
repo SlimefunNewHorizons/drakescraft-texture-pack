@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 128 128" width="128" height="128">
+<defs>
+<linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5b2bb5"/><stop offset=".45" stop-color="#2a1450"/><stop offset="1" stop-color="#0d051a"/></linearGradient>
+<linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#d6b860"/><stop offset=".5" stop-color="#b08a30"/><stop offset="1" stop-color="#684e1a"/></linearGradient>
+<radialGradient id="gem" cx=".4" cy=".35" r=".7"><stop offset="0" stop-color="#d8fbff"/><stop offset=".5" stop-color="#50dcf0"/><stop offset="1" stop-color="#0b4658"/></radialGradient>
+<pattern id="sc" width="12" height="9" patternUnits="userSpaceOnUse"><path d="M0 9 Q6 -1 12 9" fill="none" stroke="#b99be8" stroke-width="1" opacity=".22"/><path d="M-6 4.5 Q0 -4 6 4.5 M6 4.5 Q12 -4 18 4.5" fill="none" stroke="#000" stroke-width="1" opacity=".25"/></pattern>
+<filter id="bl"><feGaussianBlur stdDeviation="3"/></filter>
+<path id="s" d="M64 22 L40 26 Q22 34 20 58 L20 88 Q20 96 28 98 L42 98 L42 84 L50 76 L64 76 Z"/><path id="h" d="M30 40 Q14 34 6 6 Q24 16 42 30 Z"/>
+</defs>
+<use xlink:href="#h" fill="url(#gold)" stroke="#0a0810" stroke-width="3" stroke-linejoin="round"/>
+<use xlink:href="#s" fill="url(#g)" stroke="#0a0810" stroke-width="3.5" stroke-linejoin="round"/>
+<use xlink:href="#s" fill="url(#sc)"/>
+<g transform="translate(128 0) scale(-1 1)"><use xlink:href="#h" fill="url(#gold)" stroke="#0a0810" stroke-width="3" stroke-linejoin="round"/>
+<use xlink:href="#s" fill="url(#g)" stroke="#0a0810" stroke-width="3.5" stroke-linejoin="round"/><use xlink:href="#s" fill="url(#sc)"/></g>
+<path d="M64 8 L60 34 L68 34 Z" fill="#9634aa" stroke="#0a0810" stroke-width="2"/><ellipse cx="46" cy="64" rx="14" ry="6" fill="#50dcf0" opacity=".3" filter="url(#bl)"/><path d="M34 62 Q46 56 58 66 Q46 70 34 62 Z" fill="#50dcf0"/><path d="M70 66 Q82 56 94 62 Q82 70 70 66 Z" fill="#50dcf0"/>
+</svg>

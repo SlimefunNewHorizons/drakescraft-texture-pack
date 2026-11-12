@@ -5,7 +5,7 @@
 	"index": 0,
 	"fallback": {
 		"type": "minecraft:model",
-		"model": "minecraft:item/diamond_axe"},
+		"model": "drakescraft:item/gear3d/diamond_axe"},
 
 
 	"entries": [
@@ -21,7 +21,7 @@
 	],
 
 
-	"fallback": {"type": "minecraft:model","model": "minecraft:item/diamond_axe"}}}
+	"fallback": {"type": "minecraft:model","model": "drakescraft:item/gear3d/diamond_axe"}}}
     ]
   },
   "oversized_in_gui": true

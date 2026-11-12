@@ -5,7 +5,7 @@
 	"index": 0,
 	"fallback": {
 		"type": "minecraft:model",
-		"model": "minecraft:item/copper_axe"},
+		"model": "drakescraft:item/gear3d/copper_axe"},
 
 
 	"entries": [
@@ -15,7 +15,7 @@
 	],
 
 
-	"fallback": {"type": "minecraft:model","model": "minecraft:item/copper_axe"}}}
+	"fallback": {"type": "minecraft:model","model": "drakescraft:item/gear3d/copper_axe"}}}
     ]
   },
   "oversized_in_gui": true
