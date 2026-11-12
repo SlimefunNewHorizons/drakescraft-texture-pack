@@ -20,6 +20,7 @@ ADD_PREFIXES = (
     "assets/drakescraft/", "assets/terralense/", "assets/minecraft/sounds/", "assets/minecraft/equipment/",
     "assets/minecraft/textures/entity/equipment/", "assets/minecraft/textures/models/armor/",
     "assets/minecraft/models/slimefun/drakes_heads/", "assets/minecraft/textures/item/",
+    "assets/minecraft/models/slimefun/drakes_proc/", "assets/slimefun/textures/item/drakes_proc/",
 )
 ADD_EXACT = ("assets/minecraft/font/terralense_hud.json", "assets/minecraft/font/terralense_hud_top.json")
 GEAR_PREFIX = "assets/minecraft/items/"
@@ -119,6 +120,7 @@ def main():
     tool_ids = [t for t in a.tool_ids.split(",") if t] or sorted(
         p.stem for p in (repo / "assets/minecraft/items").glob("*.json") if "gear3d" in p.read_text())
     wrapped = 0
+    pending_prune = []
     for id_ in tool_ids:
         path = f"{GEAR_PREFIX}{id_}.json"
         if path in names:
@@ -127,8 +129,30 @@ def main():
                 add[path] = json.dumps(d, ensure_ascii=False, indent=1).encode()
                 wrapped += 1
         else:
-            add[path] = (repo / path).read_bytes()  # item nuevo (p. ej. cobre, lanza, maza)
+            doc = json.loads((repo / path).read_text())
+            pending_prune.append((path, doc))  # item nuevo (p. ej. cobre, lanza, maza): se poda al final
     report["items_herramienta_ajustados"] = wrapped
+
+    # Slimefun por id (procedural): select por custom_data de ids nuevos; el modelo del BASE pasa a ser el fallback
+    proc = 0
+    for p in sorted((repo / "assets/minecraft/items").glob("*.json")):
+        path = f"{GEAR_PREFIX}{p.name}"
+        if p.name == "player_head.json" or "drakes_proc" not in p.read_text():
+            continue
+        if path not in names and path not in add:
+            continue  # item nuevo: lo trata el bloque siguiente (con comprobacion de modelos)
+        base_doc = json.loads(add[path]) if path in add else json.loads(base.read(path))
+        repo_doc = json.loads(p.read_text())
+        m = repo_doc.get("model", {})
+        if m.get("type") != "minecraft:select" or m.get("component") != "minecraft:custom_data":
+            continue
+        m = copy.deepcopy(m)
+        m["fallback"] = base_doc.get("model", m.get("fallback"))
+        out_doc = dict(base_doc)
+        out_doc["model"] = m
+        add[path] = json.dumps(out_doc, ensure_ascii=False, indent=1).encode()
+        proc += 1
+    report["items_slimefun_por_id_fusionados"] = proc
 
     # items nuevos por id (Slimefun) que el base no tiene: solo si TODOS sus modelos existen (si no, el item pasaria de
     # vanilla a 'modelo faltante')
@@ -151,6 +175,34 @@ def main():
         if ns == "minecraft" and pth.split("/")[0] in ("item", "block", "builtin"):
             return True
         return f"assets/{ns}/models/{pth}.json" in avail
+
+    def prune(o):
+        """quita cases/entries cuyo modelo no existe; devuelve nº podados"""
+        n = 0
+        if isinstance(o, dict):
+            for key in ("cases", "entries"):
+                if isinstance(o.get(key), list):
+                    keep = []
+                    for c in o[key]:
+                        acc = set()
+                        refs(c, acc)
+                        if all(model_exists(r) for r in acc):
+                            keep.append(c)
+                        else:
+                            n += 1
+                    o[key] = keep
+            for v in o.values():
+                n += prune(v)
+        elif isinstance(o, list):
+            for v in o:
+                n += prune(v)
+        return n
+
+    pruned = 0
+    for path, doc in pending_prune:
+        pruned += prune(doc)
+        add[path] = json.dumps(doc, ensure_ascii=False, indent=1).encode()
+    report["cases_podados_por_modelo_faltante"] = pruned
 
     extra_items = skipped = 0
     skipped_list = []
