@@ -79,6 +79,7 @@ def main():
     ap.add_argument("--base", required=True, type=Path)
     ap.add_argument("--out", required=True, type=Path)
     ap.add_argument("--repo", type=Path, default=Path("."))
+    ap.add_argument("--donor", type=Path, help="zip antiguo del que rescatar modelos/texturas que los items.json del repo referencian y el base no trae")
     ap.add_argument("--tool-ids", default="", help="lista separada por comas de ids de items/ a envolver (por defecto, los de gear3d del repo)")
     a = ap.parse_args()
     repo = a.repo
@@ -253,6 +254,37 @@ def main():
         pruned += prune(doc)
         add[path] = json.dumps(doc, ensure_ascii=False, indent=1).encode()
     report["cases_podados_por_modelo_faltante"] = pruned
+
+    rescued = 0
+    if a.donor:
+        dz = zipfile.ZipFile(a.donor); dn = set(dz.namelist())
+
+        def take(path):
+            nonlocal rescued
+            if path in avail or path not in dn:
+                return
+            add[path] = dz.read(path); avail.add(path); rescued += 1
+            if path.endswith(".json") and "/models/" in path:
+                m = json.loads(dz.read(path))
+                if isinstance(m.get("parent"), str):
+                    ns, _, q = m["parent"].rpartition(":")
+                    take(f"assets/{ns or 'minecraft'}/models/{q}.json")
+                for t in (m.get("textures") or {}).values():
+                    if isinstance(t, str) and not t.startswith("#"):
+                        ns, _, q = t.rpartition(":")
+                        take(f"assets/{ns or 'minecraft'}/textures/{q}.png")
+                        take(f"assets/{ns or 'minecraft'}/textures/{q}.png.mcmeta")
+
+        for p_ in sorted((repo / "assets/minecraft/items").glob("*.json")):
+            if f"{GEAR_PREFIX}{p_.name}" in names or p_.name == "player_head.json":
+                continue
+            acc = set()
+            refs(json.loads(p_.read_text()), acc)
+            for r in acc:
+                if not model_exists(r):
+                    ns, _, q = r.rpartition(":")
+                    take(f"assets/{ns or 'minecraft'}/models/{q}.json")
+    report["modelos_rescatados_del_donor"] = rescued
 
     extra_items = skipped = 0
     skipped_list = []
