@@ -83,6 +83,29 @@ Para evitar caracteres rotos (`[]` o cajas vacías) en jugadores sin paquete de 
 
 ---
 
+## 🖼️ Galería (2026-11-12)
+
+Armaduras puestas (dragón con alas, kintsugi laqueada, tecnológica en 4 colores; cara libre):
+
+![Armaduras puestas](docs/previews/armaduras_v2_puestas.png)
+
+Alas del dragón (capa `wings`, salen del molde del cuerpo) e iconos de la armadura tecnológica:
+
+![Alas](docs/previews/alas_dragon.png) ![Iconos tech](docs/previews/iconos_tech.png)
+
+Herramientas y armaduras en vector (128 px):
+
+![Herramientas HD](docs/previews/herramientas_hd.jpg)
+![Iconos armaduras](docs/previews/iconos_armaduras.jpg)
+
+Slimefun por ID (1.624 diseños únicos, 128 px; muestra aleatoria):
+
+![Slimefun 1](docs/previews/slimefun_1.jpg)
+![Slimefun 2](docs/previews/slimefun_2.jpg)
+
+Regenerar armaduras: `python3 scripts/gen_armor_v2.py`; vista previa puesta: `python3 scripts/render_armor_preview.py out.png nombre:humanoid.png:leggings.png`. Uso en juego:
+`/give @s netherite_chestplate[item_model="drakescraft:tech_cyan_chestplate",equippable={slot:"chest",asset_id:"drakescraft:tech_cyan"}]` (también `dragon`, `kintsugi`, `tech_magenta|gold|green`).
+
 ## T2: aislamiento de shaders antiguos (#576)
 
 El pack combinado de T2 es distinto del SF-only de producción. Su shader
