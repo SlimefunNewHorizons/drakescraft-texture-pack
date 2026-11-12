@@ -343,6 +343,42 @@ def fishing_rod(mat, uid, cast=False):
     return S("wooden", uid, line + rod + guides + reel, "")
 
 
+ARMOR_MATS = ("chainmail", "iron", "golden", "diamond", "netherite", "copper")
+MATS["chainmail"] = ("#c3c8d8", "#7d8398", "#40445a", "#1a1b27", "#8b5cf6")
+
+
+def armor_icon(mat, uid, kind):
+    l, m, d, o, e = pal(mat)
+    chain = mat == "chainmail"
+    fillm = f"url(#metalv{uid})"
+    if kind == "helmet":
+        sh = "M18 78 C14 40 34 16 64 16 C94 16 114 40 110 78 L110 104 L88 104 L88 84 C88 74 80 70 72 70 L56 70 C48 70 40 74 40 84 L40 104 L18 104 Z"
+        extra = (f'<path d="M58 16 C60 6 68 6 70 16 L70 44 L58 44 Z" fill="#7c3aed" stroke="#2a1458" stroke-width="2"/>'
+                 f'<path d="M24 62 L104 62 L104 70 L24 70 Z" fill="url(#goldv{uid})" stroke="#3a2a08" stroke-width="2"/>'
+                 f'<path d="M64 70 L64 92" stroke="{o}" stroke-width="3" opacity="0.7"/>' + star(36, 40, 3, e) + star(92, 40, 3, e))
+    elif kind == "chestplate":
+        sh = "M10 40 L36 22 L50 28 C58 36 70 36 78 28 L92 22 L118 40 L110 76 L98 70 L96 112 L32 112 L30 70 L18 76 Z"
+        extra = (f'<path d="M64 40 L64 108" stroke="{o}" stroke-width="2.4" opacity="0.6"/>'
+                 f'<path d="M64 52 L74 68 L64 88 L54 68 Z" fill="url(#gem{uid})" stroke="#2a1458" stroke-width="2"/>'
+                 f'<path d="M34 100 L94 100" stroke="url(#gold{uid})" stroke-width="5"/>' + star(40, 56, 3, e) + star(88, 56, 3, e))
+    elif kind == "leggings":
+        sh = "M30 20 L98 20 L102 112 L74 112 L68 54 L60 54 L54 112 L26 112 Z"
+        extra = (f'<path d="M30 20 L98 20 L98 34 L30 34 Z" fill="url(#goldv{uid})" stroke="#3a2a08" stroke-width="2"/>'
+                 f'<circle cx="64" cy="27" r="4" fill="url(#gem{uid})"/>' + star(40, 72, 3, e) + star(88, 72, 3, e))
+    else:
+        sh = "M12 26 L46 26 L46 66 L60 74 C66 78 66 90 60 98 L60 106 L12 106 Z"
+        sh2 = "M116 26 L82 26 L82 66 L68 74 C62 78 62 90 68 98 L68 106 L116 106 Z"
+        extra = (f'<path d="M12 40 L46 40 M82 40 L116 40" stroke="url(#gold{uid})" stroke-width="5"/>' + star(28, 80, 3, e) + star(100, 80, 3, e))
+    shapes = f'<path d="{sh}" fill="{fillm}" stroke="{o}" stroke-width="3"/>'
+    if kind == "boots":
+        shapes += f'<path d="{sh2}" fill="{fillm}" stroke="{o}" stroke-width="3"/>'
+    shapes += shine(sh, mat, uid, "a") + (shine(sh2, mat, uid, "b") if kind == "boots" else "")
+    if chain:
+        shapes += f'<g clip-path="url(#bv{uid}a)" opacity="0.45">' + "".join(f'<circle cx="{x}" cy="{y}" r="4.2" fill="none" stroke="{o}" stroke-width="1.4"/>' for y in range(20, 116, 8) for x in range(10 + (y // 8 % 2) * 4, 120, 8)) + '</g>'
+    shapes += finishings(mat, uid) + extra
+    return S_flat(mat, uid, shapes, f'<path d="{sh}"/>')
+
+
 TOOLS = {"sword": sword, "pickaxe": pickaxe, "axe": axe, "shovel": shovel, "hoe": hoe, "spear": spear}
 SOLO = {"mace": (mace, "iron"), "trident": (trident, "diamond"),
         "bow": (lambda m, u: bow(m, u, -1), "wooden"), "bow_pulling_0": (lambda m, u: bow(m, u, 0), "wooden"),
@@ -360,7 +396,7 @@ SOLO = {"mace": (mace, "iron"), "trident": (trident, "diamond"),
         "shears": (shears, "iron"), "brush": (brush, "copper"), "flint_and_steel": (flint_and_steel, "iron"),
         "fishing_rod": (lambda m, u: fishing_rod(m, u, False), "wooden"), "fishing_rod_cast": (lambda m, u: fishing_rod(m, u, True), "wooden")}
 for _m in MATS:
-    if _m != "iron":
+    if _m not in ("iron", "chainmail"):
         SOLO[f"{_m}_mace"] = (mace, _m)
 
 
@@ -377,6 +413,10 @@ def main():
             jobs[f"{mat}_{tool}"] = fn(mat, f"{mat}{tool}")
     for name, (fn, mat) in SOLO.items():
         jobs[name] = fn(mat, name)
+    for mat in ARMOR_MATS:
+        for kind in ("helmet", "chestplate", "leggings", "boots"):
+            nm = f"{mat}_{kind}"
+            jobs[nm] = armor_icon(mat, nm, kind)
     for name, doc in jobs.items():
         sp = a.svg / f"{name}.svg"; sp.write_text(doc)
         subprocess.run(["rsvg-convert", "-w", str(a.size), "-h", str(a.size), str(sp), "-o", str(a.out / f"{name}.png")], check=True)
