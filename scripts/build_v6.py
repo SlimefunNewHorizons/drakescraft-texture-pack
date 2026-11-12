@@ -19,7 +19,7 @@ from pathlib import Path
 ADD_PREFIXES = (
     "assets/drakescraft/", "assets/terralense/", "assets/minecraft/sounds/", "assets/minecraft/equipment/",
     "assets/minecraft/textures/entity/equipment/", "assets/minecraft/textures/models/armor/",
-    "assets/minecraft/models/slimefun/drakes_heads/", "assets/minecraft/textures/item/",
+    "assets/minecraft/models/slimefun/drakes_heads/", "assets/minecraft/textures/item/", "assets/minecraft/textures/gui/sprites/hud/food_",
     "assets/minecraft/models/slimefun/drakes_proc/", "assets/slimefun/textures/item/drakes_proc/",
 )
 ADD_EXACT = ("assets/minecraft/font/terralense_hud.json", "assets/minecraft/font/terralense_hud_top.json")
