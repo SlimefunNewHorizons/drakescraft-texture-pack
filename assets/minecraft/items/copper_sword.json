@@ -5,7 +5,7 @@
 	"index": 0,
 	"fallback": {
 		"type": "minecraft:model",
-		"model": "minecraft:item/copper_sword"},
+		"model": "drakescraft:item/gear3d/copper_sword"},
 
 
 	"entries": [
@@ -23,7 +23,7 @@
 	],
 
 
-	"fallback": {"type": "minecraft:model","model": "minecraft:item/copper_sword"}}}
+	"fallback": {"type": "minecraft:model","model": "drakescraft:item/gear3d/copper_sword"}}}
     ]
   },
   "oversized_in_gui": true

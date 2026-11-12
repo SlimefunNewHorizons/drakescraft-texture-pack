@@ -19,11 +19,18 @@ from pathlib import Path
 from PIL import Image
 
 NS = "drakescraft"
-MATS = {  # base, luz, sombra
+MATS = {  # base, luz, sombra (estilo contenido: oscuro, acento minimo)
+    "wooden": ("#5a3d22", "#8a6838", "#33210f"),
+    "stone": ("#4a4f63", "#7a809a", "#262938"),
+    "iron": ("#6a7388", "#aeb7c8", "#2c3242"),
+    "golden": ("#8a6a24", "#c9a24a", "#3a2c10"),
+    "diamond": ("#1f6f7c", "#5fd6e4", "#0c2a33"),
     "netherite": ("#2d2638", "#54466a", "#16121e"),
-    "diamond": ("#2ab5c6", "#c2fbff", "#1b6f80"),
+    "copper": ("#8a4a2c", "#d2794a", "#3a1c10"),
+    "mace": ("#2a1f3d", "#7c3aed", "#120b1e"),
 }
-GOLD, GOLD_D, GOLD_L, WHITE, OUT = "#e0ad3a", "#8f6a1c", "#fff1a8", "#ffffff", "#0d0a14"
+TOOL_MATS = ["wooden", "stone", "iron", "golden", "diamond", "netherite", "copper"]
+GOLD, GOLD_D, GOLD_L, WHITE, OUT = "#b08a30", "#684e1a", "#d6b860", "#e8e4f0", "#0d0a14"
 HANDLE, HANDLE_L = "#6b4a2b", "#8f6a3c"
 Q = {"plate": (0, 0), "edge": (8, 0), "gold": (0, 8), "grip": (8, 8)}  # cuadrantes 8x8 del atlas 16x16
 
@@ -129,7 +136,56 @@ def axe():
     ]
 
 
-TOOLS = {"sword": sword, "pickaxe": pickaxe, "axe": axe}
+def shovel():
+    return [
+        el([7.2, -1.5, 7.2], [8.8, 0.5, 8.8], "gold"),
+        el([7.5, 0.5, 7.5], [8.5, 13, 8.5], "grip"),
+        el([7.0, 11.5, 7.0], [9.0, 12.5, 9.0], "gold"),
+        el([5.8, 12.5, 7.4], [10.2, 16.8, 8.6], "plate"),       # pala
+        el([5.0, 12.5, 7.1], [5.8, 16.5, 8.9], "edge"),         # bordes elevados
+        el([10.2, 12.5, 7.1], [11.0, 16.5, 8.9], "edge"),
+        el([6.4, 16.8, 7.5], [9.6, 18.0, 8.5], "edge"),
+    ]
+
+
+def hoe():
+    return [
+        el([7.2, -1.5, 7.2], [8.8, 0.5, 8.8], "gold"),
+        el([7.5, 0.5, 7.5], [8.5, 14, 8.5], "grip"),
+        el([7.0, 11.5, 7.0], [9.0, 12.5, 9.0], "gold"),
+        el([2.0, 12.6, 7.3], [9.0, 14.2, 8.7], "plate"),        # cuchilla hacia -X
+        el([1.5, 10.6, 7.4], [3.5, 12.6, 8.6], "edge"),         # punta hacia abajo
+        el([8.6, 14.2, 7.4], [10.0, 15.2, 8.6], "gold"),
+    ]
+
+
+def spear():
+    return [
+        el([7.2, -1.5, 7.2], [8.8, 0.5, 8.8], "gold"),
+        el([7.5, 0.5, 7.5], [8.5, 14, 8.5], "grip"),
+        el([6.8, 13.0, 6.8], [9.2, 14.2, 9.2], "gold"),
+        el([6.3, 14.2, 7.6], [9.7, 16.6, 8.4], "plate"),        # hoja en hoja de laurel
+        el([7.0, 16.6, 7.7], [9.0, 18.0, 8.3], "plate"),
+        el([7.6, 18.0, 7.85], [8.4, 19.2, 8.15], "edge"),
+    ]
+
+
+def mace():
+    return [
+        el([7.2, -1.5, 7.2], [8.8, 0.5, 8.8], "gold"),
+        el([7.5, 0.5, 7.5], [8.5, 11, 8.5], "grip"),
+        el([6.8, 10.5, 6.8], [9.2, 11.7, 9.2], "gold"),
+        el([5.0, 11.7, 5.5], [11.0, 17.0, 10.5], "plate"),      # cabeza
+        el([4.4, 13.0, 6.8], [5.0, 15.8, 9.2], "edge"),         # pinchos
+        el([11.0, 13.0, 6.8], [11.6, 15.8, 9.2], "edge"),
+        el([6.8, 17.0, 6.8], [9.2, 18.4, 9.2], "edge"),
+        el([6.8, 13.0, 4.9], [9.2, 15.8, 5.5], "edge"),
+        el([6.8, 13.0, 10.5], [9.2, 15.8, 11.1], "edge"),
+        el([5.0, 13.8, 5.5], [11.0, 14.6, 10.5], "gold"),       # banda
+    ]
+
+
+TOOLS = {"sword": sword, "pickaxe": pickaxe, "axe": axe, "shovel": shovel, "hoe": hoe, "spear": spear}
 
 DISPLAY = {  # equivalente a item/handheld; la geometria ya lleva los 45 grados
     "thirdperson_righthand": {"rotation": [0, -90, 55], "translation": [0, 4, 0.5], "scale": [0.85, 0.85, 0.85]},
@@ -141,15 +197,48 @@ DISPLAY = {  # equivalente a item/handheld; la geometria ya lleva los 45 grados
     "head": {"rotation": [0, 180, 0], "translation": [0, 13, 7], "scale": [1, 1, 1]},
     "fixed": {"rotation": [0, 180, 0], "translation": [0, 0, 0], "scale": [1, 1, 1]},
 }
+DISPLAY_MACE = dict(DISPLAY, thirdperson_righthand={"rotation": [0, -90, 55], "translation": [0, 4, 1], "scale": [1, 1, 1]},
+                    thirdperson_lefthand={"rotation": [0, 90, -55], "translation": [0, 4, 1], "scale": [1, 1, 1]},
+                    firstperson_righthand={"rotation": [0, -90, 25], "translation": [0, 3, 0.8], "scale": [0.9, 0.9, 0.9]},
+                    firstperson_lefthand={"rotation": [0, 90, -25], "translation": [0, 3, 0.8], "scale": [0.9, 0.9, 0.9]})
+DISPLAY_SPEAR_HAND = dict(DISPLAY,  # de item/spear_in_hand (jar 26.3)
+                          firstperson_righthand={"rotation": [-20, 90, -35], "translation": [3.13, 2, 0.13], "scale": [1.36, 1.36, 0.68]},
+                          firstperson_lefthand={"rotation": [-20, -90, 35], "translation": [3.13, 2, 0.13], "scale": [1.36, 1.36, 0.68]},
+                          thirdperson_righthand={"rotation": [5, 270, -40], "translation": [0, 2, 2], "scale": [1.7, 1.7, 0.85]},
+                          thirdperson_lefthand={"rotation": [5, -270, 40], "translation": [0, 2, 2], "scale": [1.7, 1.7, 0.85]})
+
+MODELS = []  # (id_modelo, material, fn, display)
+for _m in TOOL_MATS:
+    for _t, _fn in TOOLS.items():
+        _id = f"{_m}_{_t}"
+        MODELS.append((_id, _m, _fn, DISPLAY))
+        if _t == "spear":
+            MODELS.append((_id + "_in_hand", _m, _fn, DISPLAY_SPEAR_HAND))
+MODELS.append(("mace", "mace", mace, DISPLAY_MACE))
 
 
-def hook_items(root, mat, tool):
-    """Cambia los fallback minecraft:item/<id> por el modelo 3D (texto, para conservar el formato original)."""
-    p = root / f"assets/minecraft/items/{mat}_{tool}.json"
-    s = p.read_text(encoding="utf-8")
-    old, new = f'"minecraft:item/{mat}_{tool}"', f'"{NS}:item/gear3d/{mat}_{tool}"'
-    s = s.replace(old, new)
-    p.write_text(s, encoding="utf-8")
+def item_json(mid):
+    ref = f"{NS}:item/gear3d/{mid}"
+    if mid.endswith("_spear"):  # misma estructura que el vanilla: gui/suelo/marco = modelo, mano = in_hand
+        return {"model": {"type": "minecraft:select", "property": "minecraft:display_context",
+                          "cases": [{"when": ["gui", "ground", "fixed", "on_shelf"], "model": {"type": "minecraft:model", "model": ref}}],
+                          "fallback": {"type": "minecraft:model", "model": ref + "_in_hand"}}, "swap_animation_scale": 1.95}
+    return {"model": {"type": "minecraft:model", "model": ref}}
+
+
+def hook_items(root, mid):
+    """items/<id>.json: si existe (con cases Slimefun) cambia el fallback minecraft:item/<id>; si no, lo crea."""
+    if mid.endswith("_in_hand"):
+        return
+    p = root / f"assets/minecraft/items/{mid}.json"
+    if p.exists():
+        s = p.read_text(encoding="utf-8")
+        s = s.replace(f'"minecraft:item/{mid}"', f'"{NS}:item/gear3d/{mid}"')
+        if mid.endswith("_spear") and "gear3d" not in s:
+            s = json.dumps(item_json(mid), indent=2) + "\n"
+        p.write_text(s, encoding="utf-8")
+    else:
+        p.write_text(json.dumps(item_json(mid), indent=2) + "\n", encoding="utf-8")
 
 
 def collect_models(node):
@@ -169,32 +258,34 @@ def validate(root):
     for mat in MATS:
         if not (root / f"assets/{NS}/textures/item/gear3d/{mat}.png").exists():
             errs.append(f"falta textura {mat}")
-        for tool in TOOLS:
-            mp = root / f"assets/{NS}/models/item/gear3d/{mat}_{tool}.json"
-            m = json.loads(mp.read_text(encoding="utf-8"))
-            n += 1
-            for k, v in m["textures"].items():
-                ns, _, path = v.partition(":")
-                if not (root / f"assets/{ns}/textures/{path}.png").exists():
-                    errs.append(f"{mp.name}: textura {v} no existe")
-            for e in m["elements"]:
-                if any(not -16 <= c <= 32 for c in e["from"] + e["to"]):
-                    errs.append(f"{mp.name}: elemento fuera de -16..32")
-                if any(a >= b for a, b in zip(e["from"], e["to"])):
-                    errs.append(f"{mp.name}: from >= to")
-                for f in e["faces"].values():
-                    if any(not 0 <= u <= 16 for u in f["uv"]):
-                        errs.append(f"{mp.name}: uv fuera de 0..16")
-            ip = root / f"assets/minecraft/items/{mat}_{tool}.json"
-            items = json.loads(ip.read_text(encoding="utf-8"))
-            refs = set(collect_models(items))
-            if f"{NS}:item/gear3d/{mat}_{tool}" not in refs:
-                errs.append(f"{ip.name}: no usa el modelo 3D")
-            for r in refs:
-                ns, _, path = r.partition(":")
-                if not (root / f"assets/{ns or 'minecraft'}/models/{path}.json").exists():
-                    # los cases Slimefun/jackstar existentes no son de este script: solo aviso
-                    (errs if ns == NS else warns).append(f"{ip.name}: modelo {r} no existe")
+    for mid, mat, fn, _d in MODELS:
+        mp = root / f"assets/{NS}/models/item/gear3d/{mid}.json"
+        m = json.loads(mp.read_text(encoding="utf-8"))
+        n += 1
+        for k, v in m["textures"].items():
+            ns, _, path = v.partition(":")
+            if not (root / f"assets/{ns}/textures/{path}.png").exists():
+                errs.append(f"{mp.name}: textura {v} no existe")
+        for e in m["elements"]:
+            if any(not -16 <= c <= 32 for c in e["from"] + e["to"]):
+                errs.append(f"{mp.name}: elemento fuera de -16..32")
+            if any(a >= b for a, b in zip(e["from"], e["to"])):
+                errs.append(f"{mp.name}: from >= to")
+            for f in e["faces"].values():
+                if any(not 0 <= u <= 16 for u in f["uv"]):
+                    errs.append(f"{mp.name}: uv fuera de 0..16")
+        if mid.endswith("_in_hand"):
+            continue
+        ip = root / f"assets/minecraft/items/{mid}.json"
+        items = json.loads(ip.read_text(encoding="utf-8"))
+        refs = set(collect_models(items))
+        if f"{NS}:item/gear3d/{mid}" not in refs:
+            errs.append(f"{ip.name}: no usa el modelo 3D")
+        for r in refs:
+            ns, _, path = r.partition(":")
+            if not (root / f"assets/{ns or 'minecraft'}/models/{path}.json").exists():
+                # los cases Slimefun/jackstar existentes no son de este script: solo aviso
+                (errs if ns == NS else warns).append(f"{ip.name}: modelo {r} no existe")
     print(f"aviso: {len(warns)} refs preexistentes (slimefun/jackstar) sin modelo en este worktree")
     return n, errs
 
@@ -205,15 +296,14 @@ def main():
     root = Path(ap.parse_args().root)
     for mat in MATS:
         write_svg_png(mat, root)
-        for tool, fn in TOOLS.items():
-            mid = f"{mat}_{tool}"
-            model = {"credit": "DrakesCraft kintsugi 3D (gen_tool_models_3d.py)", "texture_size": [16, 16],
-                     "textures": {"0": f"{NS}:item/gear3d/{mat}", "particle": f"{NS}:item/gear3d/{mat}"},
-                     "elements": fn(), "gui_light": "front", "display": DISPLAY}
-            out = root / f"assets/{NS}/models/item/gear3d/{mid}.json"
-            out.parent.mkdir(parents=True, exist_ok=True)
-            out.write_text(json.dumps(model, indent=2) + "\n", encoding="utf-8")
-            hook_items(root, mat, tool)
+    for mid, mat, fn, disp in MODELS:
+        model = {"credit": "DrakesCraft kintsugi 3D (gen_tool_models_3d.py)", "texture_size": [16, 16],
+                 "textures": {"0": f"{NS}:item/gear3d/{mat}", "particle": f"{NS}:item/gear3d/{mat}"},
+                 "elements": fn(), "gui_light": "front", "display": disp}
+        out = root / f"assets/{NS}/models/item/gear3d/{mid}.json"
+        out.parent.mkdir(parents=True, exist_ok=True)
+        out.write_text(json.dumps(model, indent=2) + "\n", encoding="utf-8")
+        hook_items(root, mid)
     n, errs = validate(root)
     print(f"{n} modelos, {len(errs)} errores")
     for e in errs:

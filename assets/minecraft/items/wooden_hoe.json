@@ -5,7 +5,7 @@
 	"index": 0,
 	"fallback": {
 		"type": "minecraft:model",
-		"model": "minecraft:item/wooden_hoe"},
+		"model": "drakescraft:item/gear3d/wooden_hoe"},
 
 
 	"entries": [
@@ -17,7 +17,7 @@
 	],
 
 
-	"fallback": {"type": "minecraft:model","model": "minecraft:item/wooden_hoe"}}}
+	"fallback": {"type": "minecraft:model","model": "drakescraft:item/gear3d/wooden_hoe"}}}
     ]
   },
   "oversized_in_gui": true

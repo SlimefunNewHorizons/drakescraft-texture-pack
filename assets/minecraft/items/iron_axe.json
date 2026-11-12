@@ -5,7 +5,7 @@
 	"index": 0,
 	"fallback": {
 		"type": "minecraft:model",
-		"model": "minecraft:item/iron_axe"},
+		"model": "drakescraft:item/gear3d/iron_axe"},
 
 
 	"entries": [
@@ -17,7 +17,7 @@
 	],
 
 
-	"fallback": {"type": "minecraft:model","model": "minecraft:item/iron_axe"}}}
+	"fallback": {"type": "minecraft:model","model": "drakescraft:item/gear3d/iron_axe"}}}
     ]
   },
   "oversized_in_gui": true

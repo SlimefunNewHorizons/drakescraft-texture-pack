@@ -5,7 +5,7 @@
 	"index": 0,
 	"fallback": {
 		"type": "minecraft:model",
-		"model": "minecraft:item/diamond_shovel"},
+		"model": "drakescraft:item/gear3d/diamond_shovel"},
 
 
 	"entries": [
@@ -18,7 +18,7 @@
 	],
 
 
-	"fallback": {"type": "minecraft:model","model": "minecraft:item/diamond_shovel"}}}
+	"fallback": {"type": "minecraft:model","model": "drakescraft:item/gear3d/diamond_shovel"}}}
     ]
   },
   "oversized_in_gui": true

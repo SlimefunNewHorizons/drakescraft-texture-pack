@@ -1,6 +1,16 @@
 {
   "layers": {
+    "horse_body": [
+      {
+        "texture": "minecraft:gold"
+      }
+    ],
     "humanoid": [
+      {
+        "texture": "minecraft:gold"
+      }
+    ],
+    "humanoid_baby": [
       {
         "texture": "minecraft:gold"
       }
@@ -10,15 +20,23 @@
         "texture": "minecraft:gold"
       }
     ],
-    "horse_body": [
-      {
-        "texture": "minecraft:gold"
-      }
-    ],
     "nautilus_body": [
       {
         "texture": "minecraft:gold"
       }
+    ],
+    "wolf_body": [
+      {
+        "texture": "minecraft:gold"
+      }
     ]
-  }
+  },
+  "trim_overrides": [
+    {
+      "palette": "minecraft:trim/gold_darker",
+      "when": {
+        "material": "minecraft:gold"
+      }
+    }
+  ]
 }

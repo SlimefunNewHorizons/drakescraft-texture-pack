@@ -5,7 +5,27 @@
         "texture": "drakescraft:kintsugi"
       }
     ],
+    "humanoid_baby": [
+      {
+        "texture": "drakescraft:kintsugi"
+      }
+    ],
     "humanoid_leggings": [
+      {
+        "texture": "drakescraft:kintsugi"
+      }
+    ],
+    "horse_body": [
+      {
+        "texture": "drakescraft:kintsugi"
+      }
+    ],
+    "nautilus_body": [
+      {
+        "texture": "drakescraft:kintsugi"
+      }
+    ],
+    "wolf_body": [
       {
         "texture": "drakescraft:kintsugi"
       }

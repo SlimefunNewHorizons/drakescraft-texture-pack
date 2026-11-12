@@ -1,6 +1,16 @@
 {
   "layers": {
+    "horse_body": [
+      {
+        "texture": "minecraft:netherite"
+      }
+    ],
     "humanoid": [
+      {
+        "texture": "minecraft:netherite"
+      }
+    ],
+    "humanoid_baby": [
       {
         "texture": "minecraft:netherite"
       }
@@ -10,15 +20,23 @@
         "texture": "minecraft:netherite"
       }
     ],
-    "horse_body": [
-      {
-        "texture": "minecraft:netherite"
-      }
-    ],
     "nautilus_body": [
       {
         "texture": "minecraft:netherite"
       }
+    ],
+    "wolf_body": [
+      {
+        "texture": "minecraft:netherite"
+      }
     ]
-  }
+  },
+  "trim_overrides": [
+    {
+      "palette": "minecraft:trim/netherite_darker",
+      "when": {
+        "material": "minecraft:netherite"
+      }
+    }
+  ]
 }

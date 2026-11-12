@@ -1,6 +1,16 @@
 {
   "layers": {
+    "horse_body": [
+      {
+        "texture": "minecraft:iron"
+      }
+    ],
     "humanoid": [
+      {
+        "texture": "minecraft:iron"
+      }
+    ],
+    "humanoid_baby": [
       {
         "texture": "minecraft:iron"
       }
@@ -10,15 +20,23 @@
         "texture": "minecraft:iron"
       }
     ],
-    "horse_body": [
-      {
-        "texture": "minecraft:iron"
-      }
-    ],
     "nautilus_body": [
       {
         "texture": "minecraft:iron"
       }
+    ],
+    "wolf_body": [
+      {
+        "texture": "minecraft:iron"
+      }
     ]
-  }
+  },
+  "trim_overrides": [
+    {
+      "palette": "minecraft:trim/iron_darker",
+      "when": {
+        "material": "minecraft:iron"
+      }
+    }
+  ]
 }
