@@ -1,22 +1,11 @@
 {
-	"model": {
-	"type": "minecraft:range_dispatch",
-	"property": "minecraft:custom_model_data",
-	"index": 0,
-	"fallback": {
-		"type": "minecraft:model",
-		"model": "minecraft:item/pumpkin_seeds"},
-
-
-	"entries": [
-	{"threshold": 0, "model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_name",
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
 	"cases": [
-		{"when": {"text":"","extra":[{"text":"Grass Seeds","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"bold":false}]}, "model": {"type": "minecraft:model", "model": "slimefun/18_exotic_garden/plants/grass_seeds"}}	
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"EM_PUMPKIN_SEEDS"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/elementmanipulation/em_pumpkin_seeds"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"GCE_FORTIFIED_VITA_FEED"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/fluffymachines/smart_factory"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"POLLEN"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/fnamplifications/fmg_generator_honeycomb_broken"}}
 	],
-
-
-	"fallback": {"type": "minecraft:model","model": "minecraft:item/pumpkin_seeds"}}}
-    ]
-  },
-  "oversized_in_gui": true
+	"fallback": {"type":"minecraft:range_dispatch","property":"minecraft:custom_model_data","index":0,"fallback":{"type":"minecraft:model","model":"minecraft:item/pumpkin_seeds"},"entries":[{"threshold":0,"model":{"type":"minecraft:select","property":"minecraft:component","component":"minecraft:custom_name","cases":[{"when":{"text":"","extra":[{"text":"Grass Seeds","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"bold":false}]},"model":{"type":"minecraft:model","model":"slimefun/18_exotic_garden/plants/grass_seeds"}}],"fallback":{"type":"minecraft:model","model":"minecraft:item/pumpkin_seeds"}}}]}
+	},
+	"oversized_in_gui": true
 }

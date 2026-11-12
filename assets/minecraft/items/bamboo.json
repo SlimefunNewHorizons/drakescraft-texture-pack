@@ -1,22 +1,10 @@
 {
-	"model": {
-	"type": "minecraft:range_dispatch",
-	"property": "minecraft:custom_model_data",
-	"index": 0,
-	"fallback": {
-		"type": "minecraft:model",
-		"model": "minecraft:item/bamboo"},
-
-
-	"entries": [
-	{"threshold": 0, "model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_name",
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
 	"cases": [
-		{"when": {"text":"","extra":[{"text":"Reinforced Channel","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"white","bold":false}]}, "model": {"type": "minecraft:model", "model": "slimefun/24_galactifun/components/reinforced_channel"}}
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CRY_POSE_CHANGER"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/crystamaehistoria/cry_imbued_stand"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"REINFORCED_CHANNEL"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/galaxyfun/reinforced_channel"}}
 	],
-
-
-	"fallback": {"type": "minecraft:model","model": "minecraft:item/bamboo"}}}
-    ]
-  },
-  "oversized_in_gui": true
+	"fallback": {"type":"minecraft:range_dispatch","property":"minecraft:custom_model_data","index":0,"fallback":{"type":"minecraft:model","model":"minecraft:item/bamboo"},"entries":[{"threshold":0,"model":{"type":"minecraft:select","property":"minecraft:component","component":"minecraft:custom_name","cases":[{"when":{"text":"","extra":[{"text":"Reinforced Channel","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"white","bold":false}]},"model":{"type":"minecraft:model","model":"slimefun/24_galactifun/components/reinforced_channel"}}],"fallback":{"type":"minecraft:model","model":"minecraft:item/bamboo"}}}]}
+	},
+	"oversized_in_gui": true
 }

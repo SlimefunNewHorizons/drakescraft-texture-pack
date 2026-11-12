@@ -1,0 +1,12 @@
+{
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
+	"cases": [
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"DK2_CRAFTER_1"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/danktech2/dk2_crafter_1"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"FN_JUKEBOX_I"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/fnamplifications/fn_fal_condenser_1"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"FN_JUKEBOX_II"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/fnamplifications/fn_fal_condenser_2"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"FN_JUKEBOX_III"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/fnamplifications/fn_fal_condenser_3"}}
+	],
+	"fallback": {"type":"minecraft:model","model":"minecraft:block/jukebox"}
+	},
+	"oversized_in_gui": true
+}

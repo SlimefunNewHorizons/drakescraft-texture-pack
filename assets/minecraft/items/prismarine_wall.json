@@ -1,0 +1,12 @@
+{
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
+	"cases": [
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CRY_EXALTATION_STAND"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/crystamaehistoria/cry_mysterious_potted_plant"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"DYNATECH_DEGRADED_WATER_MILL_2"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/dynatech/dynatech_degraded_water_mill_2"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"DYNATECH_WATER_MILL_2"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/dynatech/dynatech_degraded_water_mill_2"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"HYDRO_GENERATOR"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/infinityexpansion/hydro_generator"}}
+	],
+	"fallback": {"type":"minecraft:model","model":"minecraft:block/prismarine_wall_inventory"}
+	},
+	"oversized_in_gui": true
+}

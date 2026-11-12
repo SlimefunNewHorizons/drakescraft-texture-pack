@@ -1,28 +1,10 @@
 {
-  "model": {
-    "type": "minecraft:range_dispatch",
-    "property": "minecraft:count",
-    "scale": 64,
-    "fallback": {
-      "type": "minecraft:model",
-      "model": "minecraft:item/arrow"
-    },
-    "entries": [
-      {
-        "threshold": 0,
-        "model": {
-          "type": "minecraft:model",
-          "model": "minecraft:item/arrow"
-        }
-      },
-      {
-        "threshold":64,
-        "model": {
-          "type": "minecraft:model",
-          "model": "jackstar:item/2_items/arrow_full"
-        }
-      }
-    ]
-  },
-  "oversized_in_gui": true
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
+	"cases": [
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"GRAPPLE_ARROW"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/drakesnanotech/grapple_arrow"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"TRICK_ARROW_CARTRIDGE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/galaxyfun/aluminum_composite"}}
+	],
+	"fallback": {"type":"minecraft:range_dispatch","property":"minecraft:count","scale":64,"fallback":{"type":"minecraft:model","model":"minecraft:item/arrow"},"entries":[{"threshold":0,"model":{"type":"minecraft:model","model":"minecraft:item/arrow"}},{"threshold":64,"model":{"type":"minecraft:model","model":"jackstar:item/2_items/arrow_full"}}]}
+	},
+	"oversized_in_gui": true
 }

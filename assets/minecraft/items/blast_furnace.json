@@ -1,30 +1,23 @@
 {
-	"model": {
-	"type": "minecraft:range_dispatch",
-	"property": "minecraft:custom_model_data",
-	"index": 0,
-	"fallback": {
-		"type": "minecraft:model",
-		"model": "minecraft:block/blast_furnace"},
-
-
-	"entries": [
-	{"threshold": 0, "model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_name",
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
 	"cases": [
-		{"when": {"text":"","extra":[{"text":"Makeshift Smeltery","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"yellow","bold":false}]}, "model": {"type": "minecraft:model", "model": "slimefun/3_basic_machines/makeshift_smeltery"}},
-
-		{"when": {"text":"","extra":[{"text":"Crank Generator","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"gray","bold":false}]}, "model": {"type": "minecraft:model", "model": "slimefun/34_fluffy_machines/crank_generator"}},
-		{"when": {"text":"","extra":[{"text":"Generator Core","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"gray","bold":false}]}, "model": {"type": "minecraft:model", "model": "slimefun/34_fluffy_machines/generator_core"}},
-		{"when": {"text":"","extra":[{"text":"Electric Dust Fabricator","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"gold","bold":false}]}, "model": {"type": "minecraft:model", "model": "slimefun/34_fluffy_machines/electric_dust_fabricator"}},
-		{"when": {"text":"","extra":[{"text":"Super Heated Furnace","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"red","bold":false}]}, "model": {"type": "minecraft:model", "model": "slimefun/34_fluffy_machines/super_heated_furnace"}},
-                {"when": {"text":"","extra":[{"text":"Foundry","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"red","bold":false}]}, "model": {"type": "minecraft:model", "model": "slimefun/34_fluffy_machines/foundry"}}
-
-
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"DYNATECH_FOOD_GENERATOR"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/litexpansion/generator"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"ELECTRIC_DUST_FABRICATOR"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/fluffymachines/electric_dust_fabricator"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"FM_FAST_SMELTERY"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/litexpansion/refined_smeltery"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"GCE_EXCITATION_CHAMBER"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/geneticchickengineering/gce_excitation_chamber"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"GCE_EXCITATION_CHAMBER_2"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/geneticchickengineering/gce_excitation_chamber_2"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"GCE_EXCITATION_CHAMBER_3"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/geneticchickengineering/gce_excitation_chamber_3"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"IDOE_ELECTRIC_BLASTFURNACE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/idreamofeasy/idoe_lavaboat"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"IDOE_ELECTRIC_BLASTFURNACE_2"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/idreamofeasy/idoe_electric_blastfurnace_2"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"IDOE_ELECTRIC_BLASTFURNACE_3"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/idreamofeasy/idoe_electric_blastfurnace_3"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"REFINED_SMELTERY"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/litexpansion/refined_smeltery"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"STONEWORKS_FACTORY"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/infinityexpansion/stoneworks_factory"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"SUPERHEATED_FURNACE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/fluffymachines/superheated_furnace"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"SUPREME_FORGE_INGOT_I"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/supreme/supreme_forge_ingot_i"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"SUPREME_FORGE_INGOT_II"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/supreme/supreme_forge_ingot_ii"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"SUPREME_FORGE_INGOT_III"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/supreme/supreme_forge_ingot_iii"}}
 	],
-
-
-	"fallback": {"type": "minecraft:model","model": "minecraft:block/blast_furnace"}}}
-    ]
-  },
-  "oversized_in_gui": true
+	"fallback": {"type":"minecraft:range_dispatch","property":"minecraft:custom_model_data","index":0,"fallback":{"type":"minecraft:model","model":"minecraft:block/blast_furnace"},"entries":[{"threshold":0,"model":{"type":"minecraft:select","property":"minecraft:component","component":"minecraft:custom_name","cases":[{"when":{"text":"","extra":[{"text":"Makeshift Smeltery","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"yellow","bold":false}]},"model":{"type":"minecraft:model","model":"slimefun/3_basic_machines/makeshift_smeltery"}},{"when":{"text":"","extra":[{"text":"Crank Generator","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"gray","bold":false}]},"model":{"type":"minecraft:model","model":"slimefun/34_fluffy_machines/crank_generator"}},{"when":{"text":"","extra":[{"text":"Generator Core","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"gray","bold":false}]},"model":{"type":"minecraft:model","model":"slimefun/34_fluffy_machines/generator_core"}},{"when":{"text":"","extra":[{"text":"Electric Dust Fabricator","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"gold","bold":false}]},"model":{"type":"minecraft:model","model":"slimefun/34_fluffy_machines/electric_dust_fabricator"}},{"when":{"text":"","extra":[{"text":"Super Heated Furnace","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"red","bold":false}]},"model":{"type":"minecraft:model","model":"slimefun/34_fluffy_machines/super_heated_furnace"}},{"when":{"text":"","extra":[{"text":"Foundry","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"red","bold":false}]},"model":{"type":"minecraft:model","model":"slimefun/34_fluffy_machines/foundry"}}],"fallback":{"type":"minecraft:model","model":"minecraft:block/blast_furnace"}}}]}
+	},
+	"oversized_in_gui": true
 }

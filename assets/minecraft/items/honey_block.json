@@ -1,0 +1,9 @@
+{
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
+	"cases": [
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"HONEY_BLOCK"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/fnamplifications/fmg_generator_honeycomb_broken"}}
+	],
+	"fallback": {"type":"minecraft:model","model":"minecraft:block/honey_block"}
+	},
+	"oversized_in_gui": true
+}

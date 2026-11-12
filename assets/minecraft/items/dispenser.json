@@ -1,31 +1,17 @@
 {
-	"model": {
-	"type": "minecraft:range_dispatch",
-	"property": "minecraft:custom_model_data",
-	"index": 0,
-	"fallback": {
-		"type": "minecraft:model",
-		"model": "minecraft:item/dispenser"},
-
-
-	"entries": [
-	{"threshold": 0, "model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_name",
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
 	"cases": [
-		{"when": {"text":"","extra":[{"text":"Dispenser (Facing up)"}]}, "model": {"type": "minecraft:model", "model": "minecraft:block/dispenser_vertical"}},
-		{"when": {"text":"","extra":[{"text":"Dispenser (Facing down)"}]}, "model": {"type": "minecraft:model", "model": "slimefun/0_ui/dispenser_face_down"}},
-		{"when": {"text":"","extra":[{"text":"Grind Stone","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"aqua","bold":false}]}, "model": {"type": "minecraft:model", "model": "slimefun/3_basic_machines/grind_stone"}},
-		{"when": {"text":"","extra":[{"text":"Ore Crusher","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"aqua","bold":false}]}, "model": {"type": "minecraft:model", "model": "slimefun/3_basic_machines/ore_crusher"}},
-		{"when": {"text":"","extra":[{"text":"Block Placer","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"green","bold":false}]}, "model": {"type": "minecraft:model", "model": "slimefun/3_basic_machines/block_placer"}},
-		{"when": {"text":"","extra":[{"text":"Ancient Pedestal","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"light_purple","bold":false}]}, "model": {"type": "minecraft:model", "model": "slimefun/15_magical_gadgets/ancient_pedestal"}},
-		{"when": {"text":"","extra":[{"text":"Environmental Forcefield Generator","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"white","bold":false}]}, "model": {"type": "minecraft:model", "model": "slimefun/24_galactifun/machines/efg"}},
-		{"when": {"text":"","extra":[{"text":"Android Interface ","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"gray","bold":false},{"text":"(Items)","italic":false,"color":"blue"}]}, "model": {"type": "minecraft:model", "model": "slimefun/31_androids/android_interface_items"}},
-		{"when": {"text":"","extra":[{"text":"Android Interface ","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"gray","bold":false},{"text":"(Fuel)","italic":false,"color":"red"}]}, "model": {"type": "minecraft:model", "model": "slimefun/31_androids/android_interface_fuel"}},
-		{"when": {"text":"","extra":[{"text":"Exp Dispenser","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"green","bold":false}]}, "model": {"type": "minecraft:model", "model": "slimefun/34_fluffy_machines/exp_dispenser"}}
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CRY_PHILOSOPHERS_SPRAY"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/crystamaehistoria/cry_waystone"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"ENVIRONMENTAL_FORCEFIELD_GENERATOR"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/galaxyfun/environmental_forcefield_generator"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"FM_STACKED_ANCIENT_PEDESTAL"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/fastmachines/fm_stacked_ancient_pedestal"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"FN_BLOCK_BREAKER_I"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/fnamplifications/fn_block_breaker_i"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"FN_BLOCK_BREAKER_II"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/fnamplifications/fn_block_breaker_ii"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"FN_BLOCK_BREAKER_III"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/fnamplifications/fn_block_breaker_iii"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"IDOE_DISPENSER_STACK"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/idreamofeasy/idoe_dispenser_stack"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"MANUAL_MILL"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/litexpansion/manual_mill"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"METAL_FORGE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/litexpansion/refined_smeltery"}}
 	],
-
-
-	"fallback": {"type": "minecraft:model","model": "minecraft:item/dispenser"}}}
-    ]
-  },
-  "oversized_in_gui": true
+	"fallback": {"type":"minecraft:range_dispatch","property":"minecraft:custom_model_data","index":0,"fallback":{"type":"minecraft:model","model":"minecraft:item/dispenser"},"entries":[{"threshold":0,"model":{"type":"minecraft:select","property":"minecraft:component","component":"minecraft:custom_name","cases":[{"when":{"text":"","extra":[{"text":"Dispenser (Facing up)"}]},"model":{"type":"minecraft:model","model":"minecraft:block/dispenser_vertical"}},{"when":{"text":"","extra":[{"text":"Dispenser (Facing down)"}]},"model":{"type":"minecraft:model","model":"slimefun/0_ui/dispenser_face_down"}},{"when":{"text":"","extra":[{"text":"Grind Stone","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"aqua","bold":false}]},"model":{"type":"minecraft:model","model":"slimefun/3_basic_machines/grind_stone"}},{"when":{"text":"","extra":[{"text":"Ore Crusher","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"aqua","bold":false}]},"model":{"type":"minecraft:model","model":"slimefun/3_basic_machines/ore_crusher"}},{"when":{"text":"","extra":[{"text":"Block Placer","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"green","bold":false}]},"model":{"type":"minecraft:model","model":"slimefun/3_basic_machines/block_placer"}},{"when":{"text":"","extra":[{"text":"Ancient Pedestal","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"light_purple","bold":false}]},"model":{"type":"minecraft:model","model":"slimefun/15_magical_gadgets/ancient_pedestal"}},{"when":{"text":"","extra":[{"text":"Environmental Forcefield Generator","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"white","bold":false}]},"model":{"type":"minecraft:model","model":"slimefun/24_galactifun/machines/efg"}},{"when":{"text":"","extra":[{"text":"Android Interface ","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"gray","bold":false},{"text":"(Items)","italic":false,"color":"blue"}]},"model":{"type":"minecraft:model","model":"slimefun/31_androids/android_interface_items"}},{"when":{"text":"","extra":[{"text":"Android Interface ","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"gray","bold":false},{"text":"(Fuel)","italic":false,"color":"red"}]},"model":{"type":"minecraft:model","model":"slimefun/31_androids/android_interface_fuel"}},{"when":{"text":"","extra":[{"text":"Exp Dispenser","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"green","bold":false}]},"model":{"type":"minecraft:model","model":"slimefun/34_fluffy_machines/exp_dispenser"}}],"fallback":{"type":"minecraft:model","model":"minecraft:item/dispenser"}}}]}
+	},
+	"oversized_in_gui": true
 }

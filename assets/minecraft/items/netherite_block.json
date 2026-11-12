@@ -1,22 +1,19 @@
 {
-	"model": {
-	"type": "minecraft:range_dispatch",
-	"property": "minecraft:custom_model_data",
-	"index": 0,
-	"fallback": {
-		"type": "minecraft:model",
-		"model": "minecraft:item/netherite_block"},
-
-
-	"entries": [
-	{"threshold": 0, "model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_name",
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
 	"cases": [
-		{"when": {"text":"","extra":[{"text":"Void Block","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"#DBCEA9","bold":false}]}, "model": {"type": "minecraft:model", "model": "slimefun/23_slime_tinker/materials/void_block"}}
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"BLOCK_CAST_VOID"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/infinityexpansion/void_block"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"DYNATECH_ANGEL_GEM"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/dynatech/dynatech_angel_gem"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"IDOE_TERRABORE_ELITE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/idreamofeasy/idoe_terrabore"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"OMC_ANGEL_GEM"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/obsidianexpansion/omc_angel_gem"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"OMC_ANGEL_GEM_2"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/obsidianexpansion/omc_angel_gem_2"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"OMC_ANGEL_GEM_3"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/obsidianexpansion/omc_angel_gem_3"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"OMC_NETHERITE_GEN"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/obsidianexpansion/omc_netherite_gen"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"OMC_VOID_CORE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/infinityexpansion/void_block"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"POWERED_BEDROCK"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/infinityexpansion/powered_bedrock"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"URU_STAR_CRUCIBLE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/drakesnanotech/uru_star_crucible"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"VOID_BLOCK"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/infinityexpansion/void_block"}}
 	],
-
-
-	"fallback": {"type": "minecraft:model","model": "minecraft:item/netherite_block"}}}
-    ]
-  },
-  "oversized_in_gui": true
+	"fallback": {"type":"minecraft:range_dispatch","property":"minecraft:custom_model_data","index":0,"fallback":{"type":"minecraft:model","model":"minecraft:item/netherite_block"},"entries":[{"threshold":0,"model":{"type":"minecraft:select","property":"minecraft:component","component":"minecraft:custom_name","cases":[{"when":{"text":"","extra":[{"text":"Void Block","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"#DBCEA9","bold":false}]},"model":{"type":"minecraft:model","model":"slimefun/23_slime_tinker/materials/void_block"}}],"fallback":{"type":"minecraft:model","model":"minecraft:item/netherite_block"}}}]}
+	},
+	"oversized_in_gui": true
 }

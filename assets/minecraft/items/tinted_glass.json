@@ -1,0 +1,11 @@
+{
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
+	"cases": [
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CRY_CROP_GLASS_3"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/crystamaehistoria/cry_crop_glass_3"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"NTW_POWER_DISPLAY"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/networksv6_drake/ntw_power_display"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"STELLAR_FLUX_LENS"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/drakesnanotech/unibeam_lens"}}
+	],
+	"fallback": {"type":"minecraft:model","model":"minecraft:block/tinted_glass"}
+	},
+	"oversized_in_gui": true
+}

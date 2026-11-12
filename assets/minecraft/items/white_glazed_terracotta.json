@@ -1,24 +1,14 @@
 {
-	"model": {
-	"type": "minecraft:range_dispatch",
-	"property": "minecraft:custom_model_data",
-	"index": 0,
-	"fallback": {
-		"type": "minecraft:model",
-		"model": "minecraft:item/white_glazed_terracotta"},
-
-
-	"entries": [
-	{"threshold": 0, "model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_name",
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
 	"cases": [
-		{"when": {"text":"","extra":[{"text":"Rainbow Glazed Terracotta","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"dark_purple","bold":false}]}, "model": {"type": "minecraft:model", "model": "slimefun/15_magical_gadgets/rainbow_glazed_terracotta"}},
-		{"when": {"text":"","extra":[{"text":"White Crystal","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"white","bold":false}]}, "model": {"type": "minecraft:model", "model": "slimefun/22_flower_power/crystal_white"}},
-		{"when": {"text":"","extra":[{"text":"Rainbow Glazed Terracotta ","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"dark_purple","bold":false},{"text":"(Christmas)","italic":false,"color":"gray"}]}, "model": {"type": "minecraft:model", "model": "slimefun/christmas/rainbow_glazed_terracotta_xmas"}}
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"FN_FAL_DOWNGRADER"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/fnamplifications/fn_machinery_brass_plating"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"NTW_AUTO_CRAFTER_WITHHOLDING"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/networksv6_drake/ntw_crafting_grid"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"NTW_CONTROL_X"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/networksv6_drake/ntw_controller"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"SUPREME_LUX_GENERATOR"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/supreme/supreme_tech_generator"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"WF_GRAVITECH_ENERCELL"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimeframe/wf_gravitech_enercell"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"WHITE_CRYSTAL"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/dynatech/dynatech_synthetic_emeraldmineralized_apiary"}}
 	],
-
-
-	"fallback": {"type": "minecraft:model","model": "minecraft:item/white_glazed_terracotta"}}}
-    ]
-  },
-  "oversized_in_gui": true
+	"fallback": {"type":"minecraft:range_dispatch","property":"minecraft:custom_model_data","index":0,"fallback":{"type":"minecraft:model","model":"minecraft:item/white_glazed_terracotta"},"entries":[{"threshold":0,"model":{"type":"minecraft:select","property":"minecraft:component","component":"minecraft:custom_name","cases":[{"when":{"text":"","extra":[{"text":"Rainbow Glazed Terracotta","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"dark_purple","bold":false}]},"model":{"type":"minecraft:model","model":"slimefun/15_magical_gadgets/rainbow_glazed_terracotta"}},{"when":{"text":"","extra":[{"text":"White Crystal","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"white","bold":false}]},"model":{"type":"minecraft:model","model":"slimefun/22_flower_power/crystal_white"}},{"when":{"text":"","extra":[{"text":"Rainbow Glazed Terracotta ","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"dark_purple","bold":false},{"text":"(Christmas)","italic":false,"color":"gray"}]},"model":{"type":"minecraft:model","model":"slimefun/christmas/rainbow_glazed_terracotta_xmas"}}],"fallback":{"type":"minecraft:model","model":"minecraft:item/white_glazed_terracotta"}}}]}
+	},
+	"oversized_in_gui": true
 }

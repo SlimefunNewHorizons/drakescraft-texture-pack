@@ -1,25 +1,16 @@
 {
-	"model": {
-	"type": "minecraft:range_dispatch",
-	"property": "minecraft:custom_model_data",
-	"index": 0,
-	"fallback": {
-		"type": "minecraft:model",
-		"model": "minecraft:item/piston"},
-
-
-	"entries": [
-	{"threshold": 0, "model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_name",
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
 	"cases": [
-		{"when": {"text":"","extra":[{"text":"Compressor","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"aqua","bold":false}]}, "model": {"type": "minecraft:model", "model": "slimefun/3_basic_machines/compressor"}},
-		{"when": {"text":"","extra":[{"text":"Circuit Press","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"white","bold":false}]}, "model": {"type": "minecraft:model", "model": "slimefun/24_galactifun/machines/circuit_press"}},
-		{"when": {"text":"","extra":[{"text":"Refinery","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"red","bold":false}]}, "model": {"type": "minecraft:model", "model": "slimefun/28_energy_and_electricity/refinery"}},
-		{"when": {"text":"","extra":[{"text":"Refinery","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"aqua","bold":false}]}, "model": {"type": "minecraft:model", "model": "slimefun/28_energy_and_electricity/refinery"}}
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"AV_FORCEFUL_INFUSION"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/alchimiavitae/av_plant_infusion_chamber"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CARBON_CRUSHER"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/elementmanipulation/em_carbon"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CIRCUIT_PRESS"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/galaxyfun/glowstone_circuit"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"DIAMOND_ANVIL"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/networksv6_drake/ntw_crafting_grid"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"FM_FAST_COMPRESSOR"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/fastmachines/fm_fast_ore_crusher"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"KINETIC_DAMPER"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/fnamplifications/fn_machinery_aluminum_plating"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"NTW_SHRINKING_BASE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/networksv6_drake/ntw_optic_star"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"WF_RECYCLER"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimeframe/wf_auto_trader"}}
 	],
-
-
-	"fallback": {"type": "minecraft:model","model": "minecraft:item/piston"}}}
-    ]
-  },
-  "oversized_in_gui": true
+	"fallback": {"type":"minecraft:range_dispatch","property":"minecraft:custom_model_data","index":0,"fallback":{"type":"minecraft:model","model":"minecraft:item/piston"},"entries":[{"threshold":0,"model":{"type":"minecraft:select","property":"minecraft:component","component":"minecraft:custom_name","cases":[{"when":{"text":"","extra":[{"text":"Compressor","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"aqua","bold":false}]},"model":{"type":"minecraft:model","model":"slimefun/3_basic_machines/compressor"}},{"when":{"text":"","extra":[{"text":"Circuit Press","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"white","bold":false}]},"model":{"type":"minecraft:model","model":"slimefun/24_galactifun/machines/circuit_press"}},{"when":{"text":"","extra":[{"text":"Refinery","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"red","bold":false}]},"model":{"type":"minecraft:model","model":"slimefun/28_energy_and_electricity/refinery"}},{"when":{"text":"","extra":[{"text":"Refinery","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"aqua","bold":false}]},"model":{"type":"minecraft:model","model":"slimefun/28_energy_and_electricity/refinery"}}],"fallback":{"type":"minecraft:model","model":"minecraft:item/piston"}}}]}
+	},
+	"oversized_in_gui": true
 }

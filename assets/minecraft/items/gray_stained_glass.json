@@ -1,0 +1,10 @@
+{
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
+	"cases": [
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"REINFORCED_GLASS"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/litexpansion/reinforced_glass"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"STB_DENSESOLAR"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/sensibletoolbox/stb_densesolar"}}
+	],
+	"fallback": {"type":"minecraft:model","model":"minecraft:block/gray_stained_glass"}
+	},
+	"oversized_in_gui": true
+}

@@ -1,25 +1,19 @@
 {
-	"model": {
-	"type": "minecraft:range_dispatch",
-	"property": "minecraft:custom_model_data",
-	"index": 0,
-	"fallback": {
-		"type": "minecraft:model",
-		"model": "minecraft:item/shroomlight"},
-
-
-	"entries": [
-	{"threshold": 0, "model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_name",
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
 	"cases": [
-		{"when": {"text":"","extra":[{"text":"Space Heater I","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"gold","bold":false}]}, "model": {"type": "minecraft:model", "model": "slimefun/24_galactifun/machines/space_heater"}},
-		{"when": {"text":"","extra":[{"text":"Space Heater II","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"gold","bold":false}]}, "model": {"type": "minecraft:model", "model": "slimefun/24_galactifun/machines/space_heater_2"}},
-		{"when": {"text":"","extra":[{"text":"Space Heater III","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"gold","bold":false}]}, "model": {"type": "minecraft:model", "model": "slimefun/24_galactifun/machines/space_heater_3"}},
-		{"when": {"text":"","extra":[{"text":"Block of Amber","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"gold","bold":false}]}, "model": {"type": "minecraft:model", "model": "slimefun/21_slimy_treetaps/amber_block"}}
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"AMBER_BLOCK"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimytreetaps/amber_block"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"GCE_SHROOMLIGHT_CHICKEN_ICON"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/geneticchickengineering/gce_shroomlight_chicken_icon"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"NPS_BEACON"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/netheopoiesis/nps_beacon"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"NTW_GREEDY_BLOCK"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/dynatech/dynatech_diamond_machine_core"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"REINFORCED_GEOTHERMAL_GENERATOR"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/litexpansion/refined_smeltery"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"SPACE_HEATER_1"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/galaxyfun/space_heater_1"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"SPACE_HEATER_2"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/galaxyfun/space_heater_2"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"SPACE_HEATER_3"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/galaxyfun/space_heater_3"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"SUPREME_ELECTRIC_CORE_I"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/supreme/supreme_electric_core_i"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"SUPREME_ELECTRIC_CORE_II"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/supreme/supreme_electric_core_ii"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"SUPREME_ELECTRIC_CORE_III"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/supreme/supreme_electric_core_iii"}}
 	],
-
-
-	"fallback": {"type": "minecraft:model","model": "minecraft:item/shroomlight"}}}
-    ]
-  },
-  "oversized_in_gui": true
+	"fallback": {"type":"minecraft:range_dispatch","property":"minecraft:custom_model_data","index":0,"fallback":{"type":"minecraft:model","model":"minecraft:item/shroomlight"},"entries":[{"threshold":0,"model":{"type":"minecraft:select","property":"minecraft:component","component":"minecraft:custom_name","cases":[{"when":{"text":"","extra":[{"text":"Space Heater I","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"gold","bold":false}]},"model":{"type":"minecraft:model","model":"slimefun/24_galactifun/machines/space_heater"}},{"when":{"text":"","extra":[{"text":"Space Heater II","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"gold","bold":false}]},"model":{"type":"minecraft:model","model":"slimefun/24_galactifun/machines/space_heater_2"}},{"when":{"text":"","extra":[{"text":"Space Heater III","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"gold","bold":false}]},"model":{"type":"minecraft:model","model":"slimefun/24_galactifun/machines/space_heater_3"}},{"when":{"text":"","extra":[{"text":"Block of Amber","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"gold","bold":false}]},"model":{"type":"minecraft:model","model":"slimefun/21_slimy_treetaps/amber_block"}}],"fallback":{"type":"minecraft:model","model":"minecraft:item/shroomlight"}}}]}
+	},
+	"oversized_in_gui": true
 }

@@ -1,0 +1,21 @@
+{
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
+	"cases": [
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"GUN_ASSAULT_RIFLE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimefunwarfare/gun_case"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"GUN_CASE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimefunwarfare/gun_case"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"GUN_ENERGY_RIFLE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimefunwarfare/energy_rectifier"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"GUN_MACHINE_GUN"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimefunwarfare/gun_case"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"GUN_MINIGUN"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimefunwarfare/gun_case"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"GUN_PISTOL"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimefunwarfare/gun_case"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"GUN_REVOLVER"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimefunwarfare/gun_case"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"GUN_RIFLE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimefunwarfare/gun_case"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"GUN_SHOTGUN"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimefunwarfare/gun_case"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"GUN_SNIPER"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimefunwarfare/gun_case"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"INFINITY_CROSSBOW"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/magicxpansion/infinity_crossbow"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"NETHER_CROSSBOW"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/magicxpansion/nether_crossbow"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"RAPID_CROSSBOW"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/magicxpansion/rapid_crossbow"}}
+	],
+	"fallback": {"type":"condition","property":"using_item","on_true":{"type":"range_dispatch","property":"crossbow/pull","entries":[{"threshold":0.58,"model":{"type":"model","model":"item/crossbow_pulling_1"}},{"threshold":1.0,"model":{"type":"model","model":"item/crossbow_pulling_2"}}],"fallback":{"type":"model","model":"item/crossbow_pulling_0"}},"on_false":{"type":"select","property":"charge_type","cases":[{"when":"arrow","model":{"type":"model","model":"item/crossbow_arrow"}},{"when":"rocket","model":{"type":"model","model":"item/crossbow_firework"}}],"fallback":{"type":"model","model":"item/crossbow"}}}
+	},
+	"oversized_in_gui": true
+}

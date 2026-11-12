@@ -1,0 +1,9 @@
+{
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
+	"cases": [
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"WF_ITEM_PROJECTOR"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimeframe/wf_nosam_pick"}}
+	],
+	"fallback": {"type":"minecraft:model","model":"minecraft:block/blackstone_slab"}
+	},
+	"oversized_in_gui": true
+}

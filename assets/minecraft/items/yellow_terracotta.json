@@ -1,0 +1,11 @@
+{
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
+	"cases": [
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"GOLD_TRANSMUTER"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/extratools/gold_transmuter"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"STB_AUTOBUILDER"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/sensibletoolbox/stb_paintcan"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"SULFUR_BLOCK"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/galaxyfun/sulfur_block"}}
+	],
+	"fallback": {"type":"minecraft:model","model":"minecraft:block/yellow_terracotta"}
+	},
+	"oversized_in_gui": true
+}

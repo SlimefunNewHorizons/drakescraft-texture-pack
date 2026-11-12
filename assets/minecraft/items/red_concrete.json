@@ -1,22 +1,11 @@
 {
-	"model": {
-	"type": "minecraft:range_dispatch",
-	"property": "minecraft:custom_model_data",
-	"index": 0,
-	"fallback": {
-		"type": "minecraft:model",
-		"model": "minecraft:item/red_concrete"},
-
-
-	"entries": [
-	{"threshold": 0, "model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_name",
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
 	"cases": [
-		{"when": {"text":"","extra":[{"text":"Reinforced Draconium Block","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"#DBCEA9","bold":false}]}, "model": {"type": "minecraft:model", "model": "slimefun/23_slime_tinker/materials/reinforced_draconium_block"}}	
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"BLOCK_CAST_REINFORCED_DRACONIUM"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/dynatech/dynatech_iron_machine_core"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CRY_SATCHEL_6"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/crystamaehistoria/cry_satchel_6"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"NPS_BEACON_BASE_3"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/netheopoiesis/nps_beacon_base_3"}}
 	],
-
-
-	"fallback": {"type": "minecraft:model","model": "minecraft:item/red_concrete"}}}
-    ]
-  },
-  "oversized_in_gui": true
+	"fallback": {"type":"minecraft:range_dispatch","property":"minecraft:custom_model_data","index":0,"fallback":{"type":"minecraft:model","model":"minecraft:item/red_concrete"},"entries":[{"threshold":0,"model":{"type":"minecraft:select","property":"minecraft:component","component":"minecraft:custom_name","cases":[{"when":{"text":"","extra":[{"text":"Reinforced Draconium Block","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"#DBCEA9","bold":false}]},"model":{"type":"minecraft:model","model":"slimefun/23_slime_tinker/materials/reinforced_draconium_block"}}],"fallback":{"type":"minecraft:model","model":"minecraft:item/red_concrete"}}}]}
+	},
+	"oversized_in_gui": true
 }

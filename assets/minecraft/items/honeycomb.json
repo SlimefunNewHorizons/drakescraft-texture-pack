@@ -1,0 +1,13 @@
+{
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
+	"cases": [
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"DRY_COMB"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/fnamplifications/fmg_generator_honeycomb_broken"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"HONEYCOMB"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/fnamplifications/fmg_generator_honeycomb_broken"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"HONEY_COMB"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/fnamplifications/fmg_generator_honeycomb_broken"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"IDOE_IDOL_TERRAN"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/idreamofeasy/idoe_idol_torrent"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"SWEET_COMB"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/fnamplifications/fmg_generator_honeycomb_broken"}}
+	],
+	"fallback": {"type":"minecraft:model","model":"minecraft:item/honeycomb"}
+	},
+	"oversized_in_gui": true
+}

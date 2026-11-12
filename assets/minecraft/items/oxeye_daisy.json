@@ -1,0 +1,10 @@
+{
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
+	"cases": [
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CRY_MYSTERIOUS_PLANT"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/crystamaehistoria/cry_mysterious_potted_plant"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"GLISTENING_OXEYE_DAISY"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/flowerpower/glistening_poppy"}}
+	],
+	"fallback": {"type":"model","model":"item/oxeye_daisy"}
+	},
+	"oversized_in_gui": true
+}

@@ -1,19 +1,8 @@
 {
-  "model": {
-    "type": "minecraft:range_dispatch",
-    "property": "minecraft:custom_model_data",
-    "index": 0,
-    "fallback": {
-      "type": "minecraft:model",
-      "model": "minecraft:item/written_book"
-    },
-    "entries": [
-      {
-        "threshold": 3009011,
-        "model": {
-          "type": "minecraft:model"
-        }
-      }
-    ]
-  }
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
+	"cases": [
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"TE_INFO"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/transcendence/te_info"}}
+	],
+	"fallback": {"type":"minecraft:range_dispatch","property":"minecraft:custom_model_data","index":0,"fallback":{"type":"minecraft:model","model":"minecraft:item/written_book"},"entries":[{"threshold":3009011,"model":{"type":"minecraft:model"}}]}
+	}
 }

@@ -1,0 +1,9 @@
+{
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
+	"cases": [
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"REINFORCED_STORAGE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/infinityexpansion/reinforced_storage"}}
+	],
+	"fallback": {"type":"minecraft:model","model":"minecraft:block/acacia_wood"}
+	},
+	"oversized_in_gui": true
+}

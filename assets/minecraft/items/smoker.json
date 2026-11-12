@@ -1,28 +1,20 @@
 {
-	"model": {
-	"type": "minecraft:range_dispatch",
-	"property": "minecraft:custom_model_data",
-	"index": 0,
-	"fallback": {
-		"type": "minecraft:model",
-		"model": "minecraft:item/smoker"},
-
-
-	"entries": [
-	{"threshold": 0, "model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_name",
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
 	"cases": [
-		{"when": {"text":"","extra":[{"text":"Rubber Factory","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"aqua","bold":false}]}, "model": {"type": "minecraft:model", "model": "slimefun/21_slimy_treetaps/rubber_factory"}},
-		{"when": {"text":"","extra":[{"text":"Auto Drier","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"gold","bold":false}]}, "model": {"type": "minecraft:model", "model": "slimefun/28_energy_and_electricity/auto_drier"}},
-		{"when": {"text":"","extra":[{"text":"Auto Brewer","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"gold","bold":false}]}, "model": {"type": "minecraft:model", "model": "slimefun/28_energy_and_electricity/auto_brewer"}},
-		{"when": {"text":"","extra":[{"text":"Warp Pad","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"gold","bold":false}]}, "model": {"type": "minecraft:model", "model": "slimefun/34_fluffy_machines/warp_pad"}},
-		{"when": {"text":"","extra":[{"text":"Smart Factory","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"red","bold":false}]}, "model": {"type": "minecraft:model", "model": "slimefun/34_fluffy_machines/smart_factory"}},
-		{"when": {"text":"","extra":[{"text":"Big Fluffy Barrel","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"aqua","bold":false}]}, "model": {"type": "minecraft:model", "model": "slimefun/34_fluffy_machines/fluffy_barrel_big"}}
-
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"BULLET_PRESS"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimefunwarfare/bullet_press"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"DYNATECH_COAL_COKE_OVEN"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/dynatech/dynatech_coal_coke"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"FM_FAST_PRESSURE_CHAMBER"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/fastmachines/fm_fast_pressure_chamber"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"GCE_GENETIC_SEQUENCER"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/geneticchickengineering/gce_genetic_sequencer"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"IDOE_ELECTRIC_SMOKER"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/idreamofeasy/idoe_electric_smoker"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"IDOE_ELECTRIC_SMOKER_2"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/idreamofeasy/idoe_electric_smoker_2"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"IDOE_ELECTRIC_SMOKER_3"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/idreamofeasy/idoe_electric_smoker_3"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"RUBBER_FACTORY"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimytreetaps/rubber_factory"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"SMART_FACTORY"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/fluffymachines/smart_factory"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"SUPREME_MAGIC_ALTAR_I"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/supreme/supreme_magic_altar_i"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"SUPREME_MAGIC_ALTAR_II"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/supreme/supreme_magic_altar_ii"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"SUPREME_MAGIC_ALTAR_III"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/supreme/supreme_magic_altar_iii"}}
 	],
-
-
-	"fallback": {"type": "minecraft:model","model": "minecraft:item/smoker"}}}
-    ]
-  },
-  "oversized_in_gui": true
+	"fallback": {"type":"minecraft:range_dispatch","property":"minecraft:custom_model_data","index":0,"fallback":{"type":"minecraft:model","model":"minecraft:item/smoker"},"entries":[{"threshold":0,"model":{"type":"minecraft:select","property":"minecraft:component","component":"minecraft:custom_name","cases":[{"when":{"text":"","extra":[{"text":"Rubber Factory","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"aqua","bold":false}]},"model":{"type":"minecraft:model","model":"slimefun/21_slimy_treetaps/rubber_factory"}},{"when":{"text":"","extra":[{"text":"Auto Drier","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"gold","bold":false}]},"model":{"type":"minecraft:model","model":"slimefun/28_energy_and_electricity/auto_drier"}},{"when":{"text":"","extra":[{"text":"Auto Brewer","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"gold","bold":false}]},"model":{"type":"minecraft:model","model":"slimefun/28_energy_and_electricity/auto_brewer"}},{"when":{"text":"","extra":[{"text":"Warp Pad","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"gold","bold":false}]},"model":{"type":"minecraft:model","model":"slimefun/34_fluffy_machines/warp_pad"}},{"when":{"text":"","extra":[{"text":"Smart Factory","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"red","bold":false}]},"model":{"type":"minecraft:model","model":"slimefun/34_fluffy_machines/smart_factory"}},{"when":{"text":"","extra":[{"text":"Big Fluffy Barrel","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"aqua","bold":false}]},"model":{"type":"minecraft:model","model":"slimefun/34_fluffy_machines/fluffy_barrel_big"}}],"fallback":{"type":"minecraft:model","model":"minecraft:item/smoker"}}}]}
+	},
+	"oversized_in_gui": true
 }

@@ -1,0 +1,10 @@
+{
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
+	"cases": [
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CRY_EXALTED_AGRONOMIST"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/crystamaehistoria/cry_guide_liquefaction"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"NTW_QUANTUM_WORKBENCH"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/networksv6_drake/ntw_crafting_grid"}}
+	],
+	"fallback": {"type":"minecraft:model","model":"minecraft:block/dried_kelp_block"}
+	},
+	"oversized_in_gui": true
+}

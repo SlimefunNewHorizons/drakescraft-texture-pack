@@ -1,24 +1,20 @@
 {
-	"model": {
-	"type": "minecraft:range_dispatch",
-	"property": "minecraft:custom_model_data",
-	"index": 0,
-	"fallback": {
-		"type": "minecraft:model",
-		"model": "minecraft:item/string"},
-
-
-	"entries": [
-	{"threshold": 0, "model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_name",
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
 	"cases": [
-		{"when": {"text":"","extra":[{"text":"Copper Wire","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"gold","bold":false}]}, "model": {"type": "minecraft:model", "model": "slimefun/10_technical_components/copper_wire"}},
-		{"when": {"text":"","extra":[{"text":"Chain","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"aqua","bold":false}]}, "model": {"type": "minecraft:model", "model": "slimefun/11_misc_items/chain"}},
-		{"when": {"text":"","extra":[{"text":"Reinforced String","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"aqua","bold":false}]}, "model": {"type": "minecraft:model", "model": "slimefun/27_foxy_machines/reinforced_string"}}
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"BUMP_FANGBIANMIAN"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/bump/bump_xuebi"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"COPPER_CABLE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/litexpansion/copper_cable"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"GCE_STRING_CHICKEN_ICON"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/geneticchickengineering/gce_string_chicken_icon"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"GOLD_CABLE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/litexpansion/gold_cable"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"NTW_OPTIC_CABLE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/networksv6_drake/ntw_optic_cable"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"REINFORCED_STRING"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/foxymachines/reinforced_string"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"SELF_REPAIRING_WEAVE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/dynatech/dynatech_aluminum_bronzemineralized_apiary"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"STB_TAPEMEASURE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/sensibletoolbox/stb_paintcan"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"TIN_CABLE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/litexpansion/tin_cable"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"UNINSULATED_COPPER_CABLE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/litexpansion/uninsulated_copper_cable"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"UNINSULATED_GOLD_CABLE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/litexpansion/uninsulated_gold_cable"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"UNINSULATED_TIN_CABLE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/litexpansion/uninsulated_tin_cable"}}
 	],
-
-
-	"fallback": {"type": "minecraft:model","model": "minecraft:item/string"}}}
-    ]
-  },
-  "oversized_in_gui": true
+	"fallback": {"type":"minecraft:range_dispatch","property":"minecraft:custom_model_data","index":0,"fallback":{"type":"minecraft:model","model":"minecraft:item/string"},"entries":[{"threshold":0,"model":{"type":"minecraft:select","property":"minecraft:component","component":"minecraft:custom_name","cases":[{"when":{"text":"","extra":[{"text":"Copper Wire","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"gold","bold":false}]},"model":{"type":"minecraft:model","model":"slimefun/10_technical_components/copper_wire"}},{"when":{"text":"","extra":[{"text":"Chain","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"aqua","bold":false}]},"model":{"type":"minecraft:model","model":"slimefun/11_misc_items/chain"}},{"when":{"text":"","extra":[{"text":"Reinforced String","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"aqua","bold":false}]},"model":{"type":"minecraft:model","model":"slimefun/27_foxy_machines/reinforced_string"}}],"fallback":{"type":"minecraft:model","model":"minecraft:item/string"}}}]}
+	},
+	"oversized_in_gui": true
 }

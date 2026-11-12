@@ -1,0 +1,14 @@
+{
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
+	"cases": [
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"BC_CHEST_COLORER"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/betterchests/bc_chest_colorer"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"IDOE_IDOL_DIVINE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/idreamofeasy/idoe_idol_torrent"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"OMC_DRAGON_SCALE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/obsidianexpansion/omc_dragon_scale"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"REPULSOR_MICRO_LENS"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/drakesnanotech/cosmic_circuit"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"RESCUE_BARRIER_NODE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/drakesnanotech/mark_xlii_control_node"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"WF_HESPERON"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimeframe/wf_travoride"}}
+	],
+	"fallback": {"type":"minecraft:model","model":"minecraft:item/amethyst_shard"}
+	},
+	"oversized_in_gui": true
+}

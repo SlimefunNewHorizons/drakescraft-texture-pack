@@ -1,0 +1,9 @@
+{
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
+	"cases": [
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"HIVE_CASING_PLANK"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/litexpansion/gold_plate"}}
+	],
+	"fallback": {"type":"minecraft:model","model":"minecraft:block/spruce_slab"}
+	},
+	"oversized_in_gui": true
+}

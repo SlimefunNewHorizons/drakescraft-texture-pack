@@ -1,26 +1,11 @@
 {
-  "model": {
-    "type": "minecraft:range_dispatch",
-    "property": "minecraft:custom_model_data",
-    "index": 0,
-    "fallback": {
-      "type": "minecraft:model",
-      "model": "minecraft:item/trident_fallback"
-    },
-    "entries": [
-      {
-        "threshold": 0,
-        "model": {
-          "type": "minecraft:select",
-          "property": "minecraft:component",
-          "component": "minecraft:custom_name",
-          "cases": [
-            {"when": {"text": "","extra": [{"text": "Soulbound Trident","obfuscated": false,"italic": false,"underlined": false,"strikethrough": false,"color": "red","bold": false}]},"model": {"type": "minecraft:model","model": "slimefun/1_weapons/soulbound_trident"}}
-          ],
-	  "fallback": {"type": "minecraft:model","model": "minecraft:item/trident_fallback"}
-        }
-      }
-    ]
-  },
-  "oversized_in_gui": true
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
+	"cases": [
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"MX_TRIDENT"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/magicxpansion/mx_trident"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"POSEIDONS_TRIDENT"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/magicxpansion/poseidons_trident"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"TRIDENT"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimefun/trident"}}
+	],
+	"fallback": {"type":"minecraft:range_dispatch","property":"minecraft:custom_model_data","index":0,"fallback":{"type":"minecraft:model","model":"minecraft:item/trident_fallback"},"entries":[{"threshold":0,"model":{"type":"minecraft:select","property":"minecraft:component","component":"minecraft:custom_name","cases":[{"when":{"text":"","extra":[{"text":"Soulbound Trident","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"red","bold":false}]},"model":{"type":"minecraft:model","model":"slimefun/1_weapons/soulbound_trident"}}],"fallback":{"type":"minecraft:model","model":"minecraft:item/trident_fallback"}}}]}
+	},
+	"oversized_in_gui": true
 }

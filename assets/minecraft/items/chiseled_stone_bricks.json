@@ -1,0 +1,10 @@
+{
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
+	"cases": [
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CRY_REALISATION_ALTAR_5"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/crystamaehistoria/cry_realisation_altar_5"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"NANOBOT_CRAFTER"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/transcendence/nanobot_crafter"}}
+	],
+	"fallback": {"type":"minecraft:model","model":"minecraft:block/chiseled_stone_bricks"}
+	},
+	"oversized_in_gui": true
+}

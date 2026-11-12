@@ -1,22 +1,10 @@
 {
-  "model": {
-    "type": "minecraft:range_dispatch",
-    "property": "minecraft:custom_model_data",
-    "index": 0,
-    "fallback": {
-      "type": "minecraft:model",
-      "model": "minecraft:item/lead"},
-
-
-    "entries": [
-      {"threshold": 0, "model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_name",
-	  "cases": [
-	  {"when": {"text":"","extra":[{"text":"Grappling Hook","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"gold","bold":false}]}, "model": {"type": "minecraft:model", "model": "slimefun/4_tools/grappling_hook"}}
-	  ],
-
-
-      "fallback": {"type": "minecraft:model","model": "minecraft:item/lead"}}}
-    ]
-  },
-  "oversized_in_gui": true
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
+	"cases": [
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CRIMSON_BANDS_RELIC"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/drakesnanotech/cosmic_fragment"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"STB_ENDERLEASH"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/sensibletoolbox/stb_enderleash"}}
+	],
+	"fallback": {"type":"minecraft:range_dispatch","property":"minecraft:custom_model_data","index":0,"fallback":{"type":"minecraft:model","model":"minecraft:item/lead"},"entries":[{"threshold":0,"model":{"type":"minecraft:select","property":"minecraft:component","component":"minecraft:custom_name","cases":[{"when":{"text":"","extra":[{"text":"Grappling Hook","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"gold","bold":false}]},"model":{"type":"minecraft:model","model":"slimefun/4_tools/grappling_hook"}}],"fallback":{"type":"minecraft:model","model":"minecraft:item/lead"}}}]}
+	},
+	"oversized_in_gui": true
 }

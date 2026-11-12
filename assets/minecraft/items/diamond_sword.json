@@ -1,33 +1,13 @@
 {
-	"model": {
-	"type": "minecraft:range_dispatch",
-	"property": "minecraft:custom_model_data",
-	"index": 0,
-	"fallback": {
-		"type": "minecraft:model",
-		"model": "minecraft:item/diamond_sword"},
-
-
-	"entries": [
-	{"threshold": 0, "model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_name",
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
 	"cases": [
-		{"when": {"text":"Amethyst"}, "model": {"type": "minecraft:model", "model": "jackstar:item/1_handheld/swords/amethyst_diamond"}},
-		{"when": {"text":"Crystal"}, "model": {"type": "minecraft:model", "model": "jackstar:item/1_handheld/swords/amethyst_diamond"}},
-		{"when": {"text":"Dead Bush"}, "model": {"type": "minecraft:model", "model": "jackstar:item/1_handheld/swords/dead_bush_diamond"}},
-		{"when": {"text":"Reaper"}, "model": {"type": "minecraft:model", "model": "jackstar:item/1_handheld/swords/reaper_diamond"}},
-		{"when": {"text":"Scythe"}, "model": {"type": "minecraft:model", "model": "jackstar:item/1_handheld/swords/reaper_diamond"}},
-		{"when": {"text":"Dirt Sword"}, "model": {"type": "minecraft:model", "model": "jackstar:item/1_handheld/swords/dirt_sword"}},
-		{"when": {"text":"Kelp Sword"}, "model": {"type": "minecraft:model", "model": "jackstar:item/1_handheld/swords/kelp_sword"}},
-		{"when": {"text":"Fire Sword"}, "model": {"type": "minecraft:model", "model": "jackstar:item/1_handheld/swords/fire_sword"}},
-		{"when": {"text":"Stick"}, "model": {"type": "minecraft:model", "model": "jackstar:item/1_handheld/swords/stick_diamond"}},
-	
-		{"when": {"text":"","extra":[{"text":"ExtraGear","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"gold","bold":false}]}, "model": {"type": "minecraft:model", "model": "slimefun/6_extragear/cobalt_sword"}},
-		{"when": {"text":"","extra":[{"text":"Soulbound Sword","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"red","bold":false}]}, "model": {"type": "minecraft:model", "model": "slimefun/1_weapons/soulbound_sword"}}
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"AV_SOUL_COLLECTOR"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/alchimiavitae/av_soul_collector"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"BUMP_EMER_SWORD"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/bump/bump_emer_sword"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"BUMP_RANDOM_SWORD"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/bump/bump_bone_sword"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"BUMP_SKY_DEVIL_SWORD"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/bump/bump_bone_sword"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"NANO_BLADE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/litexpansion/nano_blade"}}
 	],
-
-
-	"fallback": {"type": "minecraft:model","model": "minecraft:item/diamond_sword"}}}
-    ]
-  },
-  "oversized_in_gui": true
+	"fallback": {"type":"minecraft:range_dispatch","property":"minecraft:custom_model_data","index":0,"fallback":{"type":"minecraft:model","model":"minecraft:item/diamond_sword"},"entries":[{"threshold":0,"model":{"type":"minecraft:select","property":"minecraft:component","component":"minecraft:custom_name","cases":[{"when":{"text":"Amethyst"},"model":{"type":"minecraft:model","model":"jackstar:item/1_handheld/swords/amethyst_diamond"}},{"when":{"text":"Crystal"},"model":{"type":"minecraft:model","model":"jackstar:item/1_handheld/swords/amethyst_diamond"}},{"when":{"text":"Dead Bush"},"model":{"type":"minecraft:model","model":"jackstar:item/1_handheld/swords/dead_bush_diamond"}},{"when":{"text":"Reaper"},"model":{"type":"minecraft:model","model":"jackstar:item/1_handheld/swords/reaper_diamond"}},{"when":{"text":"Scythe"},"model":{"type":"minecraft:model","model":"jackstar:item/1_handheld/swords/reaper_diamond"}},{"when":{"text":"Dirt Sword"},"model":{"type":"minecraft:model","model":"jackstar:item/1_handheld/swords/dirt_sword"}},{"when":{"text":"Kelp Sword"},"model":{"type":"minecraft:model","model":"jackstar:item/1_handheld/swords/kelp_sword"}},{"when":{"text":"Fire Sword"},"model":{"type":"minecraft:model","model":"jackstar:item/1_handheld/swords/fire_sword"}},{"when":{"text":"Stick"},"model":{"type":"minecraft:model","model":"jackstar:item/1_handheld/swords/stick_diamond"}},{"when":{"text":"","extra":[{"text":"ExtraGear","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"gold","bold":false}]},"model":{"type":"minecraft:model","model":"slimefun/6_extragear/cobalt_sword"}},{"when":{"text":"","extra":[{"text":"Soulbound Sword","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"red","bold":false}]},"model":{"type":"minecraft:model","model":"slimefun/1_weapons/soulbound_sword"}}],"fallback":{"type":"minecraft:model","model":"minecraft:item/diamond_sword"}}}]}
+	},
+	"oversized_in_gui": true
 }

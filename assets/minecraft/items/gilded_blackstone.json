@@ -1,0 +1,9 @@
+{
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
+	"cases": [
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"MOB_SIMULATION_CHAMBER"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/infinityexpansion/mob_simulation_chamber"}}
+	],
+	"fallback": {"type":"minecraft:model","model":"minecraft:block/gilded_blackstone"}
+	},
+	"oversized_in_gui": true
+}

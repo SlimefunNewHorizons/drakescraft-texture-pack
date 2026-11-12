@@ -1,19 +1,8 @@
 {
-  "model": {
-    "type": "minecraft:range_dispatch",
-    "property": "minecraft:custom_model_data",
-    "index": 0,
-    "fallback": {
-      "type": "minecraft:model",
-      "model": "minecraft:item/calibrated_sculk_sensor"
-    },
-    "entries": [
-      {
-        "threshold": 3009004,
-        "model": {
-          "type": "minecraft:model"
-        }
-      }
-    ]
-  }
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
+	"cases": [
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"SNAP_CALIBRATION_MATRIX"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/drakesnanotech/nanocarbon_matrix"}}
+	],
+	"fallback": {"type":"minecraft:range_dispatch","property":"minecraft:custom_model_data","index":0,"fallback":{"type":"minecraft:model","model":"minecraft:item/calibrated_sculk_sensor"},"entries":[{"threshold":3009004,"model":{"type":"minecraft:model"}}]}
+	}
 }

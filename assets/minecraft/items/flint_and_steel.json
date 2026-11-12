@@ -1,26 +1,14 @@
 {
-  "model": {
-    "type": "minecraft:range_dispatch",
-    "property": "minecraft:custom_model_data",
-    "index": 0,
-    "fallback": {
-      "type": "minecraft:model",
-      "model": "minecraft:item/flint_and_steel"
-    },
-    "entries": [
-		{"threshold": 0, "model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_name",
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
 	"cases": [
-		{"when": {"text":"","extra":[{"text":"Rocket Engine","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"white","bold":false}]}, "model": {"type": "minecraft:model", "model": "slimefun/24_galactifun/galactifun/rocket_engine"}},
-		{"when": {"text":"","extra":[{"text":"Rocket Engine Mk 2","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"white","bold":false}]}, "model": {"type": "minecraft:model", "model": "slimefun/24_galactifun/galactifun/rocket_engine_mk2"}},
-		{"when": {"text":"","extra":[{"text":"Rocket Engine Mk 3","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"white","bold":false}]}, "model": {"type": "minecraft:model", "model": "slimefun/24_galactifun/galactifun/rocket_engine_mk3"}},
-		{"when": {"text":"","extra":[{"text":"Ion Engine","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"aqua","bold":false}]}, "model": {"type": "minecraft:model", "model": "slimefun/24_galactifun/galactifun/ion_engine"}},
-		{"when": {"text":"","extra":[{"text":"Spark Plug","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"white","bold":false}]}, "model": {"type": "minecraft:model", "model": "slimefun/24_galactifun/components/spark_plug"}},
-		{"when": {"text":"","extra":[{"text":"Spark Plug Mk 2","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"white","bold":false}]}, "model": {"type": "minecraft:model", "model": "slimefun/24_galactifun/components/spark_plug_mk2"}}
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"ION_ENGINE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/galaxyfun/ion_engine"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"ROCKET_ENGINE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/galaxyfun/rocket_engine"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"ROCKET_ENGINE_2"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/galaxyfun/rocket_engine_2"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"ROCKET_ENGINE_3"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/galaxyfun/rocket_engine_3"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"SPARK_PLUG"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/galaxyfun/reinforced_channel"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"SPARK_PLUG_2"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/galaxyfun/spark_plug_2"}}
 	],
-
-
-	"fallback": {"type": "minecraft:model","model": "minecraft:item/flint_and_steel"}}}
-    ]
-  },
-  "oversized_in_gui": true
+	"fallback": {"type":"minecraft:range_dispatch","property":"minecraft:custom_model_data","index":0,"fallback":{"type":"minecraft:model","model":"minecraft:item/flint_and_steel"},"entries":[{"threshold":0,"model":{"type":"minecraft:select","property":"minecraft:component","component":"minecraft:custom_name","cases":[{"when":{"text":"","extra":[{"text":"Rocket Engine","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"white","bold":false}]},"model":{"type":"minecraft:model","model":"slimefun/24_galactifun/galactifun/rocket_engine"}},{"when":{"text":"","extra":[{"text":"Rocket Engine Mk 2","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"white","bold":false}]},"model":{"type":"minecraft:model","model":"slimefun/24_galactifun/galactifun/rocket_engine_mk2"}},{"when":{"text":"","extra":[{"text":"Rocket Engine Mk 3","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"white","bold":false}]},"model":{"type":"minecraft:model","model":"slimefun/24_galactifun/galactifun/rocket_engine_mk3"}},{"when":{"text":"","extra":[{"text":"Ion Engine","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"aqua","bold":false}]},"model":{"type":"minecraft:model","model":"slimefun/24_galactifun/galactifun/ion_engine"}},{"when":{"text":"","extra":[{"text":"Spark Plug","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"white","bold":false}]},"model":{"type":"minecraft:model","model":"slimefun/24_galactifun/components/spark_plug"}},{"when":{"text":"","extra":[{"text":"Spark Plug Mk 2","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"white","bold":false}]},"model":{"type":"minecraft:model","model":"slimefun/24_galactifun/components/spark_plug_mk2"}}],"fallback":{"type":"minecraft:model","model":"minecraft:item/flint_and_steel"}}}]}
+	},
+	"oversized_in_gui": true
 }

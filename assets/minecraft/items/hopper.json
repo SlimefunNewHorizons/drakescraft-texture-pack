@@ -1,22 +1,11 @@
 {
-	"model": {
-	"type": "minecraft:range_dispatch",
-	"property": "minecraft:custom_model_data",
-	"index": 0,
-	"fallback": {
-		"type": "minecraft:model",
-		"model": "minecraft:item/hopper"},
-
-
-	"entries": [
-	{"threshold": 0, "model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_name",
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
 	"cases": [
-		{"when": {"text":"","extra":[{"text":"Infused Hopper","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"dark_purple","bold":false}]}, "model": {"type": "minecraft:model", "model": "slimefun/15_magical_gadgets/infused_hopper"}}
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"FM_FAST_PANNING_MACHINE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/fastmachines/fm_fast_panning_machine"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"IDOE_HOPPER_PLAYER"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/idreamofeasy/idoe_hopper_player"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"IDOE_HOPPER_SUPPLY"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/idreamofeasy/idoe_hopper_player"}}
 	],
-
-
-	"fallback": {"type": "minecraft:model","model": "minecraft:item/hopper"}}}
-    ]
-  },
-  "oversized_in_gui": true
+	"fallback": {"type":"minecraft:range_dispatch","property":"minecraft:custom_model_data","index":0,"fallback":{"type":"minecraft:model","model":"minecraft:item/hopper"},"entries":[{"threshold":0,"model":{"type":"minecraft:select","property":"minecraft:component","component":"minecraft:custom_name","cases":[{"when":{"text":"","extra":[{"text":"Infused Hopper","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"dark_purple","bold":false}]},"model":{"type":"minecraft:model","model":"slimefun/15_magical_gadgets/infused_hopper"}}],"fallback":{"type":"minecraft:model","model":"minecraft:item/hopper"}}}]}
+	},
+	"oversized_in_gui": true
 }

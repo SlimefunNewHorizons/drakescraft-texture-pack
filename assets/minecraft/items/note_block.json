@@ -1,0 +1,10 @@
+{
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
+	"cases": [
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CRY_MOB_FAN_2"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/crystamaehistoria/cry_mob_fan_2"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"NTW_GRID"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/networksv6_drake/ntw_controller"}}
+	],
+	"fallback": {"type":"minecraft:model","model":"minecraft:block/note_block"}
+	},
+	"oversized_in_gui": true
+}

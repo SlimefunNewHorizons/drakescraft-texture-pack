@@ -1,0 +1,9 @@
+{
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
+	"cases": [
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"NPS_BASIC_PURIFIED_NETHERRACK"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/simplematerialgenerators/smg_generator_netherrack"}}
+	],
+	"fallback": {"type":"minecraft:model","model":"minecraft:block/mycelium"}
+	},
+	"oversized_in_gui": true
+}

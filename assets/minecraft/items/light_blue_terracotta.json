@@ -1,0 +1,11 @@
+{
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
+	"cases": [
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"BLOCK_CAST_OSMIUM"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/dynatech/dynatech_iron_machine_core"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"STB_SMELTER"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/litexpansion/refined_smeltery"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"WF_TERRACOTTA_GEN"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimeframe/wf_basalt_gen"}}
+	],
+	"fallback": {"type":"minecraft:model","model":"minecraft:block/light_blue_terracotta"}
+	},
+	"oversized_in_gui": true
+}

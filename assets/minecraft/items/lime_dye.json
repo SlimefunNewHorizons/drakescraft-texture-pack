@@ -1,22 +1,21 @@
 {
-	"model": {
-	"type": "minecraft:range_dispatch",
-	"property": "minecraft:custom_model_data",
-	"index": 0,
-	"fallback": {
-		"type": "minecraft:model",
-		"model": "minecraft:item/lime_dye"},
-
-
-	"entries": [
-	{"threshold": 0, "model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_name",
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
 	"cases": [
-		{"when": {"text":"","extra":[{"text":"Nuclear Salt","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"green","bold":false}]}, "model": {"type": "minecraft:model", "model": "slimefun/27_foxy_machines/nuclear_salt"}}
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"EM_CARBON"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/elementmanipulation/em_carbon"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"EM_HYDROGEN"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/infinityexpansion/hydro_generator"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"EM_NITROGEN"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/elementmanipulation/em_oxygen"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"EM_OXYGEN"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/elementmanipulation/em_oxygen"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"EM_PHOSPHORUS"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/elementmanipulation/em_oxygen"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"EM_SELENIUM"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/elementmanipulation/em_oxygen"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"GAMMA_ISOTOPE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/fnamplifications/fn_machinery_aluminum_plating"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"JC_LIME_PIGMENT"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/dyebench/jc_orange_pigment"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"NTW_SYNTHETIC_EMERALD_SHARD"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/dynatech/dynatech_synthetic_emeraldmineralized_apiary"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"NUCLEAR_SALT"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/foxymachines/nuclear_salt"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"STB_PULLERMODULE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/sensibletoolbox/stb_hypersendermodule"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"SULFUR"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/elementmanipulation/em_oxygen"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"TIME_STONE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/drakesnanotech/power_stone"}}
 	],
-
-
-	"fallback": {"type": "minecraft:model","model": "minecraft:item/lime_dye"}}}
-    ]
-  },
-  "oversized_in_gui": true
+	"fallback": {"type":"minecraft:range_dispatch","property":"minecraft:custom_model_data","index":0,"fallback":{"type":"minecraft:model","model":"minecraft:item/lime_dye"},"entries":[{"threshold":0,"model":{"type":"minecraft:select","property":"minecraft:component","component":"minecraft:custom_name","cases":[{"when":{"text":"","extra":[{"text":"Nuclear Salt","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"green","bold":false}]},"model":{"type":"minecraft:model","model":"slimefun/27_foxy_machines/nuclear_salt"}}],"fallback":{"type":"minecraft:model","model":"minecraft:item/lime_dye"}}}]}
+	},
+	"oversized_in_gui": true
 }
