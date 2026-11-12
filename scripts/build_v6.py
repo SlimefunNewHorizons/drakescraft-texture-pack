@@ -105,6 +105,13 @@ def main():
     if drs.exists():
         add["assets/drakescraft/sounds.json"] = drs.read_bytes()
 
+    # fuente default: referencia a drakescraft:holo (iconos/ornamentos para hologramas y TAB)
+    fd = json.loads(base.read("assets/minecraft/font/default.json"))
+    ref = {"type": "reference", "id": "drakescraft:holo"}
+    if ref not in fd["providers"]:
+        fd["providers"].append(ref)
+    add["assets/minecraft/font/default.json"] = json.dumps(fd, ensure_ascii=True, indent=1).encode()
+
     # player_head
     bh = json.loads(base.read("assets/minecraft/items/player_head.json"))
     bcases, _ = head_cases(bh)

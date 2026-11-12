@@ -1,0 +1,22 @@
+{
+ "gear": "E700",
+ "pick": "E701",
+ "cloud": "E702",
+ "diamond": "E703",
+ "brick": "E704",
+ "flask": "E705",
+ "warn": "E706",
+ "star4": "E707",
+ "arrow": "E708",
+ "shield": "E709",
+ "scales": "E70A",
+ "flag": "E70B",
+ "star5": "E70C",
+ "check": "E70D",
+ "pencil": "E70E",
+ "home": "E70F",
+ "orn_mid": "E720",
+ "orn_l": "E721",
+ "orn_r": "E722",
+ "orn_c": "E723"
+}

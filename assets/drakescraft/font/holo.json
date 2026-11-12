@@ -1,0 +1,184 @@
+{
+ "providers": [
+  {
+   "type": "bitmap",
+   "file": "drakescraft:font/holo/gear.png",
+   "ascent": 8,
+   "height": 9,
+   "chars": [
+    "\ue700"
+   ]
+  },
+  {
+   "type": "bitmap",
+   "file": "drakescraft:font/holo/pick.png",
+   "ascent": 8,
+   "height": 9,
+   "chars": [
+    "\ue701"
+   ]
+  },
+  {
+   "type": "bitmap",
+   "file": "drakescraft:font/holo/cloud.png",
+   "ascent": 8,
+   "height": 9,
+   "chars": [
+    "\ue702"
+   ]
+  },
+  {
+   "type": "bitmap",
+   "file": "drakescraft:font/holo/diamond.png",
+   "ascent": 8,
+   "height": 9,
+   "chars": [
+    "\ue703"
+   ]
+  },
+  {
+   "type": "bitmap",
+   "file": "drakescraft:font/holo/brick.png",
+   "ascent": 8,
+   "height": 9,
+   "chars": [
+    "\ue704"
+   ]
+  },
+  {
+   "type": "bitmap",
+   "file": "drakescraft:font/holo/flask.png",
+   "ascent": 8,
+   "height": 9,
+   "chars": [
+    "\ue705"
+   ]
+  },
+  {
+   "type": "bitmap",
+   "file": "drakescraft:font/holo/warn.png",
+   "ascent": 8,
+   "height": 9,
+   "chars": [
+    "\ue706"
+   ]
+  },
+  {
+   "type": "bitmap",
+   "file": "drakescraft:font/holo/star4.png",
+   "ascent": 8,
+   "height": 9,
+   "chars": [
+    "\ue707"
+   ]
+  },
+  {
+   "type": "bitmap",
+   "file": "drakescraft:font/holo/arrow.png",
+   "ascent": 8,
+   "height": 9,
+   "chars": [
+    "\ue708"
+   ]
+  },
+  {
+   "type": "bitmap",
+   "file": "drakescraft:font/holo/shield.png",
+   "ascent": 8,
+   "height": 9,
+   "chars": [
+    "\ue709"
+   ]
+  },
+  {
+   "type": "bitmap",
+   "file": "drakescraft:font/holo/scales.png",
+   "ascent": 8,
+   "height": 9,
+   "chars": [
+    "\ue70a"
+   ]
+  },
+  {
+   "type": "bitmap",
+   "file": "drakescraft:font/holo/flag.png",
+   "ascent": 8,
+   "height": 9,
+   "chars": [
+    "\ue70b"
+   ]
+  },
+  {
+   "type": "bitmap",
+   "file": "drakescraft:font/holo/star5.png",
+   "ascent": 8,
+   "height": 9,
+   "chars": [
+    "\ue70c"
+   ]
+  },
+  {
+   "type": "bitmap",
+   "file": "drakescraft:font/holo/check.png",
+   "ascent": 8,
+   "height": 9,
+   "chars": [
+    "\ue70d"
+   ]
+  },
+  {
+   "type": "bitmap",
+   "file": "drakescraft:font/holo/pencil.png",
+   "ascent": 8,
+   "height": 9,
+   "chars": [
+    "\ue70e"
+   ]
+  },
+  {
+   "type": "bitmap",
+   "file": "drakescraft:font/holo/home.png",
+   "ascent": 8,
+   "height": 9,
+   "chars": [
+    "\ue70f"
+   ]
+  },
+  {
+   "type": "bitmap",
+   "file": "drakescraft:font/holo/orn_mid.png",
+   "ascent": 8,
+   "height": 9,
+   "chars": [
+    "\ue720"
+   ]
+  },
+  {
+   "type": "bitmap",
+   "file": "drakescraft:font/holo/orn_l.png",
+   "ascent": 8,
+   "height": 9,
+   "chars": [
+    "\ue721"
+   ]
+  },
+  {
+   "type": "bitmap",
+   "file": "drakescraft:font/holo/orn_r.png",
+   "ascent": 8,
+   "height": 9,
+   "chars": [
+    "\ue722"
+   ]
+  },
+  {
+   "type": "bitmap",
+   "file": "drakescraft:font/holo/orn_c.png",
+   "ascent": 8,
+   "height": 9,
+   "chars": [
+    "\ue723"
+   ]
+  }
+ ]
+}
