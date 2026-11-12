@@ -140,6 +140,49 @@ def main():
             pending_prune.append((path, doc))  # item nuevo (p. ej. cobre, lanza, maza): se poda al final
     report["items_herramienta_ajustados"] = wrapped
 
+    # arco/ballesta/tridente/escudo 3D: se reemplaza el FALLBACK vanilla (los cases Slimefun del base se conservan)
+    def M(n): return {"type": "minecraft:model", "model": f"drakescraft:item/gear3d/{n}"}
+    FLAT = ["gui", "ground", "fixed", "on_shelf"]
+    def flat_or(m3d, flat):
+        return {"type": "minecraft:select", "property": "minecraft:display_context",
+                "cases": [{"when": FLAT, "model": {"type": "minecraft:model", "model": flat}}], "fallback": m3d}
+    ranged = {
+        "bow": {"type": "minecraft:condition", "property": "minecraft:using_item",
+                "on_true": {"type": "minecraft:range_dispatch", "property": "minecraft:use_duration", "scale": 0.05,
+                            "entries": [{"threshold": 0.65, "model": M("bow_pull_1")}, {"threshold": 0.9, "model": M("bow_pull_2")}],
+                            "fallback": M("bow_pull_0")},
+                "on_false": flat_or(M("bow"), "minecraft:item/bow")},
+        "crossbow": {"type": "minecraft:condition", "property": "minecraft:using_item",
+                     "on_true": {"type": "minecraft:range_dispatch", "property": "minecraft:crossbow/pull",
+                                 "entries": [{"threshold": 0.58, "model": M("crossbow_pull_1")}, {"threshold": 1.0, "model": M("crossbow_pull_2")}],
+                                 "fallback": M("crossbow_pull_0")},
+                     "on_false": {"type": "minecraft:select", "property": "minecraft:charge_type",
+                                  "cases": [{"when": "arrow", "model": flat_or(M("crossbow_arrow"), "minecraft:item/crossbow_arrow")},
+                                            {"when": "rocket", "model": flat_or(M("crossbow_firework"), "minecraft:item/crossbow_firework")}],
+                                  "fallback": flat_or(M("crossbow"), "minecraft:item/crossbow")}},
+        "trident": {"type": "minecraft:select", "property": "minecraft:display_context",
+                    "cases": [{"when": FLAT, "model": {"type": "minecraft:model", "model": "minecraft:item/trident"}}],
+                    "fallback": {"type": "minecraft:condition", "property": "minecraft:using_item",
+                                 "on_false": M("trident_in_hand"), "on_true": M("trident_throwing")}},
+        "shield": {"type": "minecraft:condition", "property": "minecraft:using_item",
+                   "on_false": M("shield"), "on_true": M("shield_blocking")},
+    }
+    n_ranged = 0
+    for id_, fb in ranged.items():
+        path = f"{GEAR_PREFIX}{id_}.json"
+        src = add[path] if path in add else (base.read(path) if path in names else None)
+        if src is None:
+            continue
+        d = json.loads(src)
+        m = d["model"]
+        if m.get("component") in ("custom_data", "minecraft:custom_data") and "cases" in m:
+            m["fallback"] = fb
+        else:
+            d["model"] = fb
+        add[path] = json.dumps(d, ensure_ascii=False, indent=1).encode()
+        n_ranged += 1
+    report["items_ranged_3d"] = n_ranged
+
     # Slimefun por id (procedural): select por custom_data de ids nuevos; el modelo del BASE pasa a ser el fallback
     proc = 0
     for p in sorted((repo / "assets/minecraft/items").glob("*.json")):
