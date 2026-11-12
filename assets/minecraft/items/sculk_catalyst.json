@@ -1,0 +1,10 @@
+{
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
+	"cases": [
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"KINETIC_SHIELD_MATRIX"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/drakesnanotech/vibranium_shield_blank"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"ROSS_ABSORBER"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/drakesnanotech/energy_weave_emitter"}}
+	],
+	"fallback": {"type":"minecraft:model","model":"minecraft:block/sculk_catalyst"}
+	},
+	"oversized_in_gui": true
+}

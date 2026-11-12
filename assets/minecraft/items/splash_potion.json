@@ -1,0 +1,9 @@
+{
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
+	"cases": [
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"AV_MALEVOLENT_CONCOCTION_SPLASH_POTION"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/alchimiavitae/av_plant_infusion_chamber"}}
+	],
+	"fallback": {"type":"minecraft:model","model":"minecraft:item/splash_potion","tints":[{"type":"minecraft:potion","default":-13083194}]}
+	},
+	"oversized_in_gui": true
+}

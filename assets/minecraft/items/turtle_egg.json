@@ -1,0 +1,9 @@
+{
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
+	"cases": [
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"WF_OROKIN_CELL"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimeframe/wf_orokin_cell"}}
+	],
+	"fallback": {"type":"minecraft:model","model":"minecraft:item/turtle_egg"}
+	},
+	"oversized_in_gui": true
+}

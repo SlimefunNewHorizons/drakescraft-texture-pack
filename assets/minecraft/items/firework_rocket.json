@@ -1,0 +1,10 @@
+{
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
+	"cases": [
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"MICRO_MISSILE_RACK"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/drakesnanotech/micro_missile_rack"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"STB_LANDMARKER"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/sensibletoolbox/stb_paintcan"}}
+	],
+	"fallback": {"type":"minecraft:model","model":"minecraft:item/firework_rocket"}
+	},
+	"oversized_in_gui": true
+}

@@ -1,0 +1,13 @@
+{
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
+	"cases": [
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CRY_BODY_STAND"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/crystamaehistoria/cry_arcane_sigil"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CRY_IMBUED_STAND"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/crystamaehistoria/cry_imbued_stand"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CRY_MIND_STAND"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/crystamaehistoria/cry_arcane_sigil"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CRY_SOUL_STAND"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/alchimiavitae/av_soul_collector"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"NTW_INTERDIMENSIONAL_PRESENCE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/networksv6_drake/ntw_optic_star"}}
+	],
+	"fallback": {"type":"minecraft:model","model":"minecraft:item/armor_stand"}
+	},
+	"oversized_in_gui": true
+}

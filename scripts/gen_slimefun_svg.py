@@ -471,7 +471,20 @@ def buscar_fallback(base):
     f = fallback_vanilla(base)
     if f and not ESPECIALES.search(base):
         return {"type": "minecraft:model", "model": f}
-    return None
+    return fallback_jar(base)
+
+
+JAR = Path.home() / ".local/share/horizon-launcher/versions/nightly-2026-11-05-66f3981/.local/minecraft/26.3/jars/client.jar"
+
+
+def fallback_jar(base):
+    """definicion vanilla exacta del item (items/<base>.json del client.jar): sirve para materiales con render especial"""
+    import zipfile
+    try:
+        with zipfile.ZipFile(JAR) as z:
+            return json.loads(z.read(f"assets/minecraft/items/{base}.json"))["model"]
+    except (OSError, KeyError):
+        return None
 
 
 FB_ENDER = {"type": "minecraft:special", "base": "minecraft:item/ender_chest",

@@ -1,0 +1,10 @@
+{
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
+	"cases": [
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"MARK_XXXVIII_HEAVY_FRAME"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/drakesnanotech/hulkbuster_frame"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"ULTRON_SENTINEL_POD"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/drakesnanotech/ultron_sentinel_pod"}}
+	],
+	"fallback": {"type":"minecraft:model","model":"minecraft:block/heavy_core"}
+	},
+	"oversized_in_gui": true
+}

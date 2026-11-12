@@ -1,0 +1,9 @@
+{
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
+	"cases": [
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"INFINITY_FLOWER_GROWER"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/infinityexpansion/basic_flower_grower"}}
+	],
+	"fallback": {"type":"minecraft:model","model":"minecraft:block/chorus_flower"}
+	},
+	"oversized_in_gui": true
+}

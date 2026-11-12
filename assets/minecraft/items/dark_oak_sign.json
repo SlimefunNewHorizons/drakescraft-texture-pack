@@ -1,0 +1,10 @@
+{
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
+	"cases": [
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"DEADLY_FRAME"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimybees/sweet_frame"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"SWEET_FRAME"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimybees/sweet_frame"}}
+	],
+	"fallback": {"type":"minecraft:model","model":"minecraft:item/dark_oak_sign"}
+	},
+	"oversized_in_gui": true
+}

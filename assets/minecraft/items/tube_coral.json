@@ -1,0 +1,9 @@
+{
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
+	"cases": [
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"SUPREME_GENE_INTELLIGENCE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/supreme/supreme_gene_berserk"}}
+	],
+	"fallback": {"type":"minecraft:model","model":"minecraft:item/tube_coral"}
+	},
+	"oversized_in_gui": true
+}

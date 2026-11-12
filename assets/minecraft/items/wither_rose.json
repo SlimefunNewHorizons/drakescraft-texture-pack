@@ -1,0 +1,9 @@
+{
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
+	"cases": [
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"DYNATECH_ORECHID"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/litexpansion/mixed_metal_ingot"}}
+	],
+	"fallback": {"type":"minecraft:model","model":"minecraft:item/wither_rose"}
+	},
+	"oversized_in_gui": true
+}

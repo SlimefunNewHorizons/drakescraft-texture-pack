@@ -1,0 +1,9 @@
+{
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
+	"cases": [
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"COSMIC_FRAGMENT"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/drakesnanotech/cosmic_fragment"}}
+	],
+	"fallback": {"type":"minecraft:model","model":"minecraft:item/amethyst_cluster"}
+	},
+	"oversized_in_gui": true
+}

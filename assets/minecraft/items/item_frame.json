@@ -1,0 +1,14 @@
+{
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
+	"cases": [
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"BEEALYZER"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/fnamplifications/fn_gem_armor_impair"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CT_WIRELESS_ACCESS_TERMINAL_128"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/chestterminal/ct_wireless_access_terminal_16"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CT_WIRELESS_ACCESS_TERMINAL_16"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/chestterminal/ct_wireless_access_terminal_16"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CT_WIRELESS_ACCESS_TERMINAL_64"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/chestterminal/ct_wireless_access_terminal_16"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CT_WIRELESS_ACCESS_TERMINAL_TRANSDIMENSIONAL"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/chestterminal/ct_wireless_access_terminal_16"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"NTW_REMOTE_EMPOWERED"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/networksv6_drake/ntw_controller"}}
+	],
+	"fallback": {"type":"minecraft:model","model":"minecraft:item/item_frame"}
+	},
+	"oversized_in_gui": true
+}

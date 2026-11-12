@@ -1,0 +1,9 @@
+{
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
+	"cases": [
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CRY_MOB_CANDLE_3"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/crystamaehistoria/cry_mob_candle_3"}}
+	],
+	"fallback": {"type":"minecraft:model","model":"minecraft:item/white_candle"}
+	},
+	"oversized_in_gui": true
+}

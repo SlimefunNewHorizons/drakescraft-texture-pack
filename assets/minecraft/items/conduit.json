@@ -1,0 +1,10 @@
+{
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
+	"cases": [
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"FM_FAST_CORE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/litexpansion/advanced_machine_block"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"NE_CIVILIZATION_CORE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/nexcavate/ne_civilization_core"}}
+	],
+	"fallback": {"type":"minecraft:special","base":"minecraft:item/conduit","model":{"type":"minecraft:conduit"},"transformation":{"left_rotation":[0.0,0.0,0.0,1.0],"right_rotation":[0.0,0.0,0.0,1.0],"scale":[1.0,1.0,1.0],"translation":[0.5,0.5,0.5]}}
+	},
+	"oversized_in_gui": true
+}

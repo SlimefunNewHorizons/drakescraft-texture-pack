@@ -1,0 +1,10 @@
+{
+	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
+	"cases": [
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"NTW_RAKE_2"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/networksv6_drake/ntw_quantum_storage_2"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"NTW_RAKE_3"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/networksv6_drake/ntw_quantum_storage_3"}}
+	],
+	"fallback": {"type":"minecraft:model","model":"minecraft:item/weeping_vines"}
+	},
+	"oversized_in_gui": true
+}
