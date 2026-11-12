@@ -1,14 +1,175 @@
 {
-	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
-	"cases": [
-		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"HANDHELD_DIGGER_1"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/advancedtech/handheld_digger_1"}},
-		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"HANDHELD_DIGGER_2"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/advancedtech/handheld_digger_2"}},
-		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"HANDHELD_DIGGER_3"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/advancedtech/handheld_digger_3"}},
-		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"IDOE_TERRABORE_ADVANCED"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/networksv6_drake/ntw_advanced_nanobots"}},
-		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"OMC_CONTAINMENT_PICK"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/obsidianexpansion/omc_containment_pick"}},
-		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"WF_PRIME_NOSAM_PICK"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimeframe/wf_nosam_pick"}}
-	],
-	"fallback": {"type":"minecraft:range_dispatch","property":"minecraft:custom_model_data","index":0,"fallback":{"type":"minecraft:model","model":"minecraft:item/netherite_pickaxe"},"entries":[{"threshold":0,"model":{"type":"minecraft:select","property":"minecraft:component","component":"minecraft:custom_name","cases":[{"when":{"text":"Fortune"},"model":{"type":"minecraft:model","model":"jackstar:item/1_handheld/pickaxes/fortune_netherite"}},{"when":{"text":"Silk"},"model":{"type":"minecraft:model","model":"jackstar:item/1_handheld/pickaxes/silk_netherite"}},{"when":{"text":"","extra":[{"text":"Paxel","obfuscated":false,"italic":false,"underlined":false,"strikethrough":false,"color":"aqua","bold":false}]},"model":{"type":"minecraft:model","model":"slimefun/34_fluffy_machines/paxel"}}],"fallback":{"type":"minecraft:model","model":"minecraft:item/netherite_pickaxe"}}}]}
-	},
-	"oversized_in_gui": true
+  "model": {
+    "type": "minecraft:select",
+    "property": "minecraft:component",
+    "component": "minecraft:custom_data",
+    "cases": [
+      {
+        "when": {
+          "PublicBukkitValues": {
+            "slimefun:slimefun_item": "HANDHELD_DIGGER_1"
+          }
+        },
+        "model": {
+          "type": "minecraft:model",
+          "model": "slimefun/drakes_proc/advancedtech/handheld_digger_1"
+        }
+      },
+      {
+        "when": {
+          "PublicBukkitValues": {
+            "slimefun:slimefun_item": "HANDHELD_DIGGER_2"
+          }
+        },
+        "model": {
+          "type": "minecraft:model",
+          "model": "slimefun/drakes_proc/advancedtech/handheld_digger_2"
+        }
+      },
+      {
+        "when": {
+          "PublicBukkitValues": {
+            "slimefun:slimefun_item": "HANDHELD_DIGGER_3"
+          }
+        },
+        "model": {
+          "type": "minecraft:model",
+          "model": "slimefun/drakes_proc/advancedtech/handheld_digger_3"
+        }
+      },
+      {
+        "when": {
+          "PublicBukkitValues": {
+            "slimefun:slimefun_item": "IDOE_TERRABORE_ADVANCED"
+          }
+        },
+        "model": {
+          "type": "minecraft:model",
+          "model": "slimefun/drakes_proc/networksv6_drake/ntw_advanced_nanobots"
+        }
+      },
+      {
+        "when": {
+          "PublicBukkitValues": {
+            "slimefun:slimefun_item": "OMC_CONTAINMENT_PICK"
+          }
+        },
+        "model": {
+          "type": "minecraft:model",
+          "model": "slimefun/drakes_proc/obsidianexpansion/omc_containment_pick"
+        }
+      },
+      {
+        "when": {
+          "PublicBukkitValues": {
+            "slimefun:slimefun_item": "WF_PRIME_NOSAM_PICK"
+          }
+        },
+        "model": {
+          "type": "minecraft:model",
+          "model": "slimefun/drakes_proc/slimeframe/wf_nosam_pick"
+        }
+      }
+    ],
+    "fallback": {
+      "type": "minecraft:range_dispatch",
+      "property": "minecraft:custom_model_data",
+      "index": 0,
+      "fallback": {
+        "type": "minecraft:select",
+        "property": "minecraft:display_context",
+        "cases": [
+          {
+            "when": [
+              "gui",
+              "ground",
+              "fixed",
+              "on_shelf"
+            ],
+            "model": {
+              "type": "minecraft:model",
+              "model": "item/netherite_pickaxe"
+            }
+          }
+        ],
+        "fallback": {
+          "type": "minecraft:model",
+          "model": "drakescraft:item/gear3d/netherite_pickaxe"
+        }
+      },
+      "entries": [
+        {
+          "threshold": 0,
+          "model": {
+            "type": "minecraft:select",
+            "property": "minecraft:component",
+            "component": "minecraft:custom_name",
+            "cases": [
+              {
+                "when": {
+                  "text": "Fortune"
+                },
+                "model": {
+                  "type": "minecraft:model",
+                  "model": "jackstar:item/1_handheld/pickaxes/fortune_netherite"
+                }
+              },
+              {
+                "when": {
+                  "text": "Silk"
+                },
+                "model": {
+                  "type": "minecraft:model",
+                  "model": "jackstar:item/1_handheld/pickaxes/silk_netherite"
+                }
+              },
+              {
+                "when": {
+                  "text": "",
+                  "extra": [
+                    {
+                      "text": "Paxel",
+                      "obfuscated": false,
+                      "italic": false,
+                      "underlined": false,
+                      "strikethrough": false,
+                      "color": "aqua",
+                      "bold": false
+                    }
+                  ]
+                },
+                "model": {
+                  "type": "minecraft:model",
+                  "model": "slimefun/34_fluffy_machines/paxel"
+                }
+              }
+            ],
+            "fallback": {
+              "type": "minecraft:select",
+              "property": "minecraft:display_context",
+              "cases": [
+                {
+                  "when": [
+                    "gui",
+                    "ground",
+                    "fixed",
+                    "on_shelf"
+                  ],
+                  "model": {
+                    "type": "minecraft:model",
+                    "model": "item/netherite_pickaxe"
+                  }
+                }
+              ],
+              "fallback": {
+                "type": "minecraft:model",
+                "model": "drakescraft:item/gear3d/netherite_pickaxe"
+              }
+            }
+          }
+        }
+      ]
+    }
+  },
+  "oversized_in_gui": true
 }
