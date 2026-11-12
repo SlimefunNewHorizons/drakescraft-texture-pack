@@ -140,25 +140,18 @@ def dragon():
     s2.rect(0, 30.5, 16, 1.5, "#2a1458"); gold(s2, 0, 30.2, 16, 0.6)
 
     # alas: elytra-UV 64x32 (ala en (22,0) 10x20x2): silueta con dedos, membrana magenta, huesos dorados
-    w = Sheet(np.zeros((128, 256, 3))); w.base[:] = hx("#2a1458")
-    w.region(22, 0, 24, 22)
-    s = w
-    s.base[:] = add_noise(scales(256, 128, "#240f4a", "#8a3fd0", 12, 8, 3))
-    for fx in (24, 34):    # frente y dorso: ala de dragon (tope = hombro; abajo = punta)
-        s.hole(fx, 2, 10, 20)   # se reconstruye abajo con poligono
-    w.cut = Image.new("L", (256, 128), 0); w.cd = ImageDraw.Draw(w.cut)
+    w = Sheet(add_noise(scales(256, 128, "#3a1670", "#b24be0", 9, 6, 3)))
+    wm = ImageDraw.Draw(w.mask)
     for fx in (24, 34):
         mirror = fx == 34
         def X(x): return fx+(10-x if mirror else x)
-        # recortes entre dedos (alpha 0)
-        for pts in ([(3, 12), (4, 22), (2, 22)], [(6.2, 13), (7, 22), (5, 22)], [(9, 14), (10, 22), (8, 22)]):
-            w.cd.polygon([(X(px)*K, (2+py-2)*K) for px, py in pts], fill=255)
-        # membrana magenta
-        w.poly([(X(0.2), 5), (X(3), 12.5), (X(4.5), 21.5), (X(1.5), 21.5)], "#b02be0", 255)
-        # huesos/dedos
-        w.line([(X(0.5), 3), (X(3), 12), (X(3.6), 21)], "#e6c564", 0.55); w.line([(X(1.5), 3.5), (X(6), 14), (X(6.4), 21.4)], "#e6c564", 0.5)
-        w.line([(X(2.5), 3.5), (X(9), 15), (X(9.2), 21)], "#e6c564", 0.45)
-        w.rect(X(0) if not mirror else X(1.2), 2, 1.2, 4, "#f4d97c")
+        sil = [(0, 2), (3.5, 2), (10, 8), (10, 14), (8.6, 22), (7.4, 17), (6, 22), (4.6, 17), (3.2, 21.5), (2, 16), (0, 19)]
+        wm.polygon([(X(px)*K, py*K) for px, py in sil], fill=255)
+        w.poly([(X(0), 2), (X(3.5), 2), (X(10), 8), (X(10), 14), (X(0), 19)], "#8a1fc0", 90)
+        for tip in ((10, 14), (8.6, 21.6), (6, 21.6), (3.2, 21.2)):
+            w.line([(X(1), 2.5), (X(tip[0]), tip[1])], "#f1cf6a", 0.45)
+        w.rect(X(0) if not mirror else X(1.5), 2, 1.5, 3.5, "#f4d97c")
+        w.line([(X(1.5), 5.5), (X(0.2), 18.5)], "#e6c564", 0.4)
     return s1.out(), s2.out(), w.out()
 
 # ---------- TECNOLOGICA ----------
