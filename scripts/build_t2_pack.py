@@ -170,7 +170,8 @@ def build(base: Path, output: Path, expected_sha256: str,
           language_patches: dict | None = None,
           model_patches: dict | None = None,
           legacy_item_bridges: list[str] | None = None,
-          missing_model_fallbacks: dict[str, str] | None = None) -> dict[str, object]:
+          missing_model_fallbacks: dict[str, str] | None = None,
+          extra_files: dict[str, bytes] | None = None) -> dict[str, object]:
     if base.resolve() == output.resolve():
         raise ValueError("The input pack must be preserved")
     if digest(base, "sha256") != expected_sha256:
@@ -183,7 +184,10 @@ def build(base: Path, output: Path, expected_sha256: str,
         models = patch_model_textures(source, model_patches or {})
         items = bridge_legacy_items(source, legacy_item_bridges if legacy_item_bridges is not None else [],
                                     missing_model_fallbacks)
-        replacements = {**languages, **models, **items}
+        extra_files = extra_files or {}
+        if any(not n.startswith("assets/") for n in extra_files):
+            raise ValueError("Extra files must live under assets/")
+        replacements = {**languages, **models, **items, **extra_files}
         metadata = json.loads(source.read("pack.mcmeta"))
         overlays = metadata.setdefault("overlays", {}).setdefault("entries", [])
         if any(entry["directory"] == OVERLAY for entry in overlays):
@@ -214,10 +218,10 @@ def build(base: Path, output: Path, expected_sha256: str,
                 content = (json.dumps(metadata, ensure_ascii=False, indent=2) + "\n").encode() \
                     if name == "pack.mcmeta" else replacements.get(name, source.read(name))
                 target.writestr(info, content)
-            for name in sorted(set(items) - set(names)):
+            for name in sorted((set(items) | set(extra_files)) - set(names)):
                 info = zipfile.ZipInfo(name, date_time=source.getinfo("pack.mcmeta").date_time)
                 info.compress_type = zipfile.ZIP_DEFLATED
-                target.writestr(info, items[name])
+                target.writestr(info, replacements[name])
     return {
         "base_sha256": expected_sha256,
         "sha256": digest(output, "sha256"),
@@ -228,6 +232,7 @@ def build(base: Path, output: Path, expected_sha256: str,
         "patched_models": sorted(models),
         "bridged_items": sorted(items),
         "missing_model_fallbacks": missing_model_fallbacks or {},
+        "extra_files": sorted(extra_files),
     }
 
 
@@ -244,12 +249,16 @@ def main() -> None:
                         help="Optional JSON list of CMD-only legacy carriers to bridge to modern items")
     parser.add_argument("--missing-model-fallbacks", type=Path,
                         help="Optional explicit substitutions for absent legacy models (modern items only)")
+    parser.add_argument("--extra-dir", type=Path,
+                        help="Directory whose files (relative to it, under assets/) are added or replace base files")
     args = parser.parse_args()
+    extra = {p.relative_to(args.extra_dir).as_posix(): p.read_bytes()
+             for p in sorted(args.extra_dir.rglob("*")) if p.is_file()} if args.extra_dir else None
     patches = json.loads(args.language_patches.read_text()) if args.language_patches else None
     models = json.loads(args.model_patches.read_text()) if args.model_patches else None
     bridges = json.loads(args.legacy_item_bridges.read_text()) if args.legacy_item_bridges else None
     fallbacks = json.loads(args.missing_model_fallbacks.read_text()) if args.missing_model_fallbacks else None
-    print(json.dumps(build(args.base, args.output, args.base_sha256, patches, models, bridges, fallbacks), indent=2))
+    print(json.dumps(build(args.base, args.output, args.base_sha256, patches, models, bridges, fallbacks, extra), indent=2))
 
 
 if __name__ == "__main__":
