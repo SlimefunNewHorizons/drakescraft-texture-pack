@@ -1,59 +1,64 @@
 #!/usr/bin/env python3
-"""Armaduras DrakesCraft estilo KINTSUGI + armadura de DRAGON (26.x). Sin shader, solo pixeles pintados.
+"""Armaduras DrakesCraft KINTSUGI/DRAGON (26.x y 1.20): autoria en VECTOR (SVG) y export a 4x. Sin shader.
 
-Materiales vanilla 26.x cubiertos: leather (teñible + overlay), chainmail, iron, gold, diamond, netherite, copper,
-turtle_scute (casco). Propios: drakescraft:kintsugi y drakescraft:dragon.
-Capas por material (las que existan en el vanilla del jar de cliente):
-  humanoid (64x32), humanoid_leggings (64x32)      -> pintado por caras (UV vanilla)
-  humanoid_baby (64x64), horse_body (64x64), nautilus_body (128x128), wolf_body (64x32)
-                                                    -> mismo estilo pintado sobre la MASCARA (alpha) del PNG vanilla del jar
-Equipment JSON: se parte del JSON REAL del jar (conserva humanoid_baby, trim_overrides, dyeable...) y se anade wolf_body.
-Para dragon: iconos 2D de item (casco/peto/pantalon/botas) + assets/drakescraft/items|models/item.
-Salida extra: fuentes SVG (assets/drakescraft/textures/gear/svg) y hoja de vista previa docs/previews/.
-Uso: gen_armor_layers.py [--root .] [--jar <client.jar>]
+El SVG usa como unidades los PIXELES VANILLA (viewBox 64x32, 64x64, 128x128...), asi el layout/UV vanilla se
+mantiene exacto y proporcional; la rasterizacion (rsvg-convert) sale a 4x: capas 256x128, baby/caballo 256x256, nautilus 512x512.
+Estilo (dueño): base oscura con degradados y relieve, bordes de placa marcados, remaches discretos, pocas grietas
+finas/estrellitas, acento minimo por material (oxido en hierro, cardenillo en cobre). Dragon: escamas + cresta/cuernos/espinas.
+
+Salidas (por material, desde el MISMO svg):
+  26.x : assets/minecraft/textures/entity/equipment/{humanoid,humanoid_leggings,humanoid_baby,horse_body,nautilus_body,wolf_body}/<mat>.png
+  1.20 : assets/minecraft/textures/models/armor/<mat>_layer_{1,2}.png (+ leather_layer_N_overlay.png); copper no existe antes de 1.21.9
+  propios: assets/drakescraft/textures/entity/equipment/... (kintsugi, dragon) + equipment/*.json
+  fuentes: assets/drakescraft/textures/gear/svg/armor_<mat>_<capa>.svg ; iconos dragon 128x128 + items/models
+Las capas de baby/caballo/nautilus/lobo se recortan con la mascara alpha del PNG vanilla del jar de cliente.
+Uso: gen_armor_layers.py [--root .] [--jar client.jar]
 """
 import argparse
+import io
 import json
 import random
+import subprocess
 import zipfile
 from pathlib import Path
 from PIL import Image
 
 DEFAULT_JAR = Path.home() / ".local/share/horizon-launcher/versions/nightly-2026-11-05-66f3981/.local/minecraft/26.3/jars/client.jar"
-OUTLINE = (10, 8, 16)
-GOLD, GOLD_D, GOLD_L, WHITE = (176, 138, 48), (104, 78, 26), (214, 184, 96), (235, 232, 245)  # oro apagado
-MAGENTA, CYAN = (150, 52, 170), (36, 150, 170)  # acentos tenues
-BRIGHT_CYAN = (80, 220, 240)
+SCALE = 4
+OUT = "#0a0810"
+GOLD, GOLD_D, GOLD_L = "#b08a30", "#684e1a", "#d6b860"
+MAG, CYN, CYN_B = "#9634aa", "#2496aa", "#50dcf0"
 
 
 def hx(s):
     return tuple(int(s[i:i + 2], 16) for i in (1, 3, 5))
 
 
-def mix(a, b, t):
-    return tuple(int(a[i] * (1 - t) + b[i] * t) for i in range(3))
+def mixc(a, b, t):
+    a, b = (hx(a) if isinstance(a, str) else a), (hx(b) if isinstance(b, str) else b)
+    return "#%02x%02x%02x" % tuple(int(a[i] * (1 - t) + b[i] * t) for i in range(3))
 
 
-# Estilo contenido: base OSCURA con micro-variacion; acento total por capa ~<=7%.
-# crack: color de grietas finas; patch: (color, fraccion) manchas (oxido/cardenillo); mode: plate | mesh | scale
+# H base, h luz, d sombra, sp brillo, crack, mode, patches=[(color, fraccion)]
 MATS = {
-    "netherite": dict(H="#1d1925", h="#3a3048", d="#0c0a11", sp="#7a3a8e", crack=(110, 44, 130), mode="plate"),
-    "diamond":   dict(H="#12333c", h="#2a6f7b", d="#081a20", sp="#4fb3bf", crack=(46, 138, 150), mode="plate"),
-    "iron":      dict(H="#3a4152", h="#6a7388", d="#1b1f2a", sp="#9aa3b8", crack=(90, 100, 120), mode="plate",
-                      patch=((122, 72, 40), .045), patch2=((92, 54, 30), .03)),
-    "gold":      dict(H="#3a2c10", h="#6e551c", d="#1b1305", sp="#a88a3c", crack=(128, 100, 38), mode="plate"),
-    "chainmail": dict(H="#2e3342", h="#5a6176", d="#151822", sp="#8d93a6", crack=(70, 78, 98), mode="mesh"),
-    "copper":    dict(H="#4a2819", h="#8a4a2c", d="#1f0f09", sp="#c9845a", crack=(150, 90, 56), mode="plate",
-                      patch=((40, 120, 104), .05), patch2=((30, 88, 78), .03)),
-    "turtle_scute": dict(H="#173a22", h="#3f8a4c", d="#09170e", sp="#8fd09a", crack=(70, 150, 90), mode="scale"),
-    "leather":   dict(H="#a0a0a0", h="#c4c4c4", d="#5e5e5e", sp="#ffffff", crack=(140, 110, 50), mode="plate", gray=True),
-    "kintsugi":  dict(H="#1a1424", h="#34264a", d="#0a0810", sp="#9b6bd0", crack=GOLD, mode="plate"),
-    "dragon":    dict(H="#2a1450", h="#5b2bb5", d="#10061f", sp="#b99be8", crack=GOLD, mode="scale", tint=True),
+    "netherite": dict(H="#1d1925", h="#3a3048", d="#0a080e", sp="#8a4a9e", crack="#6e2c82", mode="plate"),
+    "diamond": dict(H="#12333c", h="#2a6f7b", d="#06161b", sp="#4fb3bf", crack="#2e8a96", mode="plate"),
+    "iron": dict(H="#3a4152", h="#6a7388", d="#14171f", sp="#9aa3b8", crack="#5a6478", mode="plate",
+                 patches=[("#7a4828", .05), ("#5c361e", .035)]),
+    "gold": dict(H="#3a2c10", h="#6e551c", d="#150f04", sp="#a88a3c", crack="#80642a", mode="plate"),
+    "chainmail": dict(H="#232735", h="#5a6176", d="#0e1018", sp="#8d93a6", crack="#46506a", mode="mesh"),
+    "copper": dict(H="#4a2819", h="#8a4a2c", d="#190c07", sp="#c9845a", crack="#96593a", mode="plate",
+                   patches=[("#28786a", .05), ("#1e5a4e", .035)]),
+    "turtle_scute": dict(H="#173a22", h="#3f8a4c", d="#07130b", sp="#8fd09a", crack="#46965a", mode="scale"),
+    "leather": dict(H="#a0a0a0", h="#c8c8c8", d="#585858", sp="#ffffff", crack="#8c6e32", mode="plate"),
+    "kintsugi": dict(H="#1a1424", h="#34264a", d="#08060d", sp="#9b6bd0", crack=GOLD, mode="plate"),
+    "dragon": dict(H="#2a1450", h="#5b2bb5", d="#0d051a", sp="#b99be8", crack=GOLD, mode="scale", tint=True),
 }
-VANILLA_JSON = ["netherite", "diamond", "iron", "gold", "chainmail", "copper", "leather"]  # con equipment json en el jar
+VANILLA_JSON = ["netherite", "diamond", "iron", "gold", "chainmail", "copper", "leather"]
 HUMANOID_MATS = VANILLA_JSON + ["turtle_scute"]
 CUSTOM = ["kintsugi", "dragon"]
-ACCENT_M, ACCENT_C = hx("#6a1470"), hx("#0b5a70")
+OLD_NAME = {"netherite": "netherite", "diamond": "diamond", "iron": "iron", "gold": "gold", "chainmail": "chainmail",
+            "leather": "leather", "turtle_scute": "turtle"}
 
 
 def box(u, v, w, h, d):
@@ -66,233 +71,207 @@ LAYER1 = {"head": HEAD, "body": BODY, "arm": ARM, "leg": LEG}
 LAYER2 = {"body": BODY, "leg": LEG}
 
 
-BRIGHT = {}
+def f(v):
+    return f"{v:.2f}".rstrip("0").rstrip(".")
 
 
-def rect_set(r):
-    x0, y0, w, h = r
-    return {(x0 + i, y0 + j) for j in range(h) for i in range(w)}
+class Builder:
+    def __init__(self, w, h, m, rng, overlay=False):
+        self.w, self.h, self.m, self.rng, self.overlay = w, h, m, rng, overlay
+        self.defs, self.body = [], []
 
-
-def base_color(x, y, m, ox, oy, seed):
-    H, hl, d = hx(m["H"]), hx(m["h"]), hx(m["d"])
-    mode = m["mode"]
-    j = ((x * 2654435761 ^ y * 40503 ^ seed) >> 3) % 5  # micro-variacion de tono
-    var = (-5, -2, 0, 2, 5)[j]
-    jit = lambda c: tuple(max(0, min(255, v + var)) for v in c)
-    if mode == "mesh":  # eslabones: anillos 4x4 de borde claro tenue y centro oscuro
-        i, k = (x + (y // 4 % 2) * 2) % 4, y % 4
-        if i in (0, 3) and k in (1, 2) or k in (0, 3) and i in (1, 2):
-            return jit(mix(H, hl, .6))
-        return jit(d if (i, k) in ((1, 1), (2, 2)) else H)
-    if mode == "scale":
-        row = (y + ox) // 3
-        c, r = (x + oy + (row % 2) * 2) % 4, (y + ox) % 3
-        cx = (x + oy + (row % 2) * 2) // 4
+    def grads(self):
+        m = self.m
+        H, hl, d = m["H"], m["h"], m["d"]
+        for v in range(3):
+            t = (-.1, 0, .12)[v]
+            c0, c1, c2 = mixc(H, hl, .45 + t), mixc(H, hl, .08 + t / 2), mixc(H, d, .45 - t)
+            self.defs.append(f'<linearGradient id="p{v}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="{c0}"/>'
+                             f'<stop offset=".45" stop-color="{c1}"/><stop offset="1" stop-color="{c2}"/></linearGradient>')
         if m.get("tint"):
-            kk = (cx * 73856093 ^ row * 19349663 ^ seed) % 100
-            if kk < 5:
-                H, hl = ACCENT_M, mix(ACCENT_M, (240, 140, 250), .45)
-            elif kk < 9:
-                H, hl = ACCENT_C, mix(ACCENT_C, (150, 240, 255), .45)
-        if r == 0 or c == 0:
-            return d
-        if r == 1 and c == 1 and (cx + row) % 2 == 0:
-            return mix(H, hl, .55)
-        return jit(H if r == 1 else tuple(max(0, v - 8) for v in H))
-    px_, py_ = (x + ox) % 4, (y + oy) % 4
-    cell = ((x + ox) // 4 * 31 + (y + oy) // 4 * 17 + seed) % 3
-    if px_ == 0 and py_ == 0:
-        return OUTLINE if not m.get("gray") else d
-    if px_ == 0 or py_ == 0:
-        return d
-    if px_ == 1 and py_ == 1 and cell == 0:
-        return mix(H, hl, .6)       # remache discreto
-    if (px_ == 1 or py_ == 1) and (x + y) % 3 == 0:
-        return mix(H, hl, .25)      # canto iluminado apenas
-    return jit(H)
+            for nm, base, lt in (("m", "#5a1466", "#a040b8"), ("c", "#0b4658", "#2a96aa")):
+                self.defs.append(f'<linearGradient id="p{nm}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="{lt}"/>'
+                                 f'<stop offset="1" stop-color="{base}"/></linearGradient>')
+        self.defs.append(f'<radialGradient id="rv" cx=".35" cy=".35" r=".7"><stop offset="0" stop-color="{mixc(H, hl, .9)}"/>'
+                         f'<stop offset="1" stop-color="{d}"/></radialGradient>')
+        self.defs.append('<radialGradient id="gem" cx=".4" cy=".35" r=".7"><stop offset="0" stop-color="#d8fbff"/>'
+                         f'<stop offset=".5" stop-color="{CYN_B}"/><stop offset="1" stop-color="#0b4658"/></radialGradient>')
+        self.defs.append(f'<linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="{GOLD_L}"/>'
+                         f'<stop offset=".5" stop-color="{GOLD}"/><stop offset="1" stop-color="{GOLD_D}"/></linearGradient>')
+        self.defs.append('<filter id="blur" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation=".45"/></filter>')
+        self.defs.append('<filter id="grain" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="1.3" '
+                         'numOctaves="2" seed="7" result="n"/><feColorMatrix in="n" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .55 -.18"/></filter>')
+
+    def clip(self, runs):
+        rects = "".join(f'<rect x="{f(x)}" y="{f(y)}" width="{f(w)}" height="{f(h)}"/>' for x, y, w, h in runs)
+        self.defs.append(f'<clipPath id="reg">{rects}</clipPath>')
+
+    def add(self, s):
+        self.body.append(s)
+
+    def base(self):
+        m, rng = self.m, self.rng
+        if self.overlay:
+            return
+        self.add(f'<rect width="{self.w}" height="{self.h}" fill="{m["d"]}"/>')
+        ox, oy = rng.randrange(4), rng.randrange(4)
+        mode = m["mode"]
+        if mode == "plate":
+            T = 4
+            for ty in range(-1, self.h // T + 1):
+                for tx in range(-1, self.w // T + 1):
+                    x, y = tx * T - ox + 4, ty * T - oy + 4
+                    v = rng.randrange(3)
+                    self.add(f'<rect x="{f(x + .2)}" y="{f(y + .2)}" width="{T - .4}" height="{T - .4}" rx=".55" fill="url(#p{v})" stroke="{m["d"]}" stroke-width=".14"/>')
+                    self.add(f'<path d="M{f(x + .6)} {f(y + T - .7)} V{f(y + .7)} Q{f(x + .6)} {f(y + .5)} {f(x + .9)} {f(y + .5)} H{f(x + T - .7)}" fill="none" stroke="{m["h"]}" stroke-width=".1" opacity=".32"/>')
+                    if rng.random() < .35:
+                        self.add(f'<circle cx="{f(x + 1)}" cy="{f(y + 1)}" r=".26" fill="url(#rv)" stroke="{m["d"]}" stroke-width=".06"/>')
+        elif mode == "mesh":
+            self.add(f'<rect width="{self.w}" height="{self.h}" fill="{m["H"]}"/>')
+            for ry in range(-1, int(self.h / 1.6) + 2):
+                for rx_ in range(-1, self.w // 2 + 2):
+                    cx, cy = rx_ * 2 + (ry % 2), ry * 1.6
+                    self.add(f'<circle cx="{f(cx)}" cy="{f(cy)}" r=".78" fill="none" stroke="{m["d"]}" stroke-width=".5"/>'
+                             f'<circle cx="{f(cx)}" cy="{f(cy)}" r=".78" fill="none" stroke="{mixc(m["H"], m["h"], .55)}" stroke-width=".22" stroke-dasharray="1.4 .9" opacity=".8"/>')
+        else:  # scale
+            for row in range(-1, int(self.h / 2.6) + 2):
+                for sx in range(-1, self.w // 4 + 2):
+                    x, y = sx * 4 + (row % 2) * 2, row * 2.6
+                    fill = "url(#p%d)" % rng.randrange(3)
+                    if m.get("tint"):
+                        k = rng.random()
+                        fill = "url(#pm)" if k < .05 else "url(#pc)" if k < .09 else fill
+                    self.add(f'<path d="M{f(x)} {f(y)} H{f(x + 4)} V{f(y + 1.7)} Q{f(x + 4)} {f(y + 3.7)} {f(x + 2)} {f(y + 3.9)} Q{f(x)} {f(y + 3.7)} {f(x)} {f(y + 1.7)} Z" fill="{fill}" stroke="{m["d"]}" stroke-width=".16"/>')
+                    self.add(f'<path d="M{f(x + .7)} {f(y + 1.5)} Q{f(x + 2)} {f(y + .6)} {f(x + 3.3)} {f(y + 1.5)}" fill="none" stroke="{m["h"]}" stroke-width=".11" opacity=".35"/>')
+        for col, frac in m.get("patches", []):  # oxido / cardenillo: manchas suaves
+            for _ in range(max(2, int(self.w * self.h * frac / 5))):
+                x, y = rng.uniform(0, self.w), rng.uniform(0, self.h)
+                self.add(f'<ellipse cx="{f(x)}" cy="{f(y)}" rx="{f(rng.uniform(.5, 1.6))}" ry="{f(rng.uniform(.4, 1.2))}" fill="{col}" opacity=".5" filter="url(#blur)"/>')
+        self.add(f'<rect width="{self.w}" height="{self.h}" filter="url(#grain)" opacity=".55"/>')
+
+    def details(self, runs):
+        m, rng = self.m, self.rng
+        area = sum(w * h for _, _, w, h in runs)
+        for _ in range(max(1, int(area / 220))):  # grietas finas
+            r = rng.choice(runs)
+            x, y = r[0] + rng.uniform(0, r[2]), r[1] + rng.uniform(0, r[3])
+            pts = [(x, y)]
+            for _s in range(rng.randrange(4, 8)):
+                x += rng.uniform(-.7, .7)
+                y += rng.uniform(.4, 1.1)
+                pts.append((x, y))
+            d = "M" + " L".join(f"{f(a)} {f(b)}" for a, b in pts)
+            self.add(f'<path d="{d}" fill="none" stroke="{m["crack"]}" stroke-width=".26" opacity=".25" filter="url(#blur)"/>')
+            self.add(f'<path d="{d}" fill="none" stroke="{m["crack"]}" stroke-width=".1" stroke-linejoin="round"/>')
+        for _ in range(max(1, int(area / 420))):  # estrellitas
+            r = rng.choice(runs)
+            x, y = r[0] + rng.uniform(1, max(1.1, r[2] - 1)), r[1] + rng.uniform(1, max(1.1, r[3] - 1))
+            s = rng.uniform(.5, .8)
+            self.add(f'<circle cx="{f(x)}" cy="{f(y)}" r="{f(s)}" fill="{m["sp"]}" opacity=".18" filter="url(#blur)"/>')
+            self.add(f'<path d="M{f(x)} {f(y - s)} L{f(x + s * .22)} {f(y - s * .22)} L{f(x + s)} {f(y)} L{f(x + s * .22)} {f(y + s * .22)} L{f(x)} {f(y + s)} '
+                     f'L{f(x - s * .22)} {f(y + s * .22)} L{f(x - s)} {f(y)} L{f(x - s * .22)} {f(y - s * .22)} Z" fill="{mixc(m["sp"], "#ffffff", .5)}" opacity=".9"/>')
+        for _ in range(int(area / 110)):  # brillos
+            r = rng.choice(runs)
+            self.add(f'<circle cx="{f(r[0] + rng.uniform(0, r[2]))}" cy="{f(r[1] + rng.uniform(0, r[3]))}" r=".11" fill="{m["sp"]}" opacity=".55"/>')
+
+    def svg(self):
+        return (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {self.w} {self.h}" width="{self.w * SCALE}" height="{self.h * SCALE}">'
+                f'<defs>{"".join(self.defs)}</defs><g clip-path="url(#reg)">{"".join(self.body)}</g></svg>')
 
 
-def blob(px, region, rng, color, frac, pts):
-    for _ in range(max(1, int(len(region) * frac / 4))):
-        x, y = rng.choice(pts)
-        for _s in range(4):
-            if (x, y) in region:
-                px[(x, y)] = color
-            x += rng.choice((-1, 0, 1))
-            y += rng.choice((-1, 0, 1))
+def face_shade(b, rects, m):
+    """Sombreado de volumen por cara: luz arriba, borde inferior oscuro."""
+    for i, (x, y, w, h) in enumerate(rects):
+        b.defs.append(f'<linearGradient id="fs{i}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".07"/>'
+                      f'<stop offset=".55" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".5"/></linearGradient>')
+        b.add(f'<rect x="{x}" y="{y}" width="{w}" height="{h}" fill="url(#fs{i})"/>')
+        b.add(f'<rect x="{f(x + .05)}" y="{f(y + .05)}" width="{w - .1}" height="{h - .1}" fill="none" stroke="{m["d"]}" stroke-width=".22" opacity=".7"/>')
 
 
-def paint(px, region, m, rng, seed=0, cracks=True):
-    """Base oscura + pocas grietas finas + estrellitas sueltas + brillos tenues (+ oxido/cardenillo)."""
-    if not region:
-        return
-    ox, oy = rng.randrange(4), rng.randrange(4)
-    for (x, y) in region:
-        px[(x, y)] = base_color(x, y, m, ox, oy, seed)
-    n = len(region)
-    pts = sorted(region)
-    for key in ("patch", "patch2"):
-        if key in m:
-            blob(px, region, rng, m[key][0], m[key][1], pts)
-    crack = m["crack"]
-    if cracks:
-        for _ in range(max(1, n // 220)):  # grietas finas de 1 px, cortas
-            x, y = rng.choice(pts)
-            for _s in range(rng.randrange(4, 9)):
-                if (x, y) not in region:
-                    break
-                px[(x, y)] = crack if rng.random() > .2 else mix(crack, (0, 0, 0), .5)
-                y += 1
-                x += rng.choice((-1, 0, 0, 1))
-    for _ in range(max(1, n // 400)):  # estrellita suelta tenue
-        cx, cy = rng.choice(pts)
-        if all((cx + dx, cy + dy) in region for dx, dy in ((1, 0), (-1, 0), (0, 1), (0, -1))):
-            px[(cx, cy)] = mix(hx(m["sp"]), WHITE, .6)
-            for dx, dy in ((1, 0), (-1, 0), (0, 1), (0, -1)):
-                px[(cx + dx, cy + dy)] = mix(px[(cx + dx, cy + dy)], hx(m["sp"]), .35)
-    sp = hx(m["sp"])
-    for _ in range(n // 90):
-        px[rng.choice(pts)] = mix(sp, (0, 0, 0), .35)
-
-
-def paint_overlay(px, region, m, rng):
-    """Overlay sin teñir (cuero): solo grietas, estrellitas y brillos; el resto transparente."""
-    tmp = {}
-    paint(tmp, region, m, rng)
-    base = {k: v for k, v in tmp.items() if max(v) > 120}
-    px.update(base)
-
-
-class Face:
-    def __init__(self, px, rect):
-        self.px, self.r = px, rect
-
-    def put(self, i, j, c):
-        x0, y0, w, h = self.r
-        if 0 <= i < w and 0 <= j < h:
-            self.px[(x0 + i, y0 + j)] = c
-
-
-def dragon_extras(px, layer):
-    """Cresta, cuernos, espinas y alas SUTILES: base oscura, pocos pixeles de acento."""
-    F = lambda part, f: Face(px, part[f])
+def dragon_extras(b, layer):
+    """Cresta, cuernos, espinas y alas SUTILES en coordenadas de cara (unidades de pixel vanilla)."""
+    a = b.add
     if layer == 1:
-        t = F(HEAD, "top")  # cresta central: puntos dorados espaciados
+        x0, y0 = HEAD["top"][0], HEAD["top"][1]
         for j in range(0, 8, 2):
-            t.put(3, j, GOLD); t.put(4, j, MAGENTA)
-        fr = F(HEAD, "front")
-        fr.put(2, 4, BRIGHT_CYAN); fr.put(5, 4, BRIGHT_CYAN)   # ojos
-        fr.put(1, 4, CYAN); fr.put(6, 4, CYAN)
-        for i in (0, 7):
-            fr.put(i, 0, GOLD); fr.put(i, 1, GOLD_D)          # base de cuernos
-        for side, flip in (("right", False), ("left", True)):  # cuernos barridos hacia atras
-            s = F(HEAD, side)
-            for (i, j) in ((5, 3), (4, 2), (3, 2), (2, 1), (1, 1), (0, 0)):
-                s.put(7 - i if flip else i, j, GOLD if (i + j) % 2 else GOLD_D)
-        b = F(HEAD, "back")
+            a(f'<path d="M{x0 + 3.2} {y0 + j + 1.8} L{x0 + 4} {y0 + j - .2} L{x0 + 4.8} {y0 + j + 1.8} Z" fill="{"url(#gold)" if j % 4 == 0 else MAG}" stroke="{OUT}" stroke-width=".1"/>')
+        fx, fy = HEAD["front"][0], HEAD["front"][1]
+        for ex in (1.2, 5.2):  # ojos
+            a(f'<ellipse cx="{f(fx + ex + .8)}" cy="{f(fy + 4.3)}" rx="1.1" ry=".55" fill="{CYN_B}" opacity=".35" filter="url(#blur)"/>')
+            a(f'<path d="M{f(fx + ex)} {f(fy + 4.1)} Q{f(fx + ex + .8)} {f(fy + 3.7)} {f(fx + ex + 1.7)} {f(fy + 4.5)} Q{f(fx + ex + .8)} {f(fy + 4.6)} {f(fx + ex)} {f(fy + 4.1)} Z" fill="{CYN_B}"/>')
+        a(f'<path d="M{fx} {fy + 3.2} L{fx + 3} {fy + 3.8} M{fx + 8} {fy + 3.2} L{fx + 5} {fy + 3.8}" stroke="url(#gold)" stroke-width=".28" fill="none"/>')
+        for side, flip in (("right", False), ("left", True)):  # cuernos
+            sx, sy = HEAD[side][0], HEAD[side][1]
+            X = (lambda v, sx=sx: sx + 8 - v) if flip else (lambda v, sx=sx: sx + v)
+            a(f'<path d="M{f(X(5.8))} {sy + 3.6} Q{f(X(3))} {sy + 3.2} {f(X(.3))} {sy + .1} Q{f(X(2.4))} {sy + 3.9} {f(X(4.6))} {sy + 4.6} Z" fill="url(#gold)" stroke="{OUT}" stroke-width=".12"/>')
+        bx, by = HEAD["back"][0], HEAD["back"][1]
         for j in range(0, 8, 2):
-            b.put(3, j, GOLD_D); b.put(4, j, MAGENTA)
-        f = F(BODY, "front")  # pecho: gema unica y costillas tenues
-        f.put(3, 4, BRIGHT_CYAN); f.put(4, 4, CYAN); f.put(3, 5, CYAN); f.put(4, 5, CYAN)
-        for j in (3, 6, 9):
-            for i in (1, 2, 5, 6):
-                f.put(i, j, GOLD_D)
-        bk = F(BODY, "back")  # espina dorsal y dos huesos de ala por lado
+            a(f'<path d="M{bx + 3.3} {by + j + 1.6} L{bx + 4} {by + j} L{bx + 4.7} {by + j + 1.6} Z" fill="{MAG}"/>')
+        cx, cy = BODY["front"][0], BODY["front"][1]  # gema + costillas
+        for j in (3, 6.2, 9.2):
+            a(f'<path d="M{cx + 1} {cy + j} Q{cx + 2} {f(cy + j + .6)} {cx + 3} {cy + j} M{cx + 5} {cy + j} Q{cx + 6} {f(cy + j + .6)} {cx + 7} {cy + j}" fill="none" stroke="{GOLD_D}" stroke-width=".22"/>')
+        a(f'<path d="M{cx + 4} {f(cy + 3.4)} L{f(cx + 4.9)} {f(cy + 4.8)} L{cx + 4} {f(cy + 6.2)} L{f(cx + 3.1)} {f(cy + 4.8)} Z" fill="url(#gem)" stroke="{GOLD_D}" stroke-width=".16"/>')
+        kx, ky = BODY["back"][0], BODY["back"][1]  # espina y alas
         for j in range(0, 12, 2):
-            bk.put(3, j, GOLD_D); bk.put(4, j, GOLD_D)
+            a(f'<path d="M{f(kx + 3.5)} {f(ky + j + 1.7)} L{kx + 4} {ky + j} L{f(kx + 4.5)} {f(ky + j + 1.7)} Z" fill="{GOLD_D}"/>')
         for flip in (False, True):
-            X = (lambda i: 7 - i) if flip else (lambda i: i)
-            for off in (3, 5):
-                for k in range(4):
-                    bk.put(X(3 - k), off + k, GOLD if k == 3 else GOLD_D)
-            bk.put(X(1), 4, MAGENTA); bk.put(X(0), 5, CYAN)
-        for f_ in ("right", "left", "front", "back"):   # hombreras con espina
-            a = F(ARM, f_)
-            for i in range(4):
-                a.put(i, 0, GOLD_D)
-            a.put(1, 1, MAGENTA)
-        for f_ in ("front", "right", "left", "back"):   # garras
-            l = F(LEG, f_)
-            for i in range(4):
-                l.put(i, 8, GOLD_D)
-            l.put(1, 11, GOLD)
+            X = (lambda v: kx + 8 - v) if flip else (lambda v: kx + v)
+            a(f'<path d="M{f(X(3.2))} {f(ky + 6.2)} Q{f(X(1.2))} {f(ky + 4.8)} {f(X(.2))} {f(ky + 1.4)} L{f(X(.2))} {ky + 6} Q{f(X(1.2))} {f(ky + 6.6)} {f(X(3.2))} {f(ky + 8.2)} Z" fill="{MAG}" opacity=".28"/>')
+            for e, end in ((6.2, 2), (8.2, 6)):
+                a(f'<path d="M{f(X(3.2))} {f(ky + e)} Q{f(X(1.2))} {f(ky + e - 1.4)} {f(X(.2))} {ky + end}" fill="none" stroke="url(#gold)" stroke-width=".28"/>')
+        for fn in ("right", "left", "front", "back"):  # hombreras
+            ax, ay = ARM[fn][0], ARM[fn][1]
+            a(f'<path d="M{f(ax + .8)} {f(ay + 1.6)} L{ax + 2} {f(ay - .2)} L{f(ax + 3.2)} {f(ay + 1.6)} Z" fill="url(#gold)" stroke="{OUT}" stroke-width=".1"/>')
+        for fn in ("front", "right", "left", "back"):  # garras
+            lx, ly = LEG[fn][0], LEG[fn][1]
+            for k in (.4, 1.6, 2.8):
+                a(f'<path d="M{f(lx + k)} {ly + 11} L{f(lx + k + .4)} {ly + 12} L{f(lx + k + .8)} {ly + 11} Z" fill="url(#gold)"/>')
     else:
-        for f_ in ("front", "back", "left", "right"):
-            bf = F(BODY, f_)
-            for i in range(0, 8 if f_ in ("front", "back") else 4, 2):
-                bf.put(i, 0, GOLD_D)
-        lf = F(LEG, "front")
-        lf.put(1, 5, CYAN); lf.put(2, 5, CYAN)
+        for fn, wd in (("front", 8), ("back", 8), ("left", 4), ("right", 4)):
+            x, y = BODY[fn][0], BODY[fn][1]
+            for i in range(0, wd, 2):
+                a(f'<rect x="{f(x + i + .3)}" y="{f(y + .2)}" width="1.2" height=".6" rx=".2" fill="{GOLD_D}"/>')
+        lx, ly = LEG["front"][0], LEG["front"][1]
+        a(f'<path d="M{lx + 2} {f(ly + 4.6)} L{f(lx + 2.9)} {f(ly + 5.6)} L{lx + 2} {f(ly + 6.6)} L{f(lx + 1.1)} {f(ly + 5.6)} Z" fill="url(#gem)" stroke="{GOLD_D}" stroke-width=".14"/>')
 
 
-def humanoid_layer(mat, layer, overlay=False):
-    m = MATS[mat]
-    rng = random.Random(f"{mat}-{layer}-{overlay}")
-    px = {}
-    parts = LAYER1 if layer == 1 else LAYER2
-    if mat == "turtle_scute":
-        parts = {"head": HEAD}
-    for pname, faces in parts.items():
-        for fname, rect in faces.items():
-            region = rect_set(rect)
-            if overlay:
-                paint_overlay(px, region, m, rng)
-                continue
-            paint(px, region, m, rng, seed=len(px))
-            x0, y0, w, h = rect
-            for i in range(w):  # borde inferior mas oscuro
-                px[(x0 + i, y0 + h - 1)] = hx(m["d"])
-            if layer == 2 and pname == "body" and fname in ("front", "back", "left", "right"):
-                for i in range(w):
-                    px[(x0 + i, y0)] = hx(m["d"])
-                    if i % 4 == 1:
-                        px[(x0 + i, y0 + 1)] = GOLD_D
-    if mat == "dragon" and not overlay:
-        dragon_extras(px, layer)
-    return px
-
-
-def mask_layer(mask_img, mat, overlay=False):
-    m = MATS[mat]
-    rng = random.Random(f"{mat}-mask-{mask_img.size}-{overlay}")
-    region = {(x, y) for y in range(mask_img.size[1]) for x in range(mask_img.size[0]) if mask_img.getpixel((x, y))[3] > 0}
-    px = {}
-    (paint_overlay if overlay else paint)(px, region, m, rng)
-    return px, mask_img.size
-
-
-def save_png(px, size, path):
-    im = Image.new("RGBA", size, (0, 0, 0, 0))
-    for (x, y), c in px.items():
-        if 0 <= x < size[0] and 0 <= y < size[1]:
-            im.putpixel((x, y), tuple(c) + (255,))
-    path.parent.mkdir(parents=True, exist_ok=True)
-    im.save(path)
-    tot = sum(1 for c in px.values())
-    br = sum(1 for c in px.values() if max(c) > 150)
-    BRIGHT[str(path.relative_to(path.parents[5]) if len(path.parents) > 5 else path)] = br / max(1, tot)
-    return im
-
-
-def save_svg(px, size, path):
-    path.parent.mkdir(parents=True, exist_ok=True)
-    w, h = size
-    out = [f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {w} {h}" width="{w * 8}" height="{h * 8}" shape-rendering="crispEdges">']
+def mask_runs(img):
+    w, h = img.size
+    runs = []
     for y in range(h):
         x = 0
         while x < w:
-            c = px.get((x, y))
-            if c is None:
+            if img.getpixel((x, y))[3] > 0:
+                e = x
+                while e + 1 < w and img.getpixel((e + 1, y))[3] > 0:
+                    e += 1
+                runs.append((x, y, e - x + 1, 1))
+                x = e + 1
+            else:
                 x += 1
-                continue
-            e = x
-            while e + 1 < w and px.get((e + 1, y)) == c:
-                e += 1
-            out.append(f'<rect x="{x}" y="{y}" width="{e - x + 1}" height="1" fill="#{c[0]:02x}{c[1]:02x}{c[2]:02x}"/>')
-            x = e + 1
-    out.append("</svg>")
-    path.write_text("\n".join(out), encoding="utf-8")
+    return runs
+
+
+def build_svg(mat, w, h, runs, key, overlay=False, face_rects=None, layer=None):
+    m = MATS[mat]
+    b = Builder(w, h, m, random.Random(key), overlay)
+    b.grads()
+    b.clip(runs)
+    b.base()
+    if face_rects and not overlay:
+        face_shade(b, face_rects, m)
+    b.details(runs)
+    if mat == "dragon" and layer and not overlay:
+        dragon_extras(b, layer)
+    return b.svg()
+
+
+def rasterize(svg_text, svg_path, png_path, size):
+    svg_path.parent.mkdir(parents=True, exist_ok=True)
+    png_path.parent.mkdir(parents=True, exist_ok=True)
+    svg_path.write_text(svg_text, encoding="utf-8")
+    subprocess.run(["rsvg-convert", "-w", str(size[0]), "-h", str(size[1]), "-o", str(png_path), str(svg_path)], check=True)
+    return Image.open(png_path).convert("RGBA")
 
 
 def write_json(path, data):
@@ -300,37 +279,42 @@ def write_json(path, data):
     path.write_text(json.dumps(data, indent=2) + "\n", encoding="utf-8")
 
 
-# ---------------- iconos 2D del set dragon (mitad izquierda 8 col x 16 filas, se espeja) ----------------
-ICONS = {
-    "helmet": ["G......P", "GG....PP", "oGoooooP", ".oHhHHHP", "oHhHHHHH", "oGGGGGGG", "oHEEHHHH", "oHHHHHHH",
-               "oHd.HHHH", "oHd..HHH", "oHd.....", "ood.....", "........", "........", "........", "........"],
-    "chestplate": ["........", "P.......", "PGo..ooo", "oGHooHHH", "oHhHHHHH", "oHHHGGGG", "oHHHGEEG", ".oHHGEEG",
-                   ".oHHGGGG", ".oHdHHHH", ".oHdHHHH", ".oHdHHHH", ".oHdHHHH", ".ooHdHHH", "..ooooDD", "........"],
-    "leggings": ["........", "........", ".ooooooo", ".oGGGGGG", ".oHHHhHH", ".oHHHHHH", ".oHHHHHo", ".oHHHHHo",
-                 ".oHHdoo.", ".oHEdo..", ".oHHdo..", ".oHHdo..", ".oHHdo..", ".oHhdo..", ".ooood..", "........"],
-    "boots": ["........", "........", "........", "........", "........", "..oooo..", "..oHho..", "..oHHo..",
-              "..oGGo..", "..oHHo..", ".ooHHo..", "oHHHHo..", "oGHHHo..", "oGDDDo..", "ooooooo.", "........"],
-}
+def icon_svg(piece):
+    shapes = {
+        "helmet": ('<path id="s" d="M64 22 L40 26 Q22 34 20 58 L20 88 Q20 96 28 98 L42 98 L42 84 L50 76 L64 76 Z"/>',
+                   '<path id="h" d="M30 40 Q14 34 6 6 Q24 16 42 30 Z"/>'),
+        "chestplate": ('<path id="s" d="M64 26 L42 26 Q30 30 20 26 L8 34 Q2 50 10 62 L22 58 L24 106 Q44 114 64 112 Z"/>',
+                       '<path id="h" d="M10 38 L0 20 L22 30 Z"/>'),
+        "leggings": ('<path id="s" d="M64 30 L22 30 L20 58 L26 112 L56 112 L58 62 L64 62 Z"/>',
+                     '<path id="h" d="M0 0 Z"/>'),
+        "boots": ('<path id="s" d="M64 50 L24 50 L24 86 Q10 90 8 104 L8 114 L64 114 Z"/>',
+                  '<path id="h" d="M10 108 L16 120 L22 108 L28 120 L34 108 Z"/>'),
+    }[piece]
+    extra = {
+        "helmet": f'<path d="M64 8 L60 34 L68 34 Z" fill="{MAG}" stroke="{OUT}" stroke-width="2"/><ellipse cx="46" cy="64" rx="14" ry="6" fill="{CYN_B}" opacity=".3" filter="url(#bl)"/>'
+                  f'<path d="M34 62 Q46 56 58 66 Q46 70 34 62 Z" fill="{CYN_B}"/><path d="M70 66 Q82 56 94 62 Q82 70 70 66 Z" fill="{CYN_B}"/>',
+        "chestplate": f'<path d="M64 52 L72 64 L64 78 L56 64 Z" fill="url(#gem)" stroke="{GOLD_D}" stroke-width="2"/><path d="M64 30 V50 M64 80 V108" stroke="{GOLD_D}" stroke-width="2.5"/>',
+        "leggings": f'<path d="M22 30 H106 V38 H22 Z" fill="url(#gold)" opacity=".85"/><path d="M40 70 L46 78 L40 86 L34 78 Z" fill="url(#gem)" stroke="{GOLD_D}" stroke-width="1.5"/>',
+        "boots": '',
+    }[piece]
+    return f'''<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 128 128" width="128" height="128">
+<defs>
+<linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5b2bb5"/><stop offset=".45" stop-color="#2a1450"/><stop offset="1" stop-color="#0d051a"/></linearGradient>
+<linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="{GOLD_L}"/><stop offset=".5" stop-color="{GOLD}"/><stop offset="1" stop-color="{GOLD_D}"/></linearGradient>
+<radialGradient id="gem" cx=".4" cy=".35" r=".7"><stop offset="0" stop-color="#d8fbff"/><stop offset=".5" stop-color="{CYN_B}"/><stop offset="1" stop-color="#0b4658"/></radialGradient>
+<pattern id="sc" width="12" height="9" patternUnits="userSpaceOnUse"><path d="M0 9 Q6 -1 12 9" fill="none" stroke="#b99be8" stroke-width="1" opacity=".22"/><path d="M-6 4.5 Q0 -4 6 4.5 M6 4.5 Q12 -4 18 4.5" fill="none" stroke="#000" stroke-width="1" opacity=".25"/></pattern>
+<filter id="bl"><feGaussianBlur stdDeviation="3"/></filter>
+{shapes[0]}{shapes[1]}
+</defs>
+<use xlink:href="#h" fill="url(#gold)" stroke="{OUT}" stroke-width="3" stroke-linejoin="round"/>
+<use xlink:href="#s" fill="url(#g)" stroke="{OUT}" stroke-width="3.5" stroke-linejoin="round"/>
+<use xlink:href="#s" fill="url(#sc)"/>
+<g transform="translate(128 0) scale(-1 1)"><use xlink:href="#h" fill="url(#gold)" stroke="{OUT}" stroke-width="3" stroke-linejoin="round"/>
+<use xlink:href="#s" fill="url(#g)" stroke="{OUT}" stroke-width="3.5" stroke-linejoin="round"/><use xlink:href="#s" fill="url(#sc)"/></g>
+{extra}
+</svg>'''
 
 
-def icon_px(rows):
-    m = MATS["dragon"]
-    H, hl, d = hx(m["H"]), hx(m["h"]), hx(m["d"])
-    px = {}
-    for y, row in enumerate(rows):
-        for x, ch in enumerate(row):
-            if ch == ".":
-                continue
-            c = {"o": OUTLINE, "H": H, "h": hl, "D": d, "d": d, "G": GOLD_D, "P": MAGENTA, "E": BRIGHT_CYAN}[ch]
-            if ch == "H" and (x + y) % 3 == 0:
-                c = tuple(max(0, v - 15) for v in H)  # escamas
-            for xx in (x, 15 - x):
-                if (xx, y) not in px or xx == x:
-                    px[(xx, y)] = c
-    return px
-
-
-# ---------------- principal ----------------
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--root", default=".")
@@ -338,115 +322,97 @@ def main():
     a = ap.parse_args()
     root = Path(a.root)
     mc, dk = root / "assets/minecraft", root / "assets/drakescraft"
-    svg = dk / "textures/gear/svg"
+    svgd = dk / "textures/gear/svg"
     z = zipfile.ZipFile(a.jar)
-    import io
+    names = set(z.namelist())
 
     def vanilla_png(layer, name):
         return Image.open(io.BytesIO(z.read(f"assets/minecraft/textures/entity/equipment/{layer}/{name}.png"))).convert("RGBA")
 
     def have(layer, name):
-        return f"assets/minecraft/textures/entity/equipment/{layer}/{name}.png" in z.namelist()
+        return f"assets/minecraft/textures/entity/equipment/{layer}/{name}.png" in names
 
     sheet = {}
     for mat in HUMANOID_MATS + CUSTOM:
         base = (dk if mat in CUSTOM else mc) / "textures/entity/equipment"
-        # humanoid + leggings por caras
         for layer, sub in ((1, "humanoid"), (2, "humanoid_leggings")):
             if mat == "turtle_scute" and layer == 2:
                 continue
-            px = humanoid_layer(mat, layer)
-            im = save_png(px, (64, 32), base / sub / f"{mat}.png")
-            save_svg(px, (64, 32), svg / f"armor_{mat}_{sub}.svg")
+            parts = {"head": HEAD} if mat == "turtle_scute" else (LAYER1 if layer == 1 else LAYER2)
+            rects = [r for p in parts.values() for r in p.values()]
+            key = f"{mat}-{layer}"
+            sv = build_svg(mat, 64, 32, rects, key, face_rects=rects, layer=layer)
+            im = rasterize(sv, svgd / f"armor_{mat}_{sub}.svg", base / sub / f"{mat}.png", (64 * SCALE, 32 * SCALE))
             sheet[(mat, sub)] = im
             if mat == "leather":
-                opx = humanoid_layer(mat, layer, overlay=True)
-                save_png(opx, (64, 32), base / sub / "leather_overlay.png")
-        # capas por mascara (UV vanilla desconocido por caras): baby / caballo / nautilus / lobo
+                osv = build_svg(mat, 64, 32, rects, key + "o", overlay=True)
+                rasterize(osv, svgd / f"armor_leather_{sub}_overlay.svg", base / sub / "leather_overlay.png", (64 * SCALE, 32 * SCALE))
+            if mat in OLD_NAME:  # formato 1.20.x desde el mismo SVG
+                old = mc / "textures/models/armor"
+                old.mkdir(parents=True, exist_ok=True)
+                im.save(old / f"{OLD_NAME[mat]}_layer_{layer}.png")
+                if mat == "leather":
+                    Image.open(base / sub / "leather_overlay.png").save(old / f"leather_layer_{layer}_overlay.png")
         src = "iron" if mat in CUSTOM else mat
         for sub, pool in (("humanoid_baby", HUMANOID_MATS), ("horse_body", ["netherite", "diamond", "iron", "gold", "copper", "leather"]),
                           ("nautilus_body", ["netherite", "diamond", "iron", "gold", "copper"])):
             if src not in pool or not have(sub, src):
                 continue
-            px, size = mask_layer(vanilla_png(sub, src), mat)
-            sheet[(mat, sub)] = save_png(px, size, base / sub / f"{mat}.png")
+            vm = vanilla_png(sub, src)
+            w, h = vm.size
+            sv = build_svg(mat, w, h, mask_runs(vm), f"{mat}-{sub}")
+            sheet[(mat, sub)] = rasterize(sv, svgd / f"armor_{mat}_{sub}.svg", base / sub / f"{mat}.png", (w * SCALE, h * SCALE))
             if mat == "leather" and sub in ("humanoid_baby", "horse_body"):
-                opx, size = mask_layer(vanilla_png(sub, "leather"), mat, overlay=True)
-                save_png(opx, size, base / sub / "leather_overlay.png")
-        if mat != "turtle_scute":  # armadura de lobo: mascara del armadillo (64x32)
-            px, size = mask_layer(vanilla_png("wolf_body", "armadillo_scute"), mat)
-            sheet[(mat, "wolf_body")] = save_png(px, size, base / "wolf_body" / f"{mat}.png")
+                osv = build_svg(mat, w, h, mask_runs(vanilla_png(sub, "leather")), f"{mat}-{sub}o", overlay=True)
+                rasterize(osv, svgd / f"armor_leather_{sub}_overlay.svg", base / sub / "leather_overlay.png", (w * SCALE, h * SCALE))
+        if mat != "turtle_scute":
+            runs = mask_runs(vanilla_png("wolf_body", "armadillo_scute"))
+            sv = build_svg(mat, 64, 32, runs, f"{mat}-wolf")
+            sheet[(mat, "wolf_body")] = rasterize(sv, svgd / f"armor_{mat}_wolf_body.svg", base / "wolf_body" / f"{mat}.png", (64 * SCALE, 32 * SCALE))
             if mat == "leather":
-                opx, size = mask_layer(vanilla_png("wolf_body", "armadillo_scute"), mat, overlay=True)
-                save_png(opx, size, base / "wolf_body" / "leather_overlay.png")
+                osv = build_svg(mat, 64, 32, runs, f"{mat}-wolfo", overlay=True)
+                rasterize(osv, svgd / "armor_leather_wolf_body_overlay.svg", base / "wolf_body" / "leather_overlay.png", (64 * SCALE, 32 * SCALE))
 
-    # equipment JSON: parte del JSON real del jar
-    for mat in VANILLA_JSON:
+    for mat in VANILLA_JSON:  # equipment JSON a partir del REAL del jar
         j = json.loads(z.read(f"assets/minecraft/equipment/{mat}.json"))
-        if mat == "leather":
-            j["layers"]["wolf_body"] = json.loads(json.dumps(j["layers"]["humanoid"]))
-        else:
-            j["layers"]["wolf_body"] = [{"texture": f"minecraft:{mat}"}]
+        j["layers"]["wolf_body"] = json.loads(json.dumps(j["layers"]["humanoid"])) if mat == "leather" else [{"texture": f"minecraft:{mat}"}]
         write_json(mc / "equipment" / f"{mat}.json", j)
     for mat in CUSTOM:
-        t = lambda: [{"texture": f"drakescraft:{mat}"}]
-        layers = {"humanoid": t(), "humanoid_baby": t(), "humanoid_leggings": t(), "horse_body": t(),
-                  "nautilus_body": t(), "wolf_body": t()}
-        write_json(dk / "equipment" / f"{mat}.json", {"layers": layers})
+        t = lambda mat=mat: [{"texture": f"drakescraft:{mat}"}]
+        write_json(dk / "equipment" / f"{mat}.json", {"layers": {"humanoid": t(), "humanoid_baby": t(), "humanoid_leggings": t(),
+                                                                  "horse_body": t(), "nautilus_body": t(), "wolf_body": t()}})
 
-    # iconos del set dragon
     icons = {}
-    for piece, rows in ICONS.items():
-        px = icon_px(rows)
-        full = {}
-        for (x, y), c in px.items():
-            full[(x, y)] = c
-        for (x, y) in list(full):
-            for dx in (-1, 0, 1):
-                for dy in (-1, 0, 1):
-                    p = (x + dx, y + dy)
-                    if 0 <= p[0] < 16 and 0 <= p[1] < 16 and p not in full:
-                        full[p] = OUTLINE
-        icons[piece] = save_png(full, (16, 16), dk / f"textures/item/dragon_{piece}.png")
-        save_svg(full, (16, 16), svg / f"dragon_{piece}.svg")
+    for piece in ("helmet", "chestplate", "leggings", "boots"):
+        icons[piece] = rasterize(icon_svg(piece), svgd / f"dragon_{piece}.svg", dk / f"textures/item/dragon_{piece}.png", (128, 128))
         write_json(dk / f"models/item/dragon_{piece}.json", {"parent": "minecraft:item/generated", "textures": {"layer0": f"drakescraft:item/dragon_{piece}"}})
         write_json(dk / f"items/dragon_{piece}.json", {"model": {"type": "minecraft:model", "model": f"drakescraft:item/dragon_{piece}"}})
 
-    # hoja de vista previa
     prev = root / "docs/previews"
     prev.mkdir(parents=True, exist_ok=True)
-    S = 4
     order = ["netherite", "diamond", "iron", "gold", "chainmail", "copper", "leather", "turtle_scute", "kintsugi", "dragon"]
-    W = 64 * 2 * S + 20 + 4 * 16 * 6 + 20
-    sh = Image.new("RGBA", (max(W, 1400), 40 + len(order) * (32 * S + 8) + 2 * (64 * S + 12) + 32 * S + 20), (40, 40, 48, 255))
-    y = 6
+    cw, rh = 256, 128
+    sh = Image.new("RGBA", (cw * 3 + 40, 140 + len(order) * (rh + 6) + 3 * 262 + 20), (44, 44, 54, 255))
     x = 10
-    for piece, im in icons.items():
-        sh.alpha_composite(im.resize((96, 96), Image.NEAREST), (x, y))
-        x += 104
-    y = 110
+    for im in icons.values():
+        sh.alpha_composite(im, (x, 6))
+        x += 134
+    y = 140
     for mat in order:
-        x = 6
-        for sub in ("humanoid", "humanoid_leggings", "wolf_body"):
-            im = sheet.get((mat, sub))
-            if im:
-                sh.alpha_composite(im.resize((64 * S, 32 * S), Image.NEAREST), (x, y))
-            x += 64 * S + 6
-        y += 32 * S + 8
+        for k, sub in enumerate(("humanoid", "humanoid_leggings", "wolf_body")):
+            if (mat, sub) in sheet:
+                sh.alpha_composite(sheet[(mat, sub)], (10 + k * (cw + 10), y))
+        y += rh + 6
     for mat in ("dragon", "kintsugi", "netherite"):
-        x = 6
-        for sub, sz in (("horse_body", 64 * S // 2 * 2 // 2), ("humanoid_baby", 64 * S // 2 * 2 // 2), ("nautilus_body", 128 * 2)):
+        x = 10
+        for sub in ("horse_body", "humanoid_baby", "nautilus_body"):
             im = sheet.get((mat, sub))
             if im:
-                s = im.size[0]
-                k = 256 // s if s <= 128 else 1
-                sh.alpha_composite(im.resize((s * k, s * k), Image.NEAREST) if k > 0 else im, (x, y))
-                x += s * k + 6
+                sh.alpha_composite(im.resize((256, 256), Image.LANCZOS), (x, y))
+                x += 266
         y += 262
-    sh = sh.crop((0, 0, sh.size[0], min(sh.size[1], y)))
-    sh.save(prev / "armaduras_kintsugi_dragon.png")
-    worst = sorted(BRIGHT.items(), key=lambda t: -t[1] if "overlay" not in t[0] else 0)[:4]
-    print("ok", sorted({k[0] for k in sheet}), "brillo max:", [(k.split("/")[-1], round(v, 3)) for k, v in worst])
+    sh.crop((0, 0, sh.size[0], y)).save(prev / "armaduras_kintsugi_dragon.png")
+    print("ok", sorted({k[0] for k in sheet}))
 
 
 if __name__ == "__main__":

@@ -35,60 +35,45 @@ HANDLE, HANDLE_L = "#6b4a2b", "#8f6a3c"
 Q = {"plate": (0, 0), "edge": (8, 0), "gold": (0, 8), "grip": (8, 8)}  # cuadrantes 8x8 del atlas 16x16
 
 
-def atlas(mat):
+def write_svg_png(mat, root):
+    """Atlas VECTORIAL (viewBox 16x16, 4 cuadrantes de 8x8) rasterizado a 128x128 con rsvg-convert.
+    Las UV de los modelos son proporcionales (0..16), asi que la resolucion no cambia los modelos."""
     b, l, d = MATS[mat]
     rng = random.Random("atlas-" + mat)
-    px = {}
-    for qn, (qx, qy) in Q.items():
-        for j in range(8):
-            for i in range(8):
-                if qn == "plate":
-                    c = b if (i + j) % 4 else d
-                    if i in (0, 7) or j in (0, 7):
-                        c = d
-                elif qn == "edge":
-                    c = l if i < 5 else b
-                    if j == 7:
-                        c = d
-                elif qn == "gold":
-                    c = GOLD if (i + j) % 5 else GOLD_L
-                    if i == 7 or j == 7:
-                        c = GOLD_D
-                else:
-                    c = HANDLE if (j // 2) % 2 == 0 else HANDLE_L
-                    if j % 4 == 3:
-                        c = GOLD_D
-                px[(qx + i, qy + j)] = c
-    # grieta de oro y estrellitas sobre la placa
-    x = 2
-    for y in range(1, 7):
-        px[(x, y)] = GOLD
-        x = max(1, min(6, x + rng.choice((-1, 0, 1))))
-    px[(5, 2)] = WHITE
-    for dx, dy in ((1, 0), (-1, 0), (0, 1), (0, -1)):
-        px[(5 + dx, 2 + dy)] = GOLD_L
-    px[(1, 6)] = WHITE
-    px[(9, 3)] = WHITE   # brillo en el filo
-    px[(10, 5)] = WHITE
-    return px
-
-
-def write_svg_png(mat, root):
-    px = atlas(mat)
-    svg = root / f"assets/{NS}/textures/gear/svg/gear3d_{mat}.svg"
+    cr = []
+    x = 2.0
+    pts = [(x, 1.0)]
+    for y in range(1, 8):
+        x = max(1.0, min(7.0, x + rng.uniform(-.8, .8)))
+        pts.append((x, y))
+    crack = "M" + " L".join(f"{a:.2f} {c:.2f}" for a, c in pts)
+    svg = f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="128" height="128">
+<defs>
+<linearGradient id="pl" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="{l}" stop-opacity=".55"/><stop offset=".3" stop-color="{b}"/><stop offset="1" stop-color="{d}"/></linearGradient>
+<linearGradient id="ed" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="{l}"/><stop offset=".6" stop-color="{b}"/><stop offset="1" stop-color="{d}"/></linearGradient>
+<linearGradient id="go" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="{GOLD_L}"/><stop offset=".5" stop-color="{GOLD}"/><stop offset="1" stop-color="{GOLD_D}"/></linearGradient>
+<filter id="bl"><feGaussianBlur stdDeviation=".25"/></filter>
+</defs>
+<rect x="0" y="0" width="8" height="8" fill="url(#pl)"/>
+<path d="M0 4 H8 M4 0 V8" stroke="{d}" stroke-width=".18" opacity=".7"/>
+<path d="{crack}" fill="none" stroke="{GOLD}" stroke-width=".14" opacity=".9"/>
+<circle cx="5.5" cy="2.2" r=".7" fill="#fff" opacity=".2" filter="url(#bl)"/>
+<path d="M5.5 1.5 L5.65 2.05 L6.2 2.2 L5.65 2.35 L5.5 2.9 L5.35 2.35 L4.8 2.2 L5.35 2.05 Z" fill="{WHITE}"/>
+<rect x="8" y="0" width="8" height="8" fill="url(#ed)"/>
+<path d="M8.4 .3 V7.7" stroke="#fff" stroke-width=".12" opacity=".5"/>
+<rect x="0" y="8" width="8" height="8" fill="url(#go)"/>
+<path d="M0 12 H8" stroke="{GOLD_D}" stroke-width=".15" opacity=".6"/>
+<rect x="8" y="8" width="8" height="8" fill="{HANDLE}"/>
+<path d="M8 9 H16 M8 11 H16 M8 13 H16 M8 15 H16" stroke="{HANDLE_L}" stroke-width=".7" opacity=".7"/>
+<path d="M8 10 H16 M8 14 H16" stroke="{GOLD_D}" stroke-width=".25"/>
+</svg>
+'''
+    sp = root / f"assets/{NS}/textures/gear/svg/gear3d_{mat}.svg"
     png = root / f"assets/{NS}/textures/item/gear3d/{mat}.png"
-    svg.parent.mkdir(parents=True, exist_ok=True)
+    sp.parent.mkdir(parents=True, exist_ok=True)
     png.parent.mkdir(parents=True, exist_ok=True)
-    rects = [f'<rect x="{x}" y="{y}" width="1" height="1" fill="{c}"/>' for (x, y), c in sorted(px.items(), key=lambda t: (t[0][1], t[0][0]))]
-    svg.write_text('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" shape-rendering="crispEdges">\n'
-                   + "\n".join(rects) + "\n</svg>\n", encoding="utf-8")
-    try:
-        subprocess.run(["rsvg-convert", "-w", "16", "-h", "16", "-o", str(png), str(svg)], check=True)
-    except (OSError, subprocess.CalledProcessError):
-        im = Image.new("RGBA", (16, 16))
-        for (x, y), c in px.items():
-            im.putpixel((x, y), tuple(int(c[i:i + 2], 16) for i in (1, 3, 5)) + (255,))
-        im.save(png)
+    sp.write_text(svg, encoding="utf-8")
+    subprocess.run(["rsvg-convert", "-w", "128", "-h", "128", "-o", str(png), str(sp)], check=True)
 
 
 def el(frm, to, quad, rot=True):

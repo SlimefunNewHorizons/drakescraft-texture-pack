@@ -2,6 +2,12 @@
 
 Vista previa: `docs/previews/armaduras_kintsugi_dragon.png` (iconos dragon + capas de cada material).
 
+## Pipeline vectorial (directriz del dueño)
+- Todo se dibuja en SVG (degradados, relieve, filtros de grano/blur, placas con borde y remaches) y se rasteriza con `rsvg-convert` a 4x. Las unidades del SVG son los pixeles vanilla, por lo que el layout/UV vanilla se conserva EXACTO y proporcional: humanoid/leggings 256x128, baby y caballo 256x256, nautilus 512x512, lobo 256x128 (el cliente escala por proporcion; 1.20-26.2 OK, 26.3 no probado).
+- Un mismo SVG genera dos formatos: 26.x `textures/entity/equipment/<capa>/<mat>.png` y 1.20.x `textures/models/armor/<mat>_layer_1|2.png` (+ `leather_layer_N_overlay.png`), para iron, gold, diamond, netherite, chainmail, leather y turtle (copper no existe antes de 1.21.9, solo formato nuevo). Los equipment JSON solo aplican a 1.21.2+; antes el cliente lee `models/armor`.
+- Iconos de item del set dragon: 128x128 (vector). Atlas de las herramientas 3D: 128x128 vectorial (UV 0..16 proporcionales).
+- Fuentes SVG editables: `assets/drakescraft/textures/gear/svg/`. Baby/caballo/nautilus/lobo se recortan con la mascara alpha del PNG vanilla del jar (el SVG dibuja el arte completo y se recorta).
+
 ## Estilo (decidido por el dueño)
 Base OSCURA con micro-variacion de tono, bordes de placa marcados, remaches discretos y pocos acentos (grietas finas de 1 px, estrellitas sueltas tenues; brillo <= ~7% de la capa). Por material: netherita casi negra con puntos magenta tenues; diamante azul-petroleo con vetas; hierro oscuro con manchas de oxido; cota de malla gris oscuro con eslabones; oro envejecido apagado; cobre oscuro con cardenillo verdeazulado; tortuga verde oscuro; cuero gris neutro (se tiñe) + overlay solo con grietas/brillos. Sin shader: los brillos son pixeles pintados.
 
@@ -22,6 +28,7 @@ Base OSCURA con micro-variacion de tono, bordes de placa marcados, remaches disc
 - Sobrescribir el id vanilla cambia TODO el material en el servidor; para uso selectivo usar `drakescraft:kintsugi`/`dragon` via `equippable.asset_id`.
 - Nada probado en cliente: la geometria 3D (giro -45 en Z) y los display estan calculados, no renderizados; revisar en Horizon 26.3 o Blockbench. Caballo/nautilus/lobo/baby usan estilo por mascara (sin motivos por cara como cresta/alas).
 - NO hecho: arco, ballesta, tridente y escudo (arco/ballesta tienen 4-6 modelos por estado; tridente y escudo son modelos especiales de entidad, no hay JSON que extender). Sin trims propios.
+- Nota: las capas 4x con alpha mantienen el mismo contorno que el vanilla; mobs con armadura en versiones que ignoren la proporcion veran la textura estirada (no probado).
 - Los brillos no emiten luz: emision mas adelante con alpha=254 en los pixeles brillantes + core shader de entidad (Emissive Library); no se hizo por riesgo ShaderC en 26.3 (ticket #576).
 - Se sobrescribio `humanoid/leather_overlay.png` y `humanoid_leggings/leather_overlay.png` del pack (eran casi transparentes).
 - Fusionar en `t2-vN.zip` (`build_t2_pack.py`) y probar en cliente.
