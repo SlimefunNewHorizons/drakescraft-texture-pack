@@ -67,6 +67,24 @@ class LegacyShaderIsolationTests(unittest.TestCase):
         self.assertEqual(first, self.output.read_bytes())
         self.assertEqual(hashlib.sha256(self.base.read_bytes()).hexdigest(), digest)
 
+    def test_corrupt_member_with_matching_archive_hash_preserves_previous_output(self):
+        self.write_base()
+        raw = self.base.read_bytes()
+        self.assertEqual(raw.count(b"texture bytes"), 1)
+        self.base.write_bytes(raw.replace(b"texture bytes", b"Texture bytes"))
+        digest = hashlib.sha256(self.base.read_bytes()).hexdigest()
+        for previous in (None, b"previous verified candidate"):
+            with self.subTest(previous_output=previous is not None):
+                if previous is not None:
+                    self.output.write_bytes(previous)
+                with self.assertRaisesRegex(ValueError, "CRC"):
+                    build(self.base, self.output, digest)
+                if previous is None:
+                    self.assertFalse(self.output.exists())
+                else:
+                    self.assertEqual(self.output.read_bytes(), previous)
+                self.assertEqual(hashlib.sha256(self.base.read_bytes()).hexdigest(), digest)
+
     def test_rejects_unaudited_overlay_shaders(self):
         self.entries["modern/assets/minecraft/shaders/core/item.fsh"] = b"legacy shader"
         with self.assertRaisesRegex(ValueError, "Audit shaders"):

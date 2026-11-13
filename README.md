@@ -129,6 +129,10 @@ previo. El constructor rechaza una base distinta, duplicados o shaders adicional
 en overlays que requieran auditoría. No incorpora los overrides del constructor
 SF-only ni modifica modelos, texturas, idiomas o los otros overlays.
 
+También verifica el CRC de todos los miembros antes de abrir la salida: incluso
+con SHA-256 coincidente, una base corrupta se rechaza conservando el candidato
+anterior. La regresión cubre tanto una salida existente como una ruta nueva.
+
 Validación del 4 de noviembre de 2026: cuatro pruebas automáticas correctas y
 12.297 contenidos idénticos al ZIP original; solo cambia la ubicación de los tres
 shaders y `pack.mcmeta`. **Pendiente: carga y comprobación visual en cliente 26.3.**

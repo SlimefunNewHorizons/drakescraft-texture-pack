@@ -180,6 +180,11 @@ def build(base: Path, output: Path, expected_sha256: str,
         names = source.namelist()
         if len(names) != len(set(names)):
             raise ValueError("Duplicate ZIP entries")
+        # Read every member before opening the output. A matching archive hash
+        # does not guarantee valid member CRCs; a late failure would truncate an
+        # existing candidate after some entries had already been written.
+        if source.testzip() is not None:
+            raise ValueError("Base pack CRC check failed")
         languages = patch_languages(source, language_patches or {})
         models = patch_model_textures(source, model_patches or {})
         items = bridge_legacy_items(source, legacy_item_bridges if legacy_item_bridges is not None else [],
