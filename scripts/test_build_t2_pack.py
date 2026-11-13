@@ -369,6 +369,7 @@ class LegacyShaderIsolationTests(unittest.TestCase):
         second = "assets/svm/models/item/second.json"
         original = b'{"parent":"minecraft:item/generated"}'
         restored = b'{"parent":"minecraft:item/handheld","textures":{"layer0":"svm:item/test"}}'
+        self.entries["assets/svm/items/required.json"] = b'{"model":{"model":"svm:item/first","fallback":{"model":"svm:item/second"}}}'
         self.entries[first] = original
         self.entries[second] = b"broken JSON"
         result = build(self.base, self.output, self.write_base(), extra_files={second: restored},
@@ -415,6 +416,7 @@ class LegacyShaderIsolationTests(unittest.TestCase):
         self.assertNotEqual(rejected.returncode, 0)
         self.assertIn(b"Missing required model", rejected.stderr)
         self.assertFalse(self.output.exists())
+        self.entries["assets/svm/items/required.json"] = b'{"model":{"model":"svm:item/first","fallback":{"model":"svm:item/second"}}}'
         for model in ("first", "second"):
             self.entries[f"assets/svm/models/item/{model}.json"] = b'{"parent":"minecraft:item/generated"}'
         command[command.index("--base-sha256") + 1] = self.write_base()
@@ -423,6 +425,68 @@ class LegacyShaderIsolationTests(unittest.TestCase):
         self.assertEqual(accepted.returncode, 0, accepted.stderr)
         self.assertEqual(set(json.loads(accepted.stdout)["required_models_sha256"]),
                          {"svm:item/first", "svm:item/second"})
+
+    def test_required_model_rejects_orphan_and_non_resource_references(self):
+        model = "assets/minecraft/models/item/custom/item/fire_katana.json"
+        self.entries[model] = b'{"elements":[]}'
+        original_entries = dict(self.entries)
+        for path in (None, "assets/minecraft/lang/es_es.json",
+                     "assets/minecraft/font/default.json", "assets/minecraft/sounds.json",
+                     "undeclared/assets/minecraft/items/test.json"):
+            with self.subTest(path=path):
+                self.entries = dict(original_entries)
+                if path:
+                    self.entries[path] = b'{"model":"minecraft:item/custom/item/fire_katana"}'
+                self.output.write_bytes(b"previous artifact")
+                with self.assertRaisesRegex(ValueError, "Unreferenced required model"):
+                    build(self.base, self.output, self.write_base(),
+                          required_models=["minecraft:item/custom/item/fire_katana"])
+                self.assertEqual(self.output.read_bytes(), b"previous artifact")
+
+    def test_required_model_self_reference_is_not_incoming(self):
+        model = "assets/svm/models/item/first.json"
+        self.entries[model] = b'{"parent":"svm:item/first"}'
+        self.entries["modern/" + model] = self.entries[model]
+        with self.assertRaisesRegex(ValueError, "Unreferenced required model"):
+            build(self.base, self.output, self.write_base(), required_models=["svm:item/first"])
+        self.assertFalse(self.output.exists())
+
+    def test_required_model_reference_uses_final_replacements(self):
+        self.entries["assets/svm/models/item/first.json"] = b'{"elements":[]}'
+        item = "assets/svm/items/selected.json"
+        self.entries[item] = b'{"model":{"model":"svm:item/first"}}'
+        self.output.write_bytes(b"previous artifact")
+        with self.assertRaisesRegex(ValueError, "Unreferenced required model"):
+            build(self.base, self.output, self.write_base(),
+                  extra_files={item: b'{"model":{"model":"svm:item/other"}}'},
+                  required_models=["svm:item/first"])
+        self.assertEqual(self.output.read_bytes(), b"previous artifact")
+
+    def test_required_model_accepts_modern_override_parent_and_declared_overlay(self):
+        self.entries["assets/minecraft/models/item/first.json"] = b'{"elements":[]}'
+        cases = {
+            "assets/minecraft/items/test.json": b'{"model":{"model":"item/first"}}',
+            "assets/minecraft/models/item/test.json": b'{"overrides":[{"model":"minecraft:item/first"}]}',
+            "modern/assets/minecraft/models/item/test.json": b'{"parent":"minecraft:item/first"}',
+            "modern/assets/minecraft/items/test.json": b'{"model":{"model":"minecraft:item/fi\\u0072st"}}',
+        }
+        original_entries = dict(self.entries)
+        for path, payload in cases.items():
+            with self.subTest(path=path):
+                self.entries = {**original_entries, path: payload}
+                result = build(self.base, self.output, self.write_base(),
+                               required_models=["minecraft:item/first"])
+                self.assertEqual(result["required_model_references"], {"minecraft:item/first": [path]})
+
+    def test_required_model_ignores_invalid_reference_json(self):
+        self.entries["assets/svm/models/item/first.json"] = b'{"elements":[]}'
+        for data in (b'broken svm:item/first', b'{"model":"svm:item/first"', b'\xff'):
+            with self.subTest(data=data):
+                with self.assertRaisesRegex(ValueError, "Unreferenced required model"):
+                    build(self.base, self.output, self.write_base(),
+                          extra_files={"assets/svm/items/test.json": data},
+                          required_models=["svm:item/first"])
+                self.assertFalse(self.output.exists())
 
     def test_extra_shaders_cannot_bypass_legacy_isolation(self):
         digest = self.write_base()

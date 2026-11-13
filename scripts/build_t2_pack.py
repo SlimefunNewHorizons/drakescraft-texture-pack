@@ -167,6 +167,47 @@ def bridge_legacy_items(source: zipfile.ZipFile, carriers: list[str],
     return result
 
 
+def required_model_references(source, replacements, metadata, required):
+    """Find incoming model/parent references in the planned loadable resources."""
+    found = {reference: set() for reference in required}
+    if not found:
+        return {}
+    prefixes = [""] + [entry["directory"] + "/"
+                         for entry in metadata.get("overlays", {}).get("entries", [])]
+
+    def references(node):
+        if isinstance(node, dict):
+            for key, value in node.items():
+                if key in {"model", "parent"} and isinstance(value, str):
+                    yield value if ":" in value else "minecraft:" + value
+                yield from references(value)
+        elif isinstance(node, list):
+            for value in node:
+                yield from references(value)
+
+    for name in sorted(set(source.namelist()) | set(replacements)):
+        logical = next((name[len(prefix):] for prefix in prefixes
+                        if name.startswith(prefix) and re.fullmatch(
+                            r"assets/[a-z0-9_.-]+/(?:items|models)/[a-z0-9_./-]+\.json",
+                            name[len(prefix):])), None)
+        if logical is None or any(part in {".", "..", ""} for part in logical.split("/")):
+            continue
+        content = replacements[name] if name in replacements else source.read(name)
+        try:
+            node = json.loads(content)
+        except (ValueError, UnicodeError):
+            continue
+        for reference in references(node):
+            if reference in found:
+                namespace, path = reference.split(":", 1)
+                if logical != f"assets/{namespace}/models/{path}.json":
+                    found[reference].add(name)
+    for reference, sources in found.items():
+        if not sources:
+            raise ValueError(f"Unreferenced required model: {reference}")
+    return {reference: sorted(sources) for reference, sources in found.items()}
+
+
 def build(base: Path, output: Path, expected_sha256: str,
           language_patches: dict | None = None,
           model_patches: dict | None = None,
@@ -225,6 +266,7 @@ def build(base: Path, output: Path, expected_sha256: str,
                 raise ValueError(f"Expected a nonempty required model object: {name}")
             checked_models[reference] = hashlib.sha256(content).hexdigest()
         metadata = json.loads(source.read("pack.mcmeta"))
+        incoming = required_model_references(source, replacements, metadata, checked_models)
         overlays = metadata.setdefault("overlays", {}).setdefault("entries", [])
         if any(entry["directory"] == OVERLAY for entry in overlays):
             raise ValueError("Base already contains the legacy shader overlay")
@@ -275,6 +317,7 @@ def build(base: Path, output: Path, expected_sha256: str,
         "missing_model_fallbacks": missing_model_fallbacks or {},
         "extra_files": sorted(extra_files),
         "required_models_sha256": checked_models,
+        "required_model_references": incoming,
     }
 
 
@@ -294,7 +337,7 @@ def main() -> None:
     parser.add_argument("--extra-dir", type=Path,
                         help="Directory whose files (relative to it, under assets/) are added or replace base files")
     parser.add_argument("--require-model", action="append", default=[], metavar="NAMESPACE:PATH",
-                        help="Require a nonempty root model JSON before writing (repeatable; does not verify provenance or render)")
+                        help="Require a nonempty root model JSON and an incoming item/model reference before writing (repeatable; does not verify provenance or render)")
     parser.add_argument("--with-terralense", action="store_true",
                         help="Add the merged TerraLense minimap assets (see scripts/merge_terralense.py)")
     args = parser.parse_args()
