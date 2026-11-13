@@ -547,6 +547,65 @@ class LegacyShaderIsolationTests(unittest.TestCase):
                           required_models=["svm:item/first"])
                 self.assertEqual(self.output.read_bytes(), b"verified candidate")
 
+    def test_overlay_substitutions_preserve_candidate_before_writing(self):
+        first = "assets/svm/models/item/first.json"
+        second = "assets/svm/models/item/second.json"
+        terminal = "assets/minecraft/models/item/generated.json"
+        self.entries[first] = b'{"parent":"svm:item/second"}'
+        self.entries[second] = b'{"parent":"minecraft:item/generated"}'
+        self.entries["assets/svm/items/selected.json"] = b'{"model":{"model":"svm:item/first"}}'
+        original = dict(self.entries)
+        # The root, a transitive parent and a client-supplied terminal can all
+        # be shadowed. Reject both malformed JSON and cycles introduced there.
+        for name, content in ((first, b'broken JSON'),
+                              (second, b'{"parent":"svm:item/first"}'),
+                              (terminal, b'{"parent":"svm:item/first"}')):
+            for existing in (False, True):
+                with self.subTest(name=name, existing=existing):
+                    self.entries = {**original, "modern/" + name: content}
+                    digest = self.write_base()
+                    self.output.unlink(missing_ok=True)
+                    if existing:
+                        self.output.write_bytes(b"verified candidate")
+                    before = set(self.base.parent.iterdir())
+                    with self.assertRaisesRegex(ValueError, "Audit required model parent in overlay"):
+                        build(self.base, self.output, digest, required_models=["svm:item/first"])
+                    self.assertEqual(set(self.base.parent.iterdir()), before)
+                    if existing:
+                        self.assertEqual(self.output.read_bytes(), b"verified candidate")
+                    else:
+                        self.assertFalse(self.output.exists())
+
+    def test_identical_overlay_is_compared_against_final_root_bytes(self):
+        name = "assets/svm/models/item/first.json"
+        final = b'{"parent":"minecraft:item/generated"}'
+        self.entries[name] = b'{"elements":[]}'
+        self.entries["modern/" + name] = final
+        self.entries["assets/svm/items/selected.json"] = b'{"model":{"model":"svm:item/first"}}'
+        result = build(self.base, self.output, self.write_base(), extra_files={name: final},
+                       required_models=["svm:item/first"])
+        self.assertEqual(result["required_model_parent_chains"]["svm:item/first"],
+                         ["svm:item/first", "minecraft:item/generated"])
+        with zipfile.ZipFile(self.output) as archive:
+            self.assertEqual(archive.read(name), final)
+            self.assertEqual(archive.read("modern/" + name), final)
+
+    def test_undeclared_overlay_and_unrelated_models_do_not_block_required_model(self):
+        name = "assets/svm/models/item/first.json"
+        self.entries[name] = b'{"elements":[]}'
+        self.entries["unused/" + name] = b'broken JSON'
+        self.entries["modern/assets/svm/models/item/unrelated.json"] = b'broken JSON'
+        self.entries["assets/svm/items/selected.json"] = b'{"model":{"model":"svm:item/first"}}'
+        build(self.base, self.output, self.write_base(), required_models=["svm:item/first"])
+        self.assertTrue(self.output.is_file())
+
+    def test_overlay_model_review_is_opt_in(self):
+        self.entries["assets/svm/models/item/first.json"] = b'{"elements":[]}'
+        self.entries["modern/assets/svm/models/item/first.json"] = b'broken JSON'
+        result = build(self.base, self.output, self.write_base())
+        self.assertEqual(result["required_model_parent_chains"], {})
+        self.assertTrue(self.output.is_file())
+
     def test_deep_parent_chain_avoids_python_recursion_limit(self):
         count = 1100
         for index in range(count):

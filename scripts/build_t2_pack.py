@@ -208,9 +208,11 @@ def required_model_references(source, replacements, metadata, required):
     return {reference: sorted(sources) for reference, sources in found.items()}
 
 
-def required_model_parent_chains(source, replacements, required):
-    """Reject parent cycles reachable from required models in the planned root."""
+def required_model_parent_chains(source, replacements, required, metadata):
+    """Reject root parent cycles and unaudited overlay substitutions."""
     names = set(source.namelist()) | set(replacements)
+    prefixes = [entry["directory"] + "/"
+                for entry in metadata.get("overlays", {}).get("entries", [])]
     chains = {}
     for reference in required:
         chain = []
@@ -223,11 +225,22 @@ def required_model_parent_chains(source, replacements, required):
             chain.append(current)
             namespace, path = current.split(":", 1)
             name = f"assets/{namespace}/models/{path}.json"
+            content = (replacements[name] if name in replacements else source.read(name)) \
+                if name in names else None
+            # A declared overlay can replace the checked model or any parent,
+            # including a vanilla parent absent from this ZIP. Require review
+            # of differing bytes even if its range may currently be inactive.
+            for prefix in prefixes:
+                overlay_name = prefix + name
+                if overlay_name in names:
+                    overlay_content = replacements[overlay_name] if overlay_name in replacements \
+                        else source.read(overlay_name)
+                    if overlay_content != content:
+                        raise ValueError(f"Audit required model parent in overlay: {overlay_name}")
             # Vanilla/builtin resources may be supplied by the client. This
             # check detects local cycles; it does not certify dependencies.
             if name not in names:
                 break
-            content = replacements[name] if name in replacements else source.read(name)
             try:
                 node = json.loads(content)
             except (ValueError, UnicodeError) as exc:
@@ -305,7 +318,7 @@ def build(base: Path, output: Path, expected_sha256: str,
             checked_models[reference] = hashlib.sha256(content).hexdigest()
         metadata = json.loads(source.read("pack.mcmeta"))
         incoming = required_model_references(source, replacements, metadata, checked_models)
-        parent_chains = required_model_parent_chains(source, replacements, checked_models)
+        parent_chains = required_model_parent_chains(source, replacements, checked_models, metadata)
         overlays = metadata.setdefault("overlays", {}).setdefault("entries", [])
         if any(entry["directory"] == OVERLAY for entry in overlays):
             raise ValueError("Base already contains the legacy shader overlay")
@@ -377,7 +390,7 @@ def main() -> None:
     parser.add_argument("--extra-dir", type=Path,
                         help="Directory whose files (relative to it, under assets/) are added or replace base files")
     parser.add_argument("--require-model", action="append", default=[], metavar="NAMESPACE:PATH",
-                        help="Require a nonempty root model JSON, an incoming reference and no local root parent cycle before writing (repeatable; does not verify provenance or render)")
+                        help="Require a nonempty root model JSON, an incoming reference, no local root parent cycle and no differing declared overlay parent before writing (repeatable; does not verify provenance or render)")
     parser.add_argument("--with-terralense", action="store_true",
                         help="Add the merged TerraLense minimap assets (see scripts/merge_terralense.py)")
     args = parser.parse_args()

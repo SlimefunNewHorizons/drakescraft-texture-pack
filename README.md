@@ -154,7 +154,15 @@ usando los bytes finales, incluidos los de `--extra-dir`. Rechaza ciclos directo
 o transitivos, JSON de padres inválido y rutas de padres inseguras antes de tocar
 la salida. El informe incluye `required_model_parent_chains`. Un padre ausente
 puede proceder del cliente (vanilla/builtin), por lo que termina el recorrido:
-esto no valida todas las dependencias ni los modelos de overlays activos.
+esto no valida todas las dependencias.
+
+Para cada modelo de esa cadena, también compara los bytes de los overlays
+declarados con la raíz final. Un overlay con bytes distintos (o que aporte un
+padre ausente de la raíz) requiere revisión y detiene la construcción antes de
+escribir. Las copias idénticas se permiten. La comprobación es conservadora:
+se aplica a todos los rangos declarados, aunque el overlay esté inactivo en un
+cliente concreto. No resuelve combinaciones de overlays ni certifica su render;
+sin `--require-model` se mantiene la construcción de candidatos parciales.
 
 Validación del 4 de noviembre de 2026: cuatro pruebas automáticas correctas y
 12.297 contenidos idénticos al ZIP original; solo cambia la ubicación de los tres
