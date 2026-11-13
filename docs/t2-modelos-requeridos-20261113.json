@@ -1,0 +1,26 @@
+{
+  "checked_at_utc": "2026-11-13T03:20:04.402136+00:00",
+  "url": "https://pack.drakescraft.cl/t2-v2.zip?v=3",
+  "user_agent": "Minecraft Java/25",
+  "http_status": 200,
+  "base": {
+    "bytes": 30291477,
+    "sha1": "4597ead7d148fe0ef46029e643af8a82d151a0a0",
+    "sha256": "7c885e2368e40c9fc0140b05e0ae03b18aa2c44156a3aa214870e5cbf20075d9",
+    "bad_crc_member": null,
+    "duplicate_entries": 0,
+    "root_core_shaders": [
+      "assets/stellarity/shaders/core/end_gateway.fsh",
+      "assets/minecraft/shaders/core/item.fsh"
+    ],
+    "original_fire_katana_present": false
+  },
+  "required_model_build": {
+    "exit_code": 1,
+    "reason": "ValueError: Missing required model: assets/minecraft/models/item/custom/item/fire_katana.json",
+    "previous_candidate_preserved": true,
+    "previous_candidate_sha256": "6ec6fe2de3eb3f97445907317bc353324773d2071e3307c03d5877562d6adc60"
+  },
+  "render_validated": false,
+  "original_model_provenance_verified": false
+}

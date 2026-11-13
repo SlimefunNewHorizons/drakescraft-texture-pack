@@ -1,5 +1,7 @@
 import hashlib
 import json
+import subprocess
+import sys
 from pathlib import Path
 import tempfile
 import unittest
@@ -343,6 +345,84 @@ class LegacyShaderIsolationTests(unittest.TestCase):
             self.assertEqual(z.read("assets/minecraft/font/default.json"), b'{"providers": []}')
             self.assertNotIn("assets/terralense/pack.mcmeta", names)
         self.assertEqual(len(result["legacy_shaders"]), 2)
+
+    def test_required_missing_model_rejects_overlay_and_fallback(self):
+        self.add_legacy_carrier()
+        name = "assets/svm/models/item/power3.json"
+        self.entries["modern/" + name] = self.entries.pop(name)
+        digest = self.write_base()
+        for existing in (False, True):
+            with self.subTest(existing=existing):
+                if existing:
+                    self.output.write_bytes(b"previous artifact")
+                with self.assertRaisesRegex(ValueError, "Missing required model"):
+                    build(self.base, self.output, digest, legacy_item_bridges=["red_dye"],
+                          missing_model_fallbacks={"svm:item/power3": "svm:item/power7"},
+                          required_models=["svm:item/power3"])
+                if existing:
+                    self.assertEqual(self.output.read_bytes(), b"previous artifact")
+                else:
+                    self.assertFalse(self.output.exists())
+
+    def test_required_models_use_final_bytes_and_record_hashes(self):
+        first = "assets/svm/models/item/first.json"
+        second = "assets/svm/models/item/second.json"
+        original = b'{"parent":"minecraft:item/generated"}'
+        restored = b'{"parent":"minecraft:item/handheld","textures":{"layer0":"svm:item/test"}}'
+        self.entries[first] = original
+        self.entries[second] = b"broken JSON"
+        result = build(self.base, self.output, self.write_base(), extra_files={second: restored},
+                       required_models=["svm:item/first", "svm:item/second"])
+        self.assertEqual(result["required_models_sha256"], {
+            "svm:item/first": hashlib.sha256(original).hexdigest(),
+            "svm:item/second": hashlib.sha256(restored).hexdigest()})
+        with zipfile.ZipFile(self.output) as z:
+            self.assertEqual(z.read(first), original)
+            self.assertEqual(z.read(second), restored)
+        del self.entries[second]
+        build(self.base, self.output, self.write_base(), extra_files={second: restored},
+              required_models=["svm:item/second"])
+        with zipfile.ZipFile(self.output) as z:
+            self.assertEqual(z.read(second), restored)
+
+    def test_required_invalid_json_and_replacements_preserve_output(self):
+        name = "assets/svm/models/item/first.json"
+        for data in (b"broken JSON", b"[]", b"null", b"{}", b"\xff"):
+            for replacement in (False, True):
+                with self.subTest(data=data, replacement=replacement):
+                    self.entries[name] = b'{"parent":"minecraft:item/generated"}' if replacement else data
+                    self.output.write_bytes(b"previous artifact")
+                    with self.assertRaisesRegex(ValueError, "required model"):
+                        build(self.base, self.output, self.write_base(),
+                              extra_files={name: data} if replacement else None,
+                              required_models=["svm:item/first"])
+                    self.assertEqual(self.output.read_bytes(), b"previous artifact")
+
+    def test_required_model_rejects_unsafe_references_before_output(self):
+        digest = self.write_base()
+        for reference in ("item/first", "svm:../first", "svm:item//first", "SVM:item/first",
+                          "svm:item/./first", "svm:item/", "svm:item\\first"):
+            with self.subTest(reference=reference):
+                with self.assertRaisesRegex(ValueError, "Invalid required model reference"):
+                    build(self.base, self.output, digest, required_models=[reference])
+                self.assertFalse(self.output.exists())
+
+    def test_require_model_cli_rejects_missing_and_accepts_repeated_models(self):
+        digest = self.write_base()
+        command = [sys.executable, str(Path(__file__).with_name("build_t2_pack.py")),
+                   "--base", str(self.base), "--base-sha256", digest, "--output", str(self.output)]
+        rejected = subprocess.run(command + ["--require-model", "svm:item/absent"], capture_output=True)
+        self.assertNotEqual(rejected.returncode, 0)
+        self.assertIn(b"Missing required model", rejected.stderr)
+        self.assertFalse(self.output.exists())
+        for model in ("first", "second"):
+            self.entries[f"assets/svm/models/item/{model}.json"] = b'{"parent":"minecraft:item/generated"}'
+        command[command.index("--base-sha256") + 1] = self.write_base()
+        accepted = subprocess.run(command + ["--require-model", "svm:item/first",
+                                              "--require-model", "svm:item/second"], capture_output=True)
+        self.assertEqual(accepted.returncode, 0, accepted.stderr)
+        self.assertEqual(set(json.loads(accepted.stdout)["required_models_sha256"]),
+                         {"svm:item/first", "svm:item/second"})
 
     def test_extra_shaders_cannot_bypass_legacy_isolation(self):
         digest = self.write_base()

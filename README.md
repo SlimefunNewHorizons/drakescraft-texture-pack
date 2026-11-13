@@ -133,6 +133,22 @@ También verifica el CRC de todos los miembros antes de abrir la salida: incluso
 con SHA-256 coincidente, una base corrupta se rechaza conservando el candidato
 anterior. La regresión cubre tanto una salida existente como una ruta nueva.
 
+Para exigir el recurso pendiente de T2, agregar a la reconstrucción:
+
+```bash
+--require-model minecraft:item/custom/item/fire_katana
+```
+
+La opción es repetible y comprueba el JSON final del modelo en la raíz antes de
+crear o reemplazar la salida. Un modelo presente solo en un overlay o una
+sustitución mediante `--missing-model-fallbacks` no cumple ese requisito. Se
+admiten recursos recuperados mediante `--extra-dir` y se informa el SHA-256 de
+cada modelo exigido en `required_models_sha256`. El ZIP público del 13-nov aún
+falla esta comprobación. Sin la opción, siguen permitiéndose candidatos parciales
+de diagnóstico. La comprobación exige un objeto JSON no vacío; no acredita la
+procedencia original, las dependencias del modelo ni su render. La recuperación
+debe documentar su fuente y validarse en los clientes 26.2/26.3.
+
 Validación del 4 de noviembre de 2026: cuatro pruebas automáticas correctas y
 12.297 contenidos idénticos al ZIP original; solo cambia la ubicación de los tres
 shaders y `pack.mcmeta`. **Pendiente: carga y comprobación visual en cliente 26.3.**
