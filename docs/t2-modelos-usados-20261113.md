@@ -19,7 +19,14 @@ buscar referencias: no se certifica por ello todo el pack.
 
 Validación: `~/ai-hub/scripts/build_seguro.sh 25 "$PWD" python3 -m unittest
 discover -s scripts -p test_build_t2_pack.py -v`.
-Resultado pendiente de la ejecución en Star.
+**30 pruebas aprobadas**, cinco regresiones nuevas. Primer ensayo con fixtures
+incorrectos de overlays; corregidos para usar el ZIP base, sin relajar controles.
+Todo bajo `build_seguro.sh`, un build a la vez y sin subir el umbral de carga.
+Ensayo adicional sobre el código anterior `195ff930`: acepta un modelo huérfano;
+el nuevo constructor lo rechaza conservando byte a byte el candidato previo.
+El ZIP público también se rechaza por el modelo ausente, conservando la salida.
+[Evidencia JSON](t2-modelos-usados-20261113.json).
+`graphify update . --json` final: AST y extras regenerados correctamente.
 
 No se modifica Dallas ni el ZIP público. El GET público del 13-nov, 06:13 UTC,
 confirma 30.291.477 bytes, SHA-1 `4597ead7d148fe0ef46029e643af8a82d151a0a0`,
