@@ -172,7 +172,8 @@ def build(base: Path, output: Path, expected_sha256: str,
           model_patches: dict | None = None,
           legacy_item_bridges: list[str] | None = None,
           missing_model_fallbacks: dict[str, str] | None = None,
-          extra_files: dict[str, bytes] | None = None) -> dict[str, object]:
+          extra_files: dict[str, bytes] | None = None,
+          required_models: list[str] | None = None) -> dict[str, object]:
     if base.resolve() == output.resolve():
         raise ValueError("The input pack must be preserved")
     if digest(base, "sha256") != expected_sha256:
@@ -200,6 +201,29 @@ def build(base: Path, output: Path, expected_sha256: str,
             if is_shader(name):
                 raise ValueError("Audit supplemental shaders before rebuilding")
         replacements = {**languages, **models, **items, **extra_files}
+        # Check the planned output, including replacements, before touching the
+        # destination. A fallback or a model in an overlay cannot satisfy a
+        # requirement for the original root resource.
+        checked_models = {}
+        for reference in required_models or []:
+            if (not re.fullmatch(r"[a-z0-9_.-]+:[a-z0-9_./-]+", reference)
+                    or any(part in {".", "..", ""} for part in reference.split(":", 1)[1].split("/"))):
+                raise ValueError(f"Invalid required model reference: {reference}")
+            namespace, path = reference.split(":", 1)
+            name = f"assets/{namespace}/models/{path}.json"
+            if name in replacements:
+                content = replacements[name]
+            elif name in names and not source.getinfo(name).is_dir():
+                content = source.read(name)
+            else:
+                raise ValueError(f"Missing required model: {name}")
+            try:
+                model = json.loads(content)
+            except (ValueError, UnicodeDecodeError) as exc:
+                raise ValueError(f"Invalid required model JSON: {name}") from exc
+            if not isinstance(model, dict) or not model:
+                raise ValueError(f"Expected a nonempty required model object: {name}")
+            checked_models[reference] = hashlib.sha256(content).hexdigest()
         metadata = json.loads(source.read("pack.mcmeta"))
         overlays = metadata.setdefault("overlays", {}).setdefault("entries", [])
         if any(entry["directory"] == OVERLAY for entry in overlays):
@@ -250,6 +274,7 @@ def build(base: Path, output: Path, expected_sha256: str,
         "bridged_items": sorted(items),
         "missing_model_fallbacks": missing_model_fallbacks or {},
         "extra_files": sorted(extra_files),
+        "required_models_sha256": checked_models,
     }
 
 
@@ -268,6 +293,8 @@ def main() -> None:
                         help="Optional explicit substitutions for absent legacy models (modern items only)")
     parser.add_argument("--extra-dir", type=Path,
                         help="Directory whose files (relative to it, under assets/) are added or replace base files")
+    parser.add_argument("--require-model", action="append", default=[], metavar="NAMESPACE:PATH",
+                        help="Require a nonempty root model JSON before writing (repeatable; does not verify provenance or render)")
     parser.add_argument("--with-terralense", action="store_true",
                         help="Add the merged TerraLense minimap assets (see scripts/merge_terralense.py)")
     args = parser.parse_args()
@@ -280,7 +307,8 @@ def main() -> None:
     models = json.loads(args.model_patches.read_text()) if args.model_patches else None
     bridges = json.loads(args.legacy_item_bridges.read_text()) if args.legacy_item_bridges else None
     fallbacks = json.loads(args.missing_model_fallbacks.read_text()) if args.missing_model_fallbacks else None
-    print(json.dumps(build(args.base, args.output, args.base_sha256, patches, models, bridges, fallbacks, extra), indent=2))
+    print(json.dumps(build(args.base, args.output, args.base_sha256, patches, models, bridges, fallbacks,
+                           extra, args.require_model), indent=2))
 
 
 if __name__ == "__main__":
