@@ -488,6 +488,75 @@ class LegacyShaderIsolationTests(unittest.TestCase):
                           required_models=["svm:item/first"])
                 self.assertFalse(self.output.exists())
 
+    def test_required_model_parent_cycles_preserve_output(self):
+        required = "minecraft:item/first"
+        item = "assets/minecraft/items/selected.json"
+        first = "assets/minecraft/models/item/first.json"
+        second = "assets/minecraft/models/item/second.json"
+        third = "assets/minecraft/models/item/third.json"
+        self.entries[item] = b'{"model":{"model":"minecraft:item/first"}}'
+        cases = [
+            {first: b'{"parent":"item/first"}'},
+            {first: b'{"parent":"minecraft:item/second"}',
+             second: b'{"parent":"item/first"}'},
+            {first: b'{"parent":"item/second"}', second: b'{"parent":"item/third"}',
+             third: b'{"parent":"minecraft:item/first"}'},
+        ]
+        for models in cases:
+            for existing in (False, True):
+                with self.subTest(models=len(models), existing=existing):
+                    self.output.unlink(missing_ok=True)
+                    if existing:
+                        self.output.write_bytes(b"verified candidate")
+                    before = set(self.base.parent.iterdir())
+                    digest = self.write_base()
+                    with self.assertRaisesRegex(ValueError, "Required model parent cycle"):
+                        build(self.base, self.output, digest, extra_files=models,
+                              required_models=[required])
+                    # Writing the fixture creates base.zip on the first case.
+                    self.assertEqual(set(self.base.parent.iterdir()), before | {self.base})
+                    if existing:
+                        self.assertEqual(self.output.read_bytes(), b"verified candidate")
+                    else:
+                        self.assertFalse(self.output.exists())
+
+    def test_parent_chain_uses_final_replacements_and_allows_vanilla_terminal(self):
+        first = "assets/svm/models/item/first.json"
+        second = "assets/svm/models/item/second.json"
+        self.entries[first] = b'{"parent":"svm:item/second"}'
+        self.entries[second] = b'{"parent":"svm:item/first"}'
+        self.entries["assets/svm/items/selected.json"] = b'{"model":{"model":"svm:item/first"}}'
+        digest = self.write_base()
+        result = build(self.base, self.output, digest,
+                       extra_files={second: b'{"parent":"item/generated"}'},
+                       required_models=["svm:item/first"])
+        self.assertEqual(result["required_model_parent_chains"],
+                         {"svm:item/first": ["svm:item/first", "svm:item/second", "minecraft:item/generated"]})
+        with zipfile.ZipFile(self.output) as archive:
+            self.assertEqual(archive.read(second), b'{"parent":"item/generated"}')
+
+    def test_invalid_parent_dependency_rejected_before_output(self):
+        self.entries["assets/svm/models/item/first.json"] = b'{"parent":"svm:item/second"}'
+        self.entries["assets/svm/items/selected.json"] = b'{"model":{"model":"svm:item/first"}}'
+        for content in (b'broken', b'[]', b'{"parent":42}', b'{"parent":"item/../first"}'):
+            with self.subTest(content=content):
+                self.output.write_bytes(b"verified candidate")
+                with self.assertRaisesRegex(ValueError, "required model parent"):
+                    build(self.base, self.output, self.write_base(),
+                          extra_files={"assets/svm/models/item/second.json": content},
+                          required_models=["svm:item/first"])
+                self.assertEqual(self.output.read_bytes(), b"verified candidate")
+
+    def test_deep_parent_chain_avoids_python_recursion_limit(self):
+        count = 1100
+        for index in range(count):
+            self.entries[f"assets/svm/models/item/m{index}.json"] = json.dumps(
+                {"parent": f"svm:item/m{index + 1}"} if index + 1 < count else {"elements": []}
+            ).encode()
+        self.entries["assets/svm/items/selected.json"] = b'{"model":{"model":"svm:item/m0"}}'
+        result = build(self.base, self.output, self.write_base(), required_models=["svm:item/m0"])
+        self.assertEqual(len(result["required_model_parent_chains"]["svm:item/m0"]), count)
+
     def test_extra_shaders_cannot_bypass_legacy_isolation(self):
         digest = self.write_base()
         for name in ("assets/minecraft/shaders/core/item.fsh",

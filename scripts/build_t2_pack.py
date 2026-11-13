@@ -208,6 +208,44 @@ def required_model_references(source, replacements, metadata, required):
     return {reference: sorted(sources) for reference, sources in found.items()}
 
 
+def required_model_parent_chains(source, replacements, required):
+    """Reject parent cycles reachable from required models in the planned root."""
+    names = set(source.namelist()) | set(replacements)
+    chains = {}
+    for reference in required:
+        chain = []
+        seen = set()
+        current = reference
+        while current is not None:
+            if current in seen:
+                raise ValueError("Required model parent cycle: " + " -> ".join(chain + [current]))
+            seen.add(current)
+            chain.append(current)
+            namespace, path = current.split(":", 1)
+            name = f"assets/{namespace}/models/{path}.json"
+            # Vanilla/builtin resources may be supplied by the client. This
+            # check detects local cycles; it does not certify dependencies.
+            if name not in names:
+                break
+            content = replacements[name] if name in replacements else source.read(name)
+            try:
+                node = json.loads(content)
+            except (ValueError, UnicodeError) as exc:
+                raise ValueError(f"Invalid required model parent JSON: {name}") from exc
+            if not isinstance(node, dict):
+                raise ValueError(f"Expected required model parent object: {name}")
+            current = node.get("parent")
+            if current is not None:
+                if (not isinstance(current, str)
+                        or not re.fullmatch(r"(?:[a-z0-9_.-]+:)?[a-z0-9_./-]+", current)
+                        or any(part in {".", "..", ""} for part in current.split(":")[-1].split("/"))):
+                    raise ValueError(f"Invalid required model parent: {name}")
+                if ":" not in current:
+                    current = "minecraft:" + current
+        chains[reference] = chain
+    return chains
+
+
 def build(base: Path, output: Path, expected_sha256: str,
           language_patches: dict | None = None,
           model_patches: dict | None = None,
@@ -267,6 +305,7 @@ def build(base: Path, output: Path, expected_sha256: str,
             checked_models[reference] = hashlib.sha256(content).hexdigest()
         metadata = json.loads(source.read("pack.mcmeta"))
         incoming = required_model_references(source, replacements, metadata, checked_models)
+        parent_chains = required_model_parent_chains(source, replacements, checked_models)
         overlays = metadata.setdefault("overlays", {}).setdefault("entries", [])
         if any(entry["directory"] == OVERLAY for entry in overlays):
             raise ValueError("Base already contains the legacy shader overlay")
@@ -318,6 +357,7 @@ def build(base: Path, output: Path, expected_sha256: str,
         "extra_files": sorted(extra_files),
         "required_models_sha256": checked_models,
         "required_model_references": incoming,
+        "required_model_parent_chains": parent_chains,
     }
 
 
@@ -337,7 +377,7 @@ def main() -> None:
     parser.add_argument("--extra-dir", type=Path,
                         help="Directory whose files (relative to it, under assets/) are added or replace base files")
     parser.add_argument("--require-model", action="append", default=[], metavar="NAMESPACE:PATH",
-                        help="Require a nonempty root model JSON and an incoming item/model reference before writing (repeatable; does not verify provenance or render)")
+                        help="Require a nonempty root model JSON, an incoming reference and no local root parent cycle before writing (repeatable; does not verify provenance or render)")
     parser.add_argument("--with-terralense", action="store_true",
                         help="Add the merged TerraLense minimap assets (see scripts/merge_terralense.py)")
     args = parser.parse_args()
