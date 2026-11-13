@@ -120,6 +120,35 @@ def fade_io(x, ms=15):
     return x
 
 
+
+def tape(x, drive=1.6, wow=0.0016, flutter=0.0006):
+    """Cinta: saturacion suave (tanh) + wow lento y flutter rapido (modulacion de retardo). Refs: calidez y deriva viva."""
+    n = x.shape[0]
+    t = np.arange(n) / SR
+    mod = wow * np.sin(2 * np.pi * 0.31 * t + RNG.random() * 6) + flutter * np.sin(2 * np.pi * 5.7 * t + RNG.random() * 6)
+    pos = np.clip(np.arange(n) + mod * SR * 0.02 * SR / SR * 40, 0, n - 1)
+    if x.ndim == 2:
+        y = np.stack([np.interp(pos, np.arange(n), x[:, c]) for c in range(2)], axis=1)
+    else:
+        y = np.interp(pos, np.arange(n), x)
+    return np.tanh(y * drive) / np.tanh(drive)
+
+
+def granular(src, sec, grain=0.35, density=14.0, pitch=(1.0, 1.5, 2.0, 0.5), jitter=1.0):
+    """Granulador: nubes de granos hanning de src con transposicion discreta -> textura brillante y viva (congelar y escanear)."""
+    out = np.zeros(int(sec * SR))
+    g = int(grain * SR)
+    w = np.hanning(g)
+    for _ in range(int(sec * density)):
+        p = RNG.choice(pitch)
+        L = int(g * p)
+        i = int(RNG.random() * (len(src) - L - 1))
+        seg = np.interp(np.linspace(0, L, g), np.arange(L + 1), src[i:i + L + 1]) * w
+        o = int(RNG.random() * (len(out) - g))
+        out[o:o + g] += seg * (0.4 + 0.6 * RNG.random()) * jitter
+    return out
+
+
 # ------------------------------------------------------------------ camas (bucles)
 def reactor_core_loop():
     d = 36
@@ -127,14 +156,14 @@ def reactor_core_loop():
     base = 55.0
     s = np.zeros_like(t)
     for k, a in zip((1, 2, 3, 4, 6, 8), (1.0, 0.55, 0.30, 0.22, 0.10, 0.05)):
-        det = 1 + 0.0007 * k * lfo(d, 0.05 * k, k)
+        det = 1 + 0.0007 * k * lfo(d, 0.05 * k, k) + 0.0012 * k * (smooth_noise(d, 0.04) - 0.5)   # deriva de carga
         s += a * np.sin(2 * np.pi * base * k * det * t + k)
-    s *= 0.75 + 0.25 * lfo(d, 0.25)                      # latido lento del nucleo
+    s *= 0.78 + 0.22 * lfo(d, 0.17)                      # latido lento (las refs piden deriva, no pulso)
     rumble = fft_filter(white(d), hi=140) * 3.0
     hiss = fft_filter(white(d), lo=2500, hi=9000) * 0.06 * (0.5 + smooth_noise(d, 0.3))
     l = s * 0.5 + rumble * 0.6 + hiss
     r = s * 0.5 + fft_filter(white(d), hi=140) * 1.8 + fft_filter(white(d), lo=2500, hi=9000) * 0.06
-    return loopify(stereo(reverb(l, 2.2, 0.25)[: len(t)], reverb(r, 2.4, 0.25)[: len(t)]), 3.0)
+    return loopify(tape(stereo(reverb(l, 1.8, 0.2)[: len(t)], reverb(r, 2.0, 0.2)[: len(t)]), 1.5), 3.0)
 
 
 def deep_space_drone_loop():
@@ -146,12 +175,15 @@ def deep_space_drone_loop():
         for det in (-0.4, 0.0, 0.5):
             vib = 1 + 0.002 * lfo(d, 0.07 + 0.03 * i, i)
             s += (0.9 / (1 + i)) * np.sin(2 * np.pi * (f + det) * vib * t + RNG.random() * 6)
-    air = fft_filter(white(d), lo=300, hi=2200, slope_db=-6) * (0.4 + 0.6 * smooth_noise(d, 0.08)) * 0.35
+    # cluster disonante (segunda menor + tritono) MUY suave: tension oscura sin estridencia
+    for f, a in ((43.65, 0.07), (58.3, 0.05), (87.3, 0.04)):
+        s += a * np.sin(2 * np.pi * f * (1 + 0.003 * smooth_noise(d, 0.05)) * t + RNG.random() * 6)
+    air = fft_filter(white(d), lo=300, hi=2200, slope_db=-6) * (0.4 + 0.6 * smooth_noise(d, 0.05)) * 0.35
     shimmer = fft_filter(white(d), lo=4000, hi=11000) * 0.025 * (0.3 + smooth_noise(d, 0.12))
     sig = s * 0.35 + air + shimmer
     L = reverb(sig, 6.0, 0.55, 3000)[: len(t)]
     R = reverb(np.roll(sig, int(0.017 * SR)), 6.5, 0.55, 3000)[: len(t)]
-    return loopify(np.stack([L, R], axis=1), 4.0)
+    return loopify(tape(np.stack([L, R], axis=1), 1.4), 4.0)
 
 
 def cosmic_wind_loop():
@@ -197,7 +229,7 @@ def cryo_chamber_loop():
     whistle = np.sin(2 * np.pi * (2200 + 40 * lfo(d, 0.09)) * t) * 0.012 * (0.3 + smooth_noise(d, 0.2))
     mist = fft_filter(white(d), lo=3000, hi=9000) * 0.05 * (0.3 + smooth_noise(d, 0.4))
     sig = hum * 0.45 + whistle + mist
-    return loopify(stereo(reverb(sig, 3.5, 0.35)[: len(t)]), 3.0)
+    return loopify(tape(stereo(reverb(sig, 3.0, 0.3)[: len(t)]), 1.3), 3.0)
 
 
 # ------------------------------------------------------------------ one-shots
@@ -279,7 +311,8 @@ def alarm_distant():
     tone = np.sin(2 * np.pi * 440 * t) * (lfo(d, 1.2) > 0) + np.sin(2 * np.pi * 330 * t) * (lfo(d, 1.2) <= 0)
     tone = tone * 0.5
     tone = fft_filter(tone, hi=900)
-    return fade_io(stereo(reverb(tone * env_ad(len(t), 0.1, 5.0, 1.1), 4.5, 0.65, 1800)))
+    e = tone * env_ad(len(t), 0.1, 5.0, 1.1)
+    return fade_io(stereo(reverb(e, 4.5, 0.65, 1800), reverb(e, 4.5, 0.65, 1800)))
 
 
 def metal_creak():
@@ -338,6 +371,39 @@ def station_heartbeat():
     return fade_io(stereo(reverb(out, 2.0, 0.3, 1500)))
 
 
+
+def granular_shimmer_loop():
+    d = 40
+    t = t_of(d)
+    src = sum(np.sin(2 * np.pi * f * t[: 8 * SR] * (1 + 0.002 * lfo(8, 0.2, f))) * a
+              for f, a in ((82.4, 1.0), (123.5, 0.7), (164.8, 0.5), (247.0, 0.3)))   # semilla: quinta vacia
+    src = np.concatenate([src] * 1)[: 8 * SR]
+    cloud = granular(src, d, 0.6, 7.0, (1.0, 1.5, 2.0, 3.0, 0.5))
+    cloud = fft_filter(cloud, lo=150, hi=6500, slope_db=-3) * (0.5 + 0.5 * smooth_noise(d, 0.04))
+    other = fft_filter(granular(src, d, 0.6, 7.0, (1.0, 1.5, 2.0, 3.0, 0.5)), lo=150, hi=6500, slope_db=-3) * (0.5 + 0.5 * smooth_noise(d, 0.05))
+    return loopify(tape(np.stack([reverb(cloud, 4.0, 0.45, 4200)[: len(t)], reverb(other, 4.2, 0.45, 4200)[: len(t)]], axis=1), 1.3), 4.0)
+
+
+def reverse_swell():
+    """Cola de reverb invertida: crece hacia un golpe sub (bounce y reprocesado, como piden las refs)."""
+    d = 6.0
+    t = t_of(d)
+    hit = np.sin(2 * np.pi * 48 * t[: SR]) * np.exp(-t[: SR] * 4) + fft_filter(white(1), lo=300, hi=3000) * np.exp(-t[: SR] * 9) * 0.4
+    tail = reverb(np.concatenate([hit, np.zeros(int((d - 1) * SR))]), 4.5, 0.9, 3500)[: int(d * SR)]
+    rev = tail[::-1] * np.linspace(0.2, 1, len(tail)) ** 1.5
+    rev = np.concatenate([rev, hit * 0.9])
+    return fade_io(stereo(rev[: int(d * SR)]), 25)
+
+
+def sub_drop():
+    d = 5.0
+    t = t_of(d)
+    f = 70 * np.exp(-t * 0.55) + 24
+    ph = 2 * np.pi * np.cumsum(f) / SR
+    s = np.sin(ph) * np.exp(-t * 0.75) + 0.2 * np.sin(2 * ph) * np.exp(-t * 1.6)
+    return fade_io(stereo(fft_filter(s, hi=300)))
+
+
 BANK = {
     # camas
     "reactor_core_loop": (reactor_core_loop, -23),
@@ -346,6 +412,7 @@ BANK = {
     "coolant_flow_loop": (coolant_flow_loop, -28),
     "server_hall_loop": (server_hall_loop, -27),
     "cryo_chamber_loop": (cryo_chamber_loop, -27),
+    "granular_shimmer_loop": (granular_shimmer_loop, -27),
     # one-shots
     "airlock_hiss": (airlock_hiss, -23),
     "airlock_clunk": (airlock_clunk, -21),
@@ -359,6 +426,8 @@ BANK = {
     "energy_swell": (energy_swell, -21),
     "signal_static": (signal_static, -28),
     "station_heartbeat": (station_heartbeat, -24),
+    "reverse_swell": (reverse_swell, -22),
+    "sub_drop": (sub_drop, -21),
 }
 
 
