@@ -149,6 +149,13 @@ de diagnóstico. La comprobación exige un objeto JSON no vacío; no acredita la
 procedencia original, las dependencias del modelo ni su render. La recuperación
 debe documentar su fuente y validarse en los clientes 26.2/26.3.
 
+Además, `--require-model` recorre iterativamente los padres locales de la raíz
+usando los bytes finales, incluidos los de `--extra-dir`. Rechaza ciclos directos
+o transitivos, JSON de padres inválido y rutas de padres inseguras antes de tocar
+la salida. El informe incluye `required_model_parent_chains`. Un padre ausente
+puede proceder del cliente (vanilla/builtin), por lo que termina el recorrido:
+esto no valida todas las dependencias ni los modelos de overlays activos.
+
 Validación del 4 de noviembre de 2026: cuatro pruebas automáticas correctas y
 12.297 contenidos idénticos al ZIP original; solo cambia la ubicación de los tres
 shaders y `pack.mcmeta`. **Pendiente: carga y comprobación visual en cliente 26.3.**
