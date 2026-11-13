@@ -3,6 +3,7 @@ import json
 from pathlib import Path
 import tempfile
 import unittest
+from unittest.mock import patch
 import zipfile
 
 from build_t2_pack import build, OVERLAY
@@ -90,6 +91,61 @@ class LegacyShaderIsolationTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "Audit shaders"):
             build(self.base, self.output, self.write_base())
         self.assertFalse(self.output.exists())
+
+    def test_write_failure_or_interruption_preserves_output_and_cleans_staging(self):
+        digest = self.write_base()
+        original_write = zipfile.ZipFile.writestr
+        for error in (OSError("disk full"), KeyboardInterrupt()):
+            for existing in (False, True):
+                with self.subTest(error=type(error).__name__, existing=existing):
+                    if existing:
+                        self.output.write_bytes(b"previous candidate")
+                    else:
+                        self.output.unlink(missing_ok=True)
+                    before = set(self.base.parent.iterdir())
+
+                    def fail_after_write(target, *args, **kwargs):
+                        original_write(target, *args, **kwargs)
+                        raise error
+
+                    with patch.object(zipfile.ZipFile, "writestr", fail_after_write):
+                        with self.assertRaises(type(error)):
+                            build(self.base, self.output, digest)
+                    self.assertEqual(set(self.base.parent.iterdir()), before)
+                    if existing:
+                        self.assertEqual(self.output.read_bytes(), b"previous candidate")
+                    else:
+                        self.assertFalse(self.output.exists())
+                    self.assertEqual(hashlib.sha256(self.base.read_bytes()).hexdigest(), digest)
+
+    def test_replace_failure_preserves_candidate_and_cleans_staging(self):
+        digest = self.write_base()
+        self.output.write_bytes(b"previous candidate")
+        before = set(self.base.parent.iterdir())
+        with patch.object(Path, "replace", side_effect=PermissionError("replacement denied")):
+            with self.assertRaises(PermissionError):
+                build(self.base, self.output, digest)
+        self.assertEqual(self.output.read_bytes(), b"previous candidate")
+        self.assertEqual(set(self.base.parent.iterdir()), before)
+
+    def test_candidate_is_replaced_only_after_zip_is_complete(self):
+        digest = self.write_base()
+        self.output.write_bytes(b"previous candidate")
+        before = set(self.base.parent.iterdir())
+        original_replace = Path.replace
+
+        def verify_then_replace(candidate, destination):
+            self.assertEqual(destination.read_bytes(), b"previous candidate")
+            self.assertEqual(candidate.parent.parent, destination.parent)
+            with zipfile.ZipFile(candidate) as archive:
+                self.assertIsNone(archive.testzip())
+                self.assertEqual(len(archive.namelist()), len(self.entries))
+            return original_replace(candidate, destination)
+
+        with patch.object(Path, "replace", verify_then_replace):
+            result = build(self.base, self.output, digest)
+        self.assertEqual(set(self.base.parent.iterdir()), before)
+        self.assertEqual(hashlib.sha1(self.output.read_bytes()).hexdigest(), result["sha1"])
 
     def test_language_patch_preserves_other_keys_resources_and_placeholders(self):
         en = "assets/stellarity/lang/en_us.json"

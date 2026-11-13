@@ -10,6 +10,7 @@ import json
 import math
 from pathlib import Path
 import re
+import tempfile
 import zipfile
 
 
@@ -221,18 +222,23 @@ def build(base: Path, output: Path, expected_sha256: str,
             "max_format": [MAX_LEGACY_FORMAT, 65535],
         })
         output.parent.mkdir(parents=True, exist_ok=True)
-        with zipfile.ZipFile(output, "w", compression=zipfile.ZIP_DEFLATED) as target:
-            for name in sorted(names):
-                info = copy.copy(source.getinfo(name))
-                if name in shaders:
-                    info.filename = f"{OVERLAY}/{name}"
-                content = (json.dumps(metadata, ensure_ascii=False, indent=2) + "\n").encode() \
-                    if name == "pack.mcmeta" else replacements.get(name, source.read(name))
-                target.writestr(info, content)
-            for name in sorted((set(items) | set(extra_files)) - set(names)):
-                info = zipfile.ZipInfo(name, date_time=source.getinfo("pack.mcmeta").date_time)
-                info.compress_type = zipfile.ZIP_DEFLATED
-                target.writestr(info, replacements[name])
+        # Stage on the destination filesystem so replacement is atomic. CRC
+        # preflight cannot protect an earlier candidate from a write failure.
+        with tempfile.TemporaryDirectory(prefix=f".{output.name}.", dir=output.parent) as directory:
+            candidate = Path(directory) / "candidate.zip"
+            with zipfile.ZipFile(candidate, "w", compression=zipfile.ZIP_DEFLATED) as target:
+                for name in sorted(names):
+                    info = copy.copy(source.getinfo(name))
+                    if name in shaders:
+                        info.filename = f"{OVERLAY}/{name}"
+                    content = (json.dumps(metadata, ensure_ascii=False, indent=2) + "\n").encode() \
+                        if name == "pack.mcmeta" else replacements.get(name, source.read(name))
+                    target.writestr(info, content)
+                for name in sorted((set(items) | set(extra_files)) - set(names)):
+                    info = zipfile.ZipInfo(name, date_time=source.getinfo("pack.mcmeta").date_time)
+                    info.compress_type = zipfile.ZIP_DEFLATED
+                    target.writestr(info, replacements[name])
+            candidate.replace(output)
     return {
         "base_sha256": expected_sha256,
         "sha256": digest(output, "sha256"),
