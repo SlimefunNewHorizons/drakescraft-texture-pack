@@ -270,6 +270,29 @@ class LegacyShaderIsolationTests(unittest.TestCase):
             self.assertNotIn("assets/terralense/pack.mcmeta", names)
         self.assertEqual(len(result["legacy_shaders"]), 2)
 
+    def test_extra_shaders_cannot_bypass_legacy_isolation(self):
+        digest = self.write_base()
+        for name in ("assets/minecraft/shaders/core/item.fsh",
+                     "assets/stellarity/shaders/core/end_gateway.fsh",
+                     "assets/stellarity/shaders/include/extra.glsl"):
+            with self.subTest(name=name):
+                self.output.write_bytes(b"previous artifact")
+                with self.assertRaisesRegex(ValueError, "supplemental shaders"):
+                    build(self.base, self.output, digest, extra_files={name: b"legacy GLSL"})
+                self.assertEqual(self.output.read_bytes(), b"previous artifact")
+
+    def test_extra_paths_cannot_escape_assets_or_disguise_shaders(self):
+        digest = self.write_base()
+        for name in ("assets/minecraft/../../pack.mcmeta", "assets/minecraft//shaders/core/item.fsh",
+                     "assets/minecraft/shaders/../models/a.json", "assets/minecraft/models/./a.json",
+                     "assets/minecraft/models/", "assets/minecraft\\shaders\\core\\item.fsh",
+                     "pack.mcmeta", "assets/Minecraft/models/a.json"):
+            with self.subTest(name=name):
+                self.output.write_bytes(b"previous artifact")
+                with self.assertRaisesRegex(ValueError, "safe resource paths"):
+                    build(self.base, self.output, digest, extra_files={name: b"unexpected"})
+                self.assertEqual(self.output.read_bytes(), b"previous artifact")
+
 
 if __name__ == "__main__":
     unittest.main()

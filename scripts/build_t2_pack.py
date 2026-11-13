@@ -185,8 +185,14 @@ def build(base: Path, output: Path, expected_sha256: str,
         items = bridge_legacy_items(source, legacy_item_bridges if legacy_item_bridges is not None else [],
                                     missing_model_fallbacks)
         extra_files = extra_files or {}
-        if any(not n.startswith("assets/") for n in extra_files):
-            raise ValueError("Extra files must live under assets/")
+        for name in extra_files:
+            if (not re.fullmatch(r"assets/[a-z0-9_.-]+/[a-z0-9_./-]+", name)
+                    or any(part in {".", "..", ""} for part in name.split("/"))):
+                raise ValueError("Extra files must use safe resource paths under assets/")
+            # These files are written after the base shader scan. Allowing one
+            # here would bypass the overlay and expose legacy GLSL to 26.3.
+            if is_shader(name):
+                raise ValueError("Audit supplemental shaders before rebuilding")
         replacements = {**languages, **models, **items, **extra_files}
         metadata = json.loads(source.read("pack.mcmeta"))
         overlays = metadata.setdefault("overlays", {}).setdefault("entries", [])

@@ -1,0 +1,54 @@
+{
+  "checked_at_utc": "2026-11-13T00:11:12.215806+00:00",
+  "public_url": "https://pack.drakescraft.cl/t2-v2.zip?v=3",
+  "base": {
+    "bytes": 30291477,
+    "sha1": "4597ead7d148fe0ef46029e643af8a82d151a0a0",
+    "sha256": "7c885e2368e40c9fc0140b05e0ae03b18aa2c44156a3aa214870e5cbf20075d9",
+    "crc_bad_entry": null,
+    "root_core_shaders": [
+      "assets/stellarity/shaders/core/end_gateway.fsh",
+      "assets/minecraft/shaders/core/item.fsh"
+    ],
+    "original_model_present": false
+  },
+  "candidate": {
+    "base_sha256": "7c885e2368e40c9fc0140b05e0ae03b18aa2c44156a3aa214870e5cbf20075d9",
+    "sha256": "6ec6fe2de3eb3f97445907317bc353324773d2071e3307c03d5877562d6adc60",
+    "sha1": "9cd305c1d11943eda9f0c5d1a982cca4b6a77f43",
+    "bytes": 30291653,
+    "legacy_shaders": [
+      "assets/minecraft/shaders/core/item.fsh",
+      "assets/stellarity/shaders/core/end_gateway.fsh",
+      "assets/stellarity/shaders/include/animated_text.glsl"
+    ],
+    "patched_languages": [],
+    "patched_models": [],
+    "bridged_items": [],
+    "missing_model_fallbacks": {},
+    "extra_files": []
+  },
+  "candidate_checks": {
+    "crc_ok": true,
+    "unique_paths": true,
+    "no_root_shaders": true,
+    "unchanged_non_shader_resources": true,
+    "original_model_present": false
+  },
+  "legacy_shader_overlay": {
+    "directory": "overlay_legacy_shaders",
+    "formats": {
+      "min_inclusive": 15,
+      "max_inclusive": 88
+    },
+    "min_format": [
+      15,
+      0
+    ],
+    "max_format": [
+      88,
+      65535
+    ]
+  },
+  "scope": "Local candidate only; no Dallas access or deployment. No fallback model used. Graphical rendering and original model provenance remain pending."
+}
