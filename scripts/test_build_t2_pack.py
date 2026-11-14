@@ -669,6 +669,19 @@ class LegacyShaderIsolationTests(unittest.TestCase):
         self.assertEqual(result["required_model_references"], {})
         self.assertTrue(self.output.is_file())
 
+    def test_reference_overlay_directory_named_assets_is_resolved_correctly(self):
+        name = "assets/svm/items/selected.json"
+        self.entries["assets/svm/models/item/first.json"] = b'{"elements":[]}'
+        self.entries["assets/" + name] = b'{"model":{"model":"svm:item/first"}}'
+        self.entries["later/" + name] = b'{}'
+        metadata = json.loads(self.entries["pack.mcmeta"])
+        metadata["overlays"]["entries"] = [{"directory": directory, "formats": 500}
+                                             for directory in ("assets", "later")]
+        self.entries["pack.mcmeta"] = json.dumps(metadata).encode()
+        with self.assertRaisesRegex(ValueError, "Audit required model reference in overlay"):
+            build(self.base, self.output, self.write_base(), required_models=["svm:item/first"])
+        self.assertFalse(self.output.exists())
+
     def test_deep_parent_chain_avoids_python_recursion_limit(self):
         count = 1100
         for index in range(count):

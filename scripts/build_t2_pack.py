@@ -269,7 +269,9 @@ def audit_required_model_reference_overlays(source, replacements, metadata, inco
         for name in sources:
             # Incoming sources already passed the loadable-resource path check.
             logical = next(name[len(prefix):] for prefix in prefixes
-                           if name.startswith(prefix + "assets/"))
+                           if name.startswith(prefix) and re.fullmatch(
+                               r"assets/[a-z0-9_.-]+/(?:items|models)/[a-z0-9_./-]+\.json",
+                               name[len(prefix):]))
             if logical in checked:
                 continue
             checked.add(logical)
