@@ -465,10 +465,10 @@ class LegacyShaderIsolationTests(unittest.TestCase):
     def test_required_model_accepts_modern_override_parent_and_declared_overlay(self):
         self.entries["assets/minecraft/models/item/first.json"] = b'{"elements":[]}'
         cases = {
-            "assets/minecraft/items/test.json": b'{"model":{"model":"item/first"}}',
+            "assets/minecraft/items/selected.json": b'{"model":{"model":"item/first"}}',
             "assets/minecraft/models/item/test.json": b'{"overrides":[{"model":"minecraft:item/first"}]}',
             "modern/assets/minecraft/models/item/test.json": b'{"parent":"minecraft:item/first"}',
-            "modern/assets/minecraft/items/test.json": b'{"model":{"model":"minecraft:item/fi\\u0072st"}}',
+            "modern/assets/minecraft/items/selected.json": b'{"model":{"model":"minecraft:item/fi\\u0072st"}}',
         }
         original_entries = dict(self.entries)
         for path, payload in cases.items():
@@ -604,6 +604,69 @@ class LegacyShaderIsolationTests(unittest.TestCase):
         self.entries["modern/assets/svm/models/item/first.json"] = b'broken JSON'
         result = build(self.base, self.output, self.write_base())
         self.assertEqual(result["required_model_parent_chains"], {})
+        self.assertTrue(self.output.is_file())
+
+    def test_overlay_reference_source_changes_preserve_output(self):
+        self.entries["assets/svm/models/item/first.json"] = b'{"elements":[]}'
+        original = dict(self.entries)
+        for resource, reference in (("items/selected.json", b'{"model":{"model":"svm:item/first"}}'),
+                                    ("models/item/selected.json", b'{"parent":"svm:item/first"}')):
+            name = "assets/svm/" + resource
+            for shadow in (b'broken JSON', b'{"model":{"model":"svm:item/other"}}'):
+                for existing in (False, True):
+                    with self.subTest(resource=resource, shadow=shadow, existing=existing):
+                        self.entries = {**original, name: reference, "modern/" + name: shadow}
+                        digest = self.write_base()
+                        self.output.unlink(missing_ok=True)
+                        if existing:
+                            self.output.write_bytes(b"verified candidate")
+                        before = set(self.base.parent.iterdir())
+                        with self.assertRaisesRegex(ValueError, "Audit required model reference in overlay"):
+                            build(self.base, self.output, digest, required_models=["svm:item/first"])
+                        self.assertEqual(set(self.base.parent.iterdir()), before)
+                        if existing:
+                            self.assertEqual(self.output.read_bytes(), b"verified candidate")
+                        else:
+                            self.assertFalse(self.output.exists())
+
+    def test_overlay_only_reference_cannot_hide_conflicting_variants(self):
+        self.entries["assets/svm/models/item/first.json"] = b'{"elements":[]}'
+        name = "assets/svm/items/selected.json"
+        reference = b'{"model":{"model":"svm:item/first"}}'
+        original = dict(self.entries)
+        for other in (name, "later/" + name):
+            with self.subTest(other=other):
+                self.entries = {**original, "modern/" + name: reference, other: b'{}'}
+                metadata = json.loads(self.entries["pack.mcmeta"])
+                metadata["overlays"]["entries"].append({"directory": "later", "formats": 500})
+                self.entries["pack.mcmeta"] = json.dumps(metadata).encode()
+                with self.assertRaisesRegex(ValueError, "Audit required model reference in overlay"):
+                    build(self.base, self.output, self.write_base(), required_models=["svm:item/first"])
+                self.assertFalse(self.output.exists())
+
+    def test_overlay_reference_sources_compare_final_bytes_and_report_sources(self):
+        self.entries["assets/svm/models/item/first.json"] = b'{"elements":[]}'
+        name = "assets/svm/items/selected.json"
+        reference = b'{"model":{"model":"svm:item/first"}}'
+        self.entries[name] = b'{}'
+        self.entries["modern/" + name] = reference
+        result = build(self.base, self.output, self.write_base(), extra_files={name: reference},
+                       required_models=["svm:item/first"])
+        self.assertEqual(result["required_model_references"],
+                         {"svm:item/first": [name, "modern/" + name]})
+        with zipfile.ZipFile(self.output) as archive:
+            self.assertEqual(archive.read(name), reference)
+            self.assertEqual(archive.read("modern/" + name), reference)
+
+    def test_reference_overlay_audit_ignores_undeclared_variants_and_is_opt_in(self):
+        self.entries["assets/svm/models/item/first.json"] = b'{"elements":[]}'
+        name = "assets/svm/items/selected.json"
+        self.entries[name] = b'{"model":{"model":"svm:item/first"}}'
+        self.entries["unused/" + name] = b'broken JSON'
+        build(self.base, self.output, self.write_base(), required_models=["svm:item/first"])
+        self.entries["modern/" + name] = b'{}'
+        result = build(self.base, self.output, self.write_base())
+        self.assertEqual(result["required_model_references"], {})
         self.assertTrue(self.output.is_file())
 
     def test_deep_parent_chain_avoids_python_recursion_limit(self):

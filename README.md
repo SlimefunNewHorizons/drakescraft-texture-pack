@@ -164,6 +164,14 @@ se aplica a todos los rangos declarados, aunque el overlay esté inactivo en un
 cliente concreto. No resuelve combinaciones de overlays ni certifica su render;
 sin `--require-model` se mantiene la construcción de candidatos parciales.
 
+También se comparan las variantes declaradas de cada ítem o modelo que aporta
+una referencia entrante al modelo exigido. Una variante distinta puede ocultar
+esa referencia al activarse su overlay: ahora requiere revisión antes de escribir
+el candidato. Se comparan raíz y overlays entre sí con los bytes finales de
+`--extra-dir`; se permiten copias idénticas y fuentes presentes solo en un overlay.
+La regla es conservadora para todos los rangos: no calcula qué combinaciones de
+overlays estarán activas ni acredita referencias efectivas por versión o render.
+
 Validación del 4 de noviembre de 2026: cuatro pruebas automáticas correctas y
 12.297 contenidos idénticos al ZIP original; solo cambia la ubicación de los tres
 shaders y `pack.mcmeta`. **Pendiente: carga y comprobación visual en cliente 26.3.**
