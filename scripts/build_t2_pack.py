@@ -259,6 +259,30 @@ def required_model_parent_chains(source, replacements, required, metadata):
     return chains
 
 
+def audit_required_model_reference_overlays(source, replacements, metadata, incoming):
+    """Reject overlay variants that can shadow an incoming reference source."""
+    names = set(source.namelist()) | set(replacements)
+    prefixes = [""] + [entry["directory"] + "/"
+                       for entry in metadata.get("overlays", {}).get("entries", [])]
+    checked = set()
+    for sources in incoming.values():
+        for name in sources:
+            # Incoming sources already passed the loadable-resource path check.
+            logical = next(name[len(prefix):] for prefix in prefixes
+                           if name.startswith(prefix) and re.fullmatch(
+                               r"assets/[a-z0-9_.-]+/(?:items|models)/[a-z0-9_./-]+\.json",
+                               name[len(prefix):]))
+            if logical in checked:
+                continue
+            checked.add(logical)
+            variants = [prefix + logical for prefix in prefixes if prefix + logical in names]
+            content = replacements[name] if name in replacements else source.read(name)
+            for variant in variants:
+                other = replacements[variant] if variant in replacements else source.read(variant)
+                if other != content:
+                    raise ValueError(f"Audit required model reference in overlay: {variant}")
+
+
 def build(base: Path, output: Path, expected_sha256: str,
           language_patches: dict | None = None,
           model_patches: dict | None = None,
@@ -319,6 +343,7 @@ def build(base: Path, output: Path, expected_sha256: str,
         metadata = json.loads(source.read("pack.mcmeta"))
         incoming = required_model_references(source, replacements, metadata, checked_models)
         parent_chains = required_model_parent_chains(source, replacements, checked_models, metadata)
+        audit_required_model_reference_overlays(source, replacements, metadata, incoming)
         overlays = metadata.setdefault("overlays", {}).setdefault("entries", [])
         if any(entry["directory"] == OVERLAY for entry in overlays):
             raise ValueError("Base already contains the legacy shader overlay")
@@ -390,7 +415,7 @@ def main() -> None:
     parser.add_argument("--extra-dir", type=Path,
                         help="Directory whose files (relative to it, under assets/) are added or replace base files")
     parser.add_argument("--require-model", action="append", default=[], metavar="NAMESPACE:PATH",
-                        help="Require a nonempty root model JSON, an incoming reference, no local root parent cycle and no differing declared overlay parent before writing (repeatable; does not verify provenance or render)")
+                        help="Require a nonempty root model JSON, an incoming reference, no local root parent cycle and no differing declared overlay parent or reference source before writing (repeatable; does not verify provenance or render)")
     parser.add_argument("--with-terralense", action="store_true",
                         help="Add the merged TerraLense minimap assets (see scripts/merge_terralense.py)")
     args = parser.parse_args()
