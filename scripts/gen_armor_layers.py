@@ -252,6 +252,22 @@ def mask_runs(img):
     return runs
 
 
+def upscale_nearest(img, scale):
+    w, h = img.size
+    out = Image.new("RGBA", (w * scale, h * scale))
+    px_in = img.convert("RGBA").load()
+    px_out = out.load()
+    for y in range(h):
+        for x in range(w):
+            p = px_in[x, y]
+            if p[3] == 0:
+                continue
+            for dy in range(scale):
+                for dx in range(scale):
+                    px_out[x * scale + dx, y * scale + dy] = p
+    return out
+
+
 def build_svg(mat, w, h, runs, key, overlay=False, face_rects=None, layer=None):
     m = MATS[mat]
     b = Builder(w, h, m, random.Random(key), overlay)
@@ -338,21 +354,30 @@ def main():
         for layer, sub in ((1, "humanoid"), (2, "humanoid_leggings")):
             if mat == "turtle_scute" and layer == 2:
                 continue
+            src = "netherite" if mat in CUSTOM else mat
+            vm = vanilla_png(sub, src)
+            runs = mask_runs(vm)
+            if mat == "dragon" and layer == 1:
+                # Ojos cyan en el visor sin cerrar la boca ni tapar la cabeza
+                runs = runs + [(9, 11, 2, 1), (9, 12, 2, 1), (13, 11, 2, 1), (13, 12, 2, 1)]
             parts = {"head": HEAD} if mat == "turtle_scute" else (LAYER1 if layer == 1 else LAYER2)
-            rects = [r for p in parts.values() for r in p.values()]
+            face_rects = [r for p in parts.values() for r in p.values()]
             key = f"{mat}-{layer}"
-            sv = build_svg(mat, 64, 32, rects, key, face_rects=rects, layer=layer)
+            sv = build_svg(mat, 64, 32, runs, key, face_rects=face_rects, layer=layer)
             im = rasterize(sv, svgd / f"armor_{mat}_{sub}.svg", base / sub / f"{mat}.png", (64 * SCALE, 32 * SCALE))
             sheet[(mat, sub)] = im
             if mat == "leather":
-                osv = build_svg(mat, 64, 32, rects, key + "o", overlay=True)
-                rasterize(osv, svgd / f"armor_leather_{sub}_overlay.svg", base / sub / "leather_overlay.png", (64 * SCALE, 32 * SCALE))
+                vom = vanilla_png(sub, "leather_overlay")
+                overlay_im = upscale_nearest(vom, SCALE)
+                overlay_png = base / sub / "leather_overlay.png"
+                overlay_png.parent.mkdir(parents=True, exist_ok=True)
+                overlay_im.save(overlay_png)
             if mat in OLD_NAME:  # formato 1.20.x desde el mismo SVG
                 old = mc / "textures/models/armor"
                 old.mkdir(parents=True, exist_ok=True)
                 im.save(old / f"{OLD_NAME[mat]}_layer_{layer}.png")
                 if mat == "leather":
-                    Image.open(base / sub / "leather_overlay.png").save(old / f"leather_layer_{layer}_overlay.png")
+                    overlay_im.save(old / f"leather_layer_{layer}_overlay.png")
         src = "iron" if mat in CUSTOM else mat
         for sub, pool in (("humanoid_baby", HUMANOID_MATS), ("horse_body", ["netherite", "diamond", "iron", "gold", "copper", "leather"]),
                           ("nautilus_body", ["netherite", "diamond", "iron", "gold", "copper"])):
@@ -363,8 +388,9 @@ def main():
             sv = build_svg(mat, w, h, mask_runs(vm), f"{mat}-{sub}")
             sheet[(mat, sub)] = rasterize(sv, svgd / f"armor_{mat}_{sub}.svg", base / sub / f"{mat}.png", (w * SCALE, h * SCALE))
             if mat == "leather" and sub in ("humanoid_baby", "horse_body"):
-                osv = build_svg(mat, w, h, mask_runs(vanilla_png(sub, "leather")), f"{mat}-{sub}o", overlay=True)
-                rasterize(osv, svgd / f"armor_leather_{sub}_overlay.svg", base / sub / "leather_overlay.png", (w * SCALE, h * SCALE))
+                vom = vanilla_png(sub, "leather_overlay")
+                overlay_im = upscale_nearest(vom, SCALE)
+                overlay_im.save(base / sub / "leather_overlay.png")
         if mat != "turtle_scute":
             runs = mask_runs(vanilla_png("wolf_body", "armadillo_scute"))
             sv = build_svg(mat, 64, 32, runs, f"{mat}-wolf")

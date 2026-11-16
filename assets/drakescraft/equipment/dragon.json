@@ -15,12 +15,6 @@
         "texture": "drakescraft:dragon"
       }
     ],
-    "wings": [
-      {
-        "texture": "drakescraft:dragon",
-        "use_player_texture": false
-      }
-    ],
     "horse_body": [
       {
         "texture": "drakescraft:dragon"
