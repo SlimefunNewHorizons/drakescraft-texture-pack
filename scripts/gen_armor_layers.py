@@ -1,22 +1,15 @@
 #!/usr/bin/env python3
-"""Armaduras DrakesCraft KINTSUGI/DRAGON (26.x y 1.20): autoria en VECTOR (SVG) y export a 4x. Sin shader.
-
-El SVG usa como unidades los PIXELES VANILLA (viewBox 64x32, 64x64, 128x128...), asi el layout/UV vanilla se
-mantiene exacto y proporcional; la rasterizacion (rsvg-convert) sale a 4x: capas 256x128, baby/caballo 256x256, nautilus 512x512.
-Estilo (dueño): base oscura con degradados y relieve, bordes de placa marcados, remaches discretos, pocas grietas
-finas/estrellitas, acento minimo por material (oxido en hierro, cardenillo en cobre). Dragon: escamas + cresta/cuernos/espinas.
-
-Salidas (por material, desde el MISMO svg):
-  26.x : assets/minecraft/textures/entity/equipment/{humanoid,humanoid_leggings,humanoid_baby,horse_body,nautilus_body,wolf_body}/<mat>.png
-  1.20 : assets/minecraft/textures/models/armor/<mat>_layer_{1,2}.png (+ leather_layer_N_overlay.png); copper no existe antes de 1.21.9
-  propios: assets/drakescraft/textures/entity/equipment/... (kintsugi, dragon) + equipment/*.json
-  fuentes: assets/drakescraft/textures/gear/svg/armor_<mat>_<capa>.svg ; iconos dragon 128x128 + items/models
-Las capas de baby/caballo/nautilus/lobo se recortan con la mascara alpha del PNG vanilla del jar de cliente.
-Uso: gen_armor_layers.py [--root .] [--jar client.jar]
+"""Armaduras Artísticas de Alta Definición para DrakesCraft (26.x y 1.20).
+Diseño heráldico y anatómico vectorial (SVG) con export a 4x (256x128).
+Reemplaza el patrón genérico de bloques por placas esculpidas, gorgueras, petos,
+hombreras, grebas, visores y ornamentos únicos por material.
 """
+from __future__ import annotations
+
 import argparse
 import io
 import json
+import math
 import random
 import subprocess
 import zipfile
@@ -29,213 +22,162 @@ OUT = "#0a0810"
 GOLD, GOLD_D, GOLD_L = "#b08a30", "#684e1a", "#d6b860"
 MAG, CYN, CYN_B = "#9634aa", "#2496aa", "#50dcf0"
 
-
-def hx(s):
-    return tuple(int(s[i:i + 2], 16) for i in (1, 3, 5))
-
-
-def mixc(a, b, t):
-    a, b = (hx(a) if isinstance(a, str) else a), (hx(b) if isinstance(b, str) else b)
-    return "#%02x%02x%02x" % tuple(int(a[i] * (1 - t) + b[i] * t) for i in range(3))
-
-
-# H base, h luz, d sombra, sp brillo, crack, mode, patches=[(color, fraccion)]
-MATS = {
-    "netherite": dict(H="#1d1925", h="#3a3048", d="#0a080e", sp="#8a4a9e", crack="#6e2c82", mode="plate"),
-    "diamond": dict(H="#12333c", h="#2a6f7b", d="#06161b", sp="#4fb3bf", crack="#2e8a96", mode="plate"),
-    "iron": dict(H="#3a4152", h="#6a7388", d="#14171f", sp="#9aa3b8", crack="#5a6478", mode="plate",
-                 patches=[("#7a4828", .05), ("#5c361e", .035)]),
-    "gold": dict(H="#3a2c10", h="#6e551c", d="#150f04", sp="#a88a3c", crack="#80642a", mode="plate"),
-    "chainmail": dict(H="#232735", h="#5a6176", d="#0e1018", sp="#8d93a6", crack="#46506a", mode="mesh"),
-    "copper": dict(H="#4a2819", h="#8a4a2c", d="#190c07", sp="#c9845a", crack="#96593a", mode="plate",
-                   patches=[("#28786a", .05), ("#1e5a4e", .035)]),
-    "turtle_scute": dict(H="#173a22", h="#3f8a4c", d="#07130b", sp="#8fd09a", crack="#46965a", mode="scale"),
-    "leather": dict(H="#a0a0a0", h="#c8c8c8", d="#585858", sp="#ffffff", crack="#8c6e32", mode="plate"),
-    "kintsugi": dict(H="#1a1424", h="#34264a", d="#08060d", sp="#9b6bd0", crack=GOLD, mode="plate"),
-    "dragon": dict(H="#2a1450", h="#5b2bb5", d="#0d051a", sp="#b99be8", crack=GOLD, mode="scale", tint=True),
+# --- PALETAS ARTÍSTICAS RICAS Y CONTRASTADAS ---
+PALETTES = {
+    "netherite": {
+        "base_dark": "#120e18",
+        "base_mid": "#251d2f",
+        "base_light": "#3f334e",
+        "specular": "#9f90b8",
+        "trim": "#d4af37",      # Oro ancestral
+        "trim_dark": "#7a5f13",
+        "trim_light": "#fff099",
+        "accent": "#9933ff",    # Resplandor nether violeta
+        "accent_glow": "#c280ff",
+        "rivet": "#e0c068",
+        "joint": "#0a070e",
+        "style": "netherite"
+    },
+    "diamond": {
+        "base_dark": "#022633",
+        "base_mid": "#0a5669",
+        "base_light": "#158c9e",
+        "specular": "#64f5ff",
+        "trim": "#c8f6ff",      # Platino cristalino
+        "trim_dark": "#0e4a57",
+        "trim_light": "#ffffff",
+        "accent": "#00f0ff",    # Gema cian pura
+        "accent_glow": "#a6fdff",
+        "rivet": "#b8f4ff",
+        "joint": "#01131a",
+        "style": "diamond"
+    },
+    "iron": {
+        "base_dark": "#252b36",
+        "base_mid": "#4f596b",
+        "base_light": "#838f9f",
+        "specular": "#dce4ec",
+        "trim": "#c49a45",      # Bronce / latón
+        "trim_dark": "#5e4514",
+        "trim_light": "#fce088",
+        "accent": "#eef4fa",    # Acero pulido
+        "accent_glow": "#ffffff",
+        "rivet": "#d8b056",
+        "joint": "#15181f",
+        "style": "iron"
+    },
+    "gold": {
+        "base_dark": "#4a3300",
+        "base_mid": "#9e7408",
+        "base_light": "#dca71b",
+        "specular": "#fff085",
+        "trim": "#ffe066",      # Oro brillante
+        "trim_dark": "#664700",
+        "trim_light": "#ffffff",
+        "accent": "#d91438",    # Rubí imperial
+        "accent_glow": "#ff6685",
+        "rivet": "#ffeaa0",
+        "joint": "#261a00",
+        "style": "gold"
+    },
+    "copper": {
+        "base_dark": "#361608",
+        "base_mid": "#783616",
+        "base_light": "#b85c2c",
+        "specular": "#f7a072",
+        "trim": "#228068",      # Cardenillo / pátina turquesa
+        "trim_dark": "#104235",
+        "trim_light": "#52deb8",
+        "accent": "#e87038",    # Cobre pulido
+        "accent_glow": "#ffd1b3",
+        "rivet": "#e5a044",
+        "joint": "#1c0a03",
+        "style": "copper"
+    },
+    "chainmail": {
+        "base_dark": "#181c24",
+        "base_mid": "#384152",
+        "base_light": "#6b778c",
+        "specular": "#b8c4d8",
+        "trim": "#422818",      # Cuero de gambesón
+        "trim_dark": "#24140b",
+        "trim_light": "#805234",
+        "accent": "#90a0b8",    # Anillas pulidas
+        "accent_glow": "#ffffff",
+        "rivet": "#c0cdd8",
+        "joint": "#0d0f14",
+        "style": "chainmail"
+    },
+    "turtle_scute": {
+        "base_dark": "#0a2614",
+        "base_mid": "#195c32",
+        "base_light": "#329955",
+        "specular": "#82f0a8",
+        "trim": "#38b2ac",      # Prismarina abisal
+        "trim_dark": "#134e4a",
+        "trim_light": "#99f6e4",
+        "accent": "#48e07b",    # Escamas esmeralda
+        "accent_glow": "#bbf7d0",
+        "rivet": "#6ee7b7",
+        "joint": "#05140a",
+        "style": "turtle"
+    },
+    "leather": {
+        "base_dark": "#3d2212",
+        "base_mid": "#734324",
+        "base_light": "#a8693d",
+        "specular": "#dba479",
+        "trim": "#f0dbbe",      # Costura doble artesanal
+        "trim_dark": "#261408",
+        "trim_light": "#ffffff",
+        "accent": "#c48350",    # Cuero teñido
+        "accent_glow": "#ffd7b3",
+        "rivet": "#c89a3c",     # Remaches latón
+        "joint": "#1f1008",
+        "style": "leather"
+    },
+    "dragon": {
+        "base_dark": "#10061e",
+        "base_mid": "#2a104c",
+        "base_light": "#52238f",
+        "specular": "#b875ff",
+        "trim": "#ffd033",      # Oro imperial de dragón
+        "trim_dark": "#7a5e08",
+        "trim_light": "#fff7b3",
+        "accent": "#00f0ff",    # Ojos y aliento cian del vacío
+        "accent_glow": "#70ffff",
+        "rivet": "#ffda55",
+        "joint": "#080210",
+        "style": "dragon"
+    },
+    "kintsugi": {
+        "base_dark": "#0b0912",
+        "base_mid": "#1b1726",
+        "base_light": "#322c42",
+        "specular": "#8e84a6",
+        "trim": "#ffd700",      # Oro líquido fundido (Kintsugi)
+        "trim_dark": "#8a6d00",
+        "trim_light": "#fff499",
+        "accent": "#ffd700",
+        "accent_glow": "#fffad6",
+        "rivet": "#ffd700",
+        "joint": "#050408",
+        "style": "kintsugi"
+    }
 }
+
 VANILLA_JSON = ["netherite", "diamond", "iron", "gold", "chainmail", "copper", "leather"]
 HUMANOID_MATS = VANILLA_JSON + ["turtle_scute"]
 CUSTOM = ["kintsugi", "dragon"]
-OLD_NAME = {"netherite": "netherite", "diamond": "diamond", "iron": "iron", "gold": "gold", "chainmail": "chainmail",
-            "leather": "leather", "turtle_scute": "turtle"}
+OLD_NAME = {
+    "netherite": "netherite", "diamond": "diamond", "iron": "iron", "gold": "gold",
+    "chainmail": "chainmail", "leather": "leather", "turtle_scute": "turtle"
+}
 
+def f(val: float) -> str:
+    return f"{val:.2f}".rstrip("0").rstrip(".")
 
-def box(u, v, w, h, d):
-    return {"top": (u + d, v, w, d), "bottom": (u + d + w, v, w, d), "right": (u, v + d, d, h),
-            "front": (u + d, v + d, w, h), "left": (u + d + w, v + d, d, h), "back": (u + d + w + d, v + d, w, h)}
-
-
-HEAD, BODY, ARM, LEG = box(0, 0, 8, 8, 8), box(16, 16, 8, 12, 4), box(40, 16, 4, 12, 4), box(0, 16, 4, 12, 4)
-LAYER1 = {"head": HEAD, "body": BODY, "arm": ARM, "leg": LEG}
-LAYER2 = {"body": BODY, "leg": LEG}
-
-
-def f(v):
-    return f"{v:.2f}".rstrip("0").rstrip(".")
-
-
-class Builder:
-    def __init__(self, w, h, m, rng, overlay=False):
-        self.w, self.h, self.m, self.rng, self.overlay = w, h, m, rng, overlay
-        self.defs, self.body = [], []
-
-    def grads(self):
-        m = self.m
-        H, hl, d = m["H"], m["h"], m["d"]
-        for v in range(3):
-            t = (-.1, 0, .12)[v]
-            c0, c1, c2 = mixc(H, hl, .45 + t), mixc(H, hl, .08 + t / 2), mixc(H, d, .45 - t)
-            self.defs.append(f'<linearGradient id="p{v}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="{c0}"/>'
-                             f'<stop offset=".45" stop-color="{c1}"/><stop offset="1" stop-color="{c2}"/></linearGradient>')
-        if m.get("tint"):
-            for nm, base, lt in (("m", "#5a1466", "#a040b8"), ("c", "#0b4658", "#2a96aa")):
-                self.defs.append(f'<linearGradient id="p{nm}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="{lt}"/>'
-                                 f'<stop offset="1" stop-color="{base}"/></linearGradient>')
-        self.defs.append(f'<radialGradient id="rv" cx=".35" cy=".35" r=".7"><stop offset="0" stop-color="{mixc(H, hl, .9)}"/>'
-                         f'<stop offset="1" stop-color="{d}"/></radialGradient>')
-        self.defs.append('<radialGradient id="gem" cx=".4" cy=".35" r=".7"><stop offset="0" stop-color="#d8fbff"/>'
-                         f'<stop offset=".5" stop-color="{CYN_B}"/><stop offset="1" stop-color="#0b4658"/></radialGradient>')
-        self.defs.append(f'<linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="{GOLD_L}"/>'
-                         f'<stop offset=".5" stop-color="{GOLD}"/><stop offset="1" stop-color="{GOLD_D}"/></linearGradient>')
-        self.defs.append('<filter id="blur" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation=".45"/></filter>')
-        self.defs.append('<filter id="grain" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="1.3" '
-                         'numOctaves="2" seed="7" result="n"/><feColorMatrix in="n" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .55 -.18"/></filter>')
-
-    def clip(self, runs):
-        rects = "".join(f'<rect x="{f(x)}" y="{f(y)}" width="{f(w)}" height="{f(h)}"/>' for x, y, w, h in runs)
-        self.defs.append(f'<clipPath id="reg">{rects}</clipPath>')
-
-    def add(self, s):
-        self.body.append(s)
-
-    def base(self):
-        m, rng = self.m, self.rng
-        if self.overlay:
-            return
-        self.add(f'<rect width="{self.w}" height="{self.h}" fill="{m["d"]}"/>')
-        ox, oy = rng.randrange(4), rng.randrange(4)
-        mode = m["mode"]
-        if mode == "plate":
-            T = 4
-            for ty in range(-1, self.h // T + 1):
-                for tx in range(-1, self.w // T + 1):
-                    x, y = tx * T - ox + 4, ty * T - oy + 4
-                    v = rng.randrange(3)
-                    self.add(f'<rect x="{f(x + .2)}" y="{f(y + .2)}" width="{T - .4}" height="{T - .4}" rx=".55" fill="url(#p{v})" stroke="{m["d"]}" stroke-width=".14"/>')
-                    self.add(f'<path d="M{f(x + .6)} {f(y + T - .7)} V{f(y + .7)} Q{f(x + .6)} {f(y + .5)} {f(x + .9)} {f(y + .5)} H{f(x + T - .7)}" fill="none" stroke="{m["h"]}" stroke-width=".1" opacity=".32"/>')
-                    if rng.random() < .35:
-                        self.add(f'<circle cx="{f(x + 1)}" cy="{f(y + 1)}" r=".26" fill="url(#rv)" stroke="{m["d"]}" stroke-width=".06"/>')
-        elif mode == "mesh":
-            self.add(f'<rect width="{self.w}" height="{self.h}" fill="{m["H"]}"/>')
-            for ry in range(-1, int(self.h / 1.6) + 2):
-                for rx_ in range(-1, self.w // 2 + 2):
-                    cx, cy = rx_ * 2 + (ry % 2), ry * 1.6
-                    self.add(f'<circle cx="{f(cx)}" cy="{f(cy)}" r=".78" fill="none" stroke="{m["d"]}" stroke-width=".5"/>'
-                             f'<circle cx="{f(cx)}" cy="{f(cy)}" r=".78" fill="none" stroke="{mixc(m["H"], m["h"], .55)}" stroke-width=".22" stroke-dasharray="1.4 .9" opacity=".8"/>')
-        else:  # scale
-            for row in range(-1, int(self.h / 2.6) + 2):
-                for sx in range(-1, self.w // 4 + 2):
-                    x, y = sx * 4 + (row % 2) * 2, row * 2.6
-                    fill = "url(#p%d)" % rng.randrange(3)
-                    if m.get("tint"):
-                        k = rng.random()
-                        fill = "url(#pm)" if k < .05 else "url(#pc)" if k < .09 else fill
-                    self.add(f'<path d="M{f(x)} {f(y)} H{f(x + 4)} V{f(y + 1.7)} Q{f(x + 4)} {f(y + 3.7)} {f(x + 2)} {f(y + 3.9)} Q{f(x)} {f(y + 3.7)} {f(x)} {f(y + 1.7)} Z" fill="{fill}" stroke="{m["d"]}" stroke-width=".16"/>')
-                    self.add(f'<path d="M{f(x + .7)} {f(y + 1.5)} Q{f(x + 2)} {f(y + .6)} {f(x + 3.3)} {f(y + 1.5)}" fill="none" stroke="{m["h"]}" stroke-width=".11" opacity=".35"/>')
-        for col, frac in m.get("patches", []):  # oxido / cardenillo: manchas suaves
-            for _ in range(max(2, int(self.w * self.h * frac / 5))):
-                x, y = rng.uniform(0, self.w), rng.uniform(0, self.h)
-                self.add(f'<ellipse cx="{f(x)}" cy="{f(y)}" rx="{f(rng.uniform(.5, 1.6))}" ry="{f(rng.uniform(.4, 1.2))}" fill="{col}" opacity=".5" filter="url(#blur)"/>')
-        self.add(f'<rect width="{self.w}" height="{self.h}" filter="url(#grain)" opacity=".55"/>')
-
-    def details(self, runs):
-        m, rng = self.m, self.rng
-        area = sum(w * h for _, _, w, h in runs)
-        for _ in range(max(1, int(area / 220))):  # grietas finas
-            r = rng.choice(runs)
-            x, y = r[0] + rng.uniform(0, r[2]), r[1] + rng.uniform(0, r[3])
-            pts = [(x, y)]
-            for _s in range(rng.randrange(4, 8)):
-                x += rng.uniform(-.7, .7)
-                y += rng.uniform(.4, 1.1)
-                pts.append((x, y))
-            d = "M" + " L".join(f"{f(a)} {f(b)}" for a, b in pts)
-            self.add(f'<path d="{d}" fill="none" stroke="{m["crack"]}" stroke-width=".26" opacity=".25" filter="url(#blur)"/>')
-            self.add(f'<path d="{d}" fill="none" stroke="{m["crack"]}" stroke-width=".1" stroke-linejoin="round"/>')
-        for _ in range(max(1, int(area / 420))):  # estrellitas
-            r = rng.choice(runs)
-            x, y = r[0] + rng.uniform(1, max(1.1, r[2] - 1)), r[1] + rng.uniform(1, max(1.1, r[3] - 1))
-            s = rng.uniform(.5, .8)
-            self.add(f'<circle cx="{f(x)}" cy="{f(y)}" r="{f(s)}" fill="{m["sp"]}" opacity=".18" filter="url(#blur)"/>')
-            self.add(f'<path d="M{f(x)} {f(y - s)} L{f(x + s * .22)} {f(y - s * .22)} L{f(x + s)} {f(y)} L{f(x + s * .22)} {f(y + s * .22)} L{f(x)} {f(y + s)} '
-                     f'L{f(x - s * .22)} {f(y + s * .22)} L{f(x - s)} {f(y)} L{f(x - s * .22)} {f(y - s * .22)} Z" fill="{mixc(m["sp"], "#ffffff", .5)}" opacity=".9"/>')
-        for _ in range(int(area / 110)):  # brillos
-            r = rng.choice(runs)
-            self.add(f'<circle cx="{f(r[0] + rng.uniform(0, r[2]))}" cy="{f(r[1] + rng.uniform(0, r[3]))}" r=".11" fill="{m["sp"]}" opacity=".55"/>')
-
-    def svg(self):
-        return (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {self.w} {self.h}" width="{self.w * SCALE}" height="{self.h * SCALE}">'
-                f'<defs>{"".join(self.defs)}</defs><g clip-path="url(#reg)">{"".join(self.body)}</g></svg>')
-
-
-def face_shade(b, rects, m):
-    """Sombreado de volumen por cara: luz arriba, borde inferior oscuro."""
-    for i, (x, y, w, h) in enumerate(rects):
-        b.defs.append(f'<linearGradient id="fs{i}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".07"/>'
-                      f'<stop offset=".55" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".5"/></linearGradient>')
-        b.add(f'<rect x="{x}" y="{y}" width="{w}" height="{h}" fill="url(#fs{i})"/>')
-        b.add(f'<rect x="{f(x + .05)}" y="{f(y + .05)}" width="{w - .1}" height="{h - .1}" fill="none" stroke="{m["d"]}" stroke-width=".22" opacity=".7"/>')
-
-
-def dragon_extras(b, layer):
-    """Cresta, cuernos, espinas y alas SUTILES en coordenadas de cara (unidades de pixel vanilla)."""
-    a = b.add
-    if layer == 1:
-        x0, y0 = HEAD["top"][0], HEAD["top"][1]
-        for j in range(0, 8, 2):
-            a(f'<path d="M{x0 + 3.2} {y0 + j + 1.8} L{x0 + 4} {y0 + j - .2} L{x0 + 4.8} {y0 + j + 1.8} Z" fill="{"url(#gold)" if j % 4 == 0 else MAG}" stroke="{OUT}" stroke-width=".1"/>')
-        fx, fy = HEAD["front"][0], HEAD["front"][1]
-        for ex in (1.2, 5.2):  # ojos
-            a(f'<ellipse cx="{f(fx + ex + .8)}" cy="{f(fy + 4.3)}" rx="1.1" ry=".55" fill="{CYN_B}" opacity=".35" filter="url(#blur)"/>')
-            a(f'<path d="M{f(fx + ex)} {f(fy + 4.1)} Q{f(fx + ex + .8)} {f(fy + 3.7)} {f(fx + ex + 1.7)} {f(fy + 4.5)} Q{f(fx + ex + .8)} {f(fy + 4.6)} {f(fx + ex)} {f(fy + 4.1)} Z" fill="{CYN_B}"/>')
-        a(f'<path d="M{fx} {fy + 3.2} L{fx + 3} {fy + 3.8} M{fx + 8} {fy + 3.2} L{fx + 5} {fy + 3.8}" stroke="url(#gold)" stroke-width=".28" fill="none"/>')
-        for side, flip in (("right", False), ("left", True)):  # cuernos
-            sx, sy = HEAD[side][0], HEAD[side][1]
-            X = (lambda v, sx=sx: sx + 8 - v) if flip else (lambda v, sx=sx: sx + v)
-            a(f'<path d="M{f(X(5.8))} {sy + 3.6} Q{f(X(3))} {sy + 3.2} {f(X(.3))} {sy + .1} Q{f(X(2.4))} {sy + 3.9} {f(X(4.6))} {sy + 4.6} Z" fill="url(#gold)" stroke="{OUT}" stroke-width=".12"/>')
-        bx, by = HEAD["back"][0], HEAD["back"][1]
-        for j in range(0, 8, 2):
-            a(f'<path d="M{bx + 3.3} {by + j + 1.6} L{bx + 4} {by + j} L{bx + 4.7} {by + j + 1.6} Z" fill="{MAG}"/>')
-        cx, cy = BODY["front"][0], BODY["front"][1]  # gema + costillas
-        for j in (3, 6.2, 9.2):
-            a(f'<path d="M{cx + 1} {cy + j} Q{cx + 2} {f(cy + j + .6)} {cx + 3} {cy + j} M{cx + 5} {cy + j} Q{cx + 6} {f(cy + j + .6)} {cx + 7} {cy + j}" fill="none" stroke="{GOLD_D}" stroke-width=".22"/>')
-        a(f'<path d="M{cx + 4} {f(cy + 3.4)} L{f(cx + 4.9)} {f(cy + 4.8)} L{cx + 4} {f(cy + 6.2)} L{f(cx + 3.1)} {f(cy + 4.8)} Z" fill="url(#gem)" stroke="{GOLD_D}" stroke-width=".16"/>')
-        kx, ky = BODY["back"][0], BODY["back"][1]  # espina y alas
-        for j in range(0, 12, 2):
-            a(f'<path d="M{f(kx + 3.5)} {f(ky + j + 1.7)} L{kx + 4} {ky + j} L{f(kx + 4.5)} {f(ky + j + 1.7)} Z" fill="{GOLD_D}"/>')
-        for flip in (False, True):
-            X = (lambda v: kx + 8 - v) if flip else (lambda v: kx + v)
-            a(f'<path d="M{f(X(3.2))} {f(ky + 6.2)} Q{f(X(1.2))} {f(ky + 4.8)} {f(X(.2))} {f(ky + 1.4)} L{f(X(.2))} {ky + 6} Q{f(X(1.2))} {f(ky + 6.6)} {f(X(3.2))} {f(ky + 8.2)} Z" fill="{MAG}" opacity=".28"/>')
-            for e, end in ((6.2, 2), (8.2, 6)):
-                a(f'<path d="M{f(X(3.2))} {f(ky + e)} Q{f(X(1.2))} {f(ky + e - 1.4)} {f(X(.2))} {ky + end}" fill="none" stroke="url(#gold)" stroke-width=".28"/>')
-        for fn in ("right", "left", "front", "back"):  # hombreras
-            ax, ay = ARM[fn][0], ARM[fn][1]
-            a(f'<path d="M{f(ax + .8)} {f(ay + 1.6)} L{ax + 2} {f(ay - .2)} L{f(ax + 3.2)} {f(ay + 1.6)} Z" fill="url(#gold)" stroke="{OUT}" stroke-width=".1"/>')
-        for fn in ("front", "right", "left", "back"):  # garras
-            lx, ly = LEG[fn][0], LEG[fn][1]
-            for k in (.4, 1.6, 2.8):
-                a(f'<path d="M{f(lx + k)} {ly + 11} L{f(lx + k + .4)} {ly + 12} L{f(lx + k + .8)} {ly + 11} Z" fill="url(#gold)"/>')
-    else:
-        for fn, wd in (("front", 8), ("back", 8), ("left", 4), ("right", 4)):
-            x, y = BODY[fn][0], BODY[fn][1]
-            for i in range(0, wd, 2):
-                a(f'<rect x="{f(x + i + .3)}" y="{f(y + .2)}" width="1.2" height=".6" rx=".2" fill="{GOLD_D}"/>')
-        lx, ly = LEG["front"][0], LEG["front"][1]
-        a(f'<path d="M{lx + 2} {f(ly + 4.6)} L{f(lx + 2.9)} {f(ly + 5.6)} L{lx + 2} {f(ly + 6.6)} L{f(lx + 1.1)} {f(ly + 5.6)} Z" fill="url(#gem)" stroke="{GOLD_D}" stroke-width=".14"/>')
-
-
-def mask_runs(img):
+def mask_runs(img: Image.Image) -> list[tuple[int, int, int, int]]:
     w, h = img.size
     runs = []
     for y in range(h):
@@ -251,8 +193,7 @@ def mask_runs(img):
                 x += 1
     return runs
 
-
-def upscale_nearest(img, scale):
+def upscale_nearest(img: Image.Image, scale: int) -> Image.Image:
     w, h = img.size
     out = Image.new("RGBA", (w * scale, h * scale))
     px_in = img.convert("RGBA").load()
@@ -267,35 +208,445 @@ def upscale_nearest(img, scale):
                     px_out[x * scale + dx, y * scale + dy] = p
     return out
 
+class SvgBuilder:
+    def __init__(self, w: int, h: int, pal: dict, seed_key: str):
+        self.w, self.h, self.pal = w, h, pal
+        self.rng = random.Random(seed_key)
+        self.defs: list[str] = []
+        self.body: list[str] = []
 
-def build_svg(mat, w, h, runs, key, overlay=False, face_rects=None, layer=None):
-    m = MATS[mat]
-    b = Builder(w, h, m, random.Random(key), overlay)
-    b.grads()
-    b.clip(runs)
-    b.base()
-    if face_rects and not overlay:
-        face_shade(b, face_rects, m)
-    b.details(runs)
-    if mat == "dragon" and layer and not overlay:
-        dragon_extras(b, layer)
-    return b.svg()
+    def add_def(self, s: str):
+        self.defs.append(s)
 
+    def add(self, s: str):
+        self.body.append(s)
 
-def rasterize(svg_text, svg_path, png_path, size):
+    def set_clip_mask(self, runs: list[tuple[int, int, int, int]]):
+        rects = "".join(f'<rect x="{x}" y="{y}" width="{w}" height="{h}"/>' for x, y, w, h in runs)
+        self.add_def(f'<clipPath id="reg">{rects}</clipPath>')
+
+    def build(self) -> str:
+        return (
+            f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {self.w} {self.h}" '
+            f'width="{self.w * SCALE}" height="{self.h * SCALE}">'
+            f'<defs>{"".join(self.defs)}</defs>'
+            f'<g clip-path="url(#reg)">{"".join(self.body)}</g>'
+            f'</svg>'
+        )
+
+def setup_gradients(b: SvgBuilder, pal: dict):
+    bd, bm, bl, sp = pal["base_dark"], pal["base_mid"], pal["base_light"], pal["specular"]
+    tr, tr_d, tr_l = pal["trim"], pal["trim_dark"], pal["trim_light"]
+    ac, ac_g = pal["accent"], pal["accent_glow"]
+
+    b.add_def(f'<linearGradient id="g_plate" x1="0" y1="0" x2="0" y2="1">'
+              f'<stop offset="0" stop-color="{bl}"/><stop offset=".4" stop-color="{bm}"/>'
+              f'<stop offset="1" stop-color="{bd}"/></linearGradient>')
+    b.add_def(f'<linearGradient id="g_diag" x1="0" y1="0" x2="1" y2="1">'
+              f'<stop offset="0" stop-color="{sp}" stop-opacity=".7"/>'
+              f'<stop offset=".3" stop-color="{bl}"/><stop offset=".8" stop-color="{bm}"/>'
+              f'<stop offset="1" stop-color="{bd}"/></linearGradient>')
+    b.add_def(f'<linearGradient id="g_trim" x1="0" y1="0" x2="0" y2="1">'
+              f'<stop offset="0" stop-color="{tr_l}"/><stop offset=".5" stop-color="{tr}"/>'
+              f'<stop offset="1" stop-color="{tr_d}"/></linearGradient>')
+    b.add_def(f'<linearGradient id="g_trim_h" x1="0" y1="0" x2="1" y2="0">'
+              f'<stop offset="0" stop-color="{tr_l}"/><stop offset=".5" stop-color="{tr}"/>'
+              f'<stop offset="1" stop-color="{tr_d}"/></linearGradient>')
+    b.add_def(f'<radialGradient id="g_gem" cx=".4" cy=".35" r=".7">'
+              f'<stop offset="0" stop-color="{ac_g}"/><stop offset=".6" stop-color="{ac}"/>'
+              f'<stop offset="1" stop-color="{bd}"/></radialGradient>')
+    b.add_def(f'<linearGradient id="g_flute" x1="0" y1="0" x2="1" y2="0">'
+              f'<stop offset="0" stop-color="{bd}" stop-opacity=".8"/>'
+              f'<stop offset=".4" stop-color="{sp}" stop-opacity=".6"/>'
+              f'<stop offset="1" stop-color="{bd}" stop-opacity=".8"/></linearGradient>')
+    b.add_def('<filter id="glow" x="-50%" y="-50%" width="200%" height="200%">'
+              '<feGaussianBlur stdDeviation=".4"/></filter>')
+    b.add_def('<filter id="soft" x="-20%" y="-20%" width="140%" height="140%">'
+              '<feGaussianBlur stdDeviation=".15"/></filter>')
+
+def draw_helmet(b: SvgBuilder, pal: dict, mat: str):
+    """Casco anatómico (0..32, 0..16)."""
+    a = b.add
+    tr, tr_d, tr_l = pal["trim"], pal["trim_dark"], pal["trim_light"]
+    sp, bd = pal["specular"], pal["base_dark"]
+    style = pal["style"]
+
+    # 1. Base sólida
+    a(f'<rect x="0" y="0" width="32" height="16" fill="url(#g_plate)"/>')
+
+    # Estilo especial: Chainmail
+    if style == "chainmail":
+        for ry in range(0, 16, 2):
+            for rx_ in range(0, 32, 2):
+                cx, cy = rx_ + (1 if (ry // 2) % 2 else 0), ry + 1
+                a(f'<circle cx="{cx}" cy="{cy}" r=".9" fill="none" stroke="{bd}" stroke-width=".4"/>'
+                  f'<circle cx="{cx}" cy="{cy}" r=".9" fill="none" stroke="{sp}" stroke-width=".2" stroke-dasharray="1.2 .8"/>')
+
+    # Estilo especial: Tortuga (hexágonos de caparazón)
+    elif style == "turtle":
+        for ty in (1, 5, 9, 13):
+            for tx in range(0, 32, 4):
+                cx, cy = tx + (2 if (ty // 4) % 2 else 0), ty
+                a(f'<polygon points="{cx-1.5},{cy} {cx-.8},{cy-1.3} {cx+.8},{cy-1.3} {cx+1.5},{cy} {cx+.8},{cy+1.3} {cx-.8},{cy+1.3}" '
+                  f'fill="url(#g_diag)" stroke="{tr_d}" stroke-width=".15"/>')
+
+    # 2. Cresta superior (top: x=8..16, y=0..8)
+    a(f'<rect x="11.2" y="0" width="1.6" height="8" fill="url(#g_trim)" stroke="{tr_d}" stroke-width=".1"/>')
+    a(f'<line x1="12" y1="0" x2="12" y2="8" stroke="{sp}" stroke-width=".3" stroke-linecap="round"/>')
+    for y_ in (2, 4, 6):
+        a(f'<path d="M 8.5 {y_} Q 12 {y_ - .6} 15.5 {y_}" fill="none" stroke="{tr_d}" stroke-width=".2"/>')
+        a(f'<circle cx="9.2" cy="{y_}" r=".2" fill="{tr_l}"/>')
+        a(f'<circle cx="14.8" cy="{y_}" r=".2" fill="{tr_l}"/>')
+
+    # 3. Frente del casco (front: x=8..16, y=8..16)
+    a(f'<rect x="8" y="8" width="8" height="2.2" fill="url(#g_trim)" stroke="{tr_d}" stroke-width=".14"/>')
+    a(f'<line x1="8" y1="8.3" x2="16" y2="8.3" stroke="{tr_l}" stroke-width=".2"/>')
+    for x_ in (8.8, 10.4, 13.6, 15.2):
+        a(f'<circle cx="{x_}" cy="9.1" r=".22" fill="{tr_l}" stroke="{tr_d}" stroke-width=".05"/>')
+
+    # Gema o emblema frontal central (x=12, y=9.1)
+    if mat in ("diamond", "dragon", "gold", "netherite", "kintsugi"):
+        a(f'<path d="M 12 8.3 L 12.8 9.2 L 12 10.1 L 11.2 9.2 Z" fill="url(#g_gem)" stroke="{tr_d}" stroke-width=".1"/>')
+        a(f'<circle cx="12" cy="9.2" r=".2" fill="#fff" filter="url(#soft)"/>')
+
+    # Visera y ceja
+    a(f'<path d="M 8 10.2 L 12 10.8 L 16 10.2 L 16 11.3 L 12 12 L 8 11.3 Z" fill="url(#g_diag)" stroke="{bd}" stroke-width=".15"/>')
+    a(f'<path d="M 8.2 10.3 L 12 10.9 L 15.8 10.3" fill="none" stroke="{sp}" stroke-width=".2"/>')
+
+    # Puente nasal
+    a(f'<rect x="11.3" y="10.8" width="1.4" height="2.2" fill="url(#g_trim)" stroke="{tr_d}" stroke-width=".1"/>')
+    a(f'<line x1="12" y1="10.8" x2="12" y2="13" stroke="{tr_l}" stroke-width=".2"/>')
+
+    # Guardamejillas laterales en el frontal
+    a(f'<path d="M 8 12.5 H 9.5 V 15.8 H 8 Z" fill="url(#g_plate)" stroke="{tr_d}" stroke-width=".12"/>')
+    a(f'<path d="M 14.5 12.5 H 16 V 15.8 H 14.5 Z" fill="url(#g_plate)" stroke="{tr_d}" stroke-width=".12"/>')
+    a(f'<circle cx="8.7" cy="14.5" r=".2" fill="{tr_l}"/>')
+    a(f'<circle cx="15.3" cy="14.5" r=".2" fill="{tr_l}"/>')
+
+    # 4. Laterales (sienes y orejeras: 0..8 y 16..24)
+    for sx in (0, 16):
+        cx = sx + 4
+        a(f'<circle cx="{cx}" cy="10.5" r="1.8" fill="url(#g_trim)" stroke="{tr_d}" stroke-width=".15"/>')
+        a(f'<circle cx="{cx}" cy="10.5" r="1.1" fill="url(#g_plate)" stroke="{tr_d}" stroke-width=".1"/>')
+        a(f'<circle cx="{cx}" cy="10.5" r=".4" fill="url(#g_gem)" stroke="{tr_d}" stroke-width=".06"/>')
+        a(f'<path d="M {sx} 12 Q {cx} 13.5 {sx + 8} 12" fill="none" stroke="{tr}" stroke-width=".25"/>')
+        for dy in (-.7, 0, .7):
+            a(f'<line x1="{cx - .6}" y1="{10.5 + dy}" x2="{cx + .6}" y2="{10.5 + dy}" stroke="{bd}" stroke-width=".18"/>')
+
+    # 5. Cogotera trasera (24..32)
+    for ly in (8, 10.2, 12.4, 14.2):
+        a(f'<rect x="24" y="{ly}" width="8" height="2" fill="url(#g_plate)" stroke="{tr_d}" stroke-width=".12"/>')
+        a(f'<line x1="24" y1="{ly + .2}" x2="32" y2="{ly + .2}" stroke="{sp}" stroke-width=".2"/>')
+        a(f'<circle cx="25" cy="{ly + 1}" r=".18" fill="{tr_l}"/>')
+        a(f'<circle cx="31" cy="{ly + 1}" r=".18" fill="{tr_l}"/>')
+
+def draw_cuirass(b: SvgBuilder, pal: dict, mat: str):
+    """Coraza principal (Body: x=16..40, y=16..32)."""
+    a = b.add
+    tr, tr_d, tr_l = pal["trim"], pal["trim_dark"], pal["trim_light"]
+    sp, bd, bm = pal["specular"], pal["base_dark"], pal["base_mid"]
+    ac, ac_g = pal["accent"], pal["accent_glow"]
+    style = pal["style"]
+
+    # Base sólida del torso
+    a(f'<rect x="16" y="16" width="24" height="16" fill="url(#g_plate)"/>')
+
+    # 1. Hombros / Cuello superior (20..28, 16..20)
+    a(f'<rect x="20" y="16" width="8" height="4" fill="url(#g_diag)"/>')
+    a(f'<rect x="22" y="16.5" width="4" height="3" rx=".8" fill="url(#g_trim)" stroke="{tr_d}" stroke-width=".12"/>')
+    a(f'<ellipse cx="24" cy="18" rx="1.4" ry=".8" fill="{bd}"/>')
+
+    # 2. Frente del Peto (20..28, 20..32)
+    # Gorguera
+    a(f'<path d="M 20 20 L 24 21.5 L 28 20 L 28 21.2 L 24 22.8 L 20 21.2 Z" fill="url(#g_trim)" stroke="{tr_d}" stroke-width=".12"/>')
+    a(f'<path d="M 20.5 20.3 L 24 21.7 L 27.5 20.3" fill="none" stroke="{tr_l}" stroke-width=".25"/>')
+
+    # Estilo específico de coraza:
+    if style == "chainmail":
+        for ry in range(21, 31, 2):
+            for rx_ in range(20, 28, 2):
+                cx, cy = rx_ + (1 if (ry // 2) % 2 else 0), ry + 1
+                a(f'<circle cx="{cx}" cy="{cy}" r=".9" fill="none" stroke="{bd}" stroke-width=".35"/>'
+                  f'<circle cx="{cx}" cy="{cy}" r=".9" fill="none" stroke="{sp}" stroke-width=".18" stroke-dasharray="1.2 .8"/>')
+    elif style == "iron":
+        # Flauta gótica radiante
+        for fx, ang in ((21, -2), (22.2, -1), (23.2, 0), (24.8, 0), (25.8, 1), (27, 2)):
+            a(f'<line x1="{fx}" y1="21.5" x2="{fx + ang * .4}" y2="28" stroke="{sp}" stroke-width=".3"/>'
+              f'<line x1="{fx + .1}" y1="21.5" x2="{fx + ang * .4 + .1}" y2="28" stroke="{bd}" stroke-width=".15"/>')
+    elif style == "copper":
+        # Manómetros / válvulas dobles de presión con agujas rojas
+        for gx in (22.2, 25.8):
+            a(f'<circle cx="{gx}" cy="24" r="1.4" fill="#ffffff" stroke="{tr_d}" stroke-width=".2"/>')
+            a(f'<circle cx="{gx}" cy="24" r="1.1" fill="none" stroke="{bd}" stroke-width=".1"/>')
+            a(f'<line x1="{gx}" y1="24" x2="{gx + .6}" y2="23.4" stroke="#d91438" stroke-width=".25" stroke-linecap="round"/>')
+            a(f'<circle cx="{gx}" cy="24" r=".2" fill="{bd}"/>')
+    else:
+        # Pectorales esculpidos
+        a(f'<path d="M 20.3 21.8 L 23.8 22.8 L 23.8 26.2 L 20.5 25.5 Z" fill="url(#g_diag)" stroke="{tr_d}" stroke-width=".1"/>')
+        a(f'<path d="M 27.7 21.8 L 24.2 22.8 L 24.2 26.2 L 27.5 25.5 Z" fill="url(#g_diag)" stroke="{tr_d}" stroke-width=".1"/>')
+        a(f'<line x1="24" y1="21.5" x2="24" y2="28.5" stroke="{tr_l}" stroke-width=".3"/>')
+
+    # Emblemas centrales
+    if mat == "diamond":
+        a(f'<path d="M 24 22.5 L 25.6 24.2 L 24 25.9 L 22.4 24.2 Z" fill="url(#g_gem)" stroke="#fff" stroke-width=".18"/>')
+        a(f'<circle cx="24" cy="24.2" r=".5" fill="#fff" filter="url(#soft)"/>')
+        a(f'<path d="M 24 21.8 V 26.6 M 21.6 24.2 H 26.4" stroke="#fff" stroke-width=".2" opacity=".8"/>')
+    elif mat == "dragon":
+        a(f'<path d="M 24 22.8 L 25.4 24.5 L 24 26.2 L 22.6 24.5 Z" fill="url(#g_gem)" stroke="{tr_d}" stroke-width=".15"/>')
+        a(f'<circle cx="24" cy="24.5" r=".4" fill="{ac_g}" filter="url(#glow)"/>')
+        for ry, span in ((23.2, 2.8), (24.8, 3.2), (26.4, 2.6)):
+            a(f'<path d="M {24 - span} {ry} Q 24 {ry - .5} {24 + span} {ry}" fill="none" stroke="{tr}" stroke-width=".25"/>')
+    elif mat == "gold":
+        a(f'<circle cx="24" cy="24.2" r="1.3" fill="url(#g_trim)" stroke="{tr_d}" stroke-width=".12"/>')
+        a(f'<circle cx="24" cy="24.2" r=".6" fill="{ac}" stroke="{tr_d}" stroke-width=".1"/>')
+        for angle in range(0, 360, 45):
+            rad = math.radians(angle)
+            x1, y1 = 24 + math.cos(rad) * 1.4, 24.2 + math.sin(rad) * 1.4
+            x2, y2 = 24 + math.cos(rad) * 2.1, 24.2 + math.sin(rad) * 2.1
+            a(f'<line x1="{f(x1)}" y1="{f(y1)}" x2="{f(x2)}" y2="{f(y2)}" stroke="{tr_l}" stroke-width=".2"/>')
+    elif mat in ("netherite", "kintsugi"):
+        a(f'<path d="M 24 22.6 L 25.8 24.2 L 24 25.8 L 22.2 24.2 Z" fill="{bd}" stroke="{tr}" stroke-width=".2"/>')
+        a(f'<path d="M 24 23.2 L 25.2 24.2 L 24 25.2 L 22.8 24.2 Z" fill="url(#g_trim)"/>')
+
+    # Placas abdominales articuladas (faulds)
+    for ay in (26.8, 28.2, 29.5):
+        a(f'<path d="M 20.8 {ay} Q 24 {ay + .4} 27.2 {ay} L 27.4 {ay + 1.1} Q 24 {ay + 1.5} 20.6 {ay + 1.1} Z" '
+          f'fill="url(#g_plate)" stroke="{bd}" stroke-width=".12"/>')
+        a(f'<path d="M 21 {ay + .15} Q 24 {ay + .55} 27 {ay + .15}" fill="none" stroke="{sp}" stroke-width=".2"/>')
+
+    # Cinturón de combate
+    a(f'<rect x="20" y="30.5" width="8" height="1.5" fill="url(#g_trim)" stroke="{tr_d}" stroke-width=".12"/>')
+    a(f'<line x1="20" y1="30.8" x2="28" y2="30.8" stroke="{tr_l}" stroke-width=".2"/>')
+    a(f'<rect x="23.1" y="30.2" width="1.8" height="1.8" rx=".3" fill="url(#g_gem)" stroke="{tr_l}" stroke-width=".15"/>')
+    a(f'<rect x="23.6" y="30.7" width=".8" height=".8" fill="{bd}"/>')
+
+    # Flancos laterales (16..20 y 28..32)
+    for fx in (16, 28):
+        for sy in (23, 27):
+            a(f'<rect x="{fx}" y="{sy}" width="4" height="1.2" fill="{bd}" stroke="{tr_d}" stroke-width=".1"/>')
+            a(f'<rect x="{fx + 1.3}" y="{sy - .1}" width="1.4" height="1.4" fill="url(#g_trim)" stroke="{tr_d}" stroke-width=".08"/>')
+
+    # Espalda de la coraza (32..40)
+    a(f'<rect x="35.3" y="20.5" width="1.4" height="9.5" fill="url(#g_trim)" stroke="{tr_d}" stroke-width=".12"/>')
+    a(f'<line x1="36" y1="20.5" x2="36" y2="30" stroke="{tr_l}" stroke-width=".25"/>')
+    for sy in (21.5, 25):
+        a(f'<path d="M 32.5 {sy} L 35.3 {sy + .8} L 35.3 {sy + 2.8} L 32.5 {sy + 2} Z" fill="url(#g_diag)" stroke="{bd}" stroke-width=".1"/>')
+        a(f'<path d="M 39.5 {sy} L 36.7 {sy + .8} L 36.7 {sy + 2.8} L 39.5 {sy + 2} Z" fill="url(#g_diag)" stroke="{bd}" stroke-width=".1"/>')
+
+def draw_pauldrons(b: SvgBuilder, pal: dict, mat: str):
+    """Hombreras y guanteletes en el brazo (Arms: x=40..56, y=16..32)."""
+    a = b.add
+    tr, tr_d, tr_l = pal["trim"], pal["trim_dark"], pal["trim_light"]
+    sp, bd = pal["specular"], pal["base_dark"]
+
+    a(f'<rect x="40" y="16" width="16" height="16" fill="url(#g_plate)"/>')
+
+    # Hombrera superior
+    a(f'<rect x="44" y="16" width="4" height="4" fill="url(#g_diag)"/>')
+    a(f'<circle cx="46" cy="18" r="1.4" fill="url(#g_trim)" stroke="{tr_d}" stroke-width=".15"/>')
+    a(f'<circle cx="46" cy="18" r=".5" fill="url(#g_gem)"/>')
+
+    # Placas escalonadas de la hombrera
+    for bx in (40, 44, 48, 52):
+        for py, h_ in ((20, 1.4), (21.4, 1.4), (22.8, 1.3)):
+            a(f'<rect x="{bx}" y="{py}" width="4" height="{h_}" fill="url(#g_plate)" stroke="{tr_d}" stroke-width=".1"/>')
+            a(f'<line x1="{bx}" y1="{py + .2}" x2="{bx + 4}" y2="{py + .2}" stroke="{sp}" stroke-width=".18"/>')
+            a(f'<circle cx="{bx + 2}" cy="{py + h_ / 2}" r=".18" fill="{tr_l}"/>')
+
+    # Codal protector
+    a(f'<rect x="44" y="24.2" width="4" height="1.8" fill="url(#g_trim)" stroke="{tr_d}" stroke-width=".1"/>')
+    a(f'<path d="M 46 24.3 L 47.2 25.1 L 46 25.9 L 44.8 25.1 Z" fill="url(#g_gem)" stroke="{tr_d}" stroke-width=".08"/>')
+
+    # Brazal / Guantelete
+    for bx in (40, 44, 48, 52):
+        a(f'<rect x="{bx}" y="26.5" width="4" height="4.5" fill="url(#g_diag)" stroke="{bd}" stroke-width=".1"/>')
+        a(f'<line x1="{bx + 2}" y1="26.5" x2="{bx + 2}" y2="31" stroke="{sp}" stroke-width=".2"/>')
+        a(f'<rect x="{bx}" y="30.5" width="4" height="1.5" fill="url(#g_trim)" stroke="{tr_d}" stroke-width=".1"/>')
+        a(f'<line x1="{bx}" y1="30.7" x2="{bx + 4}" y2="30.7" stroke="{tr_l}" stroke-width=".2"/>')
+
+def draw_boots(b: SvgBuilder, pal: dict, mat: str):
+    """Botas de combate (Legs en Capa 1: x=0..16, y=26..32)."""
+    a = b.add
+    tr, tr_d, tr_l = pal["trim"], pal["trim_dark"], pal["trim_light"]
+    sp, bd = pal["specular"], pal["base_dark"]
+
+    a(f'<rect x="0" y="26" width="16" height="6" fill="url(#g_plate)"/>')
+
+    for lx in (0, 4, 8, 12):
+        a(f'<rect x="{lx}" y="26.2" width="4" height="1.3" fill="url(#g_trim)" stroke="{tr_d}" stroke-width=".1"/>')
+        a(f'<line x1="{lx}" y1="26.4" x2="{lx + 4}" y2="26.4" stroke="{tr_l}" stroke-width=".18"/>')
+        a(f'<rect x="{lx + .3}" y="27.5" width="3.4" height="3" fill="url(#g_diag)" stroke="{bd}" stroke-width=".1"/>')
+        a(f'<line x1="{lx + 2}" y1="27.5" x2="{lx + 2}" y2="30.5" stroke="{sp}" stroke-width=".25"/>')
+        a(f'<rect x="{lx}" y="30.8" width="4" height="1.2" fill="url(#g_trim)" stroke="{tr_d}" stroke-width=".1"/>')
+        a(f'<circle cx="{lx + 1}" cy="31.4" r=".18" fill="{tr_l}"/>')
+        a(f'<circle cx="{lx + 3}" cy="31.4" r=".18" fill="{tr_l}"/>')
+
+def draw_leggings(b: SvgBuilder, pal: dict, mat: str):
+    """Grebas, musleras y cinturón (Capa 2: Body y Legs)."""
+    a = b.add
+    tr, tr_d, tr_l = pal["trim"], pal["trim_dark"], pal["trim_light"]
+    sp, bd = pal["specular"], pal["base_dark"]
+
+    a(f'<rect x="0" y="16" width="40" height="16" fill="url(#g_plate)"/>')
+
+    # Cinturón principal
+    a(f'<rect x="16" y="20" width="24" height="2.2" fill="url(#g_trim)" stroke="{tr_d}" stroke-width=".12"/>')
+    a(f'<line x1="16" y1="20.3" x2="40" y2="20.3" stroke="{tr_l}" stroke-width=".25"/>')
+    a(f'<rect x="23" y="20" width="2" height="2.2" rx=".3" fill="url(#g_gem)" stroke="{tr_l}" stroke-width=".14"/>')
+
+    # Escarcelas
+    for tx in (20.5, 25.5):
+        a(f'<path d="M {tx} 22.2 H {tx + 2} L {tx + 2.3} 25.5 L {tx + 1} 26.2 L {tx - .3} 25.5 Z" '
+          f'fill="url(#g_diag)" stroke="{tr_d}" stroke-width=".1"/>')
+        a(f'<circle cx="{tx + 1}" cy="23.2" r=".2" fill="{tr_l}"/>')
+
+    # Musleras
+    for lx in (0, 4, 8, 12):
+        a(f'<rect x="{lx + .2}" y="20.2" width="3.6" height="3.8" fill="url(#g_diag)" stroke="{bd}" stroke-width=".1"/>')
+        a(f'<line x1="{lx + 2}" y1="20.2" x2="{lx + 2}" y2="24" stroke="{sp}" stroke-width=".2"/>')
+        if lx == 12:
+            a(f'<line x1="12" y1="21.5" x2="16" y2="21.5" stroke="{bd}" stroke-width=".5"/>')
+            a(f'<line x1="12" y1="23" x2="16" y2="23" stroke="{bd}" stroke-width=".5"/>')
+
+    # Rodillera acorazada
+    for kx in (4, 8):
+        a(f'<path d="M {kx + 2} 24 L {kx + 3.6} 25.3 L {kx + 2} 26.6 L {kx + .4} 25.3 Z" '
+          f'fill="url(#g_trim)" stroke="{tr_d}" stroke-width=".12"/>')
+        a(f'<path d="M {kx + 2} 24.5 L {kx + 3} 25.3 L {kx + 2} 26.1 L {kx + 1} 25.3 Z" '
+          f'fill="url(#g_gem)" stroke="{tr_l}" stroke-width=".08"/>')
+        a(f'<circle cx="{kx + 2}" cy="25.3" r=".25" fill="#fff" filter="url(#soft)"/>')
+
+    # Grebas de espinilla
+    for lx in (0, 4, 8, 12):
+        a(f'<rect x="{lx + .2}" y="27" width="3.6" height="4.8" fill="url(#g_diag)" stroke="{bd}" stroke-width=".1"/>')
+        a(f'<line x1="{lx + 2}" y1="27" x2="{lx + 2}" y2="31.8" stroke="{sp}" stroke-width=".3"/>')
+        a(f'<line x1="{lx}" y1="31.6" x2="{lx + 4}" y2="31.6" stroke="{tr}" stroke-width=".25"/>')
+
+def draw_special_overlays(b: SvgBuilder, pal: dict, mat: str, layer: int):
+    """Detalles únicos por material: Cuernos, alas, grietas Kintsugi, destellos de diamante."""
+    a = b.add
+    tr, tr_d, tr_l = pal["trim"], pal["trim_dark"], pal["trim_light"]
+    ac, ac_g = pal["accent"], pal["accent_glow"]
+
+    if mat == "dragon":
+        if layer == 1:
+            # Cuernos de dragón laterales imponentes
+            a(f'<path d="M 6.5 11.5 Q 4 10 1 7 Q 3.5 9 6.5 9.8 Z" fill="url(#g_trim)" stroke="{tr_d}" stroke-width=".14"/>')
+            a(f'<path d="M 1.5 7.3 Q 3.8 9.2 6.5 10" fill="none" stroke="{tr_l}" stroke-width=".2"/>')
+            a(f'<path d="M 17.5 11.5 Q 20 10 23 7 Q 20.5 9 17.5 9.8 Z" fill="url(#g_trim)" stroke="{tr_d}" stroke-width=".14"/>')
+            a(f'<path d="M 22.5 7.3 Q 20.2 9.2 17.5 10" fill="none" stroke="{tr_l}" stroke-width=".2"/>')
+
+            # Ojos de dragón cian luminosos dentro del visor
+            for ex in (9.2, 13.2):
+                a(f'<ellipse cx="{ex + .8}" cy="11.8" rx="1.2" ry=".6" fill="{ac}" filter="url(#glow)"/>')
+                a(f'<ellipse cx="{ex + .8}" cy="11.8" rx=".8" ry=".35" fill="#ffffff"/>')
+                a(f'<line x1="{ex + .8}" y1="11.2" x2="{ex + .8}" y2="12.4" stroke="{pal["base_dark"]}" stroke-width=".2"/>')
+
+            # Alas de dragón desplegadas en la espalda
+            a(f'<path d="M 35 22 Q 32.5 19 32 17 L 32 23 Q 33.5 24 35 25 Z" fill="{pal["base_dark"]}" stroke="{tr}" stroke-width=".15"/>')
+            a(f'<path d="M 35 22 Q 33 20 32.2 17.2" fill="none" stroke="{tr_l}" stroke-width=".25"/>')
+            a(f'<path d="M 37 22 Q 39.5 19 40 17 L 40 23 Q 38.5 24 37 25 Z" fill="{pal["base_dark"]}" stroke="{tr}" stroke-width=".15"/>')
+            a(f'<path d="M 37 22 Q 39 20 39.8 17.2" fill="none" stroke="{tr_l}" stroke-width=".25"/>')
+
+            # Garras de dragón en las botas
+            for bx in (0, 4, 8, 12):
+                for kx in (bx + .8, bx + 2, bx + 3.2):
+                    a(f'<path d="M {kx - .3} 31.2 L {kx} 32 L {kx + .3} 31.2 Z" fill="{tr_l}" stroke="{tr_d}" stroke-width=".08"/>')
+
+    elif mat == "kintsugi":
+        crack_paths = [
+            "M 10 9 Q 11.5 10.5 12 10 Q 13 9.5 14.5 10.5",
+            "M 12 10 L 12 13 Q 13.5 14 15 14.5",
+            "M 3 10 Q 4.5 11 4 13 Q 5 14 6 15",
+            "M 19 10 Q 18 11.5 18.5 13 Q 17.5 14 17 15",
+            "M 21 21 Q 23 23 24 22.5 Q 26 24 27.5 23",
+            "M 24 22.5 L 24 26 Q 22.5 27.5 21 28",
+            "M 24 26 Q 25.5 28 27 28.5",
+            "M 24 28.5 L 24 31",
+            "M 34 22 Q 36 24 37 23.5 Q 38 25 39 26",
+            "M 42 22 Q 44 24 45 23 Q 46 25 47 27",
+            "M 45 23 L 45 30",
+            "M 2 22 Q 4 24 5 26 Q 6 25 7 28",
+            "M 5 26 L 5 31",
+            "M 10 22 Q 12 24 13 26 Q 14 28 15 30"
+        ]
+        for cp in crack_paths:
+            a(f'<path d="{cp}" fill="none" stroke="{tr}" stroke-width=".45" opacity=".4" filter="url(#glow)"/>')
+            a(f'<path d="{cp}" fill="none" stroke="{tr_l}" stroke-width=".2" stroke-linecap="round" stroke-linejoin="round"/>')
+            pts = cp.split()
+            for idx in (1, 4, len(pts) - 1):
+                try:
+                    px, py = float(pts[idx - 1]), float(pts[idx])
+                    a(f'<circle cx="{px}" cy="{py}" r=".25" fill="{tr_l}" stroke="{tr_d}" stroke-width=".06"/>')
+                except Exception:
+                    pass
+
+    elif mat == "diamond":
+        glints = [(12, 9), (24, 24.2), (46, 18), (6, 25.3), (10, 25.3)] if layer == 1 else [(6, 25.3), (10, 25.3), (24, 21)]
+        for gx, gy in glints:
+            a(f'<circle cx="{gx}" cy="{gy}" r="1" fill="#fff" opacity=".35" filter="url(#glow)"/>')
+            a(f'<path d="M {gx} {gy - 1.2} L {gx + .25} {gy - .25} L {gx + 1.2} {gy} L {gx + .25} {gy + .25} '
+              f'L {gx} {gy + 1.2} L {gx - .25} {gy + .25} L {gx - 1.2} {gy} L {gx - .25} {gy - .25} Z" fill="#ffffff"/>')
+
+def draw_mob_armor(b: SvgBuilder, pal: dict, mat: str, sub: str, w: int, h: int):
+    """Genera armaduras de caballo, lobo, nautilus y crías con estética heráldica."""
+    a = b.add
+    tr, tr_d, tr_l = pal["trim"], pal["trim_dark"], pal["trim_light"]
+    sp, bd = pal["specular"], pal["base_dark"]
+
+    # Fondo general
+    a(f'<rect width="{w}" height="{h}" fill="url(#g_plate)"/>')
+
+    # Bardeado y ribetes ornamentales
+    T = 8
+    for y_ in range(0, h, T):
+        a(f'<line x1="0" y1="{y_}" x2="{w}" y2="{y_}" stroke="{bd}" stroke-width=".3"/>')
+        a(f'<line x1="0" y1="{y_ + .2}" x2="{w}" y2="{y_ + .2}" stroke="{sp}" stroke-width=".2"/>')
+        for x_ in range(0, w, T):
+            a(f'<circle cx="{x_ + 1}" cy="{y_ + 1}" r=".35" fill="{tr_l}" stroke="{tr_d}" stroke-width=".08"/>')
+
+    if sub == "horse_body":
+        # Tesela heráldica central para caballo
+        a(f'<rect x="{w/2 - 8}" y="{h/2 - 6}" width="16" height="12" rx="2" fill="url(#g_diag)" stroke="{tr}" stroke-width=".4"/>')
+        a(f'<circle cx="{w/2}" cy="{h/2}" r="3" fill="url(#g_gem)" stroke="{tr_l}" stroke-width=".3"/>')
+
+def build_svg(mat: str, w: int, h: int, runs: list[tuple[int, int, int, int]],
+              seed_key: str, layer: int = 1, sub: str = "humanoid") -> str:
+    """Función de despacho para la generación de cualquier capa de armadura."""
+    pal = PALETTES.get(mat, PALETTES["iron"])
+    b = SvgBuilder(w, h, pal, seed_key)
+    setup_gradients(b, pal)
+    b.set_clip_mask(runs)
+
+    if sub in ("humanoid", "humanoid_baby"):
+        if layer == 1:
+            draw_helmet(b, pal, mat)
+            draw_cuirass(b, pal, mat)
+            draw_pauldrons(b, pal, mat)
+            draw_boots(b, pal, mat)
+        else:
+            draw_leggings(b, pal, mat)
+        draw_special_overlays(b, pal, mat, layer)
+    elif sub == "humanoid_leggings":
+        draw_leggings(b, pal, mat)
+        draw_special_overlays(b, pal, mat, 2)
+    else:
+        draw_mob_armor(b, pal, mat, sub, w, h)
+
+    return b.build()
+
+def rasterize(svg_text: str, svg_path: Path, png_path: Path, size: tuple[int, int]) -> Image.Image:
     svg_path.parent.mkdir(parents=True, exist_ok=True)
     png_path.parent.mkdir(parents=True, exist_ok=True)
     svg_path.write_text(svg_text, encoding="utf-8")
     subprocess.run(["rsvg-convert", "-w", str(size[0]), "-h", str(size[1]), "-o", str(png_path), str(svg_path)], check=True)
     return Image.open(png_path).convert("RGBA")
 
-
-def write_json(path, data):
+def write_json(path: Path, data: dict):
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(data, indent=2) + "\n", encoding="utf-8")
 
-
-def icon_svg(piece):
+def icon_svg(piece: str) -> str:
     shapes = {
         "helmet": ('<path id="s" d="M64 22 L40 26 Q22 34 20 58 L20 88 Q20 96 28 98 L42 98 L42 84 L50 76 L64 76 Z"/>',
                    '<path id="h" d="M30 40 Q14 34 6 6 Q24 16 42 30 Z"/>'),
@@ -330,7 +681,6 @@ def icon_svg(piece):
 {extra}
 </svg>'''
 
-
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--root", default=".")
@@ -358,12 +708,10 @@ def main():
             vm = vanilla_png(sub, src)
             runs = mask_runs(vm)
             if mat == "dragon" and layer == 1:
-                # Ojos cyan en el visor sin cerrar la boca ni tapar la cabeza
+                # Ojos cian en el visor
                 runs = runs + [(9, 11, 2, 1), (9, 12, 2, 1), (13, 11, 2, 1), (13, 12, 2, 1)]
-            parts = {"head": HEAD} if mat == "turtle_scute" else (LAYER1 if layer == 1 else LAYER2)
-            face_rects = [r for p in parts.values() for r in p.values()]
             key = f"{mat}-{layer}"
-            sv = build_svg(mat, 64, 32, runs, key, face_rects=face_rects, layer=layer)
+            sv = build_svg(mat, 64, 32, runs, key, layer=layer, sub=sub)
             im = rasterize(sv, svgd / f"armor_{mat}_{sub}.svg", base / sub / f"{mat}.png", (64 * SCALE, 32 * SCALE))
             sheet[(mat, sub)] = im
             if mat == "leather":
@@ -372,34 +720,34 @@ def main():
                 overlay_png = base / sub / "leather_overlay.png"
                 overlay_png.parent.mkdir(parents=True, exist_ok=True)
                 overlay_im.save(overlay_png)
-            if mat in OLD_NAME:  # formato 1.20.x desde el mismo SVG
+            if mat in OLD_NAME:
                 old = mc / "textures/models/armor"
                 old.mkdir(parents=True, exist_ok=True)
                 im.save(old / f"{OLD_NAME[mat]}_layer_{layer}.png")
                 if mat == "leather":
                     overlay_im.save(old / f"leather_layer_{layer}_overlay.png")
+
         src = "iron" if mat in CUSTOM else mat
-        for sub, pool in (("humanoid_baby", HUMANOID_MATS), ("horse_body", ["netherite", "diamond", "iron", "gold", "copper", "leather"]),
+        for sub, pool in (("humanoid_baby", HUMANOID_MATS),
+                          ("horse_body", ["netherite", "diamond", "iron", "gold", "copper", "leather"]),
                           ("nautilus_body", ["netherite", "diamond", "iron", "gold", "copper"])):
             if src not in pool or not have(sub, src):
                 continue
             vm = vanilla_png(sub, src)
             w, h = vm.size
-            sv = build_svg(mat, w, h, mask_runs(vm), f"{mat}-{sub}")
+            sv = build_svg(mat, w, h, mask_runs(vm), f"{mat}-{sub}", sub=sub)
             sheet[(mat, sub)] = rasterize(sv, svgd / f"armor_{mat}_{sub}.svg", base / sub / f"{mat}.png", (w * SCALE, h * SCALE))
             if mat == "leather" and sub in ("humanoid_baby", "horse_body"):
                 vom = vanilla_png(sub, "leather_overlay")
                 overlay_im = upscale_nearest(vom, SCALE)
                 overlay_im.save(base / sub / "leather_overlay.png")
+
         if mat != "turtle_scute":
             runs = mask_runs(vanilla_png("wolf_body", "armadillo_scute"))
-            sv = build_svg(mat, 64, 32, runs, f"{mat}-wolf")
+            sv = build_svg(mat, 64, 32, runs, f"{mat}-wolf", sub="wolf_body")
             sheet[(mat, "wolf_body")] = rasterize(sv, svgd / f"armor_{mat}_wolf_body.svg", base / "wolf_body" / f"{mat}.png", (64 * SCALE, 32 * SCALE))
-            if mat == "leather":
-                osv = build_svg(mat, 64, 32, runs, f"{mat}-wolfo", overlay=True)
-                rasterize(osv, svgd / "armor_leather_wolf_body_overlay.svg", base / "wolf_body" / "leather_overlay.png", (64 * SCALE, 32 * SCALE))
 
-    for mat in VANILLA_JSON:  # equipment JSON a partir del REAL del jar
+    for mat in VANILLA_JSON:
         j = json.loads(z.read(f"assets/minecraft/equipment/{mat}.json"))
         j["layers"]["wolf_body"] = json.loads(json.dumps(j["layers"]["humanoid"])) if mat == "leather" else [{"texture": f"minecraft:{mat}"}]
         write_json(mc / "equipment" / f"{mat}.json", j)
@@ -439,7 +787,6 @@ def main():
         y += 262
     sh.crop((0, 0, sh.size[0], y)).save(prev / "armaduras_kintsugi_dragon.png")
     print("ok", sorted({k[0] for k in sheet}))
-
 
 if __name__ == "__main__":
     main()
