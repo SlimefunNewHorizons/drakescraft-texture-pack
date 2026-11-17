@@ -26301,6 +26301,10 @@
       "chars": [
         ""
       ]
+    },
+    {
+      "type": "reference",
+      "id": "drakescraft:holo"
     }
   ]
 }

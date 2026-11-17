@@ -124,12 +124,21 @@ def main():
     if drs.exists():
         add["assets/drakescraft/sounds.json"] = drs.read_bytes()
 
-    # fuente default: referencia a drakescraft:holo (iconos/ornamentos para hologramas y TAB)
-    fd = json.loads(base.read("assets/minecraft/font/default.json"))
-    ref = {"type": "reference", "id": "drakescraft:holo"}
-    if ref not in fd["providers"]:
-        fd["providers"].append(ref)
-    add["assets/minecraft/font/default.json"] = json.dumps(fd, ensure_ascii=True, indent=1).encode()
+    # pack.mcmeta y pack.png desde el repo (garantiza compatibilidad 1.20 - 26.2+)
+    if (repo / "pack.mcmeta").exists():
+        add["pack.mcmeta"] = (repo / "pack.mcmeta").read_bytes()
+    if (repo / "pack.png").exists():
+        add["pack.png"] = (repo / "pack.png").read_bytes()
+
+    # fuente default: utilizar la definicion maestra del repo (con todos los rangos, grecas y drakescraft:holo)
+    if (repo / "assets/minecraft/font/default.json").exists():
+        fd = json.loads((repo / "assets/minecraft/font/default.json").read_text())
+        ref = {"type": "reference", "id": "drakescraft:holo"}
+        if ref not in fd.get("providers", []):
+            fd["providers"].append(ref)
+        add["assets/minecraft/font/default.json"] = json.dumps(fd, ensure_ascii=True, indent=1).encode()
+    if (repo / "assets/drakescraft/font/holo.json").exists():
+        add["assets/drakescraft/font/holo.json"] = (repo / "assets/drakescraft/font/holo.json").read_bytes()
 
     # player_head
     canonical_skull_fallback = {

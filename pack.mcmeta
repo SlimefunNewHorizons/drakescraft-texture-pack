@@ -1,9 +1,9 @@
 {
   "pack": {
-    "pack_format": 64,
+    "pack_format": 46,
     "description": [
       "§6DrakesCraft §bSovereign Pack §7(1.20 - 26.2+)",
-      "\n§eStarSuites §8· §fSlimefun §8· §dHUD & Audio Overhaul"
+      "\n§eStarSuites §8· §fSlimefun §8· §dHUD & Audio Suite"
     ],
     "supported_formats": {
       "min_inclusive": 15,
