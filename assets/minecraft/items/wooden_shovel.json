@@ -1,4 +1,6 @@
 {
-  "type": "minecraft:model",
-  "model": "item/wooden_shovel"
+  "model": {
+    "type": "minecraft:model",
+    "model": "item/wooden_shovel"
+  }
 }

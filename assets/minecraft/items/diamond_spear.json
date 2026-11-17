@@ -1,4 +1,7 @@
 {
-  "type": "minecraft:model",
-  "model": "item/diamond_spear"
+  "model": {
+    "type": "minecraft:model",
+    "model": "item/diamond_spear"
+  },
+  "swap_animation_scale": 1.95
 }

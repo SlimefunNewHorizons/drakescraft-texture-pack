@@ -28,6 +28,18 @@ ADD_EXACT = ("assets/minecraft/font/terralense_hud.json", "assets/minecraft/font
 GEAR_PREFIX = "assets/minecraft/items/"
 
 
+TOOL_STEMS = {
+    "chainmail_sword", "copper_sword", "diamond_sword", "golden_sword", "iron_sword", "netherite_sword", "stone_sword", "wooden_sword",
+    "chainmail_axe", "copper_axe", "diamond_axe", "golden_axe", "iron_axe", "netherite_axe", "stone_axe", "wooden_axe",
+    "chainmail_pickaxe", "copper_pickaxe", "diamond_pickaxe", "golden_pickaxe", "iron_pickaxe", "netherite_pickaxe", "stone_pickaxe", "wooden_pickaxe",
+    "copper_shovel", "diamond_shovel", "golden_shovel", "iron_shovel", "netherite_shovel", "stone_shovel", "wooden_shovel",
+    "copper_hoe", "diamond_hoe", "golden_hoe", "iron_hoe", "netherite_hoe", "stone_hoe", "wooden_hoe",
+    "chainmail_spear", "copper_spear", "diamond_spear", "golden_spear", "iron_spear", "netherite_spear", "stone_spear", "wooden_spear",
+    "mace", "copper_mace", "diamond_mace", "golden_mace", "netherite_mace", "stone_mace", "wooden_mace",
+    "trident", "shears", "flint_and_steel", "fishing_rod", "fishing_rod_cast"
+}
+
+
 def unwrap_tool_item(path, data):
     """Limpia cualquier referencia residual a gear3d, restaurando el modelo vanilla 3D en mano."""
     id_ = Path(path).stem
@@ -38,13 +50,10 @@ def unwrap_tool_item(path, data):
         if isinstance(o, dict):
             if o.get("type") == "minecraft:select" and o.get("property") == "minecraft:display_context":
                 fb = o.get("fallback", {})
-                if isinstance(fb, dict) and "gear3d" in str(fb.get("model", "")):
+                if isinstance(fb, dict) and isinstance(fb.get("model"), str) and "gear3d" in fb["model"]:
                     changed += 1
-                    cases = o.get("cases", [])
-                    if len(cases) == 1 and "model" in cases[0]:
-                        return unwrap(cases[0]["model"])
                     return {"type": "minecraft:model", "model": f"item/{id_}"}
-            if "gear3d" in str(o.get("model", "")):
+            if isinstance(o.get("model"), str) and "gear3d" in o["model"]:
                 changed += 1
                 return {"type": "minecraft:model", "model": f"item/{id_}"}
             return {k: unwrap(v) for k, v in o.items()}
@@ -96,6 +105,12 @@ def main():
         if rel in ADD_EXACT or rel.startswith(ADD_PREFIXES):
             if rel == "assets/minecraft/sounds.json":
                 continue
+            if rel.startswith("assets/minecraft/textures/item/") and p.stem in TOOL_STEMS:
+                continue
+            if rel.startswith("assets/minecraft/models/item/") and p.stem in TOOL_STEMS:
+                continue
+            if rel == "assets/minecraft/items/mace.json":
+                continue
             add[rel] = p.read_bytes()
     report = {}
 
@@ -137,9 +152,11 @@ def main():
     add["assets/minecraft/items/player_head.json"] = json.dumps(bh, ensure_ascii=False, indent=1).encode()
     report["cabezas_nuevas_por_id"] = len(new)
 
-    # Anadir directamente todos los items/*.json limpios y canonicos del repo
+    # Anadir directamente todos los items/*.json limpios y canonicos del repo (mace.json queda excluido)
     items_repo_count = 0
     for p in sorted((repo / "assets/minecraft/items").glob("*.json")):
+        if p.name == "mace.json":
+            continue
         path = f"{GEAR_PREFIX}{p.name}"
         add[path] = p.read_bytes()
         items_repo_count += 1
@@ -292,10 +309,16 @@ def main():
         for info in base.infolist():
             if info.filename in add:
                 continue
-            # Erradicar estrictamente overrides de bloques vanilla y modelos planos gear3d
+            # Erradicar estrictamente overrides de bloques vanilla, modelos planos gear3d, mace y herramientas vanilla
             if info.filename.startswith("assets/minecraft/textures/block/"):
                 continue
             if "gear3d" in info.filename:
+                continue
+            if info.filename == "assets/minecraft/items/mace.json":
+                continue
+            if info.filename.startswith("assets/minecraft/textures/item/") and Path(info.filename).stem in TOOL_STEMS:
+                continue
+            if info.filename.startswith("assets/minecraft/models/item/") and Path(info.filename).stem in TOOL_STEMS:
                 continue
             if info.filename in ("assets/minecraft/items/chain.json",
                                  "assets/minecraft/items/chiseled_bookshelf.json",
@@ -309,6 +332,12 @@ def main():
             if n_.startswith("assets/minecraft/textures/block/"):
                 continue
             if "gear3d" in n_:
+                continue
+            if n_ == "assets/minecraft/items/mace.json":
+                continue
+            if n_.startswith("assets/minecraft/textures/item/") and Path(n_).stem in TOOL_STEMS:
+                continue
+            if n_.startswith("assets/minecraft/models/item/") and Path(n_).stem in TOOL_STEMS:
                 continue
             zi = zipfile.ZipInfo(n_, date_time=dt)
             zi.compress_type = zipfile.ZIP_DEFLATED

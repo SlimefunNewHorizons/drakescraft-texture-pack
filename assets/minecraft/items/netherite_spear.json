@@ -1,4 +1,7 @@
 {
-  "type": "minecraft:model",
-  "model": "item/netherite_spear"
+  "model": {
+    "type": "minecraft:model",
+    "model": "item/netherite_spear"
+  },
+  "swap_animation_scale": 1.95
 }

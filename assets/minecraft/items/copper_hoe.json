@@ -1,4 +1,6 @@
 {
-  "type": "minecraft:model",
-  "model": "item/copper_hoe"
+  "model": {
+    "type": "minecraft:model",
+    "model": "item/copper_hoe"
+  }
 }
