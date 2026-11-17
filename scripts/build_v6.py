@@ -17,10 +17,12 @@ import zipfile
 from pathlib import Path
 
 ADD_PREFIXES = (
-    "assets/drakescraft/", "assets/terralense/", "assets/minecraft/sounds/", "assets/minecraft/equipment/",
+    "assets/drakescraft/", "assets/terralense/", "assets/jackstar/", "assets/minecraft/sounds/", "assets/minecraft/equipment/",
     "assets/minecraft/textures/entity/equipment/", "assets/minecraft/textures/models/armor/",
-    "assets/minecraft/models/slimefun/drakes_heads/", "assets/minecraft/textures/item/", "assets/minecraft/textures/gui/sprites/hud/food_",
+    "assets/minecraft/models/slimefun/drakes_heads/", "assets/minecraft/textures/item/", "assets/minecraft/textures/block/",
+    "assets/minecraft/textures/gui/", "assets/minecraft/textures/painting/", "assets/minecraft/textures/entity/",
     "assets/minecraft/models/slimefun/drakes_proc/", "assets/slimefun/textures/item/drakes_proc/",
+    "assets/minecraft/optifine/", "assets/minecraft/models/item/",
 )
 ADD_EXACT = ("assets/minecraft/font/terralense_hud.json", "assets/minecraft/font/terralense_hud_top.json")
 GEAR_PREFIX = "assets/minecraft/items/"
@@ -188,7 +190,13 @@ def main():
     proc = 0
     for p in sorted((repo / "assets/minecraft/items").glob("*.json")):
         path = f"{GEAR_PREFIX}{p.name}"
-        if p.name == "player_head.json" or "drakes_proc" not in p.read_text():
+        if p.name == "player_head.json":
+            continue
+        if p.name.endswith("_bed.json") or p.name in ("snow_block.json", "spore_blossom.json", "dragon_egg.json"):
+            add[path] = p.read_bytes()
+            proc += 1
+            continue
+        if "drakes_proc" not in p.read_text():
             continue
         if path not in names and path not in add:
             continue  # item nuevo: lo trata el bloque siguiente (con comprobacion de modelos)

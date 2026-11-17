@@ -2,6 +2,6 @@
 	"parent": "minecraft:block/cube_all",
 	"author": "Jackstar (DrakesCraft Labs)",
 	"textures": {
-		"all": "slimefun:item/27_foxy_machines/stabilized_blistering_block"
+		"all": "slimefun:item/drakes_proc/foxymachines/stabilized_blistering_block"
 	}
 }
