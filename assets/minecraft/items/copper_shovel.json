@@ -1,6 +1,4 @@
 {
-  "model": {
-    "type": "minecraft:model",
-    "model": "drakescraft:item/gear3d/copper_shovel"
-  }
+  "type": "minecraft:model",
+  "model": "item/copper_shovel"
 }

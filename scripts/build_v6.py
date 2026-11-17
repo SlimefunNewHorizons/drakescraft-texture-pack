@@ -19,7 +19,7 @@ from pathlib import Path
 ADD_PREFIXES = (
     "assets/drakescraft/", "assets/terralense/", "assets/jackstar/", "assets/minecraft/sounds/", "assets/minecraft/equipment/",
     "assets/minecraft/textures/entity/equipment/", "assets/minecraft/textures/models/armor/",
-    "assets/minecraft/models/slimefun/drakes_heads/", "assets/minecraft/textures/item/", "assets/minecraft/textures/block/",
+    "assets/minecraft/models/slimefun/drakes_heads/", "assets/minecraft/textures/item/",
     "assets/minecraft/textures/gui/", "assets/minecraft/textures/painting/", "assets/minecraft/textures/entity/",
     "assets/minecraft/models/slimefun/drakes_proc/", "assets/slimefun/textures/item/drakes_proc/",
     "assets/minecraft/optifine/", "assets/minecraft/models/item/",
@@ -28,31 +28,32 @@ ADD_EXACT = ("assets/minecraft/font/terralense_hud.json", "assets/minecraft/font
 GEAR_PREFIX = "assets/minecraft/items/"
 
 
-def wrap_tool_item(path, data):
-    """data: items/<id>.json del base. Envuelve fallback item/<id> -> select display_context."""
+def unwrap_tool_item(path, data):
+    """Limpia cualquier referencia residual a gear3d, restaurando el modelo vanilla 3D en mano."""
     id_ = Path(path).stem
     changed = 0
 
-    def is_plain(v):
-        return isinstance(v, dict) and v.get("type") in ("model", "minecraft:model") and v.get("model") in (f"item/{id_}", f"minecraft:item/{id_}")
-
-    def walk(o):
+    def unwrap(o):
         nonlocal changed
         if isinstance(o, dict):
-            for k, v in list(o.items()):
-                if k == "fallback" and is_plain(v):
-                    o[k] = {"type": "minecraft:select", "property": "minecraft:display_context",
-                            "cases": [{"when": ["gui", "ground", "fixed", "on_shelf"], "model": {"type": "minecraft:model", "model": f"item/{id_}"}}],
-                            "fallback": {"type": "minecraft:model", "model": f"drakescraft:item/gear3d/{id_}"}}
+            if o.get("type") == "minecraft:select" and o.get("property") == "minecraft:display_context":
+                fb = o.get("fallback", {})
+                if isinstance(fb, dict) and "gear3d" in str(fb.get("model", "")):
                     changed += 1
-                else:
-                    walk(v)
+                    cases = o.get("cases", [])
+                    if len(cases) == 1 and "model" in cases[0]:
+                        return unwrap(cases[0]["model"])
+                    return {"type": "minecraft:model", "model": f"item/{id_}"}
+            if "gear3d" in str(o.get("model", "")):
+                changed += 1
+                return {"type": "minecraft:model", "model": f"item/{id_}"}
+            return {k: unwrap(v) for k, v in o.items()}
         elif isinstance(o, list):
-            for v in o:
-                walk(v)
+            return [unwrap(v) for v in o]
+        return o
 
-    walk(data)
-    return changed
+    res = unwrap(data)
+    return res, changed
 
 
 def merge_sounds(base, repo):
@@ -116,75 +117,47 @@ def main():
     add["assets/minecraft/font/default.json"] = json.dumps(fd, ensure_ascii=True, indent=1).encode()
 
     # player_head
+    canonical_skull_fallback = {
+        "type": "minecraft:special",
+        "base": "minecraft:item/template_skull",
+        "model": {"type": "minecraft:head", "kind": "player"}
+    }
     bh = json.loads(base.read("assets/minecraft/items/player_head.json"))
-    bcases, _ = head_cases(bh)
+    bcases, bmodel = head_cases(bh)
     rh = json.loads((repo / "assets/minecraft/items/player_head.json").read_text())
     rcases, _ = head_cases(rh)
     have = {json.dumps(c["when"], sort_keys=True) for c in bcases}
     new = [copy.deepcopy(c) for c in (rcases or []) if json.dumps(c["when"], sort_keys=True) not in have]
     bcases.extend(new)
+    # Asegurar fallback 1.21.4+ canonical para que todas las cabezas personalizadas rendericen su skin
+    if bmodel and "fallback" in bmodel:
+        bmodel["fallback"] = canonical_skull_fallback
+    if "fallback" in bh.get("model", {}):
+        bh["model"]["fallback"] = canonical_skull_fallback
     add["assets/minecraft/items/player_head.json"] = json.dumps(bh, ensure_ascii=False, indent=1).encode()
     report["cabezas_nuevas_por_id"] = len(new)
 
-    # herramientas: envolver fallback en items del base
-    tool_ids = [t for t in a.tool_ids.split(",") if t] or sorted(
-        p.stem for p in (repo / "assets/minecraft/items").glob("*.json") if "gear3d" in p.read_text())
-    wrapped = 0
-    pending_prune = []
-    for id_ in tool_ids:
-        path = f"{GEAR_PREFIX}{id_}.json"
-        if path in names:
-            d = json.loads(base.read(path))
-            if wrap_tool_item(path, d):
-                add[path] = json.dumps(d, ensure_ascii=False, indent=1).encode()
-                wrapped += 1
-        else:
-            doc = json.loads((repo / path).read_text())
-            pending_prune.append((path, doc))  # item nuevo (p. ej. cobre, lanza, maza): se poda al final
-    report["items_herramienta_ajustados"] = wrapped
+    # Anadir directamente todos los items/*.json limpios y canonicos del repo
+    items_repo_count = 0
+    for p in sorted((repo / "assets/minecraft/items").glob("*.json")):
+        path = f"{GEAR_PREFIX}{p.name}"
+        add[path] = p.read_bytes()
+        items_repo_count += 1
+    report["items_json_repo_anadidos"] = items_repo_count
 
-    # arco/ballesta/tridente/escudo 3D: se reemplaza el FALLBACK vanilla (los cases Slimefun del base se conservan)
-    def M(n): return {"type": "minecraft:model", "model": f"drakescraft:item/gear3d/{n}"}
-    FLAT = ["gui", "ground", "fixed", "on_shelf"]
-    def flat_or(m3d, flat):
-        return {"type": "minecraft:select", "property": "minecraft:display_context",
-                "cases": [{"when": FLAT, "model": {"type": "minecraft:model", "model": flat}}], "fallback": m3d}
-    ranged = {
-        "bow": {"type": "minecraft:condition", "property": "minecraft:using_item",
-                "on_true": {"type": "minecraft:range_dispatch", "property": "minecraft:use_duration", "scale": 0.05,
-                            "entries": [{"threshold": 0.65, "model": M("bow_pull_1")}, {"threshold": 0.9, "model": M("bow_pull_2")}],
-                            "fallback": M("bow_pull_0")},
-                "on_false": flat_or(M("bow"), "minecraft:item/bow")},
-        "crossbow": {"type": "minecraft:condition", "property": "minecraft:using_item",
-                     "on_true": {"type": "minecraft:range_dispatch", "property": "minecraft:crossbow/pull",
-                                 "entries": [{"threshold": 0.58, "model": M("crossbow_pull_1")}, {"threshold": 1.0, "model": M("crossbow_pull_2")}],
-                                 "fallback": M("crossbow_pull_0")},
-                     "on_false": {"type": "minecraft:select", "property": "minecraft:charge_type",
-                                  "cases": [{"when": "arrow", "model": flat_or(M("crossbow_arrow"), "minecraft:item/crossbow_arrow")},
-                                            {"when": "rocket", "model": flat_or(M("crossbow_firework"), "minecraft:item/crossbow_firework")}],
-                                  "fallback": flat_or(M("crossbow"), "minecraft:item/crossbow")}},
-        "trident": {"type": "minecraft:select", "property": "minecraft:display_context",
-                    "cases": [{"when": FLAT, "model": {"type": "minecraft:model", "model": "minecraft:item/trident"}}],
-                    "fallback": {"type": "minecraft:condition", "property": "minecraft:using_item",
-                                 "on_false": M("trident_in_hand"), "on_true": M("trident_throwing")}},
-        "shield": {"type": "minecraft:condition", "property": "minecraft:using_item",
-                   "on_false": M("shield"), "on_true": M("shield_blocking")},
-    }
-    n_ranged = 0
-    for id_, fb in ranged.items():
-        path = f"{GEAR_PREFIX}{id_}.json"
-        src = add[path] if path in add else (base.read(path) if path in names else None)
-        if src is None:
-            continue
-        d = json.loads(src)
-        m = d["model"]
-        if m.get("component") in ("custom_data", "minecraft:custom_data") and "cases" in m:
-            m["fallback"] = fb
-        else:
-            d["model"] = fb
-        add[path] = json.dumps(d, ensure_ascii=False, indent=1).encode()
-        n_ranged += 1
-    report["items_ranged_3d"] = n_ranged
+    # Limpiar y desenvolver cualquier herramienta residual del base que use gear3d
+    unwrapped = 0
+    for path in names:
+        if path.startswith(GEAR_PREFIX) and path.endswith(".json") and path not in add:
+            try:
+                d = json.loads(base.read(path))
+                clean_d, n_c = unwrap_tool_item(path, d)
+                if n_c > 0:
+                    add[path] = json.dumps(clean_d, ensure_ascii=False, indent=1).encode()
+                    unwrapped += 1
+            except Exception:
+                pass
+    report["items_herramienta_desenvueltos_sin_gear3d"] = unwrapped
 
     # Slimefun por id (procedural): select por custom_data de ids nuevos; el modelo del BASE pasa a ser el fallback
     proc = 0
@@ -257,6 +230,7 @@ def main():
                 n += prune(v)
         return n
 
+    pending_prune = []
     pruned = 0
     for path, doc in pending_prune:
         pruned += prune(doc)
@@ -318,9 +292,24 @@ def main():
         for info in base.infolist():
             if info.filename in add:
                 continue
+            # Erradicar estrictamente overrides de bloques vanilla y modelos planos gear3d
+            if info.filename.startswith("assets/minecraft/textures/block/"):
+                continue
+            if "gear3d" in info.filename:
+                continue
+            if info.filename in ("assets/minecraft/items/chain.json",
+                                 "assets/minecraft/items/chiseled_bookshelf.json",
+                                 "assets/minecraft/items/sculk_sensor.json",
+                                 "assets/minecraft/items/big_dripleaf.json",
+                                 "assets/minecraft/items/small_dripleaf.json"):
+                continue
             out.writestr(copy.copy(info), base.read(info.filename))
         dt = base.getinfo("pack.mcmeta").date_time
         for n_, b in sorted(add.items()):
+            if n_.startswith("assets/minecraft/textures/block/"):
+                continue
+            if "gear3d" in n_:
+                continue
             zi = zipfile.ZipInfo(n_, date_time=dt)
             zi.compress_type = zipfile.ZIP_DEFLATED
             out.writestr(zi, b)
