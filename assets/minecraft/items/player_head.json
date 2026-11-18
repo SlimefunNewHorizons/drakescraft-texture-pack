@@ -14,6 +14,17 @@
       {
        "when": {
         "PublicBukkitValues": {
+         "slimefun:slimefun_item": "CAN"
+        }
+       },
+       "model": {
+        "type": "minecraft:model",
+        "model": "slimefun/11_misc_items/tin_can"
+       }
+      },
+      {
+       "when": {
+        "PublicBukkitValues": {
          "slimefun:slimefun_item": "ADVANCED_GEO_MINER"
         }
        },
@@ -15018,7 +15029,7 @@
       {
        "when": {
         "PublicBukkitValues": {
-         "slimefun:slimefun_item": "MAGNESIGHT™_TRAIT_PROP_LINKS_MAGNESIUM_DUST"
+         "slimefun:slimefun_item": "MAGNESIGHT\u2122_TRAIT_PROP_LINKS_MAGNESIUM_DUST"
         }
        },
        "model": {
@@ -18538,7 +18549,7 @@
       {
        "when": {
         "PublicBukkitValues": {
-         "slimefun:slimefun_item": "LADDER_SIMULATOR™_TRAIT_PROP_HEAD_INGOT_CAST_BOOMERITE"
+         "slimefun:slimefun_item": "LADDER_SIMULATOR\u2122_TRAIT_PROP_HEAD_INGOT_CAST_BOOMERITE"
         }
        },
        "model": {
@@ -21211,7 +21222,7 @@
       {
        "when": {
         "PublicBukkitValues": {
-         "slimefun:slimefun_item": "MAGNESIGHT™_II_TRAIT_PROP_LINKS_MAGNESIUM_SINGULARITY"
+         "slimefun:slimefun_item": "MAGNESIGHT\u2122_II_TRAIT_PROP_LINKS_MAGNESIUM_SINGULARITY"
         }
        },
        "model": {
