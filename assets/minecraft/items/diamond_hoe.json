@@ -55,7 +55,7 @@
             ],
             "model": {
               "type": "minecraft:model",
-              "model": "item/diamond_hoe"
+              "model": "minecraft:item/diamond_hoe"
             }
           }
         ],
@@ -126,7 +126,7 @@
                   ],
                   "model": {
                     "type": "minecraft:model",
-                    "model": "item/diamond_hoe"
+                    "model": "minecraft:item/diamond_hoe"
                   }
                 }
               ],

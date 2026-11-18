@@ -3,7 +3,7 @@
 	"cases": [
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CLT_BISCUIT_BASE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/cultivation/clt_biscuit_base"}}
 	],
-	"fallback": {"type":"model","model":"block/oak_trapdoor_bottom"}
+	"fallback": {"type": "minecraft:model","model": "minecraft:block/oak_trapdoor_bottom"}
 	},
 	"oversized_in_gui": true
 }

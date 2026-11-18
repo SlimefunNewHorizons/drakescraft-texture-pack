@@ -246,7 +246,7 @@
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"NPS_DISCORDANT_CRYSTAL_WATER"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/netheopoiesis/nps_harmonised_crystal_water"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"STB_ADVANCEDSENDERMODULE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/sensibletoolbox/stb_advancedsendermodule"}}
 	],
-	"fallback": {"type":"model","model":"item/light_blue_dye"}
+	"fallback": {"type": "minecraft:model","model": "minecraft:item/light_blue_dye"}
 	},
 	"oversized_in_gui": true
 }

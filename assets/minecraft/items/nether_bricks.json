@@ -5,7 +5,7 @@
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"STB_INFERNALFARM"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/netheopoiesis/nps_crude_harvesting_tool"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"WF_CONCRETE_GEN_2"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimeframe/wf_concrete_gen_2"}}
 	],
-	"fallback": {"type":"model","model":"block/nether_bricks"}
+	"fallback": {"type": "minecraft:model","model": "minecraft:block/nether_bricks"}
 	},
 	"oversized_in_gui": true
 }

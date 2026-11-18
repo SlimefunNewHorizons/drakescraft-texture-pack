@@ -16,7 +16,7 @@
           ],
           "model": {
             "type": "minecraft:model",
-            "model": "item/wooden_axe"
+            "model": "minecraft:item/wooden_axe"
           }
         }
       ],
@@ -56,7 +56,7 @@
                 ],
                 "model": {
                   "type": "minecraft:model",
-                  "model": "item/wooden_axe"
+                  "model": "minecraft:item/wooden_axe"
                 }
               }
             ],

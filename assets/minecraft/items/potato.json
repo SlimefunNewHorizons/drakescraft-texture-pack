@@ -3,7 +3,7 @@
 	"cases": [
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"EM_POTATO"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/elementmanipulation/em_potato"}}
 	],
-	"fallback": {"type":"model","model":"item/potato"}
+	"fallback": {"type": "minecraft:model","model": "minecraft:item/potato"}
 	},
 	"oversized_in_gui": true
 }

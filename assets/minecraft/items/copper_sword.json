@@ -16,7 +16,7 @@
           ],
           "model": {
             "type": "minecraft:model",
-            "model": "item/copper_sword"
+            "model": "minecraft:item/copper_sword"
           }
         }
       ],
@@ -128,7 +128,7 @@
                 ],
                 "model": {
                   "type": "minecraft:model",
-                  "model": "item/copper_sword"
+                  "model": "minecraft:item/copper_sword"
                 }
               }
             ],

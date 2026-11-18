@@ -88,7 +88,7 @@
             ],
             "model": {
               "type": "minecraft:model",
-              "model": "item/netherite_pickaxe"
+              "model": "minecraft:item/netherite_pickaxe"
             }
           }
         ],
@@ -157,7 +157,7 @@
                   ],
                   "model": {
                     "type": "minecraft:model",
-                    "model": "item/netherite_pickaxe"
+                    "model": "minecraft:item/netherite_pickaxe"
                   }
                 }
               ],

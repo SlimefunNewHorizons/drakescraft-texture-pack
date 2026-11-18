@@ -6,7 +6,7 @@
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"GN_TEMPURA_SHRIMP"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/gastronomicon/gn_fried_shrimp"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"NAUTILUS_SHELL"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/magicxpansion/nautilus_shell"}}
 	],
-	"fallback": {"type":"model","model":"item/nautilus_shell"}
+	"fallback": {"type": "minecraft:model","model": "minecraft:item/nautilus_shell"}
 	},
 	"oversized_in_gui": true
 }

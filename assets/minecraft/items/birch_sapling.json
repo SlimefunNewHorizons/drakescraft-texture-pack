@@ -7,7 +7,7 @@
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CLT_TREE_PEACH"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/cultivation/clt_tree_peach"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CLT_TREE_PECAN"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/cultivation/clt_counter_blender"}}
 	],
-	"fallback": {"type":"model","model":"item/birch_sapling"}
+	"fallback": {"type": "minecraft:model","model": "minecraft:item/birch_sapling"}
 	},
 	"oversized_in_gui": true
 }

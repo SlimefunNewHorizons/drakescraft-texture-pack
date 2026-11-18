@@ -9,7 +9,7 @@
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"RAW_CARBON_MESH"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/litexpansion/raw_carbon_mesh"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"STB_VACUUMMODULE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/sensibletoolbox/stb_hypersendermodule"}}
 	],
-	"fallback": {"type":"model","model":"item/black_dye"}
+	"fallback": {"type": "minecraft:model","model": "minecraft:item/black_dye"}
 	},
 	"oversized_in_gui": true
 }

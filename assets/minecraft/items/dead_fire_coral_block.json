@@ -5,7 +5,7 @@
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CRY_SPONGE_SEARING"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/crystamaehistoria/cry_recall_lattice"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CRY_SPONGE_SUPER_MASSIVE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/crystamaehistoria/cry_recall_lattice"}}
 	],
-	"fallback": {"type":"model","model":"block/dead_fire_coral_block"}
+	"fallback": {"type": "minecraft:model","model": "minecraft:block/dead_fire_coral_block"}
 	},
 	"oversized_in_gui": true
 }

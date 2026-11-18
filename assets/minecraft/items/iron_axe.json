@@ -16,7 +16,7 @@
           ],
           "model": {
             "type": "minecraft:model",
-            "model": "item/iron_axe"
+            "model": "minecraft:item/iron_axe"
           }
         }
       ],
@@ -76,7 +76,7 @@
                 ],
                 "model": {
                   "type": "minecraft:model",
-                  "model": "item/iron_axe"
+                  "model": "minecraft:item/iron_axe"
                 }
               }
             ],

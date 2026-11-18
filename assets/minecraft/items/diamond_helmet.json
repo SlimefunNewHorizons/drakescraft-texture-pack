@@ -1,13 +1,166 @@
 {
-	"model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:custom_data",
-	"cases": [
-		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"ADVANCEDLX_SOLAR_HELMET"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/litexpansion/advanced_solar_helmet"}},
-		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"BUMP_RANDOM_HELMET"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/bump/bump_random_helmet"}},
-		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"HYBRID_SOLAR_HELMET"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/litexpansion/hybrid_solar_helmet"}},
-		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"OBSIDIAN_HELMET"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/obsidianexpansion/omc_helmet"}},
-		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"ULTIMATE_SOLAR_HELMET"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/litexpansion/ultimate_solar_helmet"}}
-	],
-	"fallback": {"type":"model","model":"item/diamond_helmet"}
-	},
-	"oversized_in_gui": true
+  "model": {
+    "type": "minecraft:select",
+    "property": "minecraft:component",
+    "component": "minecraft:custom_data",
+    "cases": [
+      {
+        "when": {
+          "PublicBukkitValues": {
+            "slimefun:slimefun_item": "ADVANCEDLX_SOLAR_HELMET"
+          }
+        },
+        "model": {
+          "type": "minecraft:model",
+          "model": "slimefun/drakes_proc/litexpansion/advanced_solar_helmet"
+        }
+      },
+      {
+        "when": {
+          "PublicBukkitValues": {
+            "slimefun:slimefun_item": "BUMP_RANDOM_HELMET"
+          }
+        },
+        "model": {
+          "type": "minecraft:model",
+          "model": "slimefun/drakes_proc/bump/bump_random_helmet"
+        }
+      },
+      {
+        "when": {
+          "PublicBukkitValues": {
+            "slimefun:slimefun_item": "HYBRID_SOLAR_HELMET"
+          }
+        },
+        "model": {
+          "type": "minecraft:model",
+          "model": "slimefun/drakes_proc/litexpansion/hybrid_solar_helmet"
+        }
+      },
+      {
+        "when": {
+          "PublicBukkitValues": {
+            "slimefun:slimefun_item": "OBSIDIAN_HELMET"
+          }
+        },
+        "model": {
+          "type": "minecraft:model",
+          "model": "slimefun/drakes_proc/obsidianexpansion/omc_helmet"
+        }
+      },
+      {
+        "when": {
+          "PublicBukkitValues": {
+            "slimefun:slimefun_item": "ULTIMATE_SOLAR_HELMET"
+          }
+        },
+        "model": {
+          "type": "minecraft:model",
+          "model": "slimefun/drakes_proc/litexpansion/ultimate_solar_helmet"
+        }
+      }
+    ],
+    "fallback": {
+      "type": "minecraft:range_dispatch",
+      "property": "minecraft:custom_model_data",
+      "index": 0,
+      "fallback": {
+        "type": "minecraft:model",
+        "model": "minecraft:item/diamond_helmet"
+      },
+      "entries": [
+        {
+          "threshold": 0,
+          "model": {
+            "type": "minecraft:select",
+            "property": "minecraft:trim_material",
+            "cases": [
+              {
+                "when": "minecraft:quartz",
+                "model": {
+                  "type": "minecraft:model",
+                  "model": "minecraft:item/diamond_helmet_quartz_trim"
+                }
+              },
+              {
+                "when": "minecraft:iron",
+                "model": {
+                  "type": "minecraft:model",
+                  "model": "minecraft:item/diamond_helmet_iron_trim"
+                }
+              },
+              {
+                "when": "minecraft:netherite",
+                "model": {
+                  "type": "minecraft:model",
+                  "model": "minecraft:item/diamond_helmet_netherite_trim"
+                }
+              },
+              {
+                "when": "minecraft:redstone",
+                "model": {
+                  "type": "minecraft:model",
+                  "model": "minecraft:item/diamond_helmet_redstone_trim"
+                }
+              },
+              {
+                "when": "minecraft:copper",
+                "model": {
+                  "type": "minecraft:model",
+                  "model": "minecraft:item/diamond_helmet_copper_trim"
+                }
+              },
+              {
+                "when": "minecraft:gold",
+                "model": {
+                  "type": "minecraft:model",
+                  "model": "minecraft:item/diamond_helmet_gold_trim"
+                }
+              },
+              {
+                "when": "minecraft:emerald",
+                "model": {
+                  "type": "minecraft:model",
+                  "model": "minecraft:item/diamond_helmet_emerald_trim"
+                }
+              },
+              {
+                "when": "minecraft:diamond",
+                "model": {
+                  "type": "minecraft:model",
+                  "model": "minecraft:item/diamond_helmet_diamond_trim"
+                }
+              },
+              {
+                "when": "minecraft:lapis",
+                "model": {
+                  "type": "minecraft:model",
+                  "model": "minecraft:item/diamond_helmet_lapis_trim"
+                }
+              },
+              {
+                "when": "minecraft:amethyst",
+                "model": {
+                  "type": "minecraft:model",
+                  "model": "minecraft:item/diamond_helmet_amethyst_trim"
+                }
+              },
+              {
+                "when": "minecraft:resin",
+                "model": {
+                  "type": "minecraft:model",
+                  "model": "minecraft:item/diamond_helmet_resin_trim"
+                }
+              }
+            ],
+            "fallback": {
+              "type": "minecraft:model",
+              "model": "minecraft:item/diamond_helmet"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "oversized_in_gui": true
 }

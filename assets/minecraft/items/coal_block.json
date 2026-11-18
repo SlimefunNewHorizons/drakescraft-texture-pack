@@ -14,7 +14,7 @@
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"JC_COAL_BLOCK_6"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/dynatech/dynatech_coal_coke"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"QP_CARBON_STRUCTURE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/elementmanipulation/em_carbon"}}
 	],
-	"fallback": {"type":"model","model":"block/coal_block"}
+	"fallback": {"type": "minecraft:model","model": "minecraft:block/coal_block"}
 	},
 	"oversized_in_gui": true
 }

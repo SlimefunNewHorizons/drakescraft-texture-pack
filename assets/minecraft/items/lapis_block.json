@@ -10,7 +10,7 @@
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"JC_LAPIS_BLOCK_5"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/compressioncraft/jc_lapis_block_5"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"JC_LAPIS_BLOCK_6"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/compressioncraft/jc_lapis_block_6"}}
 	],
-	"fallback": {"type":"model","model":"block/lapis_block"}
+	"fallback": {"type": "minecraft:model","model": "minecraft:block/lapis_block"}
 	},
 	"oversized_in_gui": true
 }

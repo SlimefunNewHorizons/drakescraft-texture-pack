@@ -130,7 +130,7 @@
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CLT_SLICED_WHEAT"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/cultivation/clt_sliced_wheat"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"GCE_KELP_CHICKEN_ICON"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/geneticchickengineering/gce_feather_chicken_icon"}}
 	],
-	"fallback": {"type":"model","model":"item/kelp"}
+	"fallback": {"type": "minecraft:model","model": "minecraft:item/kelp"}
 	},
 	"oversized_in_gui": true
 }

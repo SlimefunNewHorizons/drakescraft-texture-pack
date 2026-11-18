@@ -175,7 +175,7 @@
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"SOUL_STONE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/simplematerialgenerators/smg_generator_soul_sand"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"STB_RECEIVERMODULE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/sensibletoolbox/stb_hypersendermodule"}}
 	],
-	"fallback": {"type":"model","model":"item/orange_dye"}
+	"fallback": {"type": "minecraft:model","model": "minecraft:item/orange_dye"}
 	},
 	"oversized_in_gui": true
 }

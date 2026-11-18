@@ -5,7 +5,7 @@
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"IDOE_ELECTRIC_CABLE_3"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/idreamofeasy/idoe_electric_cable_3"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"QP_BEACON_TRANSMITTER"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/quaptics/qp_beacon_transmitter"}}
 	],
-	"fallback": {"type":"model","model":"item/iron_bars"}
+	"fallback": {"type": "minecraft:model","model": "minecraft:item/iron_bars"}
 	},
 	"oversized_in_gui": true
 }

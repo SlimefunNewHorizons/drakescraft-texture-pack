@@ -5,7 +5,7 @@
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"MATERIAL_DIE_BASIC"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/simplestorage/material_die_basic"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"MATERIAL_PEWTER_PLATE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/simplestorage/material_pewter_plate"}}
 	],
-	"fallback": {"type":"model","model":"block/light_gray_carpet"}
+	"fallback": {"type": "minecraft:model","model": "minecraft:block/light_gray_carpet"}
 	},
 	"oversized_in_gui": true
 }

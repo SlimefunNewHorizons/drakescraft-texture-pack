@@ -3,7 +3,7 @@
 	"cases": [
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"EM_LEAVES"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/elementmanipulation/em_leaves"}}
 	],
-	"fallback": {"type":"model","model":"minecraft:block/oak_leaves","tints":[{"type":"minecraft:constant","value":-12012264}]}
+	"fallback": {"type": "minecraft:model","model":"minecraft:block/oak_leaves","tints":[{"type":"minecraft:constant","value":-12012264}]}
 	},
 	"oversized_in_gui": true
 }

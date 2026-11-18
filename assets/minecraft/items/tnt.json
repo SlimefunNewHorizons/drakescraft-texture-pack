@@ -5,7 +5,7 @@
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"EXPLOSIVE_SYNTHESIZER"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimefunwarfare/explosive_synthesizer"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"MARK_XVII_ARTILLERY_CORE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimytreetaps/amber_block"}}
 	],
-	"fallback": {"type":"model","model":"block/tnt"}
+	"fallback": {"type": "minecraft:model","model": "minecraft:block/tnt"}
 	},
 	"oversized_in_gui": true
 }

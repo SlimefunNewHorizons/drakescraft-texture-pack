@@ -12,7 +12,7 @@
         ],
         "model": {
           "type": "minecraft:model",
-          "model": "item/stone_spear"
+          "model": "minecraft:item/stone_spear"
         }
       }
     ],

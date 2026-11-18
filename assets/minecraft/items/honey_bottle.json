@@ -5,7 +5,7 @@
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"HONEY_BOTTLE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/potionexpansion/gold_sight"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"NANOMASS_CANISTER"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimefun/chain_chestplate"}}
 	],
-	"fallback": {"type":"model","model":"item/honey_bottle"}
+	"fallback": {"type": "minecraft:model","model": "minecraft:item/honey_bottle"}
 	},
 	"oversized_in_gui": true
 }

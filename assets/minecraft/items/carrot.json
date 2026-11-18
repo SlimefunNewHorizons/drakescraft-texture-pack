@@ -3,7 +3,7 @@
 	"cases": [
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"EM_CARROT"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/elementmanipulation/em_carrot"}}
 	],
-	"fallback": {"type":"model","model":"item/carrot"}
+	"fallback": {"type": "minecraft:model","model": "minecraft:item/carrot"}
 	},
 	"oversized_in_gui": true
 }

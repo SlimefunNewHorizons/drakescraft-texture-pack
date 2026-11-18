@@ -3,7 +3,7 @@
 	"cases": [
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"GLISTENING_DANDELION"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/flowerpower/glistening_poppy"}}
 	],
-	"fallback": {"type":"model","model":"item/dandelion"}
+	"fallback": {"type": "minecraft:model","model": "minecraft:item/dandelion"}
 	},
 	"oversized_in_gui": true
 }

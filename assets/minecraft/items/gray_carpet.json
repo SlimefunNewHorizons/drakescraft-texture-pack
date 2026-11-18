@@ -6,7 +6,7 @@
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"RED_ROOM_CLOAKING_MESH"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/spiritsunchained/su_spirit_net"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"THORIUM_PLATE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/litexpansion/thorium_plate"}}
 	],
-	"fallback": {"type":"model","model":"block/gray_carpet"}
+	"fallback": {"type": "minecraft:model","model": "minecraft:block/gray_carpet"}
 	},
 	"oversized_in_gui": true
 }

@@ -16,7 +16,7 @@
           ],
           "model": {
             "type": "minecraft:model",
-            "model": "item/stone_sword"
+            "model": "minecraft:item/stone_sword"
           }
         }
       ],
@@ -128,7 +128,7 @@
                 ],
                 "model": {
                   "type": "minecraft:model",
-                  "model": "item/stone_sword"
+                  "model": "minecraft:item/stone_sword"
                 }
               }
             ],

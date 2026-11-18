@@ -44,7 +44,7 @@
             ],
             "model": {
               "type": "minecraft:model",
-              "model": "item/iron_hoe"
+              "model": "minecraft:item/iron_hoe"
             }
           }
         ],
@@ -115,7 +115,7 @@
                   ],
                   "model": {
                     "type": "minecraft:model",
-                    "model": "item/iron_hoe"
+                    "model": "minecraft:item/iron_hoe"
                   }
                 }
               ],

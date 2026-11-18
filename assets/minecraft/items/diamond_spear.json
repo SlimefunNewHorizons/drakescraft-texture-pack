@@ -12,7 +12,7 @@
         ],
         "model": {
           "type": "minecraft:model",
-          "model": "item/diamond_spear"
+          "model": "minecraft:item/diamond_spear"
         }
       }
     ],

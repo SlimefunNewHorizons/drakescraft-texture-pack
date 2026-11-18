@@ -5,7 +5,7 @@
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"COPPER_PLATE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/litexpansion/copper_plate"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"MATERIAL_CUPRONICKEL_PLATE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/simplestorage/material_electrum_plate"}}
 	],
-	"fallback": {"type":"model","model":"block/orange_carpet"}
+	"fallback": {"type": "minecraft:model","model": "minecraft:block/orange_carpet"}
 	},
 	"oversized_in_gui": true
 }

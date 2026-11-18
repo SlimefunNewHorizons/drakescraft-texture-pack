@@ -44,7 +44,7 @@
             ],
             "model": {
               "type": "minecraft:model",
-              "model": "item/iron_pickaxe"
+              "model": "minecraft:item/iron_pickaxe"
             }
           }
         ],
@@ -173,7 +173,7 @@
                   ],
                   "model": {
                     "type": "minecraft:model",
-                    "model": "item/iron_pickaxe"
+                    "model": "minecraft:item/iron_pickaxe"
                   }
                 }
               ],

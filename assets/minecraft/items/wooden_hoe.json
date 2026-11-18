@@ -33,7 +33,7 @@
             ],
             "model": {
               "type": "minecraft:model",
-              "model": "item/wooden_hoe"
+              "model": "minecraft:item/wooden_hoe"
             }
           }
         ],
@@ -123,7 +123,7 @@
                   ],
                   "model": {
                     "type": "minecraft:model",
-                    "model": "item/wooden_hoe"
+                    "model": "minecraft:item/wooden_hoe"
                   }
                 }
               ],

@@ -9,7 +9,7 @@
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"JC_CHARCOAL_6"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/dynatech/dynatech_coal_coke"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"SLAG"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/liquid/slag"}}
 	],
-	"fallback": {"type":"model","model":"item/charcoal"}
+	"fallback": {"type": "minecraft:model","model": "minecraft:item/charcoal"}
 	},
 	"oversized_in_gui": true
 }

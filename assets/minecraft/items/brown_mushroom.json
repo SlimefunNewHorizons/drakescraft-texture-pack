@@ -3,7 +3,7 @@
 	"cases": [
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"GN_CHOCOLATE_TRUFFLE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/gastronomicon/gn_fried_shrimp"}}
 	],
-	"fallback": {"type":"model","model":"item/brown_mushroom"}
+	"fallback": {"type": "minecraft:model","model": "minecraft:item/brown_mushroom"}
 	},
 	"oversized_in_gui": true
 }

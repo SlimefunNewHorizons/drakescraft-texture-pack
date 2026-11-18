@@ -17,7 +17,7 @@
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"JC_COAL_5"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/compressioncraft/jc_charcoal_5"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"JC_COAL_6"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/dynatech/dynatech_coal_coke"}}
 	],
-	"fallback": {"type":"model","model":"item/coal"}
+	"fallback": {"type": "minecraft:model","model": "minecraft:item/coal"}
 	},
 	"oversized_in_gui": true
 }

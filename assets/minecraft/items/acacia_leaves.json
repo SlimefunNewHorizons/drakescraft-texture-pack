@@ -17,7 +17,7 @@
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CLT_LEAVES_TREE_PECAN"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/elementmanipulation/em_leaves"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CLT_LEAVES_TREE_PINEAPPLE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/elementmanipulation/em_leaves"}}
 	],
-	"fallback": {"type":"model","model":"minecraft:block/acacia_leaves","tints":[{"type":"minecraft:constant","value":-12012264}]}
+	"fallback": {"type": "minecraft:model","model":"minecraft:block/acacia_leaves","tints":[{"type":"minecraft:constant","value":-12012264}]}
 	},
 	"oversized_in_gui": true
 }

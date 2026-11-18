@@ -16,7 +16,7 @@
           ],
           "model": {
             "type": "minecraft:model",
-            "model": "item/golden_pickaxe"
+            "model": "minecraft:item/golden_pickaxe"
           }
         }
       ],
@@ -85,7 +85,7 @@
                 ],
                 "model": {
                   "type": "minecraft:model",
-                  "model": "item/golden_pickaxe"
+                  "model": "minecraft:item/golden_pickaxe"
                 }
               }
             ],

@@ -13,7 +13,7 @@
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"JC_EMERALD_BLOCK_5"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/compressioncraft/jc_emerald_5"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"JC_EMERALD_BLOCK_6"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/dynatech/dynatech_synthetic_emeraldmineralized_apiary"}}
 	],
-	"fallback": {"type":"model","model":"block/emerald_block"}
+	"fallback": {"type": "minecraft:model","model": "minecraft:block/emerald_block"}
 	},
 	"oversized_in_gui": true
 }

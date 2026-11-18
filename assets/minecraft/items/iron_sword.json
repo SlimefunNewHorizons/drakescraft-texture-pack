@@ -55,7 +55,7 @@
             ],
             "model": {
               "type": "minecraft:model",
-              "model": "item/iron_sword"
+              "model": "minecraft:item/iron_sword"
             }
           }
         ],
@@ -605,7 +605,7 @@
                   ],
                   "model": {
                     "type": "minecraft:model",
-                    "model": "item/iron_sword"
+                    "model": "minecraft:item/iron_sword"
                   }
                 }
               ],

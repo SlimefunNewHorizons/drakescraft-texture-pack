@@ -129,7 +129,7 @@
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CLT_MASHED_WASABI"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/cultivation/clt_mashed_wasabi"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CLT_MASHED_WHEAT"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/cultivation/clt_mashed_wheat"}}
 	],
-	"fallback": {"type":"model","model":"item/suspicious_stew"}
+	"fallback": {"type": "minecraft:model","model": "minecraft:item/suspicious_stew"}
 	},
 	"oversized_in_gui": true
 }

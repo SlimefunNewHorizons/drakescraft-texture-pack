@@ -44,7 +44,7 @@
             ],
             "model": {
               "type": "minecraft:model",
-              "model": "item/netherite_shovel"
+              "model": "minecraft:item/netherite_shovel"
             }
           }
         ],
@@ -95,7 +95,7 @@
                   ],
                   "model": {
                     "type": "minecraft:model",
-                    "model": "item/netherite_shovel"
+                    "model": "minecraft:item/netherite_shovel"
                   }
                 }
               ],

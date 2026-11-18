@@ -175,7 +175,7 @@
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"STB_BREAKERMODULE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/sensibletoolbox/stb_hypersendermodule"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"STB_SILKYBREAKERMODULE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/sensibletoolbox/stb_hypersendermodule"}}
 	],
-	"fallback": {"type":"model","model":"item/yellow_dye"}
+	"fallback": {"type": "minecraft:model","model": "minecraft:item/yellow_dye"}
 	},
 	"oversized_in_gui": true
 }

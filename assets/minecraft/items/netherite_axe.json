@@ -16,7 +16,7 @@
           ],
           "model": {
             "type": "minecraft:model",
-            "model": "item/netherite_axe"
+            "model": "minecraft:item/netherite_axe"
           }
         }
       ],
@@ -96,7 +96,7 @@
                 ],
                 "model": {
                   "type": "minecraft:model",
-                  "model": "item/netherite_axe"
+                  "model": "minecraft:item/netherite_axe"
                 }
               }
             ],

@@ -55,7 +55,7 @@
             ],
             "model": {
               "type": "minecraft:model",
-              "model": "item/netherite_sword"
+              "model": "minecraft:item/netherite_sword"
             }
           }
         ],
@@ -227,7 +227,7 @@
                   ],
                   "model": {
                     "type": "minecraft:model",
-                    "model": "item/netherite_sword"
+                    "model": "minecraft:item/netherite_sword"
                   }
                 }
               ],

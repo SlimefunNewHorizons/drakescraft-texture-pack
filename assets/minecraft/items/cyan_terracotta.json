@@ -3,7 +3,7 @@
 	"cases": [
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"STB_PUMP"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/sensibletoolbox/stb_pump"}}
 	],
-	"fallback": {"type":"model","model":"block/cyan_terracotta"}
+	"fallback": {"type": "minecraft:model","model": "minecraft:block/cyan_terracotta"}
 	},
 	"oversized_in_gui": true
 }

@@ -3,7 +3,7 @@
 	"cases": [
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"WF_FLOWER_GEN"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimeframe/wf_flower_gen"}}
 	],
-	"fallback": {"type":"model","model":"block/dead_horn_coral_block"}
+	"fallback": {"type": "minecraft:model","model": "minecraft:block/dead_horn_coral_block"}
 	},
 	"oversized_in_gui": true
 }

@@ -3,7 +3,7 @@
 	"cases": [
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"SU_SMOOTH_CHARGED_QUARTZ_III"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/spiritsunchained/su_charged_quartz_iii"}}
 	],
-	"fallback": {"type":"model","model":"block/smooth_quartz"}
+	"fallback": {"type": "minecraft:model","model": "minecraft:block/smooth_quartz"}
 	},
 	"oversized_in_gui": true
 }

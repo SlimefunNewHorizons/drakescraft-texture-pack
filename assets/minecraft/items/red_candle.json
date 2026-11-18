@@ -3,7 +3,7 @@
 	"cases": [
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"NTW_CRAYON"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/networksv6_drake/ntw_controller"}}
 	],
-	"fallback": {"type":"model","model":"item/red_candle"}
+	"fallback": {"type": "minecraft:model","model": "minecraft:item/red_candle"}
 	},
 	"oversized_in_gui": true
 }

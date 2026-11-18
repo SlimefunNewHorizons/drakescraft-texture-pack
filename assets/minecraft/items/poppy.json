@@ -3,7 +3,7 @@
 	"cases": [
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"GLISTENING_POPPY"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/flowerpower/glistening_poppy"}}
 	],
-	"fallback": {"type":"model","model":"item/poppy"}
+	"fallback": {"type": "minecraft:model","model": "minecraft:item/poppy"}
 	},
 	"oversized_in_gui": true
 }

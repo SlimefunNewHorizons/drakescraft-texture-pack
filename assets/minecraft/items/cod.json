@@ -3,7 +3,7 @@
 	"cases": [
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"GN_TAIYAKI"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/gastronomicon/gn_fried_shrimp"}}
 	],
-	"fallback": {"type":"model","model":"item/cod"}
+	"fallback": {"type": "minecraft:model","model": "minecraft:item/cod"}
 	},
 	"oversized_in_gui": true
 }

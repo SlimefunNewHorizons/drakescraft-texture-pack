@@ -51,7 +51,7 @@
           ],
           "model": {
             "type": "minecraft:model",
-            "model": "item/golden_hoe"
+            "model": "minecraft:item/golden_hoe"
           }
         }
       ],

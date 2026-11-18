@@ -3,7 +3,7 @@
 	"cases": [
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"EM_EGG"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/foxymachines/pixie_queen_spawn_egg"}}
 	],
-	"fallback": {"type":"model","model":"item/egg"}
+	"fallback": {"type": "minecraft:model","model": "minecraft:item/egg"}
 	},
 	"oversized_in_gui": true
 }

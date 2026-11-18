@@ -7,7 +7,7 @@
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"FN_ORIENT_PEARL"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/fnamplifications/fn_orient_pearl"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"GCE_ENDER_PEARL_CHICKEN_ICON"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/fnamplifications/fn_orient_pearl"}}
 	],
-	"fallback": {"type":"model","model":"item/ender_pearl"}
+	"fallback": {"type": "minecraft:model","model": "minecraft:item/ender_pearl"}
 	},
 	"oversized_in_gui": true
 }

@@ -16,7 +16,7 @@
           ],
           "model": {
             "type": "minecraft:model",
-            "model": "item/stone_pickaxe"
+            "model": "minecraft:item/stone_pickaxe"
           }
         }
       ],
@@ -65,7 +65,7 @@
                 ],
                 "model": {
                   "type": "minecraft:model",
-                  "model": "item/stone_pickaxe"
+                  "model": "minecraft:item/stone_pickaxe"
                 }
               }
             ],

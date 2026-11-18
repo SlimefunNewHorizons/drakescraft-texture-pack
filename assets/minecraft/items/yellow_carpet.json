@@ -6,7 +6,7 @@
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"GOLD_PLATE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/litexpansion/gold_plate"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"MATERIAL_ELECTRUM_PLATE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/simplestorage/material_electrum_plate"}}
 	],
-	"fallback": {"type":"model","model":"block/yellow_carpet"}
+	"fallback": {"type": "minecraft:model","model": "minecraft:block/yellow_carpet"}
 	},
 	"oversized_in_gui": true
 }

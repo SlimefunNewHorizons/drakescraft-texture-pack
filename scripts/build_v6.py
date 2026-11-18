@@ -150,8 +150,7 @@ def main():
                     "cases": [{"when": FLAT, "model": {"type": "minecraft:model", "model": "minecraft:item/trident"}}],
                     "fallback": {"type": "minecraft:condition", "property": "minecraft:using_item",
                                  "on_false": M("trident_in_hand"), "on_true": M("trident_throwing")}},
-        "shield": {"type": "minecraft:condition", "property": "minecraft:using_item",
-                   "on_false": M("shield"), "on_true": M("shield_blocking")},
+
     }
     n_ranged = 0
     for id_, fb in ranged.items():

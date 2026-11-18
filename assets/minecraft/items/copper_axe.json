@@ -16,7 +16,7 @@
           ],
           "model": {
             "type": "minecraft:model",
-            "model": "item/copper_axe"
+            "model": "minecraft:item/copper_axe"
           }
         }
       ],
@@ -56,7 +56,7 @@
                 ],
                 "model": {
                   "type": "minecraft:model",
-                  "model": "item/copper_axe"
+                  "model": "minecraft:item/copper_axe"
                 }
               }
             ],

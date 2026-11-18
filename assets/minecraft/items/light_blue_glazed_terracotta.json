@@ -6,7 +6,7 @@
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"SUPREME_VENTUS_GENERATOR"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/supreme/supreme_tech_generator"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"WF_ARCANE_FLUX_DYNAMO"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimeframe/wf_basalt_gen"}}
 	],
-	"fallback": {"type":"model","model":"block/light_blue_glazed_terracotta"}
+	"fallback": {"type": "minecraft:model","model": "minecraft:block/light_blue_glazed_terracotta"}
 	},
 	"oversized_in_gui": true
 }

@@ -9,7 +9,7 @@
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"QP_INFUSED_FREQUENCY_CRYSTAL"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/netheopoiesis/nps_harmonised_crystal_water"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"WF_SALVAGE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimeframe/wf_travoride"}}
 	],
-	"fallback": {"type":"model","model":"item/prismarine_crystals"}
+	"fallback": {"type": "minecraft:model","model": "minecraft:item/prismarine_crystals"}
 	},
 	"oversized_in_gui": true
 }

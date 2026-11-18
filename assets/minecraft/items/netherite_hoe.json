@@ -51,7 +51,7 @@
           ],
           "model": {
             "type": "minecraft:model",
-            "model": "item/netherite_hoe"
+            "model": "minecraft:item/netherite_hoe"
           }
         }
       ],

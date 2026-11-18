@@ -33,7 +33,7 @@
             ],
             "model": {
               "type": "minecraft:model",
-              "model": "item/stone_axe"
+              "model": "minecraft:item/stone_axe"
             }
           }
         ],
@@ -73,7 +73,7 @@
                   ],
                   "model": {
                     "type": "minecraft:model",
-                    "model": "item/stone_axe"
+                    "model": "minecraft:item/stone_axe"
                   }
                 }
               ],

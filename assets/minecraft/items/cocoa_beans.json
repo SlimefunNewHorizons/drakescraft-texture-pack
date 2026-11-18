@@ -5,7 +5,7 @@
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"DRUG_MORPHINE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimefun/filled_flask_of_knowledge"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"EM_COCOA"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/elementmanipulation/em_cocoa"}}
 	],
-	"fallback": {"type":"model","model":"item/cocoa_beans"}
+	"fallback": {"type": "minecraft:model","model": "minecraft:item/cocoa_beans"}
 	},
 	"oversized_in_gui": true
 }

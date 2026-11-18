@@ -17,7 +17,7 @@
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"MULTI_FUNCTIONAL_STORAGE_UNIT"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/litexpansion/multi_functional_electric_storage_unit"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"WF_PRISMATIC_ENERGIZED_CORE"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimeframe/wf_prismatic_energized_core"}}
 	],
-	"fallback": {"type":"model","model":"block/diamond_block"}
+	"fallback": {"type": "minecraft:model","model": "minecraft:block/diamond_block"}
 	},
 	"oversized_in_gui": true
 }
