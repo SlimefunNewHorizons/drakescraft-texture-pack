@@ -32,8 +32,26 @@
       "property": "minecraft:custom_model_data",
       "index": 0,
       "fallback": {
-        "type": "minecraft:model",
-        "model": "item/iron_pickaxe"
+        "type": "minecraft:select",
+        "property": "minecraft:display_context",
+        "cases": [
+          {
+            "when": [
+              "gui",
+              "ground",
+              "fixed",
+              "on_shelf"
+            ],
+            "model": {
+              "type": "minecraft:model",
+              "model": "item/iron_pickaxe"
+            }
+          }
+        ],
+        "fallback": {
+          "type": "minecraft:model",
+          "model": "drakescraft:item/gear3d/iron_pickaxe"
+        }
       },
       "entries": [
         {
@@ -143,8 +161,26 @@
               }
             ],
             "fallback": {
-              "type": "minecraft:model",
-              "model": "item/iron_pickaxe"
+              "type": "minecraft:select",
+              "property": "minecraft:display_context",
+              "cases": [
+                {
+                  "when": [
+                    "gui",
+                    "ground",
+                    "fixed",
+                    "on_shelf"
+                  ],
+                  "model": {
+                    "type": "minecraft:model",
+                    "model": "item/iron_pickaxe"
+                  }
+                }
+              ],
+              "fallback": {
+                "type": "minecraft:model",
+                "model": "drakescraft:item/gear3d/iron_pickaxe"
+              }
             }
           }
         }

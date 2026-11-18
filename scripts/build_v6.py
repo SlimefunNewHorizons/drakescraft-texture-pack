@@ -28,43 +28,6 @@ ADD_EXACT = ("assets/minecraft/font/terralense_hud.json", "assets/minecraft/font
 GEAR_PREFIX = "assets/minecraft/items/"
 
 
-TOOL_STEMS = {
-    "chainmail_sword", "copper_sword", "diamond_sword", "golden_sword", "iron_sword", "netherite_sword", "stone_sword", "wooden_sword",
-    "chainmail_axe", "copper_axe", "diamond_axe", "golden_axe", "iron_axe", "netherite_axe", "stone_axe", "wooden_axe",
-    "chainmail_pickaxe", "copper_pickaxe", "diamond_pickaxe", "golden_pickaxe", "iron_pickaxe", "netherite_pickaxe", "stone_pickaxe", "wooden_pickaxe",
-    "copper_shovel", "diamond_shovel", "golden_shovel", "iron_shovel", "netherite_shovel", "stone_shovel", "wooden_shovel",
-    "copper_hoe", "diamond_hoe", "golden_hoe", "iron_hoe", "netherite_hoe", "stone_hoe", "wooden_hoe",
-    "chainmail_spear", "copper_spear", "diamond_spear", "golden_spear", "iron_spear", "netherite_spear", "stone_spear", "wooden_spear",
-    "mace", "copper_mace", "diamond_mace", "golden_mace", "netherite_mace", "stone_mace", "wooden_mace",
-    "trident", "shears", "flint_and_steel", "fishing_rod", "fishing_rod_cast"
-}
-
-
-def unwrap_tool_item(path, data):
-    """Limpia cualquier referencia residual a gear3d, restaurando el modelo vanilla 3D en mano."""
-    id_ = Path(path).stem
-    changed = 0
-
-    def unwrap(o):
-        nonlocal changed
-        if isinstance(o, dict):
-            if o.get("type") == "minecraft:select" and o.get("property") == "minecraft:display_context":
-                fb = o.get("fallback", {})
-                if isinstance(fb, dict) and isinstance(fb.get("model"), str) and "gear3d" in fb["model"]:
-                    changed += 1
-                    return {"type": "minecraft:model", "model": f"item/{id_}"}
-            if isinstance(o.get("model"), str) and "gear3d" in o["model"]:
-                changed += 1
-                return {"type": "minecraft:model", "model": f"item/{id_}"}
-            return {k: unwrap(v) for k, v in o.items()}
-        elif isinstance(o, list):
-            return [unwrap(v) for v in o]
-        return o
-
-    res = unwrap(data)
-    return res, changed
-
-
 def merge_sounds(base, repo):
     out = dict(base)
     n = 0
@@ -104,12 +67,6 @@ def main():
         rel = p.relative_to(repo).as_posix()
         if rel in ADD_EXACT or rel.startswith(ADD_PREFIXES):
             if rel == "assets/minecraft/sounds.json":
-                continue
-            if rel.startswith("assets/minecraft/textures/item/") and p.stem in TOOL_STEMS:
-                continue
-            if rel.startswith("assets/minecraft/models/item/") and p.stem in TOOL_STEMS:
-                continue
-            if rel == "assets/minecraft/items/mace.json":
                 continue
             add[rel] = p.read_bytes()
     report = {}
@@ -161,29 +118,56 @@ def main():
     add["assets/minecraft/items/player_head.json"] = json.dumps(bh, ensure_ascii=False, indent=1).encode()
     report["cabezas_nuevas_por_id"] = len(new)
 
-    # Anadir directamente todos los items/*.json limpios y canonicos del repo (mace.json queda excluido)
+    # Anadir directamente todos los items/*.json del repo (con modelos 3D gear3d en mano y HD en GUI)
     items_repo_count = 0
     for p in sorted((repo / "assets/minecraft/items").glob("*.json")):
-        if p.name == "mace.json":
-            continue
         path = f"{GEAR_PREFIX}{p.name}"
         add[path] = p.read_bytes()
         items_repo_count += 1
     report["items_json_repo_anadidos"] = items_repo_count
 
-    # Limpiar y desenvolver cualquier herramienta residual del base que use gear3d
-    unwrapped = 0
-    for path in names:
-        if path.startswith(GEAR_PREFIX) and path.endswith(".json") and path not in add:
-            try:
-                d = json.loads(base.read(path))
-                clean_d, n_c = unwrap_tool_item(path, d)
-                if n_c > 0:
-                    add[path] = json.dumps(clean_d, ensure_ascii=False, indent=1).encode()
-                    unwrapped += 1
-            except Exception:
-                pass
-    report["items_herramienta_desenvueltos_sin_gear3d"] = unwrapped
+    # arco/ballesta/tridente/escudo 3D en mano
+    def M(n): return {"type": "minecraft:model", "model": f"drakescraft:item/gear3d/{n}"}
+    FLAT = ["gui", "ground", "fixed", "on_shelf"]
+    def flat_or(m3d, flat):
+        return {"type": "minecraft:select", "property": "minecraft:display_context",
+                "cases": [{"when": FLAT, "model": {"type": "minecraft:model", "model": flat}}], "fallback": m3d}
+    ranged = {
+        "bow": {"type": "minecraft:condition", "property": "minecraft:using_item",
+                "on_true": {"type": "minecraft:range_dispatch", "property": "minecraft:use_duration", "scale": 0.05,
+                            "entries": [{"threshold": 0.65, "model": M("bow_pull_1")}, {"threshold": 0.9, "model": M("bow_pull_2")}],
+                            "fallback": M("bow_pull_0")},
+                "on_false": flat_or(M("bow"), "minecraft:item/bow")},
+        "crossbow": {"type": "minecraft:condition", "property": "minecraft:using_item",
+                     "on_true": {"type": "minecraft:range_dispatch", "property": "minecraft:crossbow/pull",
+                                 "entries": [{"threshold": 0.58, "model": M("crossbow_pull_1")}, {"threshold": 1.0, "model": M("crossbow_pull_2")}],
+                                 "fallback": M("crossbow_pull_0")},
+                     "on_false": {"type": "minecraft:select", "property": "minecraft:charge_type",
+                                  "cases": [{"when": "arrow", "model": flat_or(M("crossbow_arrow"), "minecraft:item/crossbow_arrow")},
+                                            {"when": "rocket", "model": flat_or(M("crossbow_firework"), "minecraft:item/crossbow_firework")}],
+                                  "fallback": flat_or(M("crossbow"), "minecraft:item/crossbow")}},
+        "trident": {"type": "minecraft:select", "property": "minecraft:display_context",
+                    "cases": [{"when": FLAT, "model": {"type": "minecraft:model", "model": "minecraft:item/trident"}}],
+                    "fallback": {"type": "minecraft:condition", "property": "minecraft:using_item",
+                                 "on_false": M("trident_in_hand"), "on_true": M("trident_throwing")}},
+        "shield": {"type": "minecraft:condition", "property": "minecraft:using_item",
+                   "on_false": M("shield"), "on_true": M("shield_blocking")},
+    }
+    n_ranged = 0
+    for id_, fb in ranged.items():
+        path = f"{GEAR_PREFIX}{id_}.json"
+        src = add[path] if path in add else (base.read(path) if path in names else None)
+        if src is None:
+            continue
+        d = json.loads(src)
+        m = d["model"]
+        if m.get("component") in ("custom_data", "minecraft:custom_data") and "cases" in m:
+            m["fallback"] = fb
+        else:
+            d["model"] = fb
+        add[path] = json.dumps(d, ensure_ascii=False, indent=1).encode()
+        n_ranged += 1
+    report["items_ranged_3d"] = n_ranged
 
     # Slimefun por id (procedural): select por custom_data de ids nuevos; el modelo del BASE pasa a ser el fallback
     proc = 0
@@ -318,16 +302,7 @@ def main():
         for info in base.infolist():
             if info.filename in add:
                 continue
-            # Erradicar estrictamente overrides de bloques vanilla, modelos planos gear3d, mace y herramientas vanilla
             if info.filename.startswith("assets/minecraft/textures/block/"):
-                continue
-            if "gear3d" in info.filename:
-                continue
-            if info.filename == "assets/minecraft/items/mace.json":
-                continue
-            if info.filename.startswith("assets/minecraft/textures/item/") and Path(info.filename).stem in TOOL_STEMS:
-                continue
-            if info.filename.startswith("assets/minecraft/models/item/") and Path(info.filename).stem in TOOL_STEMS:
                 continue
             if info.filename in ("assets/minecraft/items/chain.json",
                                  "assets/minecraft/items/chiseled_bookshelf.json",
@@ -339,14 +314,6 @@ def main():
         dt = base.getinfo("pack.mcmeta").date_time
         for n_, b in sorted(add.items()):
             if n_.startswith("assets/minecraft/textures/block/"):
-                continue
-            if "gear3d" in n_:
-                continue
-            if n_ == "assets/minecraft/items/mace.json":
-                continue
-            if n_.startswith("assets/minecraft/textures/item/") and Path(n_).stem in TOOL_STEMS:
-                continue
-            if n_.startswith("assets/minecraft/models/item/") and Path(n_).stem in TOOL_STEMS:
                 continue
             zi = zipfile.ZipInfo(n_, date_time=dt)
             zi.compress_type = zipfile.ZIP_DEFLATED

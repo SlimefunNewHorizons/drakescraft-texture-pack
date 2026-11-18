@@ -50,8 +50,26 @@
       }
     ],
     "fallback": {
-      "type": "minecraft:model",
-      "model": "item/iron_shovel"
+      "type": "minecraft:select",
+      "property": "minecraft:display_context",
+      "cases": [
+        {
+          "when": [
+            "gui",
+            "ground",
+            "fixed",
+            "on_shelf"
+          ],
+          "model": {
+            "type": "minecraft:model",
+            "model": "item/iron_shovel"
+          }
+        }
+      ],
+      "fallback": {
+        "type": "minecraft:model",
+        "model": "drakescraft:item/gear3d/iron_shovel"
+      }
     }
   },
   "oversized_in_gui": true

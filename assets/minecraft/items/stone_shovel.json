@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "item/stone_shovel"
+    "model": "drakescraft:item/gear3d/stone_shovel"
   }
 }

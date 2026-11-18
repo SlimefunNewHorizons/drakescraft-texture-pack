@@ -4,8 +4,26 @@
     "property": "minecraft:custom_model_data",
     "index": 0,
     "fallback": {
-      "type": "minecraft:model",
-      "model": "item/netherite_axe"
+      "type": "minecraft:select",
+      "property": "minecraft:display_context",
+      "cases": [
+        {
+          "when": [
+            "gui",
+            "ground",
+            "fixed",
+            "on_shelf"
+          ],
+          "model": {
+            "type": "minecraft:model",
+            "model": "item/netherite_axe"
+          }
+        }
+      ],
+      "fallback": {
+        "type": "minecraft:model",
+        "model": "drakescraft:item/gear3d/netherite_axe"
+      }
     },
     "entries": [
       {
@@ -66,8 +84,26 @@
             }
           ],
           "fallback": {
-            "type": "minecraft:model",
-            "model": "item/netherite_axe"
+            "type": "minecraft:select",
+            "property": "minecraft:display_context",
+            "cases": [
+              {
+                "when": [
+                  "gui",
+                  "ground",
+                  "fixed",
+                  "on_shelf"
+                ],
+                "model": {
+                  "type": "minecraft:model",
+                  "model": "item/netherite_axe"
+                }
+              }
+            ],
+            "fallback": {
+              "type": "minecraft:model",
+              "model": "drakescraft:item/gear3d/netherite_axe"
+            }
           }
         }
       }
