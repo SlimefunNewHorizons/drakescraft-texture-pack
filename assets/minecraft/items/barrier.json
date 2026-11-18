@@ -1,22 +1,140 @@
 {
-	"model": {
-	"type": "minecraft:range_dispatch",
-	"property": "minecraft:custom_model_data",
-	"index": 0,
-	"fallback": {
-		"type": "minecraft:model",
-		"model": "minecraft:item/barrier"},
-
-
-	"entries": [
-	{"threshold": 0, "model": {"type": "minecraft:select", "property": "minecraft:component", "component": "minecraft:written_book_content",
-	"cases": [
-		{"when": [{"title": {"raw": "LOCKED"},"author": ""}], "model": {"type": "minecraft:model", "model": "slimefun/0_ui/ui_locked"}}
-	],
-
-
-	"fallback": {"type": "minecraft:model","model": "minecraft:item/barrier"}}}
-    ]
+  "model": {
+    "type": "minecraft:select",
+    "property": "minecraft:component",
+    "component": "minecraft:custom_data",
+    "cases": [
+      {
+        "when": {
+          "PublicBukkitValues": {
+            "slimefun:slimefun_item": "_UI_NOT_RESEARCHED"
+          }
+        },
+        "model": {
+          "type": "minecraft:model",
+          "model": "slimefun/0_ui/ui_locked"
+        }
+      },
+      {
+        "when": {
+          "PublicBukkitValues": {
+            "slimefun:slimefun_item": "_UI_NO_PERMISSION"
+          }
+        },
+        "model": {
+          "type": "minecraft:model",
+          "model": "slimefun/0_ui/ui_locked"
+        }
+      }
+    ],
+    "fallback": {
+      "type": "minecraft:range_dispatch",
+      "property": "minecraft:custom_model_data",
+      "index": 0,
+      "entries": [
+        {
+          "threshold": 3000002,
+          "model": {
+            "type": "minecraft:model",
+            "model": "slimefun/0_ui/ui_locked"
+          }
+        },
+        {
+          "threshold": 3000004,
+          "model": {
+            "type": "minecraft:model",
+            "model": "minecraft:item/barrier"
+          }
+        }
+      ],
+      "fallback": {
+        "type": "minecraft:select",
+        "property": "minecraft:component",
+        "component": "minecraft:custom_name",
+        "cases": [
+          {
+            "when": {
+              "text": "Not researched"
+            },
+            "model": {
+              "type": "minecraft:model",
+              "model": "slimefun/0_ui/ui_locked"
+            }
+          },
+          {
+            "when": {
+              "text": "No Permission"
+            },
+            "model": {
+              "type": "minecraft:model",
+              "model": "slimefun/0_ui/ui_locked"
+            }
+          },
+          {
+            "when": {
+              "text": "",
+              "extra": [
+                {
+                  "text": "Not researched",
+                  "obfuscated": false,
+                  "italic": false,
+                  "underlined": false,
+                  "strikethrough": false,
+                  "color": "white",
+                  "bold": false
+                }
+              ]
+            },
+            "model": {
+              "type": "minecraft:model",
+              "model": "slimefun/0_ui/ui_locked"
+            }
+          },
+          {
+            "when": {
+              "text": "",
+              "extra": [
+                {
+                  "text": "No Permission",
+                  "obfuscated": false,
+                  "italic": false,
+                  "underlined": false,
+                  "strikethrough": false,
+                  "color": "white",
+                  "bold": false
+                }
+              ]
+            },
+            "model": {
+              "type": "minecraft:model",
+              "model": "slimefun/0_ui/ui_locked"
+            }
+          },
+          {
+            "when": {
+              "text": "LOCKED"
+            },
+            "model": {
+              "type": "minecraft:model",
+              "model": "slimefun/0_ui/ui_locked"
+            }
+          },
+          {
+            "when": {
+              "text": "BLOQUEADO"
+            },
+            "model": {
+              "type": "minecraft:model",
+              "model": "slimefun/0_ui/ui_locked"
+            }
+          }
+        ],
+        "fallback": {
+          "type": "minecraft:model",
+          "model": "minecraft:item/barrier"
+        }
+      }
+    }
   },
   "oversized_in_gui": true
 }

@@ -1,6 +1,6 @@
 {
 	"credit": "DrakesCraft Labs (Jackstar); basado en pack comunitario Racingsky",
-	"parent": "item/generated",
+	"parent": "minecraft:item/generated",
 	"textures": {
 		"layer0": "slimefun:item/0_ui/ui_locked"
 	},

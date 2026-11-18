@@ -5,3 +5,6 @@ target/
 .gradle/
 __pycache__/
 build/
+
+*.zip
+*.sha1
