@@ -301,7 +301,9 @@ def main():
         for info in base.infolist():
             if info.filename in add:
                 continue
-            if info.filename.startswith("assets/minecraft/textures/block/"):
+            # Politica de Jack (2026-11-20): el pack NO toca bloques vanilla (texturas, modelos ni blockstates); solo herramientas,
+            # armas, armaduras, scoreboard, tab, rangos, Slimefun, interfaces y botones.
+            if info.filename.startswith(("assets/minecraft/textures/block/", "assets/minecraft/models/block/", "assets/minecraft/blockstates/")):
                 continue
             if info.filename in ("assets/minecraft/items/chain.json",
                                  "assets/minecraft/items/chiseled_bookshelf.json",
