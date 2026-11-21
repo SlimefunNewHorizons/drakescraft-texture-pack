@@ -1,8 +1,11 @@
 import hashlib
 import json
+import subprocess
+import sys
 from pathlib import Path
 import tempfile
 import unittest
+from unittest.mock import patch
 import zipfile
 
 from build_t2_pack import build, OVERLAY
@@ -67,11 +70,84 @@ class LegacyShaderIsolationTests(unittest.TestCase):
         self.assertEqual(first, self.output.read_bytes())
         self.assertEqual(hashlib.sha256(self.base.read_bytes()).hexdigest(), digest)
 
+    def test_corrupt_member_with_matching_archive_hash_preserves_previous_output(self):
+        self.write_base()
+        raw = self.base.read_bytes()
+        self.assertEqual(raw.count(b"texture bytes"), 1)
+        self.base.write_bytes(raw.replace(b"texture bytes", b"Texture bytes"))
+        digest = hashlib.sha256(self.base.read_bytes()).hexdigest()
+        for previous in (None, b"previous verified candidate"):
+            with self.subTest(previous_output=previous is not None):
+                if previous is not None:
+                    self.output.write_bytes(previous)
+                with self.assertRaisesRegex(ValueError, "CRC"):
+                    build(self.base, self.output, digest)
+                if previous is None:
+                    self.assertFalse(self.output.exists())
+                else:
+                    self.assertEqual(self.output.read_bytes(), previous)
+                self.assertEqual(hashlib.sha256(self.base.read_bytes()).hexdigest(), digest)
+
     def test_rejects_unaudited_overlay_shaders(self):
         self.entries["modern/assets/minecraft/shaders/core/item.fsh"] = b"legacy shader"
         with self.assertRaisesRegex(ValueError, "Audit shaders"):
             build(self.base, self.output, self.write_base())
         self.assertFalse(self.output.exists())
+
+    def test_write_failure_or_interruption_preserves_output_and_cleans_staging(self):
+        digest = self.write_base()
+        original_write = zipfile.ZipFile.writestr
+        for error in (OSError("disk full"), KeyboardInterrupt()):
+            for existing in (False, True):
+                with self.subTest(error=type(error).__name__, existing=existing):
+                    if existing:
+                        self.output.write_bytes(b"previous candidate")
+                    else:
+                        self.output.unlink(missing_ok=True)
+                    before = set(self.base.parent.iterdir())
+
+                    def fail_after_write(target, *args, **kwargs):
+                        original_write(target, *args, **kwargs)
+                        raise error
+
+                    with patch.object(zipfile.ZipFile, "writestr", fail_after_write):
+                        with self.assertRaises(type(error)):
+                            build(self.base, self.output, digest)
+                    self.assertEqual(set(self.base.parent.iterdir()), before)
+                    if existing:
+                        self.assertEqual(self.output.read_bytes(), b"previous candidate")
+                    else:
+                        self.assertFalse(self.output.exists())
+                    self.assertEqual(hashlib.sha256(self.base.read_bytes()).hexdigest(), digest)
+
+    def test_replace_failure_preserves_candidate_and_cleans_staging(self):
+        digest = self.write_base()
+        self.output.write_bytes(b"previous candidate")
+        before = set(self.base.parent.iterdir())
+        with patch.object(Path, "replace", side_effect=PermissionError("replacement denied")):
+            with self.assertRaises(PermissionError):
+                build(self.base, self.output, digest)
+        self.assertEqual(self.output.read_bytes(), b"previous candidate")
+        self.assertEqual(set(self.base.parent.iterdir()), before)
+
+    def test_candidate_is_replaced_only_after_zip_is_complete(self):
+        digest = self.write_base()
+        self.output.write_bytes(b"previous candidate")
+        before = set(self.base.parent.iterdir())
+        original_replace = Path.replace
+
+        def verify_then_replace(candidate, destination):
+            self.assertEqual(destination.read_bytes(), b"previous candidate")
+            self.assertEqual(candidate.parent.parent, destination.parent)
+            with zipfile.ZipFile(candidate) as archive:
+                self.assertIsNone(archive.testzip())
+                self.assertEqual(len(archive.namelist()), len(self.entries))
+            return original_replace(candidate, destination)
+
+        with patch.object(Path, "replace", verify_then_replace):
+            result = build(self.base, self.output, digest)
+        self.assertEqual(set(self.base.parent.iterdir()), before)
+        self.assertEqual(hashlib.sha1(self.output.read_bytes()).hexdigest(), result["sha1"])
 
     def test_language_patch_preserves_other_keys_resources_and_placeholders(self):
         en = "assets/stellarity/lang/en_us.json"
@@ -269,6 +345,375 @@ class LegacyShaderIsolationTests(unittest.TestCase):
             self.assertEqual(z.read("assets/minecraft/font/default.json"), b'{"providers": []}')
             self.assertNotIn("assets/terralense/pack.mcmeta", names)
         self.assertEqual(len(result["legacy_shaders"]), 2)
+
+    def test_required_missing_model_rejects_overlay_and_fallback(self):
+        self.add_legacy_carrier()
+        name = "assets/svm/models/item/power3.json"
+        self.entries["modern/" + name] = self.entries.pop(name)
+        digest = self.write_base()
+        for existing in (False, True):
+            with self.subTest(existing=existing):
+                if existing:
+                    self.output.write_bytes(b"previous artifact")
+                with self.assertRaisesRegex(ValueError, "Missing required model"):
+                    build(self.base, self.output, digest, legacy_item_bridges=["red_dye"],
+                          missing_model_fallbacks={"svm:item/power3": "svm:item/power7"},
+                          required_models=["svm:item/power3"])
+                if existing:
+                    self.assertEqual(self.output.read_bytes(), b"previous artifact")
+                else:
+                    self.assertFalse(self.output.exists())
+
+    def test_required_models_use_final_bytes_and_record_hashes(self):
+        first = "assets/svm/models/item/first.json"
+        second = "assets/svm/models/item/second.json"
+        original = b'{"parent":"minecraft:item/generated"}'
+        restored = b'{"parent":"minecraft:item/handheld","textures":{"layer0":"svm:item/test"}}'
+        self.entries["assets/svm/items/required.json"] = b'{"model":{"model":"svm:item/first","fallback":{"model":"svm:item/second"}}}'
+        self.entries[first] = original
+        self.entries[second] = b"broken JSON"
+        result = build(self.base, self.output, self.write_base(), extra_files={second: restored},
+                       required_models=["svm:item/first", "svm:item/second"])
+        self.assertEqual(result["required_models_sha256"], {
+            "svm:item/first": hashlib.sha256(original).hexdigest(),
+            "svm:item/second": hashlib.sha256(restored).hexdigest()})
+        with zipfile.ZipFile(self.output) as z:
+            self.assertEqual(z.read(first), original)
+            self.assertEqual(z.read(second), restored)
+        del self.entries[second]
+        build(self.base, self.output, self.write_base(), extra_files={second: restored},
+              required_models=["svm:item/second"])
+        with zipfile.ZipFile(self.output) as z:
+            self.assertEqual(z.read(second), restored)
+
+    def test_required_invalid_json_and_replacements_preserve_output(self):
+        name = "assets/svm/models/item/first.json"
+        for data in (b"broken JSON", b"[]", b"null", b"{}", b"\xff"):
+            for replacement in (False, True):
+                with self.subTest(data=data, replacement=replacement):
+                    self.entries[name] = b'{"parent":"minecraft:item/generated"}' if replacement else data
+                    self.output.write_bytes(b"previous artifact")
+                    with self.assertRaisesRegex(ValueError, "required model"):
+                        build(self.base, self.output, self.write_base(),
+                              extra_files={name: data} if replacement else None,
+                              required_models=["svm:item/first"])
+                    self.assertEqual(self.output.read_bytes(), b"previous artifact")
+
+    def test_required_model_rejects_unsafe_references_before_output(self):
+        digest = self.write_base()
+        for reference in ("item/first", "svm:../first", "svm:item//first", "SVM:item/first",
+                          "svm:item/./first", "svm:item/", "svm:item\\first"):
+            with self.subTest(reference=reference):
+                with self.assertRaisesRegex(ValueError, "Invalid required model reference"):
+                    build(self.base, self.output, digest, required_models=[reference])
+                self.assertFalse(self.output.exists())
+
+    def test_require_model_cli_rejects_missing_and_accepts_repeated_models(self):
+        digest = self.write_base()
+        command = [sys.executable, str(Path(__file__).with_name("build_t2_pack.py")),
+                   "--base", str(self.base), "--base-sha256", digest, "--output", str(self.output)]
+        rejected = subprocess.run(command + ["--require-model", "svm:item/absent"], capture_output=True)
+        self.assertNotEqual(rejected.returncode, 0)
+        self.assertIn(b"Missing required model", rejected.stderr)
+        self.assertFalse(self.output.exists())
+        self.entries["assets/svm/items/required.json"] = b'{"model":{"model":"svm:item/first","fallback":{"model":"svm:item/second"}}}'
+        for model in ("first", "second"):
+            self.entries[f"assets/svm/models/item/{model}.json"] = b'{"parent":"minecraft:item/generated"}'
+        command[command.index("--base-sha256") + 1] = self.write_base()
+        accepted = subprocess.run(command + ["--require-model", "svm:item/first",
+                                              "--require-model", "svm:item/second"], capture_output=True)
+        self.assertEqual(accepted.returncode, 0, accepted.stderr)
+        self.assertEqual(set(json.loads(accepted.stdout)["required_models_sha256"]),
+                         {"svm:item/first", "svm:item/second"})
+
+    def test_required_model_rejects_orphan_and_non_resource_references(self):
+        model = "assets/minecraft/models/item/custom/item/fire_katana.json"
+        self.entries[model] = b'{"elements":[]}'
+        original_entries = dict(self.entries)
+        for path in (None, "assets/minecraft/lang/es_es.json",
+                     "assets/minecraft/font/default.json", "assets/minecraft/sounds.json",
+                     "undeclared/assets/minecraft/items/test.json"):
+            with self.subTest(path=path):
+                self.entries = dict(original_entries)
+                if path:
+                    self.entries[path] = b'{"model":"minecraft:item/custom/item/fire_katana"}'
+                self.output.write_bytes(b"previous artifact")
+                with self.assertRaisesRegex(ValueError, "Unreferenced required model"):
+                    build(self.base, self.output, self.write_base(),
+                          required_models=["minecraft:item/custom/item/fire_katana"])
+                self.assertEqual(self.output.read_bytes(), b"previous artifact")
+
+    def test_required_model_self_reference_is_not_incoming(self):
+        model = "assets/svm/models/item/first.json"
+        self.entries[model] = b'{"parent":"svm:item/first"}'
+        self.entries["modern/" + model] = self.entries[model]
+        with self.assertRaisesRegex(ValueError, "Unreferenced required model"):
+            build(self.base, self.output, self.write_base(), required_models=["svm:item/first"])
+        self.assertFalse(self.output.exists())
+
+    def test_required_model_reference_uses_final_replacements(self):
+        self.entries["assets/svm/models/item/first.json"] = b'{"elements":[]}'
+        item = "assets/svm/items/selected.json"
+        self.entries[item] = b'{"model":{"model":"svm:item/first"}}'
+        self.output.write_bytes(b"previous artifact")
+        with self.assertRaisesRegex(ValueError, "Unreferenced required model"):
+            build(self.base, self.output, self.write_base(),
+                  extra_files={item: b'{"model":{"model":"svm:item/other"}}'},
+                  required_models=["svm:item/first"])
+        self.assertEqual(self.output.read_bytes(), b"previous artifact")
+
+    def test_required_model_accepts_modern_override_parent_and_declared_overlay(self):
+        self.entries["assets/minecraft/models/item/first.json"] = b'{"elements":[]}'
+        cases = {
+            "assets/minecraft/items/selected.json": b'{"model":{"model":"item/first"}}',
+            "assets/minecraft/models/item/test.json": b'{"overrides":[{"model":"minecraft:item/first"}]}',
+            "modern/assets/minecraft/models/item/test.json": b'{"parent":"minecraft:item/first"}',
+            "modern/assets/minecraft/items/selected.json": b'{"model":{"model":"minecraft:item/fi\\u0072st"}}',
+        }
+        original_entries = dict(self.entries)
+        for path, payload in cases.items():
+            with self.subTest(path=path):
+                self.entries = {**original_entries, path: payload}
+                result = build(self.base, self.output, self.write_base(),
+                               required_models=["minecraft:item/first"])
+                self.assertEqual(result["required_model_references"], {"minecraft:item/first": [path]})
+
+    def test_required_model_ignores_invalid_reference_json(self):
+        self.entries["assets/svm/models/item/first.json"] = b'{"elements":[]}'
+        for data in (b'broken svm:item/first', b'{"model":"svm:item/first"', b'\xff'):
+            with self.subTest(data=data):
+                with self.assertRaisesRegex(ValueError, "Unreferenced required model"):
+                    build(self.base, self.output, self.write_base(),
+                          extra_files={"assets/svm/items/test.json": data},
+                          required_models=["svm:item/first"])
+                self.assertFalse(self.output.exists())
+
+    def test_required_model_parent_cycles_preserve_output(self):
+        required = "minecraft:item/first"
+        item = "assets/minecraft/items/selected.json"
+        first = "assets/minecraft/models/item/first.json"
+        second = "assets/minecraft/models/item/second.json"
+        third = "assets/minecraft/models/item/third.json"
+        self.entries[item] = b'{"model":{"model":"minecraft:item/first"}}'
+        cases = [
+            {first: b'{"parent":"item/first"}'},
+            {first: b'{"parent":"minecraft:item/second"}',
+             second: b'{"parent":"item/first"}'},
+            {first: b'{"parent":"item/second"}', second: b'{"parent":"item/third"}',
+             third: b'{"parent":"minecraft:item/first"}'},
+        ]
+        for models in cases:
+            for existing in (False, True):
+                with self.subTest(models=len(models), existing=existing):
+                    self.output.unlink(missing_ok=True)
+                    if existing:
+                        self.output.write_bytes(b"verified candidate")
+                    before = set(self.base.parent.iterdir())
+                    digest = self.write_base()
+                    with self.assertRaisesRegex(ValueError, "Required model parent cycle"):
+                        build(self.base, self.output, digest, extra_files=models,
+                              required_models=[required])
+                    # Writing the fixture creates base.zip on the first case.
+                    self.assertEqual(set(self.base.parent.iterdir()), before | {self.base})
+                    if existing:
+                        self.assertEqual(self.output.read_bytes(), b"verified candidate")
+                    else:
+                        self.assertFalse(self.output.exists())
+
+    def test_parent_chain_uses_final_replacements_and_allows_vanilla_terminal(self):
+        first = "assets/svm/models/item/first.json"
+        second = "assets/svm/models/item/second.json"
+        self.entries[first] = b'{"parent":"svm:item/second"}'
+        self.entries[second] = b'{"parent":"svm:item/first"}'
+        self.entries["assets/svm/items/selected.json"] = b'{"model":{"model":"svm:item/first"}}'
+        digest = self.write_base()
+        result = build(self.base, self.output, digest,
+                       extra_files={second: b'{"parent":"item/generated"}'},
+                       required_models=["svm:item/first"])
+        self.assertEqual(result["required_model_parent_chains"],
+                         {"svm:item/first": ["svm:item/first", "svm:item/second", "minecraft:item/generated"]})
+        with zipfile.ZipFile(self.output) as archive:
+            self.assertEqual(archive.read(second), b'{"parent":"item/generated"}')
+
+    def test_invalid_parent_dependency_rejected_before_output(self):
+        self.entries["assets/svm/models/item/first.json"] = b'{"parent":"svm:item/second"}'
+        self.entries["assets/svm/items/selected.json"] = b'{"model":{"model":"svm:item/first"}}'
+        for content in (b'broken', b'[]', b'{"parent":42}', b'{"parent":"item/../first"}'):
+            with self.subTest(content=content):
+                self.output.write_bytes(b"verified candidate")
+                with self.assertRaisesRegex(ValueError, "required model parent"):
+                    build(self.base, self.output, self.write_base(),
+                          extra_files={"assets/svm/models/item/second.json": content},
+                          required_models=["svm:item/first"])
+                self.assertEqual(self.output.read_bytes(), b"verified candidate")
+
+    def test_overlay_substitutions_preserve_candidate_before_writing(self):
+        first = "assets/svm/models/item/first.json"
+        second = "assets/svm/models/item/second.json"
+        terminal = "assets/minecraft/models/item/generated.json"
+        self.entries[first] = b'{"parent":"svm:item/second"}'
+        self.entries[second] = b'{"parent":"minecraft:item/generated"}'
+        self.entries["assets/svm/items/selected.json"] = b'{"model":{"model":"svm:item/first"}}'
+        original = dict(self.entries)
+        # The root, a transitive parent and a client-supplied terminal can all
+        # be shadowed. Reject both malformed JSON and cycles introduced there.
+        for name, content in ((first, b'broken JSON'),
+                              (second, b'{"parent":"svm:item/first"}'),
+                              (terminal, b'{"parent":"svm:item/first"}')):
+            for existing in (False, True):
+                with self.subTest(name=name, existing=existing):
+                    self.entries = {**original, "modern/" + name: content}
+                    digest = self.write_base()
+                    self.output.unlink(missing_ok=True)
+                    if existing:
+                        self.output.write_bytes(b"verified candidate")
+                    before = set(self.base.parent.iterdir())
+                    with self.assertRaisesRegex(ValueError, "Audit required model parent in overlay"):
+                        build(self.base, self.output, digest, required_models=["svm:item/first"])
+                    self.assertEqual(set(self.base.parent.iterdir()), before)
+                    if existing:
+                        self.assertEqual(self.output.read_bytes(), b"verified candidate")
+                    else:
+                        self.assertFalse(self.output.exists())
+
+    def test_identical_overlay_is_compared_against_final_root_bytes(self):
+        name = "assets/svm/models/item/first.json"
+        final = b'{"parent":"minecraft:item/generated"}'
+        self.entries[name] = b'{"elements":[]}'
+        self.entries["modern/" + name] = final
+        self.entries["assets/svm/items/selected.json"] = b'{"model":{"model":"svm:item/first"}}'
+        result = build(self.base, self.output, self.write_base(), extra_files={name: final},
+                       required_models=["svm:item/first"])
+        self.assertEqual(result["required_model_parent_chains"]["svm:item/first"],
+                         ["svm:item/first", "minecraft:item/generated"])
+        with zipfile.ZipFile(self.output) as archive:
+            self.assertEqual(archive.read(name), final)
+            self.assertEqual(archive.read("modern/" + name), final)
+
+    def test_undeclared_overlay_and_unrelated_models_do_not_block_required_model(self):
+        name = "assets/svm/models/item/first.json"
+        self.entries[name] = b'{"elements":[]}'
+        self.entries["unused/" + name] = b'broken JSON'
+        self.entries["modern/assets/svm/models/item/unrelated.json"] = b'broken JSON'
+        self.entries["assets/svm/items/selected.json"] = b'{"model":{"model":"svm:item/first"}}'
+        build(self.base, self.output, self.write_base(), required_models=["svm:item/first"])
+        self.assertTrue(self.output.is_file())
+
+    def test_overlay_model_review_is_opt_in(self):
+        self.entries["assets/svm/models/item/first.json"] = b'{"elements":[]}'
+        self.entries["modern/assets/svm/models/item/first.json"] = b'broken JSON'
+        result = build(self.base, self.output, self.write_base())
+        self.assertEqual(result["required_model_parent_chains"], {})
+        self.assertTrue(self.output.is_file())
+
+    def test_overlay_reference_source_changes_preserve_output(self):
+        self.entries["assets/svm/models/item/first.json"] = b'{"elements":[]}'
+        original = dict(self.entries)
+        for resource, reference in (("items/selected.json", b'{"model":{"model":"svm:item/first"}}'),
+                                    ("models/item/selected.json", b'{"parent":"svm:item/first"}')):
+            name = "assets/svm/" + resource
+            for shadow in (b'broken JSON', b'{"model":{"model":"svm:item/other"}}'):
+                for existing in (False, True):
+                    with self.subTest(resource=resource, shadow=shadow, existing=existing):
+                        self.entries = {**original, name: reference, "modern/" + name: shadow}
+                        digest = self.write_base()
+                        self.output.unlink(missing_ok=True)
+                        if existing:
+                            self.output.write_bytes(b"verified candidate")
+                        before = set(self.base.parent.iterdir())
+                        with self.assertRaisesRegex(ValueError, "Audit required model reference in overlay"):
+                            build(self.base, self.output, digest, required_models=["svm:item/first"])
+                        self.assertEqual(set(self.base.parent.iterdir()), before)
+                        if existing:
+                            self.assertEqual(self.output.read_bytes(), b"verified candidate")
+                        else:
+                            self.assertFalse(self.output.exists())
+
+    def test_overlay_only_reference_cannot_hide_conflicting_variants(self):
+        self.entries["assets/svm/models/item/first.json"] = b'{"elements":[]}'
+        name = "assets/svm/items/selected.json"
+        reference = b'{"model":{"model":"svm:item/first"}}'
+        original = dict(self.entries)
+        for other in (name, "later/" + name):
+            with self.subTest(other=other):
+                self.entries = {**original, "modern/" + name: reference, other: b'{}'}
+                metadata = json.loads(self.entries["pack.mcmeta"])
+                metadata["overlays"]["entries"].append({"directory": "later", "formats": 500})
+                self.entries["pack.mcmeta"] = json.dumps(metadata).encode()
+                with self.assertRaisesRegex(ValueError, "Audit required model reference in overlay"):
+                    build(self.base, self.output, self.write_base(), required_models=["svm:item/first"])
+                self.assertFalse(self.output.exists())
+
+    def test_overlay_reference_sources_compare_final_bytes_and_report_sources(self):
+        self.entries["assets/svm/models/item/first.json"] = b'{"elements":[]}'
+        name = "assets/svm/items/selected.json"
+        reference = b'{"model":{"model":"svm:item/first"}}'
+        self.entries[name] = b'{}'
+        self.entries["modern/" + name] = reference
+        result = build(self.base, self.output, self.write_base(), extra_files={name: reference},
+                       required_models=["svm:item/first"])
+        self.assertEqual(result["required_model_references"],
+                         {"svm:item/first": [name, "modern/" + name]})
+        with zipfile.ZipFile(self.output) as archive:
+            self.assertEqual(archive.read(name), reference)
+            self.assertEqual(archive.read("modern/" + name), reference)
+
+    def test_reference_overlay_audit_ignores_undeclared_variants_and_is_opt_in(self):
+        self.entries["assets/svm/models/item/first.json"] = b'{"elements":[]}'
+        name = "assets/svm/items/selected.json"
+        self.entries[name] = b'{"model":{"model":"svm:item/first"}}'
+        self.entries["unused/" + name] = b'broken JSON'
+        build(self.base, self.output, self.write_base(), required_models=["svm:item/first"])
+        self.entries["modern/" + name] = b'{}'
+        result = build(self.base, self.output, self.write_base())
+        self.assertEqual(result["required_model_references"], {})
+        self.assertTrue(self.output.is_file())
+
+    def test_reference_overlay_directory_named_assets_is_resolved_correctly(self):
+        name = "assets/svm/items/selected.json"
+        self.entries["assets/svm/models/item/first.json"] = b'{"elements":[]}'
+        self.entries["assets/" + name] = b'{"model":{"model":"svm:item/first"}}'
+        self.entries["later/" + name] = b'{}'
+        metadata = json.loads(self.entries["pack.mcmeta"])
+        metadata["overlays"]["entries"] = [{"directory": directory, "formats": 500}
+                                             for directory in ("assets", "later")]
+        self.entries["pack.mcmeta"] = json.dumps(metadata).encode()
+        with self.assertRaisesRegex(ValueError, "Audit required model reference in overlay"):
+            build(self.base, self.output, self.write_base(), required_models=["svm:item/first"])
+        self.assertFalse(self.output.exists())
+
+    def test_deep_parent_chain_avoids_python_recursion_limit(self):
+        count = 1100
+        for index in range(count):
+            self.entries[f"assets/svm/models/item/m{index}.json"] = json.dumps(
+                {"parent": f"svm:item/m{index + 1}"} if index + 1 < count else {"elements": []}
+            ).encode()
+        self.entries["assets/svm/items/selected.json"] = b'{"model":{"model":"svm:item/m0"}}'
+        result = build(self.base, self.output, self.write_base(), required_models=["svm:item/m0"])
+        self.assertEqual(len(result["required_model_parent_chains"]["svm:item/m0"]), count)
+
+    def test_extra_shaders_cannot_bypass_legacy_isolation(self):
+        digest = self.write_base()
+        for name in ("assets/minecraft/shaders/core/item.fsh",
+                     "assets/stellarity/shaders/core/end_gateway.fsh",
+                     "assets/stellarity/shaders/include/extra.glsl"):
+            with self.subTest(name=name):
+                self.output.write_bytes(b"previous artifact")
+                with self.assertRaisesRegex(ValueError, "supplemental shaders"):
+                    build(self.base, self.output, digest, extra_files={name: b"legacy GLSL"})
+                self.assertEqual(self.output.read_bytes(), b"previous artifact")
+
+    def test_extra_paths_cannot_escape_assets_or_disguise_shaders(self):
+        digest = self.write_base()
+        for name in ("assets/minecraft/../../pack.mcmeta", "assets/minecraft//shaders/core/item.fsh",
+                     "assets/minecraft/shaders/../models/a.json", "assets/minecraft/models/./a.json",
+                     "assets/minecraft/models/", "assets/minecraft\\shaders\\core\\item.fsh",
+                     "pack.mcmeta", "assets/Minecraft/models/a.json"):
+            with self.subTest(name=name):
+                self.output.write_bytes(b"previous artifact")
+                with self.assertRaisesRegex(ValueError, "safe resource paths"):
+                    build(self.base, self.output, digest, extra_files={name: b"unexpected"})
+                self.assertEqual(self.output.read_bytes(), b"previous artifact")
 
 
 if __name__ == "__main__":
