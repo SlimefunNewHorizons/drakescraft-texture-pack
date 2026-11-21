@@ -8,7 +8,7 @@ import unittest
 from unittest.mock import patch
 import zipfile
 
-from build_t2_pack import build, OVERLAY
+from build_t2_pack import build, OVERLAY, PNG_SIGNATURE
 
 
 class LegacyShaderIsolationTests(unittest.TestCase):
@@ -367,16 +367,29 @@ class LegacyShaderIsolationTests(unittest.TestCase):
     def test_required_models_use_final_bytes_and_record_hashes(self):
         first = "assets/svm/models/item/first.json"
         second = "assets/svm/models/item/second.json"
+        tex = "assets/svm/textures/item/test.png"
+        png_bytes = PNG_SIGNATURE + b"test-png"
         original = b'{"parent":"minecraft:item/generated"}'
         restored = b'{"parent":"minecraft:item/handheld","textures":{"layer0":"svm:item/test"}}'
         self.entries["assets/svm/items/required.json"] = b'{"model":{"model":"svm:item/first","fallback":{"model":"svm:item/second"}}}'
         self.entries[first] = original
         self.entries[second] = b"broken JSON"
+        self.entries[tex] = png_bytes
         result = build(self.base, self.output, self.write_base(), extra_files={second: restored},
                        required_models=["svm:item/first", "svm:item/second"])
         self.assertEqual(result["required_models_sha256"], {
             "svm:item/first": hashlib.sha256(original).hexdigest(),
             "svm:item/second": hashlib.sha256(restored).hexdigest()})
+        self.assertEqual(result["required_model_textures"], {
+            "svm:item/first": [],
+            "svm:item/second": [{
+                "texture": "svm:item/test",
+                "path": tex,
+                "present": True,
+                "sha256": hashlib.sha256(png_bytes).hexdigest(),
+                "mcmeta_sha256": None,
+            }],
+        })
         with zipfile.ZipFile(self.output) as z:
             self.assertEqual(z.read(first), original)
             self.assertEqual(z.read(second), restored)
@@ -714,6 +727,196 @@ class LegacyShaderIsolationTests(unittest.TestCase):
                 with self.assertRaisesRegex(ValueError, "safe resource paths"):
                     build(self.base, self.output, digest, extra_files={name: b"unexpected"})
                 self.assertEqual(self.output.read_bytes(), b"previous artifact")
+
+    def test_required_model_rejects_invalid_geometry_slots_png_or_mcmeta_before_output(self):
+        required = "minecraft:item/custom/item/fire_katana"
+        model_path = "assets/minecraft/models/item/custom/item/fire_katana.json"
+        parent_path = "assets/custom/models/item/katana_base.json"
+        tex_path = "assets/minecraft/textures/custom/fire_katana.png"
+        mcmeta_path = tex_path + ".mcmeta"
+        valid_png = PNG_SIGNATURE + b"katana-png"
+        self.entries["assets/svm_ep/items/katana_fire.json"] = json.dumps(
+            {"model": {"type": "minecraft:model", "model": required}}
+        ).encode()
+        base_tex = {"textures": {"1": "custom/fire_katana"}}
+        cases = (
+            ("textures_list", {"textures": []}, {}),
+            ("bad_ref_escape", {"textures": {"1": "../escape"}}, {}),
+            ("bad_ref_upper", {"textures": {"1": "Upper:bad"}}, {}),
+            ("bad_hash_ref", {"textures": {"1": "#"}}, {}),
+            ("dangling_slot", {"textures": {"1": "#missing"}}, {}),
+            ("self_slot_cycle", {"textures": {"1": "#1"}}, {}),
+            ("two_slot_cycle", {"textures": {"1": "#2", "2": "#1"}}, {}),
+            ("face_missing_slot",
+             {"textures": {"1": "block/fire_0"}, "elements": [{"faces": {"north": {"texture": "#2"}}}]},
+             {}),
+            ("face_unprefixed_texture",
+             {"textures": {"1": "block/fire_0"}, "elements": [{"faces": {"north": {"texture": "block/fire_0"}}}]},
+             {}),
+            ("element_missing_faces",
+             {**base_tex, "elements": [{}]},
+             {tex_path: valid_png}),
+            ("element_bad_from_len",
+             {**base_tex, "elements": [{"from": [0, 0], "faces": {"north": {"texture": "#1"}}}]},
+             {tex_path: valid_png}),
+            ("element_bad_from_bool",
+             {**base_tex, "elements": [{"from": [0, True, 0], "faces": {"north": {"texture": "#1"}}}]},
+             {tex_path: valid_png}),
+            ("element_bad_to_len",
+             {**base_tex, "elements": [{"to": [16, 16, 16, 16], "faces": {"north": {"texture": "#1"}}}]},
+             {tex_path: valid_png}),
+            ("face_invalid_direction",
+             {**base_tex, "elements": [{"faces": {"diagonal": {"texture": "#1"}}}]},
+             {tex_path: valid_png}),
+            ("face_invalid_uv_len",
+             {**base_tex, "elements": [{"faces": {"north": {"texture": "#1", "uv": [0, 0, 16]}}}]},
+             {tex_path: valid_png}),
+            ("face_invalid_uv_bool",
+             {**base_tex, "elements": [{"faces": {"north": {"texture": "#1", "uv": [0, 0, 16, False]}}}]},
+             {tex_path: valid_png}),
+            ("face_invalid_cullface",
+             {**base_tex, "elements": [{"faces": {"north": {"texture": "#1", "cullface": "side"}}}]},
+             {tex_path: valid_png}),
+            ("face_invalid_rotation",
+             {**base_tex, "elements": [{"faces": {"north": {"texture": "#1", "rotation": 45}}}]},
+             {tex_path: valid_png}),
+            ("face_bool_rotation",
+             {**base_tex, "elements": [{"faces": {"north": {"texture": "#1", "rotation": True}}}]},
+             {tex_path: valid_png}),
+            ("parent_invalid_element_not_hidden_by_child",
+             {"parent": "custom:item/katana_base", **base_tex, "elements": []},
+             {parent_path: b'{"elements":[{}]}', tex_path: valid_png}),
+            ("parent_invalid_texture_not_hidden_by_child",
+             {"parent": "custom:item/katana_base", **base_tex},
+             {parent_path: b'{"textures":{"1":"../escape"}}', tex_path: valid_png}),
+            ("missing_custom_minecraft_png", base_tex, {}),
+            ("missing_custom_namespace_png", {"textures": {"1": "svm_ep:item/fire_katana"}}, {}),
+            ("corrupt_png_signature", base_tex, {tex_path: b"not-a-png"}),
+            ("parent_missing_custom_png",
+             {"parent": "custom:item/katana_base"},
+             {parent_path: json.dumps(base_tex).encode()}),
+            ("mcmeta_invalid_json", base_tex, {tex_path: valid_png, mcmeta_path: b"not-json"}),
+            ("mcmeta_empty_dict", base_tex, {tex_path: valid_png, mcmeta_path: b"{}"}),
+            ("mcmeta_animation_not_dict", base_tex, {tex_path: valid_png, mcmeta_path: b'{"animation":[]}'}),
+            ("mcmeta_frametime_zero", base_tex, {tex_path: valid_png, mcmeta_path: b'{"animation":{"frametime":0}}'}),
+            ("mcmeta_frametime_bool", base_tex, {tex_path: valid_png, mcmeta_path: b'{"animation":{"frametime":true}}'}),
+            ("mcmeta_width_negative", base_tex, {tex_path: valid_png, mcmeta_path: b'{"animation":{"width":-1}}'}),
+            ("mcmeta_interpolate_non_bool", base_tex, {tex_path: valid_png, mcmeta_path: b'{"animation":{"interpolate":1}}'}),
+            ("mcmeta_frames_negative_index", base_tex, {tex_path: valid_png, mcmeta_path: b'{"animation":{"frames":[-1]}}'}),
+            ("mcmeta_frames_bad_dict_time", base_tex, {tex_path: valid_png, mcmeta_path: b'{"animation":{"frames":[{"index":0,"time":0}]}}'}),
+        )
+        original_entries = dict(self.entries)
+        for label, model_doc, extra in cases:
+            with self.subTest(case=label):
+                self.entries = {**original_entries, model_path: json.dumps(model_doc).encode(), **extra}
+                self.output.write_bytes(b"verified candidate")
+                with self.assertRaisesRegex(ValueError, r"(?i)required model"):
+                    build(self.base, self.output, self.write_base(), required_models=[required])
+                self.assertEqual(self.output.read_bytes(), b"verified candidate")
+
+    def test_required_model_rejects_declared_overlay_texture_or_mcmeta_substitutions(self):
+        required = "minecraft:item/custom/item/fire_katana"
+        model_path = "assets/minecraft/models/item/custom/item/fire_katana.json"
+        parent_path = "assets/custom/models/item/katana_base.json"
+        tex_path = "assets/minecraft/textures/custom/fire_katana.png"
+        mcmeta_path = tex_path + ".mcmeta"
+        valid_png = PNG_SIGNATURE + b"root-png"
+        alt_png = PNG_SIGNATURE + b"overlay-png"
+        root_mcmeta = b'{"animation":{"frametime":2}}'
+        alt_mcmeta = b'{"animation":{"frametime":4}}'
+        self.entries["assets/svm_ep/items/katana_fire.json"] = json.dumps(
+            {"model": {"type": "minecraft:model", "model": required}}
+        ).encode()
+        original_entries = dict(self.entries)
+        for label, overlay_dir, model_doc, extra in (
+            ("overlay_texture_differs", "modern", {"textures": {"1": "custom/fire_katana"}},
+             {tex_path: valid_png, "modern/" + tex_path: alt_png}),
+            ("overlay_parent_texture_differs", "modern", {"parent": "custom:item/katana_base"},
+             {parent_path: b'{"textures":{"blade":"svm_ep:item/blade"}}',
+              "assets/svm_ep/textures/item/blade.png": valid_png,
+              "modern/assets/svm_ep/textures/item/blade.png": alt_png}),
+            ("overlay_injects_vanilla_texture", "modern", {"textures": {"2": "block/fire_0"}},
+             {"modern/assets/minecraft/textures/block/fire_0.png": alt_png}),
+            ("overlay_mcmeta_differs", "modern", {"textures": {"1": "custom/fire_katana"}},
+             {tex_path: valid_png, mcmeta_path: root_mcmeta, "modern/" + mcmeta_path: alt_mcmeta}),
+            ("overlay_injects_mcmeta", "modern", {"textures": {"1": "custom/fire_katana"}},
+             {tex_path: valid_png, "modern/" + mcmeta_path: alt_mcmeta}),
+            ("overlay_named_assets_texture_differs", "assets", {"textures": {"1": "custom/fire_katana"}},
+             {tex_path: valid_png, "assets/" + tex_path: alt_png}),
+            ("overlay_named_assets_mcmeta_differs", "assets", {"textures": {"1": "custom/fire_katana"}},
+             {tex_path: valid_png, mcmeta_path: root_mcmeta, "assets/" + mcmeta_path: alt_mcmeta}),
+        ):
+            with self.subTest(case=label):
+                self.entries = {**original_entries, model_path: json.dumps(model_doc).encode(), **extra}
+                metadata = json.loads(self.entries["pack.mcmeta"])
+                metadata["overlays"]["entries"] = [{"directory": overlay_dir, "formats": 500}]
+                self.entries["pack.mcmeta"] = json.dumps(metadata).encode()
+                self.output.write_bytes(b"verified candidate")
+                with self.assertRaisesRegex(ValueError, "Audit required model texture"):
+                    build(self.base, self.output, self.write_base(), required_models=[required])
+                self.assertEqual(self.output.read_bytes(), b"verified candidate")
+
+    def test_required_model_validates_inherited_textures_geometry_mcmeta_and_identical_overlays(self):
+        required = "minecraft:item/custom/item/fire_katana"
+        model_path = "assets/minecraft/models/item/custom/item/fire_katana.json"
+        parent_path = "assets/custom/models/item/katana_base.json"
+        tex_path = "assets/svm_ep/textures/item/katana_blade.png"
+        mcmeta_path = tex_path + ".mcmeta"
+        valid_png = PNG_SIGNATURE + b"valid-blade"
+        valid_mcmeta = json.dumps({
+            "animation": {
+                "frametime": 2,
+                "width": 16,
+                "height": 16,
+                "interpolate": True,
+                "frames": [0, {"index": 1, "time": 4}],
+            }
+        }).encode()
+        self.entries["assets/svm_ep/items/katana_fire.json"] = json.dumps(
+            {"model": {"type": "minecraft:model", "model": required}}
+        ).encode()
+        self.entries[parent_path] = json.dumps({
+            "textures": {"1": "#base", "base": "custom/overridden_missing"},
+            "elements": [{
+                "from": [0, 0, 0],
+                "to": [16, 16, 16],
+                "faces": {
+                    "north": {
+                        "texture": "#1",
+                        "uv": [0, 0, 16, 16],
+                        "cullface": "north",
+                        "rotation": 90,
+                    }
+                },
+            }],
+        }).encode()
+        self.entries[model_path] = json.dumps({
+            "parent": "custom:item/katana_base",
+            "textures": {"base": "svm_ep:item/katana_blade", "2": "block/fire_0"},
+        }).encode()
+        self.entries["modern/" + tex_path] = valid_png
+        self.entries["modern/" + mcmeta_path] = valid_mcmeta
+        self.entries["unused/" + tex_path] = b"corrupt-in-undeclared-overlay"
+        self.entries["unused/" + mcmeta_path] = b"broken-in-undeclared-overlay"
+        result = build(self.base, self.output, self.write_base(),
+                       extra_files={tex_path: valid_png, mcmeta_path: valid_mcmeta},
+                       required_models=[required])
+        self.assertEqual(result["required_model_textures"][required], [
+            {
+                "texture": "minecraft:block/fire_0",
+                "path": "assets/minecraft/textures/block/fire_0.png",
+                "present": False,
+                "sha256": None,
+                "mcmeta_sha256": None,
+            },
+            {
+                "texture": "svm_ep:item/katana_blade",
+                "path": tex_path,
+                "present": True,
+                "sha256": hashlib.sha256(valid_png).hexdigest(),
+                "mcmeta_sha256": hashlib.sha256(valid_mcmeta).hexdigest(),
+            },
+        ])
 
 
 if __name__ == "__main__":

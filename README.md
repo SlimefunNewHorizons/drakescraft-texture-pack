@@ -156,6 +156,15 @@ la salida. El informe incluye `required_model_parent_chains`. Un padre ausente
 puede proceder del cliente (vanilla/builtin), por lo que termina el recorrido:
 esto no valida todas las dependencias.
 
+Para cada modelo de esa cadena, también valida la geometría de `elements`/`faces`
+(`from`, `to`, `uv`, `cullface`, `rotation` y referencias `#slot`), las ranuras
+heredadas de `textures` (sin ciclos `#slot` ni alias colgantes), la presencia y
+firma binaria PNG (`\x89PNG\r\n\x1a\n`) de todas las texturas personalizadas o de
+namespaces propios, la validez de los metadatos `.png.mcmeta` (`animation`), y la
+consistencia frente a overlays declarados (rechazando sustituciones o inyecciones
+de `.png` o `.png.mcmeta` en overlays con bytes distintos a la raíz final). El
+informe incluye `required_model_textures`.
+
 Para cada modelo de esa cadena, también compara los bytes de los overlays
 declarados con la raíz final. Un overlay con bytes distintos (o que aporte un
 padre ausente de la raíz) requiere revisión y detiene la construcción antes de

@@ -17,6 +17,60 @@ import zipfile
 OVERLAY = "overlay_legacy_shaders"
 MAX_LEGACY_FORMAT = 88  # Minecraft 26.2; 26.3 uses ShaderC/SPIR-V.
 PLACEHOLDER = re.compile(r"%(?:\d+\$)?[sd]|%%")
+PNG_SIGNATURE = b"\x89PNG\r\n\x1a\n"
+CUBE_FACES = {"down", "up", "north", "south", "west", "east"}
+
+
+def valid_number_list(value: object, length: int) -> bool:
+    return (
+        isinstance(value, list)
+        and len(value) == length
+        and all(type(item) in {int, float} and math.isfinite(item) for item in value)
+    )
+
+
+def valid_resource_reference(value: object) -> str | None:
+    if not isinstance(value, str) or not re.fullmatch(r"(?:[a-z0-9_.-]+:)?[a-z0-9_./-]+", value):
+        return None
+    reference = value if ":" in value else "minecraft:" + value
+    _, path = reference.split(":", 1)
+    if any(part in {".", "..", ""} for part in path.split("/")):
+        return None
+    return reference
+
+
+def valid_texture_mcmeta(payload: bytes) -> bool:
+    try:
+        node = json.loads(payload)
+    except (ValueError, UnicodeError):
+        return False
+    if not isinstance(node, dict) or not node:
+        return False
+    if "animation" in node:
+        anim = node["animation"]
+        if not isinstance(anim, dict):
+            return False
+        for key in ("frametime", "width", "height"):
+            if key in anim and (type(anim[key]) is not int or anim[key] <= 0):
+                return False
+        if "interpolate" in anim and type(anim["interpolate"]) is not bool:
+            return False
+        if "frames" in anim:
+            frames = anim["frames"]
+            if not isinstance(frames, list):
+                return False
+            for frame in frames:
+                if type(frame) is int:
+                    if frame < 0:
+                        return False
+                elif isinstance(frame, dict):
+                    if type(frame.get("index")) is not int or frame["index"] < 0:
+                        return False
+                    if "time" in frame and (type(frame["time"]) is not int or frame["time"] <= 0):
+                        return False
+                else:
+                    return False
+    return True
 
 
 def patch_languages(source: zipfile.ZipFile, patches: dict) -> dict[str, bytes]:
@@ -283,6 +337,144 @@ def audit_required_model_reference_overlays(source, replacements, metadata, inco
                     raise ValueError(f"Audit required model reference in overlay: {variant}")
 
 
+def required_model_textures(source, replacements, metadata, parent_chains):
+    """Validate geometry, texture slots, PNG/mcmeta files and overlay variants for required models."""
+    names = set(source.namelist()) | set(replacements)
+    overlay_prefixes = [entry["directory"] + "/"
+                        for entry in metadata.get("overlays", {}).get("entries", [])]
+    result = {}
+    for reference, chain in parent_chains.items():
+        merged_textures = {}
+        face_slots = []
+        for current in reversed(chain):
+            namespace, model_path = current.split(":", 1)
+            root_model = f"assets/{namespace}/models/{model_path}.json"
+            if root_model not in names:
+                continue
+            content = replacements[root_model] if root_model in replacements else source.read(root_model)
+            node = json.loads(content)
+            if "textures" in node:
+                textures = node["textures"]
+                if not isinstance(textures, dict):
+                    raise ValueError(f"Invalid required model textures: {root_model}")
+                for slot, raw_ref in textures.items():
+                    if (not isinstance(slot, str)
+                            or not re.fullmatch(r"[a-zA-Z0-9_.-]+", slot)
+                            or not isinstance(raw_ref, str)):
+                        raise ValueError(f"Invalid required model texture slot: {root_model}")
+                    if raw_ref.startswith("#"):
+                        if not re.fullmatch(r"#[a-zA-Z0-9_.-]+", raw_ref):
+                            raise ValueError(f"Invalid required model texture alias: {root_model}")
+                        merged_textures[slot] = raw_ref
+                    else:
+                        normalized = valid_resource_reference(raw_ref)
+                        if normalized is None:
+                            raise ValueError(f"Invalid required model texture reference: {root_model}")
+                        merged_textures[slot] = normalized
+            if "elements" in node:
+                elements = node["elements"]
+                if not isinstance(elements, list):
+                    raise ValueError(f"Invalid required model elements: {root_model}")
+                current_slots = []
+                for element in elements:
+                    if not isinstance(element, dict):
+                        raise ValueError(f"Invalid required model element: {root_model}")
+                    for coord_key in ("from", "to"):
+                        if coord_key in element and not valid_number_list(element[coord_key], 3):
+                            raise ValueError(f"Invalid required model element {coord_key}: {root_model}")
+                    faces = element.get("faces")
+                    if not isinstance(faces, dict) or not faces:
+                        raise ValueError(f"Invalid required model element faces: {root_model}")
+                    for direction, face in faces.items():
+                        if direction not in CUBE_FACES or not isinstance(face, dict):
+                            raise ValueError(f"Invalid required model face: {root_model}")
+                        if "uv" in face and not valid_number_list(face["uv"], 4):
+                            raise ValueError(f"Invalid required model face uv: {root_model}")
+                        if "cullface" in face and face["cullface"] not in CUBE_FACES:
+                            raise ValueError(f"Invalid required model face cullface: {root_model}")
+                        if "rotation" in face and (
+                            type(face["rotation"]) is not int
+                            or face["rotation"] not in {0, 90, 180, 270}
+                        ):
+                            raise ValueError(f"Invalid required model face rotation: {root_model}")
+                        tex = face.get("texture")
+                        if not isinstance(tex, str) or not re.fullmatch(r"#[a-zA-Z0-9_.-]+", tex):
+                            raise ValueError(f"Invalid required model face texture: {root_model}")
+                        current_slots.append(tex[1:])
+                face_slots = current_slots
+        for slot in face_slots:
+            if slot not in merged_textures:
+                raise ValueError(f"Undefined required model face texture slot: {reference}: #{slot}")
+        resolved_refs = set()
+        for slot in sorted(merged_textures):
+            visited = {slot}
+            target = merged_textures[slot]
+            while isinstance(target, str) and target.startswith("#"):
+                next_slot = target[1:]
+                if next_slot in visited:
+                    raise ValueError(f"Required model texture slot cycle: {reference}: #{slot}")
+                if next_slot not in merged_textures:
+                    raise ValueError(f"Undefined required model texture slot: {reference}: #{next_slot}")
+                visited.add(next_slot)
+                target = merged_textures[next_slot]
+            if isinstance(target, str) and not target.startswith("#"):
+                resolved_refs.add(target)
+        textures_report = []
+        for texture_ref in sorted(resolved_refs):
+            tex_ns, tex_path = texture_ref.split(":", 1)
+            root_png = f"assets/{tex_ns}/textures/{tex_path}.png"
+            root_mcmeta = root_png + ".mcmeta"
+            custom_required = (
+                tex_ns != "minecraft"
+                or tex_path == "custom"
+                or tex_path.startswith("custom/")
+                or "/custom/" in tex_path
+            )
+            png_bytes = None
+            root_sha256 = None
+            if root_png in replacements:
+                png_bytes = replacements[root_png]
+            elif root_png in names and not source.getinfo(root_png).is_dir():
+                png_bytes = source.read(root_png)
+            if png_bytes is not None:
+                if not png_bytes.startswith(PNG_SIGNATURE):
+                    raise ValueError(f"Invalid required model texture PNG signature: {root_png}")
+                root_sha256 = hashlib.sha256(png_bytes).hexdigest()
+            elif custom_required:
+                raise ValueError(f"Missing required model texture: {root_png}")
+            mcmeta_bytes = None
+            root_mcmeta_sha256 = None
+            if root_mcmeta in replacements:
+                mcmeta_bytes = replacements[root_mcmeta]
+            elif root_mcmeta in names and not source.getinfo(root_mcmeta).is_dir():
+                mcmeta_bytes = source.read(root_mcmeta)
+            if mcmeta_bytes is not None:
+                if not valid_texture_mcmeta(mcmeta_bytes):
+                    raise ValueError(f"Invalid required model texture mcmeta: {root_mcmeta}")
+                root_mcmeta_sha256 = hashlib.sha256(mcmeta_bytes).hexdigest()
+            for prefix in overlay_prefixes:
+                overlay_png = prefix + root_png
+                if overlay_png in names:
+                    ov_png = replacements[overlay_png] if overlay_png in replacements else source.read(overlay_png)
+                    if ov_png != png_bytes:
+                        raise ValueError(f"Audit required model texture in overlay: {overlay_png}")
+                overlay_mcmeta = prefix + root_mcmeta
+                if overlay_mcmeta in names:
+                    ov_mcmeta = (replacements[overlay_mcmeta]
+                                 if overlay_mcmeta in replacements else source.read(overlay_mcmeta))
+                    if ov_mcmeta != mcmeta_bytes:
+                        raise ValueError(f"Audit required model texture mcmeta in overlay: {overlay_mcmeta}")
+            textures_report.append({
+                "texture": texture_ref,
+                "path": root_png,
+                "present": root_sha256 is not None,
+                "sha256": root_sha256,
+                "mcmeta_sha256": root_mcmeta_sha256,
+            })
+        result[reference] = textures_report
+    return result
+
+
 def build(base: Path, output: Path, expected_sha256: str,
           language_patches: dict | None = None,
           model_patches: dict | None = None,
@@ -343,6 +535,7 @@ def build(base: Path, output: Path, expected_sha256: str,
         metadata = json.loads(source.read("pack.mcmeta"))
         incoming = required_model_references(source, replacements, metadata, checked_models)
         parent_chains = required_model_parent_chains(source, replacements, checked_models, metadata)
+        model_textures = required_model_textures(source, replacements, metadata, parent_chains)
         audit_required_model_reference_overlays(source, replacements, metadata, incoming)
         overlays = metadata.setdefault("overlays", {}).setdefault("entries", [])
         if any(entry["directory"] == OVERLAY for entry in overlays):
@@ -396,6 +589,7 @@ def build(base: Path, output: Path, expected_sha256: str,
         "required_models_sha256": checked_models,
         "required_model_references": incoming,
         "required_model_parent_chains": parent_chains,
+        "required_model_textures": model_textures,
     }
 
 
