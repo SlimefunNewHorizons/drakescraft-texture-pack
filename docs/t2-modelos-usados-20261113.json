@@ -1,0 +1,22 @@
+{
+  "old_builder_accepts_orphan": true,
+  "new_builder_rejects_orphan": true,
+  "error": "Unreferenced required model: svm:item/orphan",
+  "previous_candidate_preserved": true,
+  "public_pack": {
+    "sha1": "4597ead7d148fe0ef46029e643af8a82d151a0a0",
+    "bytes": 30291477,
+    "error": "Missing required model: assets/minecraft/models/item/custom/item/fire_katana.json",
+    "previous_candidate_preserved": true
+  },
+  "unit_tests": {
+    "passed": 30,
+    "new_tests": 5,
+    "failed": 0,
+    "build_seguro": true
+  },
+  "graph": {
+    "ast_updated": true,
+    "graph_extra_merged": true
+  }
+}

@@ -129,6 +129,49 @@ previo. El constructor rechaza una base distinta, duplicados o shaders adicional
 en overlays que requieran auditoría. No incorpora los overrides del constructor
 SF-only ni modifica modelos, texturas, idiomas o los otros overlays.
 
+También verifica el CRC de todos los miembros antes de abrir la salida: incluso
+con SHA-256 coincidente, una base corrupta se rechaza conservando el candidato
+anterior. La regresión cubre tanto una salida existente como una ruta nueva.
+
+Para exigir el recurso pendiente de T2, agregar a la reconstrucción:
+
+```bash
+--require-model minecraft:item/custom/item/fire_katana
+```
+
+La opción es repetible y comprueba el JSON final del modelo en la raíz antes de
+crear o reemplazar la salida. Un modelo presente solo en un overlay o una
+sustitución mediante `--missing-model-fallbacks` no cumple ese requisito. Se
+admiten recursos recuperados mediante `--extra-dir` y se informa el SHA-256 de
+cada modelo exigido en `required_models_sha256`. El ZIP público del 13-nov aún
+falla esta comprobación. Sin la opción, siguen permitiéndose candidatos parciales
+de diagnóstico. La comprobación exige un objeto JSON no vacío; no acredita la
+procedencia original, las dependencias del modelo ni su render. La recuperación
+debe documentar su fuente y validarse en los clientes 26.2/26.3.
+
+Además, `--require-model` recorre iterativamente los padres locales de la raíz
+usando los bytes finales, incluidos los de `--extra-dir`. Rechaza ciclos directos
+o transitivos, JSON de padres inválido y rutas de padres inseguras antes de tocar
+la salida. El informe incluye `required_model_parent_chains`. Un padre ausente
+puede proceder del cliente (vanilla/builtin), por lo que termina el recorrido:
+esto no valida todas las dependencias.
+
+Para cada modelo de esa cadena, también compara los bytes de los overlays
+declarados con la raíz final. Un overlay con bytes distintos (o que aporte un
+padre ausente de la raíz) requiere revisión y detiene la construcción antes de
+escribir. Las copias idénticas se permiten. La comprobación es conservadora:
+se aplica a todos los rangos declarados, aunque el overlay esté inactivo en un
+cliente concreto. No resuelve combinaciones de overlays ni certifica su render;
+sin `--require-model` se mantiene la construcción de candidatos parciales.
+
+También se comparan las variantes declaradas de cada ítem o modelo que aporta
+una referencia entrante al modelo exigido. Una variante distinta puede ocultar
+esa referencia al activarse su overlay: ahora requiere revisión antes de escribir
+el candidato. Se comparan raíz y overlays entre sí con los bytes finales de
+`--extra-dir`; se permiten copias idénticas y fuentes presentes solo en un overlay.
+La regla es conservadora para todos los rangos: no calcula qué combinaciones de
+overlays estarán activas ni acredita referencias efectivas por versión o render.
+
 Validación del 4 de noviembre de 2026: cuatro pruebas automáticas correctas y
 12.297 contenidos idénticos al ZIP original; solo cambia la ubicación de los tres
 shaders y `pack.mcmeta`. **Pendiente: carga y comprobación visual en cliente 26.3.**
@@ -217,11 +260,26 @@ la carga visual en cliente y la compatibilidad completa 1.21–26.4; no instalad
 
 | Punto | Estado |
 |---|---|
-| Pack servido en producción | `t2-v2.zip` (≈30 MB, SHA-1 `4597ead7d148fe0ef46029e643af8a82d151a0a0`) lo ofrece Odysseia en Dallas, opcional; la URL responde 200 y el hash coincide con la configuración (verificado hoy). Sin `shaders/core` en la raíz; overlays 1.21.x–26.x. |
+| Pack público auditado | GET de `t2-v2.zip?v=3`: 30.291.477 bytes, SHA-1 `4597ead7d148fe0ef46029e643af8a82d151a0a0`, CRC correcto. **Contiene dos shaders raíz**: `assets/minecraft/shaders/core/item.fsh` y `assets/stellarity/shaders/core/end_gateway.fsh`. La afirmación anterior de ausencia de shaders raíz era incorrecta. No se consultó la configuración de Dallas. |
 | Pruebas | Solo **estáticas** (estructura del ZIP, CRC, `pack.mcmeta`, pruebas de `build_t2_pack.py`). **No hay prueba de render en cliente 26.2/26.3** (carga, shaders, overlays, capturas). |
 | `fire_katana` | El modelo original **no existe** en la base; `fire_katana2` es una **sustitución temporal** (decisión documentada arriba), no recupera la geometría original. |
 | Regla | No cambiar el pack servido en Dallas sin validación en cliente limpio y autorización; el cambio se hace subiendo el ZIP nuevo y actualizando SHA-1 en `plugins/Odysseia/config.yml` + recarga, nunca reiniciando solo por esto. |
 | Pendiente | Validar en cliente limpio 26.2 y 26.3 (capturas + `latest.log`) y decidir `fire_katana`. Lo puede ejecutar el launcher DrakeStar con una instancia 26.x. |
+
+### Supplemental resources and shader isolation
+
+`build_t2_pack.py --extra-dir` rejects shader resources, including replacements
+of shaders already present in the base. Supplemental files bypass the base
+shader scan, so accepting them would expose legacy GLSL at the pack root again.
+Paths must be lowercase resource paths under `assets/<namespace>/`, without
+empty segments, traversal or backslashes. Validation happens before opening
+the output ZIP and preserves any previous artifact on rejection.
+
+The constructor has 16 passing tests, including supplemental core/include
+shaders and disguised paths. A local candidate built from the public ZIP is
+documented in [the static evidence](docs/t2-candidato-20261112.json).
+It isolates the legacy shaders but still lacks the original `fire_katana` model;
+it has not been deployed or validated in a graphical client.
 
 ## 📄 License & Upstream Attribution
 

@@ -10,6 +10,7 @@ import json
 import math
 from pathlib import Path
 import re
+import tempfile
 import zipfile
 
 
@@ -166,12 +167,129 @@ def bridge_legacy_items(source: zipfile.ZipFile, carriers: list[str],
     return result
 
 
+def required_model_references(source, replacements, metadata, required):
+    """Find incoming model/parent references in the planned loadable resources."""
+    found = {reference: set() for reference in required}
+    if not found:
+        return {}
+    prefixes = [""] + [entry["directory"] + "/"
+                         for entry in metadata.get("overlays", {}).get("entries", [])]
+
+    def references(node):
+        if isinstance(node, dict):
+            for key, value in node.items():
+                if key in {"model", "parent"} and isinstance(value, str):
+                    yield value if ":" in value else "minecraft:" + value
+                yield from references(value)
+        elif isinstance(node, list):
+            for value in node:
+                yield from references(value)
+
+    for name in sorted(set(source.namelist()) | set(replacements)):
+        logical = next((name[len(prefix):] for prefix in prefixes
+                        if name.startswith(prefix) and re.fullmatch(
+                            r"assets/[a-z0-9_.-]+/(?:items|models)/[a-z0-9_./-]+\.json",
+                            name[len(prefix):])), None)
+        if logical is None or any(part in {".", "..", ""} for part in logical.split("/")):
+            continue
+        content = replacements[name] if name in replacements else source.read(name)
+        try:
+            node = json.loads(content)
+        except (ValueError, UnicodeError):
+            continue
+        for reference in references(node):
+            if reference in found:
+                namespace, path = reference.split(":", 1)
+                if logical != f"assets/{namespace}/models/{path}.json":
+                    found[reference].add(name)
+    for reference, sources in found.items():
+        if not sources:
+            raise ValueError(f"Unreferenced required model: {reference}")
+    return {reference: sorted(sources) for reference, sources in found.items()}
+
+
+def required_model_parent_chains(source, replacements, required, metadata):
+    """Reject root parent cycles and unaudited overlay substitutions."""
+    names = set(source.namelist()) | set(replacements)
+    prefixes = [entry["directory"] + "/"
+                for entry in metadata.get("overlays", {}).get("entries", [])]
+    chains = {}
+    for reference in required:
+        chain = []
+        seen = set()
+        current = reference
+        while current is not None:
+            if current in seen:
+                raise ValueError("Required model parent cycle: " + " -> ".join(chain + [current]))
+            seen.add(current)
+            chain.append(current)
+            namespace, path = current.split(":", 1)
+            name = f"assets/{namespace}/models/{path}.json"
+            content = (replacements[name] if name in replacements else source.read(name)) \
+                if name in names else None
+            # A declared overlay can replace the checked model or any parent,
+            # including a vanilla parent absent from this ZIP. Require review
+            # of differing bytes even if its range may currently be inactive.
+            for prefix in prefixes:
+                overlay_name = prefix + name
+                if overlay_name in names:
+                    overlay_content = replacements[overlay_name] if overlay_name in replacements \
+                        else source.read(overlay_name)
+                    if overlay_content != content:
+                        raise ValueError(f"Audit required model parent in overlay: {overlay_name}")
+            # Vanilla/builtin resources may be supplied by the client. This
+            # check detects local cycles; it does not certify dependencies.
+            if name not in names:
+                break
+            try:
+                node = json.loads(content)
+            except (ValueError, UnicodeError) as exc:
+                raise ValueError(f"Invalid required model parent JSON: {name}") from exc
+            if not isinstance(node, dict):
+                raise ValueError(f"Expected required model parent object: {name}")
+            current = node.get("parent")
+            if current is not None:
+                if (not isinstance(current, str)
+                        or not re.fullmatch(r"(?:[a-z0-9_.-]+:)?[a-z0-9_./-]+", current)
+                        or any(part in {".", "..", ""} for part in current.split(":")[-1].split("/"))):
+                    raise ValueError(f"Invalid required model parent: {name}")
+                if ":" not in current:
+                    current = "minecraft:" + current
+        chains[reference] = chain
+    return chains
+
+
+def audit_required_model_reference_overlays(source, replacements, metadata, incoming):
+    """Reject overlay variants that can shadow an incoming reference source."""
+    names = set(source.namelist()) | set(replacements)
+    prefixes = [""] + [entry["directory"] + "/"
+                       for entry in metadata.get("overlays", {}).get("entries", [])]
+    checked = set()
+    for sources in incoming.values():
+        for name in sources:
+            # Incoming sources already passed the loadable-resource path check.
+            logical = next(name[len(prefix):] for prefix in prefixes
+                           if name.startswith(prefix) and re.fullmatch(
+                               r"assets/[a-z0-9_.-]+/(?:items|models)/[a-z0-9_./-]+\.json",
+                               name[len(prefix):]))
+            if logical in checked:
+                continue
+            checked.add(logical)
+            variants = [prefix + logical for prefix in prefixes if prefix + logical in names]
+            content = replacements[name] if name in replacements else source.read(name)
+            for variant in variants:
+                other = replacements[variant] if variant in replacements else source.read(variant)
+                if other != content:
+                    raise ValueError(f"Audit required model reference in overlay: {variant}")
+
+
 def build(base: Path, output: Path, expected_sha256: str,
           language_patches: dict | None = None,
           model_patches: dict | None = None,
           legacy_item_bridges: list[str] | None = None,
           missing_model_fallbacks: dict[str, str] | None = None,
-          extra_files: dict[str, bytes] | None = None) -> dict[str, object]:
+          extra_files: dict[str, bytes] | None = None,
+          required_models: list[str] | None = None) -> dict[str, object]:
     if base.resolve() == output.resolve():
         raise ValueError("The input pack must be preserved")
     if digest(base, "sha256") != expected_sha256:
@@ -180,15 +298,52 @@ def build(base: Path, output: Path, expected_sha256: str,
         names = source.namelist()
         if len(names) != len(set(names)):
             raise ValueError("Duplicate ZIP entries")
+        # Read every member before opening the output. A matching archive hash
+        # does not guarantee valid member CRCs; a late failure would truncate an
+        # existing candidate after some entries had already been written.
+        if source.testzip() is not None:
+            raise ValueError("Base pack CRC check failed")
         languages = patch_languages(source, language_patches or {})
         models = patch_model_textures(source, model_patches or {})
         items = bridge_legacy_items(source, legacy_item_bridges if legacy_item_bridges is not None else [],
                                     missing_model_fallbacks)
         extra_files = extra_files or {}
-        if any(not n.startswith("assets/") for n in extra_files):
-            raise ValueError("Extra files must live under assets/")
+        for name in extra_files:
+            if (not re.fullmatch(r"assets/[a-z0-9_.-]+/[a-z0-9_./-]+", name)
+                    or any(part in {".", "..", ""} for part in name.split("/"))):
+                raise ValueError("Extra files must use safe resource paths under assets/")
+            # These files are written after the base shader scan. Allowing one
+            # here would bypass the overlay and expose legacy GLSL to 26.3.
+            if is_shader(name):
+                raise ValueError("Audit supplemental shaders before rebuilding")
         replacements = {**languages, **models, **items, **extra_files}
+        # Check the planned output, including replacements, before touching the
+        # destination. A fallback or a model in an overlay cannot satisfy a
+        # requirement for the original root resource.
+        checked_models = {}
+        for reference in required_models or []:
+            if (not re.fullmatch(r"[a-z0-9_.-]+:[a-z0-9_./-]+", reference)
+                    or any(part in {".", "..", ""} for part in reference.split(":", 1)[1].split("/"))):
+                raise ValueError(f"Invalid required model reference: {reference}")
+            namespace, path = reference.split(":", 1)
+            name = f"assets/{namespace}/models/{path}.json"
+            if name in replacements:
+                content = replacements[name]
+            elif name in names and not source.getinfo(name).is_dir():
+                content = source.read(name)
+            else:
+                raise ValueError(f"Missing required model: {name}")
+            try:
+                model = json.loads(content)
+            except (ValueError, UnicodeDecodeError) as exc:
+                raise ValueError(f"Invalid required model JSON: {name}") from exc
+            if not isinstance(model, dict) or not model:
+                raise ValueError(f"Expected a nonempty required model object: {name}")
+            checked_models[reference] = hashlib.sha256(content).hexdigest()
         metadata = json.loads(source.read("pack.mcmeta"))
+        incoming = required_model_references(source, replacements, metadata, checked_models)
+        parent_chains = required_model_parent_chains(source, replacements, checked_models, metadata)
+        audit_required_model_reference_overlays(source, replacements, metadata, incoming)
         overlays = metadata.setdefault("overlays", {}).setdefault("entries", [])
         if any(entry["directory"] == OVERLAY for entry in overlays):
             raise ValueError("Base already contains the legacy shader overlay")
@@ -210,18 +365,23 @@ def build(base: Path, output: Path, expected_sha256: str,
             "max_format": [MAX_LEGACY_FORMAT, 65535],
         })
         output.parent.mkdir(parents=True, exist_ok=True)
-        with zipfile.ZipFile(output, "w", compression=zipfile.ZIP_DEFLATED) as target:
-            for name in sorted(names):
-                info = copy.copy(source.getinfo(name))
-                if name in shaders:
-                    info.filename = f"{OVERLAY}/{name}"
-                content = (json.dumps(metadata, ensure_ascii=False, indent=2) + "\n").encode() \
-                    if name == "pack.mcmeta" else replacements.get(name, source.read(name))
-                target.writestr(info, content)
-            for name in sorted((set(items) | set(extra_files)) - set(names)):
-                info = zipfile.ZipInfo(name, date_time=source.getinfo("pack.mcmeta").date_time)
-                info.compress_type = zipfile.ZIP_DEFLATED
-                target.writestr(info, replacements[name])
+        # Stage on the destination filesystem so replacement is atomic. CRC
+        # preflight cannot protect an earlier candidate from a write failure.
+        with tempfile.TemporaryDirectory(prefix=f".{output.name}.", dir=output.parent) as directory:
+            candidate = Path(directory) / "candidate.zip"
+            with zipfile.ZipFile(candidate, "w", compression=zipfile.ZIP_DEFLATED) as target:
+                for name in sorted(names):
+                    info = copy.copy(source.getinfo(name))
+                    if name in shaders:
+                        info.filename = f"{OVERLAY}/{name}"
+                    content = (json.dumps(metadata, ensure_ascii=False, indent=2) + "\n").encode() \
+                        if name == "pack.mcmeta" else replacements.get(name, source.read(name))
+                    target.writestr(info, content)
+                for name in sorted((set(items) | set(extra_files)) - set(names)):
+                    info = zipfile.ZipInfo(name, date_time=source.getinfo("pack.mcmeta").date_time)
+                    info.compress_type = zipfile.ZIP_DEFLATED
+                    target.writestr(info, replacements[name])
+            candidate.replace(output)
     return {
         "base_sha256": expected_sha256,
         "sha256": digest(output, "sha256"),
@@ -233,6 +393,9 @@ def build(base: Path, output: Path, expected_sha256: str,
         "bridged_items": sorted(items),
         "missing_model_fallbacks": missing_model_fallbacks or {},
         "extra_files": sorted(extra_files),
+        "required_models_sha256": checked_models,
+        "required_model_references": incoming,
+        "required_model_parent_chains": parent_chains,
     }
 
 
@@ -251,6 +414,8 @@ def main() -> None:
                         help="Optional explicit substitutions for absent legacy models (modern items only)")
     parser.add_argument("--extra-dir", type=Path,
                         help="Directory whose files (relative to it, under assets/) are added or replace base files")
+    parser.add_argument("--require-model", action="append", default=[], metavar="NAMESPACE:PATH",
+                        help="Require a nonempty root model JSON, an incoming reference, no local root parent cycle and no differing declared overlay parent or reference source before writing (repeatable; does not verify provenance or render)")
     parser.add_argument("--with-terralense", action="store_true",
                         help="Add the merged TerraLense minimap assets (see scripts/merge_terralense.py)")
     args = parser.parse_args()
@@ -263,7 +428,8 @@ def main() -> None:
     models = json.loads(args.model_patches.read_text()) if args.model_patches else None
     bridges = json.loads(args.legacy_item_bridges.read_text()) if args.legacy_item_bridges else None
     fallbacks = json.loads(args.missing_model_fallbacks.read_text()) if args.missing_model_fallbacks else None
-    print(json.dumps(build(args.base, args.output, args.base_sha256, patches, models, bridges, fallbacks, extra), indent=2))
+    print(json.dumps(build(args.base, args.output, args.base_sha256, patches, models, bridges, fallbacks,
+                           extra, args.require_model), indent=2))
 
 
 if __name__ == "__main__":
