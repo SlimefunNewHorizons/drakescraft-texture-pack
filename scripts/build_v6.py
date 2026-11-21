@@ -406,6 +406,60 @@ def main():
     report["items_json_omitidos_por_modelo_faltante"] = skipped
     report["omitidos_ejemplos"] = skipped_list[:6]
 
+    # Parches declarativos de modelos (ej. ender_grass_block_snowy.json -> side_snow existente)
+    model_patches_file = repo / "scripts/t2_model_patches.json"
+    patched_models = 0
+    if model_patches_file.is_file():
+        model_patches = json.loads(model_patches_file.read_text(encoding="utf-8"))
+        for mpath, slots in model_patches.items():
+            raw = add.get(mpath) if mpath in add else (base.read(mpath) if mpath in names else None)
+            if raw is None:
+                continue
+            doc = json.loads(raw.decode("utf-8"))
+            textures = doc.get("textures")
+            if not isinstance(textures, dict):
+                continue
+            changed = False
+            for slot, tex_ref in slots.items():
+                ns, _, rel = tex_ref.rpartition(":")
+                png = f"assets/{ns or 'minecraft'}/textures/{rel}.png"
+                if png not in names and png not in add:
+                    raise SystemExit(f"Model patch target texture missing: {png} (for {mpath})")
+                if textures.get(slot) != tex_ref:
+                    textures[slot] = tex_ref
+                    changed = True
+            if changed:
+                add[mpath] = (json.dumps(doc, ensure_ascii=False, indent=2) + "\n").encode("utf-8")
+                patched_models += 1
+    report["modelos_parcheados"] = patched_models
+
+    # Parches declarativos de idiomas (Stellarity EN/ES + espejo es_cl desde es_es)
+    lang_patches_file = repo / "scripts/t2_language_patches.json"
+    patched_langs = 0
+    if lang_patches_file.is_file():
+        lang_patches = json.loads(lang_patches_file.read_text(encoding="utf-8"))
+        for lpath, entries in lang_patches.items():
+            raw = add.get(lpath) if lpath in add else (base.read(lpath) if lpath in names else None)
+            if raw is None:
+                continue
+            doc = json.loads(raw.decode("utf-8"))
+            changed = False
+            for k, v in entries.items():
+                if doc.get(k) != v:
+                    doc[k] = v
+                    changed = True
+            if changed:
+                add[lpath] = (json.dumps(doc, ensure_ascii=False, indent=2) + "\n").encode("utf-8")
+                patched_langs += 1
+    stellarity_es_es = "assets/stellarity/lang/es_es.json"
+    stellarity_es_cl = "assets/stellarity/lang/es_cl.json"
+    if stellarity_es_cl not in names and stellarity_es_cl not in add:
+        es_raw = add.get(stellarity_es_es) or (base.read(stellarity_es_es) if stellarity_es_es in names else None)
+        if es_raw is not None:
+            add[stellarity_es_cl] = es_raw
+            patched_langs += 1
+    report["idiomas_parcheados"] = patched_langs
+
     a.out.parent.mkdir(parents=True, exist_ok=True)
     with zipfile.ZipFile(a.out, "w", zipfile.ZIP_DEFLATED) as out:
         for info in base.infolist():
