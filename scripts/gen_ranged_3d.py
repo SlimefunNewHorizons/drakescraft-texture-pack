@@ -5,7 +5,7 @@ coordenadas de entidad vanilla y se convierten (x,-y,-z)+8 para reutilizar los `
 Salida: assets/drakescraft/models/item/gear3d/{bow,bow_pull_0..2,crossbow,crossbow_pull_0..2,crossbow_arrow,
 crossbow_firework,trident_in_hand,trident_throwing,shield,shield_blocking}.json + textures/item/gear3d/ranged_atlas.png.
 Uso: gen_ranged_3d.py [--jar client.jar]"""
-import argparse, json, subprocess, zipfile
+import argparse, copy, json, math, subprocess, zipfile
 from pathlib import Path
 
 JAR = Path.home() / ".local/share/horizon-launcher/versions/nightly-2026-11-05-66f3981/.local/minecraft/26.3/jars/client.jar"
@@ -123,6 +123,15 @@ def crossbow(pull, load):
     return model(e, DISP["crossbow"])
 
 
+def _rot_vec_mc(vec, rot_deg):
+    rx, ry, rz = [math.radians(a) for a in rot_deg]
+    x, y, z = vec
+    x, y = x * math.cos(rz) - y * math.sin(rz), x * math.sin(rz) + y * math.cos(rz)
+    y, z = y * math.cos(rx) - z * math.sin(rx), y * math.sin(rx) + z * math.cos(rx)
+    x, z = x * math.cos(ry) + z * math.sin(ry), -x * math.sin(ry) + z * math.cos(ry)
+    return (x, y, z)
+
+
 def trident(extra_display):
     e = [ent(-0.5, 2, -0.5, 1, 25, 1, "wood_d"),
          ent(-0.95, 2.0, -0.95, 1.9, 1.4, 1.9, "gold"), ent(-0.95, 12.0, -0.95, 1.9, 1.2, 1.9, "gold"), ent(-0.95, 22.0, -0.95, 1.9, 1.2, 1.9, "gold"),
@@ -131,7 +140,19 @@ def trident(extra_display):
          ent(-2.5, -3, -0.5, 1, 4, 1, "steel"), ent(-0.5, -4.6, -0.5, 1, 4.6, 1, "steel"), ent(1.5, -3, -0.5, 1, 4, 1, "steel"),
          ent(-3.1, -1.4, -0.5, 0.6, 1.6, 1, "steel_d"), ent(2.5, -1.4, -0.5, 0.6, 1.6, 1, "steel_d"),
          ent(-0.25, -3.6, -0.7, 0.5, 3.6, 1.4, "cyan")]
-    return model(e, extra_display, {"gui_light": "front"})
+    # Shift +6.0 in Y so all coordinates stay within Minecraft's strict [-16, 32] element bounds
+    shift_y = 6.0
+    for el in e:
+        el["from"][1] = round(el["from"][1] + shift_y, 3)
+        el["to"][1] = round(el["to"][1] + shift_y, 3)
+    disp = copy.deepcopy(extra_display)
+    for k, d in disp.items():
+        rot = d.get("rotation", [0, 0, 0])
+        tr = d.get("translation", [0, 0, 0])
+        sc = d.get("scale", [1, 1, 1])
+        dx, dy, dz = _rot_vec_mc((0.0, shift_y * sc[1], 0.0), rot)
+        d["translation"] = [round(tr[0] - dx, 2), round(tr[1] - dy, 2), round(tr[2] - dz, 2)]
+    return model(e, disp, {"gui_light": "front"})
 
 
 def shield(blocking):

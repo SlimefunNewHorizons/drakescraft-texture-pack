@@ -150,6 +150,8 @@ def main():
                     "cases": [{"when": FLAT, "model": {"type": "minecraft:model", "model": "minecraft:item/trident"}}],
                     "fallback": {"type": "minecraft:condition", "property": "minecraft:using_item",
                                  "on_false": M("trident_in_hand"), "on_true": M("trident_throwing")}},
+        "shield": {"type": "minecraft:condition", "property": "minecraft:using_item",
+                   "on_false": M("shield"), "on_true": M("shield_blocking")},
 
     }
     n_ranged = 0
@@ -194,6 +196,114 @@ def main():
         add[path] = json.dumps(out_doc, ensure_ascii=False, indent=1).encode()
         proc += 1
     report["items_slimefun_por_id_fusionados"] = proc
+
+    # Parchear overlays (overlay_1_21_6_plus, overlay_1_21_11, overlay_26_1_2, ...) para que NO pisen los modelos 3D gear3d
+    # ni pierdan los casos drakes_proc en Minecraft 1.21.6+ / 1.21.11 / 26.1.2 / 26.2+.
+    gear3d_ids = {p.stem for p in (repo / "assets/drakescraft/models/item/gear3d").glob("*.json")}
+    repo_proc_cases = {}
+    for p in sorted((repo / "assets/minecraft/items").glob("*.json")):
+        if p.name == "player_head.json":
+            continue
+        txt = p.read_text()
+        if "drakes_proc" not in txt:
+            continue
+        rm = json.loads(txt).get("model", {})
+        if rm.get("type") == "minecraft:select" and rm.get("component") == "minecraft:custom_data" and isinstance(rm.get("cases"), list):
+            repo_proc_cases[p.stem] = rm["cases"]
+
+    def _replace_flat_leaf(node, item_id, replacement):
+        """Reemplaza hojas {'type': 'model'|'minecraft:model', 'model': 'item/<id>'|'minecraft:item/<id>'} por replacement."""
+        replaced = 0
+        if isinstance(node, dict):
+            targets = (f"item/{item_id}", f"minecraft:item/{item_id}")
+            for k in list(node.keys()):
+                v = node[k]
+                if isinstance(v, dict) and v.get("type") in ("model", "minecraft:model") and v.get("model") in targets:
+                    node[k] = copy.deepcopy(replacement)
+                    replaced += 1
+                else:
+                    replaced += _replace_flat_leaf(v, item_id, replacement)
+        elif isinstance(node, list):
+            for i, v in enumerate(node):
+                if isinstance(v, dict) and v.get("type") in ("model", "minecraft:model") and v.get("model") in (f"item/{item_id}", f"minecraft:item/{item_id}"):
+                    node[i] = copy.deepcopy(replacement)
+                    replaced += 1
+                else:
+                    replaced += _replace_flat_leaf(v, item_id, replacement)
+        return replaced
+
+    def _inject_custom_data_cases(node, extra_cases):
+        """Inserta casos custom_data que falten en el primer select(component=custom_data) encontrado."""
+        if not extra_cases or not isinstance(node, dict):
+            return 0
+        if node.get("type") in ("select", "minecraft:select") and node.get("component") in ("custom_data", "minecraft:custom_data") and isinstance(node.get("cases"), list):
+            have_w = {json.dumps(c.get("when"), sort_keys=True) for c in node["cases"]}
+            added = 0
+            for c in extra_cases:
+                key = json.dumps(c.get("when"), sort_keys=True)
+                if key not in have_w:
+                    node["cases"].append(copy.deepcopy(c))
+                    have_w.add(key)
+                    added += 1
+            return added
+        for k in ("on_false", "fallback"):
+            if k in node:
+                res = _inject_custom_data_cases(node[k], extra_cases)
+                if res:
+                    return res
+        return 0
+
+    def _replace_trident_special(node, replacement):
+        """Reemplaza el bloque display_context/special vanilla del tridente por el selector 3D."""
+        if not isinstance(node, dict):
+            return 0
+        # En overlay_1_21_11 / overlay_26_1_2, el fallback de custom_data es un select(display_context) con special minecraft:trident
+        if node.get("type") in ("select", "minecraft:select") and node.get("component") in ("custom_data", "minecraft:custom_data"):
+            fb = node.get("fallback")
+            if isinstance(fb, dict) and "minecraft:trident" in json.dumps(fb):
+                node["fallback"] = copy.deepcopy(replacement)
+                return 1
+        replaced = 0
+        for k in ("on_false", "fallback"):
+            if k in node:
+                replaced += _replace_trident_special(node[k], replacement)
+        return replaced
+
+    ov_patched = 0
+    ov_proc_injected = 0
+    for ov_path in sorted(names):
+        if not ov_path.startswith("overlay_") or "/assets/minecraft/items/" not in ov_path or not ov_path.endswith(".json"):
+            continue
+        item_id = Path(ov_path).stem
+        if item_id == "player_head":
+            continue
+        ov_doc = json.loads(base.read(ov_path))
+        changed = False
+        if item_id == "trident":
+            if _replace_trident_special(ov_doc.get("model", {}), ranged["trident"]):
+                changed = True
+            inj = _inject_custom_data_cases(ov_doc.get("model", {}), repo_proc_cases.get("trident", []))
+            if inj:
+                ov_proc_injected += inj
+                changed = True
+        elif item_id in gear3d_ids:
+            fb_3d = flat_or(M(item_id), f"minecraft:item/{item_id}")
+            if _replace_flat_leaf(ov_doc.get("model", {}), item_id, fb_3d):
+                changed = True
+            inj = _inject_custom_data_cases(ov_doc.get("model", {}), repo_proc_cases.get(item_id, []))
+            if inj:
+                ov_proc_injected += inj
+                changed = True
+        elif item_id in repo_proc_cases:
+            inj = _inject_custom_data_cases(ov_doc.get("model", {}), repo_proc_cases[item_id])
+            if inj:
+                ov_proc_injected += inj
+                changed = True
+        if changed:
+            add[ov_path] = json.dumps(ov_doc, ensure_ascii=False, indent=1).encode()
+            ov_patched += 1
+    report["overlays_items_parcheados_3d"] = ov_patched
+    report["overlays_cases_drakes_proc_inyectados"] = ov_proc_injected
 
     # items nuevos por id (Slimefun) que el base no tiene: solo si TODOS sus modelos existen (si no, el item pasaria de
     # vanilla a 'modelo faltante')
