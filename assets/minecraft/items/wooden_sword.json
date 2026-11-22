@@ -127,8 +127,7 @@
             "when": [
               "gui",
               "ground",
-              "fixed",
-              "on_shelf"
+              "fixed"
             ],
             "model": {
               "type": "minecraft:model",
@@ -239,8 +238,7 @@
                   "when": [
                     "gui",
                     "ground",
-                    "fixed",
-                    "on_shelf"
+                    "fixed"
                   ],
                   "model": {
                     "type": "minecraft:model",

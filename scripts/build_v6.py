@@ -128,7 +128,7 @@ def main():
 
     # arco/ballesta/tridente/escudo 3D en mano
     def M(n): return {"type": "minecraft:model", "model": f"drakescraft:item/gear3d/{n}"}
-    FLAT = ["gui", "ground", "fixed", "on_shelf"]
+    FLAT = ["gui", "ground", "fixed"]
     def flat_or(m3d, flat):
         return {"type": "minecraft:select", "property": "minecraft:display_context",
                 "cases": [{"when": FLAT, "model": {"type": "minecraft:model", "model": flat}}], "fallback": m3d}
@@ -211,11 +211,81 @@ def main():
         if rm.get("type") == "minecraft:select" and rm.get("component") == "minecraft:custom_data" and isinstance(rm.get("cases"), list):
             repo_proc_cases[p.stem] = rm["cases"]
 
-    def _replace_flat_leaf(node, item_id, replacement):
-        """Reemplaza hojas {'type': 'model'|'minecraft:model', 'model': 'item/<id>'|'minecraft:item/<id>'} por replacement."""
-        replaced = 0
+    def _is_display_context_select(node):
+        return (
+            isinstance(node, dict)
+            and node.get("type") in ("select", "minecraft:select")
+            and node.get("property") in ("display_context", "minecraft:display_context")
+            and isinstance(node.get("cases"), list)
+        )
+
+    def _strip_on_shelf(node):
+        """Elimina 'on_shelf' (introducido en 1.21.9) de cases.when y de model.display para compatibilidad 1.21.4-1.21.8."""
+        changed = False
         if isinstance(node, dict):
-            targets = (f"item/{item_id}", f"minecraft:item/{item_id}")
+            disp = node.get("display")
+            if isinstance(disp, dict) and "on_shelf" in disp:
+                del disp["on_shelf"]
+                changed = True
+            if _is_display_context_select(node):
+                new_cases = []
+                for c in node["cases"]:
+                    if isinstance(c, dict):
+                        w = c.get("when")
+                        if w == "on_shelf":
+                            changed = True
+                            continue
+                        if isinstance(w, list) and "on_shelf" in w:
+                            c["when"] = [x for x in w if x != "on_shelf"]
+                            changed = True
+                            if not c["when"]:
+                                continue
+                    new_cases.append(c)
+                node["cases"] = new_cases
+            for v in node.values():
+                if _strip_on_shelf(v):
+                    changed = True
+        elif isinstance(node, list):
+            for v in node:
+                if _strip_on_shelf(v):
+                    changed = True
+        return changed
+
+    def _flatten_display_context_select(node):
+        """Desenvuelve minecraft:select(display_context) anidados redundantes."""
+        changed = False
+        if isinstance(node, dict):
+            if _is_display_context_select(node):
+                for c in node["cases"]:
+                    if not isinstance(c, dict):
+                        continue
+                    inner = c.get("model")
+                    while _is_display_context_select(inner) and len(inner["cases"]) == 1:
+                        inner_case = inner["cases"][0]
+                        if inner.get("fallback") == node.get("fallback"):
+                            c["model"] = inner_case.get("model")
+                            inner = c["model"]
+                            changed = True
+                        else:
+                            break
+            for v in node.values():
+                if _flatten_display_context_select(v):
+                    changed = True
+        elif isinstance(node, list):
+            for v in node:
+                if _flatten_display_context_select(v):
+                    changed = True
+        return changed
+
+    def _replace_flat_leaf(node, item_id, replacement):
+        """Reemplaza hojas {'type': 'model'|'minecraft:model', 'model': 'item/<id>'|'minecraft:item/<id>'} por replacement
+        sin re-envolver select(display_context) que ya envuelven este item."""
+        replaced = 0
+        targets = (f"item/{item_id}", f"minecraft:item/{item_id}")
+        if isinstance(node, dict):
+            if _is_display_context_select(node) and node.get("fallback") == replacement.get("fallback"):
+                # Ya está envuelto en select(display_context) con el mismo fallback 3D; no re-envolver
+                return 0
             for k in list(node.keys()):
                 v = node[k]
                 if isinstance(v, dict) and v.get("type") in ("model", "minecraft:model") and v.get("model") in targets:
@@ -225,7 +295,7 @@ def main():
                     replaced += _replace_flat_leaf(v, item_id, replacement)
         elif isinstance(node, list):
             for i, v in enumerate(node):
-                if isinstance(v, dict) and v.get("type") in ("model", "minecraft:model") and v.get("model") in (f"item/{item_id}", f"minecraft:item/{item_id}"):
+                if isinstance(v, dict) and v.get("type") in ("model", "minecraft:model") and v.get("model") in targets:
                     node[i] = copy.deepcopy(replacement)
                     replaced += 1
                 else:
@@ -287,6 +357,8 @@ def main():
                 ov_proc_injected += inj
                 changed = True
         elif item_id in gear3d_ids:
+            if _flatten_display_context_select(ov_doc.get("model", {})):
+                changed = True
             fb_3d = flat_or(M(item_id), f"minecraft:item/{item_id}")
             if _replace_flat_leaf(ov_doc.get("model", {}), item_id, fb_3d):
                 changed = True
@@ -299,6 +371,8 @@ def main():
             if inj:
                 ov_proc_injected += inj
                 changed = True
+        if _strip_on_shelf(ov_doc):
+            changed = True
         if changed:
             add[ov_path] = json.dumps(ov_doc, ensure_ascii=False, indent=1).encode()
             ov_patched += 1
@@ -460,6 +534,17 @@ def main():
             patched_langs += 1
     report["idiomas_parcheados"] = patched_langs
 
+    def _sanitize_json_bytes(fname, raw):
+        if not fname.endswith(".json") or b"on_shelf" not in raw:
+            return raw, False
+        doc = json.loads(raw.decode("utf-8"))
+        c1 = _strip_on_shelf(doc)
+        c2 = _flatten_display_context_select(doc)
+        if c1 or c2:
+            return json.dumps(doc, ensure_ascii=False, indent=1).encode("utf-8"), True
+        return raw, False
+
+    on_shelf_sanitized = 0
     a.out.parent.mkdir(parents=True, exist_ok=True)
     with zipfile.ZipFile(a.out, "w", zipfile.ZIP_DEFLATED) as out:
         for info in base.infolist():
@@ -478,17 +563,24 @@ def main():
             # Evitar StringIndexOutOfBoundsException en InteractiveChatDiscordSrvAddon por archivos WIP sin extension bajo textures/
             if not info.is_dir() and "/textures/" in info.filename and "." not in Path(info.filename).name:
                 continue
-            out.writestr(copy.copy(info), base.read(info.filename))
+            raw_b, san = _sanitize_json_bytes(info.filename, base.read(info.filename))
+            if san:
+                on_shelf_sanitized += 1
+            out.writestr(copy.copy(info), raw_b)
         dt = base.getinfo("pack.mcmeta").date_time
         for n_, b in sorted(add.items()):
             if n_.startswith("assets/minecraft/textures/block/"):
                 continue
+            b, san = _sanitize_json_bytes(n_, b)
+            if san:
+                on_shelf_sanitized += 1
             zi = zipfile.ZipInfo(n_, date_time=dt)
             zi.compress_type = zipfile.ZIP_DEFLATED
             out.writestr(zi, b)
     z = zipfile.ZipFile(a.out)
     bad = z.testzip()
     report.update({"archivos_anadidos_o_reemplazados": len(add), "reemplazan_base": len([n for n in add if n in names]),
+                   "on_shelf_sanitizados": on_shelf_sanitized,
                    "entradas": len(z.namelist()), "bytes": a.out.stat().st_size, "crc": bad or "ok"})
     print(json.dumps(report, indent=1))
 
