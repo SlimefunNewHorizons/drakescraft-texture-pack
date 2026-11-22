@@ -579,10 +579,54 @@ def main():
             out.writestr(zi, b)
     z = zipfile.ZipFile(a.out)
     bad = z.testzip()
+    # Contract Pack Gate obligatorio (bloquea regresiones antes de publicar)
+    gate_violations = []
+    if bad is not None:
+        gate_violations.append(f"CRC corrupto: {bad}")
+    on_shelf_left = 0
+    extless_tex = 0
+    json_errs = 0
+    rank_glyphs = 0
+    has_polis = False
+    for ename in z.namelist():
+        if ename.endswith("/"):
+            continue
+        low = ename.lower()
+        if "/textures/" in low and "." not in ename.rsplit("/", 1)[-1]:
+            extless_tex += 1
+        if low.endswith(".png") and "polis" in low:
+            has_polis = True
+        if low.endswith(".json") or ename == "pack.mcmeta":
+            raw_b = z.read(ename)
+            try:
+                doc = json.loads(raw_b.decode("utf-8-sig"))
+            except Exception:
+                json_errs += 1
+                continue
+            if low == "assets/minecraft/font/default.json" and isinstance(doc, dict):
+                rank_glyphs = sum(
+                    1 for pr in (doc.get("providers") or [])
+                    if isinstance(pr, dict) and pr.get("type") == "bitmap" and pr.get("file")
+                )
+            if ("/items/" in low or "/models/" in low) and b'"on_shelf"' in raw_b:
+                on_shelf_left += 1
+    if on_shelf_left:
+        gate_violations.append(f"Quedaron {on_shelf_left} JSONs con token 'on_shelf' incompatible con 1.21.4-1.21.8")
+    if extless_tex:
+        gate_violations.append(f"Quedaron {extless_tex} archivos sin extension bajo /textures/")
+    if json_errs:
+        gate_violations.append(f"Quedaron {json_errs} JSONs invalidos")
+    if rank_glyphs < 134 or not has_polis:
+        gate_violations.append(f"Faltan glyphs de rangos (count={rank_glyphs}, polis={has_polis})")
+
     report.update({"archivos_anadidos_o_reemplazados": len(add), "reemplazan_base": len([n for n in add if n in names]),
                    "on_shelf_sanitizados": on_shelf_sanitized,
-                   "entradas": len(z.namelist()), "bytes": a.out.stat().st_size, "crc": bad or "ok"})
+                   "entradas": len(z.namelist()), "bytes": a.out.stat().st_size, "crc": bad or "ok",
+                   "pack_gate": {"passed": not gate_violations, "rank_glyphs": rank_glyphs, "has_polis": has_polis,
+                                 "violations": gate_violations}})
     print(json.dumps(report, indent=1))
+    if gate_violations:
+        raise SystemExit(2)
 
 
 if __name__ == "__main__":
