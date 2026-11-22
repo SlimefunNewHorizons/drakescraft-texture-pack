@@ -17,5 +17,14 @@
     "DISPLAY": false,
     "dev_dri": false,
     "minecraft_default_install": false
+  },
+  "validation": {
+    "baseline_commit": "81e3f7f0",
+    "baseline_regression_failures": 27,
+    "current_tests_passed": 48,
+    "current_tests_failed": 0,
+    "execution": "Python unittest, shared /tmp/saori-build.lock, nice 15, ionice c3; no build",
+    "build_seguro": "cancelled while waiting for load >=5; no compilation started",
+    "diff_check": "passed"
   }
 }

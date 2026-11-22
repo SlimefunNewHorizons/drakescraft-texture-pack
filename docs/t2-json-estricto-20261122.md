@@ -16,6 +16,14 @@ Regresión: 27 combinaciones de constante y ubicación, entre ZIP base y bytes
 suplementarios, más un control que preserva cadenas y bytes válidos. Se verifica
 la conservación del candidato anterior en cada rechazo.
 
+Validación sobre `81e3f7f0`: los 27 subcasos reproducen el falso éxito del
+constructor anterior. Tras el cambio pasan **48/48 pruebas** (`3,401 s`),
+incluidas las nuevas regresiones y el control de cadenas válidas.
+`git diff --check` correcto. `build_seguro.sh` se canceló durante la espera por
+carga >= 5, antes de ejecutar. Las pruebas son Python sin compilación y se
+ejecutaron a prioridad baja (`nice 15`, `ionice c3`) con el mismo lock
+`/tmp/saori-build.lock`, sin procesos de prueba paralelos.
+
 ## Bloqueos del pendiente global
 
 La [inspección local](t2-json-estricto-20261122.json) del ZIP público cacheado
