@@ -27,6 +27,34 @@ ADD_PREFIXES = (
 ADD_EXACT = ("assets/minecraft/font/terralense_hud.json", "assets/minecraft/font/terralense_hud_top.json")
 GEAR_PREFIX = "assets/minecraft/items/"
 
+ATLAS_ITEMS = "assets/minecraft/atlases/items.json"
+TRIM_OVERLAY = "overlay_26_3_trims"
+TRIM_OVERLAY_MIN = 97  # 26.3: paletas de trims pasan a textures/palettes/ (trim_base, trim/<material>)
+
+
+def split_trim_atlas(raw):
+    """Atlas de items en formato 26.3 -> (raiz en formato <=26.2, original para el overlay 26.3), o None.
+
+    En 26.2 (resource 88) minecraft:trim_base no existe: el cliente registra 'Failed to load palette image' y
+    pierde todos los trims de armadura en items. 26.3 lee las paletas relativas a textures/palettes/.
+    """
+    doc = json.loads(raw)
+    changed = False
+    for src in doc.get("sources", []):
+        if src.get("type") != "minecraft:paletted_permutations" or src.get("palette_key") != "minecraft:trim_base":
+            continue
+        src["palette_key"] = "minecraft:trims/color_palettes/trim_palette"
+        for k, v in src.get("permutations", {}).items():
+            ns, _, path = v.partition(":")
+            if path.startswith("trim/"):
+                mat = path[len("trim/"):]
+                src["permutations"][k] = (f"minecraft:trims/color_palettes/{mat}" if ns == "minecraft"
+                                          else f"{ns}:palettes/trim/{mat}")
+        changed = True
+    if not changed:
+        return None
+    return (json.dumps(doc, ensure_ascii=False, indent=2) + "\n").encode(), raw
+
 
 def merge_sounds(base, repo):
     out = dict(base)
@@ -86,6 +114,20 @@ def main():
         add["pack.mcmeta"] = (repo / "pack.mcmeta").read_bytes()
     if (repo / "pack.png").exists():
         add["pack.png"] = (repo / "pack.png").read_bytes()
+
+    # Atlas de trims: raiz compatible con 26.2 y el formato 26.3 (palettes/) solo en su overlay
+    atlas_raw = add.get(ATLAS_ITEMS) or (base.read(ATLAS_ITEMS) if ATLAS_ITEMS in names else None)
+    split = split_trim_atlas(atlas_raw) if atlas_raw else None
+    if split:
+        add[ATLAS_ITEMS], add[f"{TRIM_OVERLAY}/{ATLAS_ITEMS}"] = split
+        meta = json.loads(add.get("pack.mcmeta") or base.read("pack.mcmeta"))
+        entries = meta.setdefault("overlays", {}).setdefault("entries", [])
+        if not any(e.get("directory") == TRIM_OVERLAY for e in entries):
+            entries.append({"directory": TRIM_OVERLAY,
+                            "formats": {"min_inclusive": TRIM_OVERLAY_MIN, "max_inclusive": 500},
+                            "min_format": [TRIM_OVERLAY_MIN, 0], "max_format": [500, 0]})
+        add["pack.mcmeta"] = (json.dumps(meta, ensure_ascii=False, indent=2) + "\n").encode()
+    report["atlas_trims_26_3_a_overlay"] = bool(split)
 
     # fuente default: utilizar la definicion maestra del repo (con todos los rangos, grecas y drakescraft:holo)
     if (repo / "assets/minecraft/font/default.json").exists():
@@ -610,6 +652,8 @@ def main():
                 )
             if ("/items/" in low or "/models/" in low) and b'"on_shelf"' in raw_b:
                 on_shelf_left += 1
+    if ATLAS_ITEMS in z.namelist() and b'"minecraft:trim_base"' in z.read(ATLAS_ITEMS):
+        gate_violations.append("atlases/items.json raiz usa minecraft:trim_base (solo 26.3): trims rotos en 26.2")
     if on_shelf_left:
         gate_violations.append(f"Quedaron {on_shelf_left} JSONs con token 'on_shelf' incompatible con 1.21.4-1.21.8")
     if extless_tex:
