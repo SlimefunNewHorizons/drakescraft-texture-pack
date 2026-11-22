@@ -21,11 +21,20 @@ PNG_SIGNATURE = b"\x89PNG\r\n\x1a\n"
 CUBE_FACES = {"down", "up", "north", "south", "west", "east"}
 
 
+def finite_number(value: object) -> bool:
+    if type(value) not in {int, float}:
+        return False
+    try:
+        return math.isfinite(value)
+    except OverflowError:
+        return False
+
+
 def valid_number_list(value: object, length: int) -> bool:
     return (
         isinstance(value, list)
         and len(value) == length
-        and all(type(item) in {int, float} and math.isfinite(item) for item in value)
+        and all(finite_number(item) for item in value)
     )
 
 
@@ -168,8 +177,7 @@ def bridge_legacy_items(source: zipfile.ZipFile, carriers: list[str],
             predicate = override.get("predicate", {})
             threshold = predicate.get("custom_model_data")
             if (set(predicate) != {"custom_model_data"}
-                    or type(threshold) not in (int, float)
-                    or not math.isfinite(threshold) or threshold <= previous):
+                    or not finite_number(threshold) or threshold <= previous):
                 raise ValueError(f"Unsupported legacy predicate or order: {legacy_path}")
             reference = override.get("model", "")
             if not isinstance(reference, str):

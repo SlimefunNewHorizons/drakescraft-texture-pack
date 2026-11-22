@@ -231,6 +231,17 @@ class LegacyShaderIsolationTests(unittest.TestCase):
                     "model": {"type": "model", "model": "slimefun:keep"}}],
                 "fallback": {"type": "model", "model": "item/red_dye"}}}).encode()
 
+    def test_legacy_bridge_rejects_overflowing_threshold_preserving_output(self):
+        self.add_legacy_carrier()
+        carrier = json.loads(self.entries[self.carrier])
+        carrier["overrides"][0]["predicate"]["custom_model_data"] = 10 ** 400
+        self.entries[self.carrier] = json.dumps(carrier).encode()
+        digest = self.write_base()
+        self.output.write_bytes(b"previous candidate")
+        with self.assertRaisesRegex(ValueError, "Unsupported legacy predicate"):
+            build(self.base, self.output, digest, legacy_item_bridges=["red_dye"])
+        self.assertEqual(self.output.read_bytes(), b"previous candidate")
+
     def test_legacy_bridge_matches_old_threshold_selection_and_preserves_source(self):
         self.add_legacy_carrier()
         digest = self.write_base()
@@ -769,6 +780,9 @@ class LegacyShaderIsolationTests(unittest.TestCase):
              {tex_path: valid_png}),
             ("element_bad_from_bool",
              {**base_tex, "elements": [{"from": [0, True, 0], "faces": {"north": {"texture": "#1"}}}]},
+             {tex_path: valid_png}),
+            ("element_overflowing_from",
+             {**base_tex, "elements": [{"from": [0, 10 ** 400, 0], "faces": {"north": {"texture": "#1"}}}]},
              {tex_path: valid_png}),
             ("element_bad_to_len",
              {**base_tex, "elements": [{"to": [16, 16, 16, 16], "faces": {"north": {"texture": "#1"}}}]},
