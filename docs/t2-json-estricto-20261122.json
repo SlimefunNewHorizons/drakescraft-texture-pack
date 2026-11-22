@@ -1,0 +1,21 @@
+{
+  "source": "cached public ZIP; not a new GET",
+  "artifact": "/tmp/codex2-t2-20261122/base.zip",
+  "bytes": 30291477,
+  "sha1": "4597ead7d148fe0ef46029e643af8a82d151a0a0",
+  "crc_ok": true,
+  "root_core_shaders": [
+    "assets/stellarity/shaders/core/end_gateway.fsh",
+    "assets/minecraft/shaders/core/item.fsh"
+  ],
+  "original_present": false,
+  "reference_sources": [
+    "assets/svm_ep/items/katana_fire.json",
+    "assets/minecraft/models/item/warped_fungus_on_a_stick.json"
+  ],
+  "render_environment": {
+    "DISPLAY": false,
+    "dev_dri": false,
+    "minecraft_default_install": false
+  }
+}

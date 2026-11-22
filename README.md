@@ -138,6 +138,11 @@ Para exigir el recurso pendiente de T2, agregar a la reconstrucción:
 --require-model minecraft:item/custom/item/fire_katana
 ```
 
+Los JSON inspeccionados por el constructor rechazan `NaN`, `Infinity` y
+`-Infinity`, incluso en campos ajenos a la geometría. El rechazo conserva el
+candidato previo; esos nombres siguen permitidos dentro de cadenas de texto.
+Esto no valida los recursos ajenos que el constructor copia sin inspeccionar.
+
 La opción es repetible y comprueba el JSON final del modelo en la raíz antes de
 crear o reemplazar la salida. Un modelo presente solo en un overlay o una
 sustitución mediante `--missing-model-fallbacks` no cumple ese requisito. Se
