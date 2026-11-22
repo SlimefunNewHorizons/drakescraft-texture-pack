@@ -259,7 +259,16 @@ def required_model_references(source, replacements, metadata, required):
             node = json.loads(content)
         except (ValueError, UnicodeError):
             continue
-        for reference in references(node):
+        if not isinstance(node, dict):
+            continue
+        if "/models/" in logical:
+            # Only the model's root parent and legacy overrides load models;
+            # arbitrary metadata (e.g. display) must not satisfy this check.
+            candidates = {"parent": node.get("parent"), "overrides": node.get("overrides", [])}
+        else:
+            # Item definitions load the model tree, not arbitrary root metadata.
+            candidates = node.get("model", {})
+        for reference in references(candidates):
             if reference in found:
                 namespace, path = reference.split(":", 1)
                 if logical != f"assets/{namespace}/models/{path}.json":

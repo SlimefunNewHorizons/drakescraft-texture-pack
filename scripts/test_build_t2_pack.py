@@ -483,6 +483,19 @@ class LegacyShaderIsolationTests(unittest.TestCase):
             build(self.base, self.output, self.write_base(), required_models=["svm:item/first"])
         self.assertFalse(self.output.exists())
 
+    def test_required_model_ignores_references_in_unloaded_metadata(self):
+        self.entries["assets/svm/models/item/first.json"] = b'{"elements":[]}'
+        for path, payload in (
+            ("assets/svm/models/item/test.json", b'{"display":{"parent":"svm:item/first"}}'),
+            ("assets/svm/items/test.json", b'{"metadata":{"model":"svm:item/first"},"model":{}}'),
+        ):
+            with self.subTest(path=path):
+                self.output.write_bytes(b"previous artifact")
+                with self.assertRaisesRegex(ValueError, "Unreferenced required model"):
+                    build(self.base, self.output, self.write_base(), extra_files={path: payload},
+                          required_models=["svm:item/first"])
+                self.assertEqual(self.output.read_bytes(), b"previous artifact")
+
     def test_required_model_reference_uses_final_replacements(self):
         self.entries["assets/svm/models/item/first.json"] = b'{"elements":[]}'
         item = "assets/svm/items/selected.json"
