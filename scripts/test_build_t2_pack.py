@@ -94,6 +94,14 @@ class LegacyShaderIsolationTests(unittest.TestCase):
             build(self.base, self.output, self.write_base())
         self.assertFalse(self.output.exists())
 
+    def test_rejects_undeclared_overlay_content_without_replacing_candidate(self):
+        self.entries[f"{OVERLAY}/assets/minecraft/items/test.json"] = b'{"model":{}}'
+        digest = self.write_base()
+        self.output.write_bytes(b"previous candidate")
+        with self.assertRaisesRegex(ValueError, "overlay directory"):
+            build(self.base, self.output, digest)
+        self.assertEqual(self.output.read_bytes(), b"previous candidate")
+
     def test_write_failure_or_interruption_preserves_output_and_cleans_staging(self):
         digest = self.write_base()
         original_write = zipfile.ZipFile.writestr

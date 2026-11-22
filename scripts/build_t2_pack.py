@@ -540,6 +540,8 @@ def build(base: Path, output: Path, expected_sha256: str,
         overlays = metadata.setdefault("overlays", {}).setdefault("entries", [])
         if any(entry["directory"] == OVERLAY for entry in overlays):
             raise ValueError("Base already contains the legacy shader overlay")
+        if any(name.startswith(f"{OVERLAY}/") for name in names):
+            raise ValueError("Base contains files in the legacy shader overlay directory")
         # Refuse to silently leave a second legacy override active on 26.3.
         if any("/assets/" in name and is_shader("assets/" + name.split("/assets/", 1)[1])
                for name in names):
