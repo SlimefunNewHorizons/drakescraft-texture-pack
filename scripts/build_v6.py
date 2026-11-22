@@ -475,6 +475,9 @@ def main():
                                  "assets/minecraft/items/big_dripleaf.json",
                                  "assets/minecraft/items/small_dripleaf.json"):
                 continue
+            # Evitar StringIndexOutOfBoundsException en InteractiveChatDiscordSrvAddon por archivos WIP sin extension bajo textures/
+            if not info.is_dir() and "/textures/" in info.filename and "." not in Path(info.filename).name:
+                continue
             out.writestr(copy.copy(info), base.read(info.filename))
         dt = base.getinfo("pack.mcmeta").date_time
         for n_, b in sorted(add.items()):
