@@ -28,46 +28,6 @@ ADD_EXACT = ("assets/minecraft/font/terralense_hud.json", "assets/minecraft/font
 GEAR_PREFIX = "assets/minecraft/items/"
 
 
-def apply_missing_model_fallbacks(read, paths, fallbacks):
-    """Reescribe en items/*.json (cualquier namespace u overlay) las referencias a modelos ausentes declaradas en
-    t2_missing_model_fallbacks.json. Sin esto un item moderno (p. ej. svm_ep:katana_fire -> item/custom/item/fire_katana)
-    se ve como modelo faltante en 26.x. Devuelve {ruta: bytes} solo de los archivos cambiados."""
-    def model_file(ref):
-        ns, _, p = ref.rpartition(":")
-        return f"assets/{ns or 'minecraft'}/models/{p}.json"
-
-    for missing, target in fallbacks.items():
-        if model_file(missing) in paths:
-            raise SystemExit(f"Fallback would replace an existing model: {missing}")
-        if model_file(target) not in paths:
-            raise SystemExit(f"Missing fallback model: {model_file(target)}")
-    keys = {m.removeprefix("minecraft:"): t for m, t in fallbacks.items()}
-
-    def swap(o):
-        n = 0
-        if isinstance(o, dict):
-            m = o.get("model")
-            if isinstance(m, str) and m.removeprefix("minecraft:") in keys:
-                o["model"] = keys[m.removeprefix("minecraft:")]
-                n += 1
-            for v in o.values():
-                n += swap(v)
-        elif isinstance(o, list):
-            for v in o:
-                n += swap(v)
-        return n
-
-    changed = {}
-    for path in sorted(paths):
-        parts = path.split("/")
-        if len(parts) < 4 or parts[-2] != "items" or parts[-4] != "assets" or not path.endswith(".json"):
-            continue
-        doc = json.loads(read(path))
-        if swap(doc):
-            changed[path] = (json.dumps(doc, ensure_ascii=False, indent=1) + "\n").encode("utf-8")
-    return changed
-
-
 def merge_sounds(base, repo):
     out = dict(base)
     n = 0
@@ -472,13 +432,6 @@ def main():
                 add[mpath] = (json.dumps(doc, ensure_ascii=False, indent=2) + "\n").encode("utf-8")
                 patched_models += 1
     report["modelos_parcheados"] = patched_models
-
-    fallbacks_file = repo / "scripts/t2_missing_model_fallbacks.json"
-    if fallbacks_file.is_file():
-        fixed = apply_missing_model_fallbacks(lambda p: add[p] if p in add else base.read(p), names | set(add),
-                                              json.loads(fallbacks_file.read_text(encoding="utf-8")))
-        add.update(fixed)
-        report["items_con_fallback_de_modelo"] = sorted(fixed)
 
     # Parches declarativos de idiomas (Stellarity EN/ES + espejo es_cl desde es_es)
     lang_patches_file = repo / "scripts/t2_language_patches.json"
