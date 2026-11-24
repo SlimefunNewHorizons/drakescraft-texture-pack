@@ -206,7 +206,7 @@ def item_json(mid):
     ref = f"{NS}:item/gear3d/{mid}"
     if mid.endswith("_spear"):  # misma estructura que el vanilla: gui/suelo/marco = modelo, mano = in_hand
         return {"model": {"type": "minecraft:select", "property": "minecraft:display_context",
-                          "cases": [{"when": ["gui", "ground", "fixed", "on_shelf"], "model": {"type": "minecraft:model", "model": ref}}],
+                          "cases": [{"when": ["gui", "ground", "fixed"], "model": {"type": "minecraft:model", "model": ref}}],
                           "fallback": {"type": "minecraft:model", "model": ref + "_in_hand"}}, "swap_animation_scale": 1.95}
     return {"model": {"type": "minecraft:model", "model": ref}}
 

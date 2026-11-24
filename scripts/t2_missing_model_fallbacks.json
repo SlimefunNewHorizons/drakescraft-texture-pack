@@ -1,3 +1,8 @@
 {
-  "minecraft:item/custom/item/fire_katana": "minecraft:item/custom/item/fire_katana2"
+  "minecraft:item/custom/item/fire_katana": "minecraft:item/custom/item/fire_katana2",
+  "minecraft:item/custom/npc/thunder_god/faling": "minecraft:item/custom/npc/thunder_god/falling",
+  "minecraft:item/light_blue_concrete_powder": "minecraft:block/light_blue_concrete_powder",
+  "minecraft:item/white_concrete_powder": "minecraft:block/white_concrete_powder",
+  "minecraft:item/red_concrete_powder": "minecraft:block/red_concrete_powder",
+  "minecraft:item/lime_concrete_powder": "minecraft:block/lime_concrete_powder"
 }

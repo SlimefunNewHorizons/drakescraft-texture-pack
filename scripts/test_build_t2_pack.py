@@ -94,6 +94,14 @@ class LegacyShaderIsolationTests(unittest.TestCase):
             build(self.base, self.output, self.write_base())
         self.assertFalse(self.output.exists())
 
+    def test_rejects_undeclared_overlay_content_without_replacing_candidate(self):
+        self.entries[f"{OVERLAY}/assets/minecraft/items/test.json"] = b'{"model":{}}'
+        digest = self.write_base()
+        self.output.write_bytes(b"previous candidate")
+        with self.assertRaisesRegex(ValueError, "overlay directory"):
+            build(self.base, self.output, digest)
+        self.assertEqual(self.output.read_bytes(), b"previous candidate")
+
     def test_write_failure_or_interruption_preserves_output_and_cleans_staging(self):
         digest = self.write_base()
         original_write = zipfile.ZipFile.writestr
@@ -222,6 +230,17 @@ class LegacyShaderIsolationTests(unittest.TestCase):
                 "component": "minecraft:custom_data", "cases": [{"when": {"sf": "KEEP"},
                     "model": {"type": "model", "model": "slimefun:keep"}}],
                 "fallback": {"type": "model", "model": "item/red_dye"}}}).encode()
+
+    def test_legacy_bridge_rejects_overflowing_threshold_preserving_output(self):
+        self.add_legacy_carrier()
+        carrier = json.loads(self.entries[self.carrier])
+        carrier["overrides"][0]["predicate"]["custom_model_data"] = 10 ** 400
+        self.entries[self.carrier] = json.dumps(carrier).encode()
+        digest = self.write_base()
+        self.output.write_bytes(b"previous candidate")
+        with self.assertRaisesRegex(ValueError, "Unsupported legacy predicate"):
+            build(self.base, self.output, digest, legacy_item_bridges=["red_dye"])
+        self.assertEqual(self.output.read_bytes(), b"previous candidate")
 
     def test_legacy_bridge_matches_old_threshold_selection_and_preserves_source(self):
         self.add_legacy_carrier()
@@ -524,6 +543,19 @@ class LegacyShaderIsolationTests(unittest.TestCase):
             build(self.base, self.output, self.write_base(), required_models=["svm:item/first"])
         self.assertFalse(self.output.exists())
 
+    def test_required_model_ignores_references_in_unloaded_metadata(self):
+        self.entries["assets/svm/models/item/first.json"] = b'{"elements":[]}'
+        for path, payload in (
+            ("assets/svm/models/item/test.json", b'{"display":{"parent":"svm:item/first"}}'),
+            ("assets/svm/items/test.json", b'{"metadata":{"model":"svm:item/first"},"model":{}}'),
+        ):
+            with self.subTest(path=path):
+                self.output.write_bytes(b"previous artifact")
+                with self.assertRaisesRegex(ValueError, "Unreferenced required model"):
+                    build(self.base, self.output, self.write_base(), extra_files={path: payload},
+                          required_models=["svm:item/first"])
+                self.assertEqual(self.output.read_bytes(), b"previous artifact")
+
     def test_required_model_reference_uses_final_replacements(self):
         self.entries["assets/svm/models/item/first.json"] = b'{"elements":[]}'
         item = "assets/svm/items/selected.json"
@@ -821,6 +853,9 @@ class LegacyShaderIsolationTests(unittest.TestCase):
              {tex_path: valid_png}),
             ("element_bad_from_bool",
              {**base_tex, "elements": [{"from": [0, True, 0], "faces": {"north": {"texture": "#1"}}}]},
+             {tex_path: valid_png}),
+            ("element_overflowing_from",
+             {**base_tex, "elements": [{"from": [0, 10 ** 400, 0], "faces": {"north": {"texture": "#1"}}}]},
              {tex_path: valid_png}),
             ("element_bad_to_len",
              {**base_tex, "elements": [{"to": [16, 16, 16, 16], "faces": {"north": {"texture": "#1"}}}]},

@@ -28,11 +28,20 @@ def parse_json(payload: bytes | str):
     return json.loads(payload, parse_constant=reject_constant)
 
 
+def finite_number(value: object) -> bool:
+    if type(value) not in {int, float}:
+        return False
+    try:
+        return math.isfinite(value)
+    except OverflowError:
+        return False
+
+
 def valid_number_list(value: object, length: int) -> bool:
     return (
         isinstance(value, list)
         and len(value) == length
-        and all(type(item) in {int, float} and math.isfinite(item) for item in value)
+        and all(finite_number(item) for item in value)
     )
 
 
@@ -175,8 +184,7 @@ def bridge_legacy_items(source: zipfile.ZipFile, carriers: list[str],
             predicate = override.get("predicate", {})
             threshold = predicate.get("custom_model_data")
             if (set(predicate) != {"custom_model_data"}
-                    or type(threshold) not in (int, float)
-                    or not math.isfinite(threshold) or threshold <= previous):
+                    or not finite_number(threshold) or threshold <= previous):
                 raise ValueError(f"Unsupported legacy predicate or order: {legacy_path}")
             reference = override.get("model", "")
             if not isinstance(reference, str):
@@ -258,7 +266,16 @@ def required_model_references(source, replacements, metadata, required):
             node = parse_json(content)
         except (ValueError, UnicodeError):
             continue
-        for reference in references(node):
+        if not isinstance(node, dict):
+            continue
+        if "/models/" in logical:
+            # Only the model's root parent and legacy overrides load models;
+            # arbitrary metadata (e.g. display) must not satisfy this check.
+            candidates = {"parent": node.get("parent"), "overrides": node.get("overrides", [])}
+        else:
+            # Item definitions load the model tree, not arbitrary root metadata.
+            candidates = node.get("model", {})
+        for reference in references(candidates):
             if reference in found:
                 namespace, path = reference.split(":", 1)
                 if logical != f"assets/{namespace}/models/{path}.json":
@@ -547,6 +564,8 @@ def build(base: Path, output: Path, expected_sha256: str,
         overlays = metadata.setdefault("overlays", {}).setdefault("entries", [])
         if any(entry["directory"] == OVERLAY for entry in overlays):
             raise ValueError("Base already contains the legacy shader overlay")
+        if any(name.startswith(f"{OVERLAY}/") for name in names):
+            raise ValueError("Base contains files in the legacy shader overlay directory")
         # Refuse to silently leave a second legacy override active on 26.3.
         if any("/assets/" in name and is_shader("assets/" + name.split("/assets/", 1)[1])
                for name in names):
