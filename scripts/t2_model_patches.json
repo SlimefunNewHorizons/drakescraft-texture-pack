@@ -1,5 +1,24 @@
 {
   "assets/stellarity/models/block/ender_grass_block_snowy.json": {
     "side": "stellarity:block/ender_grass_block_side_snow"
+  },
+  "assets/minecraft/models/item/custom/item/explosion_summon2.json": {
+    "0": "custom/explosion_summon1",
+    "particle": "custom/explosion_summon1"
+  },
+  "assets/minecraft/models/item/custom/item/explosion_summon3.json": {
+    "particle": "custom/explosion_summon1"
+  },
+  "assets/svm_ep/models/item/ratio_cleaver.json": {
+    "particle": "svm_ep:item/ratio_cleaver"
+  },
+  "assets/minecraft/models/item/custom/item/cherry_katana.json": {
+    "particle": "custom/cherry_katana"
+  },
+  "assets/minecraft/models/item/custom/item/water_katana.json": {
+    "particle": "custom/water_katana"
+  },
+  "assets/minecraft/models/item/custom/item/demon_katana.json": {
+    "particle": "custom/demon_katana"
   }
 }
