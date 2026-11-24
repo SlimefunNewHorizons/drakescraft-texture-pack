@@ -12,6 +12,8 @@ from build_v6 import (  # noqa: E402
     is_stale_single_frame_animation_mcmeta,
     sanitize_blocks_atlas,
     split_trim_atlas,
+    strip_legacy_builtin_entity_parent,
+    upscale_8x8_rgba_png_to_16x16,
 )
 
 MODERN = {"sources": [
@@ -121,6 +123,31 @@ class ResourcePathAndStaleAnimationMcmetaTest(unittest.TestCase):
             valid_interp,
             lambda _: png_128x128,
         ))
+
+    def test_strips_legacy_builtin_entity_parent(self):
+        legacy = b'{"parent": "builtin/entity", "textures": {"particle": "block/soul_sand"}}'
+        stripped = strip_legacy_builtin_entity_parent(legacy)
+        self.assertIsNotNone(stripped)
+        self.assertEqual(json.loads(stripped), {"textures": {"particle": "block/soul_sand"}})
+        self.assertIsNone(strip_legacy_builtin_entity_parent(stripped))
+        self.assertIsNone(strip_legacy_builtin_entity_parent(b'{"parent": "item/generated"}'))
+
+    def test_upscales_8x8_rgba_png_to_16x16(self):
+        import struct
+        import zlib
+
+        def chunk(ctype, payload):
+            crc = zlib.crc32(ctype + payload) & 0xFFFFFFFF
+            return struct.pack(">I", len(payload)) + ctype + payload + struct.pack(">I", crc)
+
+        ihdr = struct.pack(">IIBBBBB", 8, 8, 8, 6, 0, 0, 0)
+        row = b"\x00" + (b"\x10\x20\x30\x40" * 8)
+        png8 = b"\x89PNG\r\n\x1a\n" + chunk(b"IHDR", ihdr) + chunk(b"IDAT", zlib.compress(row * 8)) + chunk(b"IEND", b"")
+        up = upscale_8x8_rgba_png_to_16x16(png8)
+        self.assertIsNotNone(up)
+        w, h = struct.unpack(">II", up[16:24])
+        self.assertEqual((w, h), (16, 16))
+        self.assertIsNone(upscale_8x8_rgba_png_to_16x16(up))
 
 
 if __name__ == "__main__":

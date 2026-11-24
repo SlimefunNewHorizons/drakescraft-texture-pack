@@ -13,7 +13,9 @@ Reglas:
 import argparse
 import copy
 import json
+import struct
 import zipfile
+import zlib
 from pathlib import Path
 
 ADD_PREFIXES = (
@@ -142,6 +144,96 @@ def is_stale_single_frame_animation_mcmeta(name, raw_mcmeta, read_png):
     frame_h = anim.get("height") if isinstance(anim.get("height"), int) and anim.get("height") > 0 else w
     total_frames = (h // frame_h) if frame_h > 0 else 1
     return max_idx >= total_frames
+
+
+def strip_legacy_builtin_entity_parent(raw):
+    """Elimina parent: 'builtin/entity' de modelos de plantilla (chest_fallback, template_skull).
+
+    En 26.2/26.3 los special item models (chest, head, banner, shield, trident) resuelven su transformacion
+    desde modelos JSON sin parent; conservar 'builtin/entity' provoca WARN 'Missing block model: minecraft:builtin/entity'.
+    """
+    try:
+        doc = json.loads(raw.decode("utf-8-sig"))
+    except Exception:
+        return None
+    if not isinstance(doc, dict):
+        return None
+    parent = doc.get("parent")
+    if not isinstance(parent, str) or parent.removeprefix("minecraft:") != "builtin/entity":
+        return None
+    doc = dict(doc)
+    del doc["parent"]
+    return (json.dumps(doc, ensure_ascii=False, indent=2) + "\n").encode("utf-8")
+
+
+def upscale_8x8_rgba_png_to_16x16(raw):
+    """Escala x2 (nearest-neighbor) un PNG RGBA 8x8 de 8 bits a 16x16 para no degradar el mipmap de blocks.png (4->3)."""
+    if not raw or len(raw) < 33 or raw[:8] != b"\x89PNG\r\n\x1a\n":
+        return None
+    w, h, bit_depth, color_type, comp, filt, interlace = struct.unpack(">IIBBBBB", raw[16:29])
+    if (w, h, bit_depth, color_type, comp, filt, interlace) != (8, 8, 8, 6, 0, 0, 0):
+        return None
+    pos = 8
+    idat = bytearray()
+    while pos + 8 <= len(raw):
+        length = struct.unpack(">I", raw[pos:pos + 4])[0]
+        ctype = raw[pos + 4:pos + 8]
+        if pos + 12 + length > len(raw):
+            return None
+        if ctype == b"IDAT":
+            idat.extend(raw[pos + 8:pos + 8 + length])
+        pos += 12 + length
+    try:
+        data = zlib.decompress(bytes(idat))
+    except Exception:
+        return None
+    stride = 8 * 4
+    if len(data) != 8 * (1 + stride):
+        return None
+    rows = []
+    prev = bytearray(stride)
+    for y in range(8):
+        ft = data[y * (1 + stride)]
+        row = bytearray(data[y * (1 + stride) + 1:(y + 1) * (1 + stride)])
+        if ft == 1:
+            for i in range(4, stride):
+                row[i] = (row[i] + row[i - 4]) & 0xFF
+        elif ft == 2:
+            for i in range(stride):
+                row[i] = (row[i] + prev[i]) & 0xFF
+        elif ft == 3:
+            for i in range(stride):
+                a = row[i - 4] if i >= 4 else 0
+                row[i] = (row[i] + ((a + prev[i]) >> 1)) & 0xFF
+        elif ft == 4:
+            for i in range(stride):
+                a = row[i - 4] if i >= 4 else 0
+                b = prev[i]
+                c = prev[i - 4] if i >= 4 else 0
+                p = a + b - c
+                pa, pb, pc = abs(p - a), abs(p - b), abs(p - c)
+                pr = a if (pa <= pb and pa <= pc) else (b if pb <= pc else c)
+                row[i] = (row[i] + pr) & 0xFF
+        elif ft != 0:
+            return None
+        rows.append(bytes(row))
+        prev = row
+    out_raw = bytearray()
+    for row in rows:
+        doubled = bytearray(b"\x00")
+        for x in range(8):
+            px = row[x * 4:(x + 1) * 4]
+            doubled.extend(px)
+            doubled.extend(px)
+        out_raw.extend(doubled)
+        out_raw.extend(doubled)
+
+    def _chunk(ctype, payload):
+        crc = zlib.crc32(ctype + payload) & 0xFFFFFFFF
+        return struct.pack(">I", len(payload)) + ctype + payload + struct.pack(">I", crc)
+
+    ihdr = struct.pack(">IIBBBBB", 16, 16, 8, 6, 0, 0, 0)
+    return b"\x89PNG\r\n\x1a\n" + _chunk(b"IHDR", ihdr) + _chunk(b"IDAT", zlib.compress(bytes(out_raw), 9)) + _chunk(b"IEND", b"")
 
 
 def split_trim_atlas(raw):
@@ -787,6 +879,8 @@ def main():
         return raw, False
 
     on_shelf_sanitized = 0
+    builtin_entity_stripped = 0
+    png_8x8_upscaled = 0
     beds_dropped = 0
     invalid_paths_dropped = 0
     stale_mcmeta_dropped = 0
@@ -819,6 +913,16 @@ def main():
             if is_legacy_bed_item(info.filename, raw_b):
                 beds_dropped += 1
                 continue
+            if info.filename.endswith(".json") and "/models/" in info.filename:
+                stripped = strip_legacy_builtin_entity_parent(raw_b)
+                if stripped is not None:
+                    raw_b = stripped
+                    builtin_entity_stripped += 1
+            if info.filename.endswith(".png") and info.filename.startswith("assets/minecraft/textures/custom/"):
+                up = upscale_8x8_rgba_png_to_16x16(raw_b)
+                if up is not None:
+                    raw_b = up
+                    png_8x8_upscaled += 1
             raw_b, san = _sanitize_json_bytes(info.filename, raw_b)
             if san:
                 on_shelf_sanitized += 1
@@ -839,6 +943,16 @@ def main():
             if is_legacy_bed_item(n_, b):
                 beds_dropped += 1
                 continue
+            if n_.endswith(".json") and "/models/" in n_:
+                stripped = strip_legacy_builtin_entity_parent(b)
+                if stripped is not None:
+                    b = stripped
+                    builtin_entity_stripped += 1
+            if n_.endswith(".png") and n_.startswith("assets/minecraft/textures/custom/"):
+                up = upscale_8x8_rgba_png_to_16x16(b)
+                if up is not None:
+                    b = up
+                    png_8x8_upscaled += 1
             b, san = _sanitize_json_bytes(n_, b)
             if san:
                 on_shelf_sanitized += 1
@@ -892,6 +1006,10 @@ def main():
     bad_locs = [n for n in z.namelist() if not n.endswith("/") and has_invalid_resource_location_chars(n)]
     if bad_locs:
         gate_violations.append(f"{len(bad_locs)} rutas con caracteres invalidos en ResourceLocation: {bad_locs[:3]}")
+    builtin_entity_models = [n for n in z.namelist() if n.endswith(".json") and "/models/" in n
+                             and strip_legacy_builtin_entity_parent(z.read(n)) is not None]
+    if builtin_entity_models:
+        gate_violations.append(f"{len(builtin_entity_models)} modelos con parent 'builtin/entity' obsoleto en 26.x: {builtin_entity_models[:3]}")
     if on_shelf_left:
         gate_violations.append(f"Quedaron {on_shelf_left} JSONs con token 'on_shelf' incompatible con 1.21.4-1.21.8")
     if extless_tex:
@@ -902,7 +1020,8 @@ def main():
         gate_violations.append(f"Faltan glyphs de rangos (count={rank_glyphs}, polis={has_polis})")
 
     report.update({"archivos_anadidos_o_reemplazados": len(add), "reemplazan_base": len([n for n in add if n in names]),
-                   "on_shelf_sanitizados": on_shelf_sanitized, "camas_legacy_omitidas": beds_dropped,
+                   "on_shelf_sanitizados": on_shelf_sanitized, "builtin_entity_sanitizados": builtin_entity_stripped,
+                   "png_8x8_escalados_a_16x16": png_8x8_upscaled, "camas_legacy_omitidas": beds_dropped,
                    "rutas_invalidas_omitidas": invalid_paths_dropped, "mcmeta_anim_obsoletos_omitidos": stale_mcmeta_dropped,
                    "entradas": len(z.namelist()), "bytes": a.out.stat().st_size, "crc": bad or "ok",
                    "pack_gate": {"passed": not gate_violations, "rank_glyphs": rank_glyphs, "has_polis": has_polis,
