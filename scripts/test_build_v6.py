@@ -9,6 +9,10 @@ class MissingModelFallbackTest(unittest.TestCase):
         self.files = {
             "assets/svm_ep/items/katana_fire.json": json.dumps(
                 {"model": {"type": "minecraft:model", "model": "minecraft:item/custom/item/fire_katana"}}),
+            "assets/svm_ep/items/thunder_god/falling.json": json.dumps(
+                {"model": {"type": "minecraft:model", "model": "minecraft:item/custom/npc/thunder_god/faling"}}),
+            "assets/minecraft/items/light_blue_concrete_powder.json": json.dumps(
+                {"model": {"type": "minecraft:model", "model": "minecraft:item/light_blue_concrete_powder"}}),
             "overlay_x/assets/minecraft/items/stick.json": json.dumps(
                 {"model": {"type": "minecraft:select", "cases": [{"model": {"model": "item/custom/item/fire_katana"}}],
                            "fallback": {"type": "minecraft:model", "model": "item/stick"}}}),
@@ -18,9 +22,14 @@ class MissingModelFallbackTest(unittest.TestCase):
                     {"predicate": {"custom_model_data": 1}, "model": "item/custom/item/fire_katana"},
                     {"predicate": {"custom_model_data": 2}, "model": "item/custom/item/fire_katana2"}]}),
             "assets/minecraft/models/item/custom/item/fire_katana2.json": "{}",
+            "assets/minecraft/models/item/custom/npc/thunder_god/falling.json": "{}",
             "assets/minecraft/models/item/custom/item/katana.json": "{}",
         }
-        self.fallbacks = {"minecraft:item/custom/item/fire_katana": "minecraft:item/custom/item/fire_katana2"}
+        self.fallbacks = {
+            "minecraft:item/custom/item/fire_katana": "minecraft:item/custom/item/fire_katana2",
+            "minecraft:item/custom/npc/thunder_god/faling": "minecraft:item/custom/npc/thunder_god/falling",
+            "minecraft:item/light_blue_concrete_powder": "minecraft:block/light_blue_concrete_powder",
+        }
 
     def run_fallbacks(self, fallbacks=None):
         return apply_missing_model_fallbacks(lambda p: self.files[p], set(self.files), fallbacks or self.fallbacks)
@@ -28,6 +37,8 @@ class MissingModelFallbackTest(unittest.TestCase):
     def test_rewrites_modern_items_in_any_namespace_and_overlay(self):
         changed = self.run_fallbacks()
         self.assertEqual(set(changed), {"assets/svm_ep/items/katana_fire.json",
+                                        "assets/svm_ep/items/thunder_god/falling.json",
+                                        "assets/minecraft/items/light_blue_concrete_powder.json",
                                         "overlay_x/assets/minecraft/items/stick.json",
                                         "assets/minecraft/models/item/warped_fungus_on_a_stick.json"})
         rod = json.loads(changed["assets/minecraft/models/item/warped_fungus_on_a_stick.json"])

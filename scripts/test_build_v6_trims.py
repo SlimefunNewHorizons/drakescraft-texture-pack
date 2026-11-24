@@ -4,7 +4,15 @@ import unittest
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent))
-from build_v6 import is_legacy_bed_item, is_root_shader, split_trim_atlas  # noqa: E402
+from build_v6 import (  # noqa: E402
+    backfill_missing_model_particles,
+    has_invalid_resource_location_chars,
+    is_legacy_bed_item,
+    is_root_shader,
+    is_stale_single_frame_animation_mcmeta,
+    sanitize_blocks_atlas,
+    split_trim_atlas,
+)
 
 MODERN = {"sources": [
     {"type": "minecraft:directory", "prefix": "item/", "source": "item"},
@@ -54,5 +62,67 @@ class RootShaderTest(unittest.TestCase):
         self.assertFalse(is_root_shader("assets/minecraft/shaders/"))
 
 
+class SanitizeBlocksAtlasTest(unittest.TestCase):
+    def test_removes_broad_entity_directory_and_preserves_subdirectories(self):
+        doc = {"sources": [
+            {"type": "directory", "source": "custom", "prefix": "custom/"},
+            {"type": "directory", "source": "entity", "prefix": "entity/"},
+            {"type": "minecraft:directory", "source": "entity/cow", "prefix": "entity/cow/"},
+            {"type": "single", "resource": "slimefun:item/x"},
+        ]}
+        cleaned = sanitize_blocks_atlas(json.dumps(doc).encode("utf-8"))
+        self.assertIsNotNone(cleaned)
+        sources = json.loads(cleaned)["sources"]
+        self.assertEqual([s.get("source") or s.get("resource") for s in sources],
+                         ["custom", "entity/cow", "slimefun:item/x", "entity/npc", "entity/stand"])
+        self.assertIsNone(sanitize_blocks_atlas(cleaned))
+
+
+class BackfillMissingModelParticlesTest(unittest.TestCase):
+    def test_backfills_particle_only_for_parentless_element_models_with_valid_png(self):
+        files = {
+            "assets/minecraft/models/item/custom/item/murasama.json": json.dumps(
+                {"textures": {"2": "custom/murasama"}, "elements": [{"from": [0, 0, 0], "to": [1, 1, 1]}]}),
+            "assets/minecraft/textures/custom/murasama.png": "PNG",
+            "assets/minecraft/models/item/with_parent.json": json.dumps(
+                {"parent": "item/generated", "textures": {"layer0": "custom/murasama"}, "elements": []}),
+            "assets/minecraft/models/item/missing_png.json": json.dumps(
+                {"textures": {"0": "custom/nonexistent"}, "elements": []}),
+        }
+        changed = backfill_missing_model_particles(lambda p: files[p], set(files))
+        self.assertEqual(set(changed), {"assets/minecraft/models/item/custom/item/murasama.json"})
+        patched = json.loads(changed["assets/minecraft/models/item/custom/item/murasama.json"])
+        self.assertEqual(patched["textures"]["particle"], "custom/murasama")
+
+
+class ResourcePathAndStaleAnimationMcmetaTest(unittest.TestCase):
+    def test_detects_invalid_resource_location_chars(self):
+        self.assertTrue(has_invalid_resource_location_chars("assets/svm_jojo/models/stand/c_moon/render but epic.png"))
+        self.assertTrue(has_invalid_resource_location_chars("assets/minecraft/textures/item/Foo.png"))
+        self.assertFalse(has_invalid_resource_location_chars("assets/minecraft/textures/item/flint_and_steel.png"))
+
+    def test_detects_stale_single_frame_animation_mcmeta(self):
+        png_128x128 = b"\x89PNG\r\n\x1a\n\x00\x00\x00\rIHDR" + (128).to_bytes(4, "big") + (128).to_bytes(4, "big")
+        png_16x80 = b"\x89PNG\r\n\x1a\n\x00\x00\x00\rIHDR" + (16).to_bytes(4, "big") + (80).to_bytes(4, "big")
+        stale = b'{"animation": {"frametime": 2, "frames": [0, 1, 2, 3, 4]}}'
+        valid_interp = b'{"animation": {"interpolate": true, "frametime": 2}}'
+        self.assertTrue(is_stale_single_frame_animation_mcmeta(
+            "assets/minecraft/textures/item/tipped_arrow_head.png.mcmeta",
+            stale,
+            lambda _: png_128x128,
+        ))
+        self.assertFalse(is_stale_single_frame_animation_mcmeta(
+            "assets/minecraft/textures/item/tipped_arrow_head.png.mcmeta",
+            stale,
+            lambda _: png_16x80,
+        ))
+        self.assertFalse(is_stale_single_frame_animation_mcmeta(
+            "assets/stellarity/textures/item/dragonblade.png.mcmeta",
+            valid_interp,
+            lambda _: png_128x128,
+        ))
+
+
 if __name__ == "__main__":
     unittest.main()
+

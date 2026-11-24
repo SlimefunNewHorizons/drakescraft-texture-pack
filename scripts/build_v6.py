@@ -28,16 +28,120 @@ ADD_EXACT = ("assets/minecraft/font/terralense_hud.json", "assets/minecraft/font
 GEAR_PREFIX = "assets/minecraft/items/"
 
 ATLAS_ITEMS = "assets/minecraft/atlases/items.json"
+ATLAS_BLOCKS = "assets/minecraft/atlases/blocks.json"
 TRIM_OVERLAY = "overlay_26_3_trims"
 TRIM_OVERLAY_MIN = 97  # 26.3: paletas de trims pasan a textures/palettes/ (trim_base, trim/<material>)
 SHADER_OVERLAY = "overlay_legacy_shaders"
 SHADER_MAX_FORMAT = 88  # 26.2; 26.3 compila con ShaderC y rechaza el GLSL legacy (moj_import)
 
 
+def sanitize_blocks_atlas(raw):
+    """Reemplaza la fuente broad {'type': 'directory', 'source': 'entity'} de atlases/blocks.json por subcarpetas seguras.
+
+    En 26.2/26.3 los sprites de banner, chest, decorated_pot, shield y shulker viven en sus propios atlases
+    (banner_patterns, chests, decorated_pot, shield_patterns, shulker_boxes); incluir 'entity' completo en
+    blocks.json provoca 154 avisos 'Duplicate sprite ... This will be rejected in a future version'.
+    Las subcarpetas necesarias para modelos (entity/cow, entity/frog, entity/pig, entity/npc, entity/stand) se declaran aparte.
+    """
+    doc = json.loads(raw)
+    sources = doc.get("sources")
+    if not isinstance(sources, list):
+        return None
+    kept = [s for s in sources
+            if not (isinstance(s, dict)
+                    and s.get("type") in ("directory", "minecraft:directory")
+                    and s.get("source") == "entity")]
+    if len(kept) == len(sources):
+        return None
+    existing_dirs = {s.get("source") for s in kept
+                     if isinstance(s, dict) and s.get("type") in ("directory", "minecraft:directory")}
+    for sub in ("entity/npc", "entity/stand"):
+        if sub not in existing_dirs:
+            kept.append({"type": "minecraft:directory", "source": sub, "prefix": f"{sub}/"})
+    doc["sources"] = kept
+    return (json.dumps(doc, ensure_ascii=False, indent=2) + "\n").encode("utf-8")
+
+
+def backfill_missing_model_particles(read, paths):
+    """Completa textures.particle en modelos con geometria (elements) sin parent que omitieron 'particle'.
+
+    En 26.2/26.3 el bakery emite 'Missing texture references in model ...: particle' para cada modelo con
+    elements sin parent ni slot 'particle'. Se asigna la primera textura no-alias definida en textures
+    cuyo PNG exista en el pack (o sea textura vanilla). Devuelve {ruta: bytes} de los modelos actualizados.
+    """
+    changed = {}
+    for path in sorted(paths):
+        if "/models/" not in path or not path.endswith(".json"):
+            continue
+        doc = json.loads(read(path))
+        if not isinstance(doc, dict) or doc.get("parent") or "elements" not in doc:
+            continue
+        textures = doc.get("textures")
+        if not isinstance(textures, dict) or not textures or "particle" in textures:
+            continue
+        chosen = None
+        for k in sorted(textures.keys()):
+            val = textures[k]
+            if not isinstance(val, str) or not val or val.startswith("#"):
+                continue
+            ns, _, rel = val.partition(":") if ":" in val else ("minecraft", ":", val)
+            png = f"assets/{ns}/textures/{rel}.png"
+            if png in paths or (ns == "minecraft" and rel.startswith(("block/", "item/", "entity/"))):
+                chosen = val
+                break
+        if chosen is not None:
+            textures["particle"] = chosen
+            changed[path] = (json.dumps(doc, ensure_ascii=False, indent=2) + "\n").encode("utf-8")
+    return changed
+
+
 def is_root_shader(name):
     """assets/<ns>/shaders/** en la raiz del pack (no en un overlay)."""
     parts = name.split("/")
     return len(parts) >= 4 and parts[0] == "assets" and parts[2] == "shaders" and not name.endswith("/")
+
+
+def has_invalid_resource_location_chars(name):
+    """ResourceLocation solo acepta [a-z0-9_.-/] en el path y [a-z0-9_.-] en el namespace."""
+    parts = name.split("/")
+    for idx, seg in enumerate(parts):
+        if not seg:
+            continue
+        allowed = "abcdefghijklmnopqrstuvwxyz0123456789_.-"
+        if any(ch not in allowed for ch in seg):
+            return True
+    return False
+
+
+def is_stale_single_frame_animation_mcmeta(name, raw_mcmeta, read_png):
+    """Detecta .png.mcmeta cuyo animation.frames pide indices >= 1 sobre un PNG cuadrado 1:1 (1 solo frame)."""
+    if not name.endswith(".png.mcmeta"):
+        return False
+    try:
+        doc = json.loads(raw_mcmeta.decode("utf-8-sig"))
+    except Exception:
+        return False
+    anim = doc.get("animation") if isinstance(doc, dict) else None
+    if not isinstance(anim, dict):
+        return False
+    frames = anim.get("frames")
+    if not isinstance(frames, list) or not frames:
+        return False
+    max_idx = 0
+    for f in frames:
+        idx = f.get("index", 0) if isinstance(f, dict) else (f if isinstance(f, int) else 0)
+        if isinstance(idx, int) and idx > max_idx:
+            max_idx = idx
+    if max_idx < 1:
+        return False
+    png_raw = read_png(name[:-7])
+    if not png_raw or len(png_raw) < 24 or png_raw[:8] != b"\x89PNG\r\n\x1a\n":
+        return False
+    w = int.from_bytes(png_raw[16:20], "big")
+    h = int.from_bytes(png_raw[20:24], "big")
+    frame_h = anim.get("height") if isinstance(anim.get("height"), int) and anim.get("height") > 0 else w
+    total_frames = (h // frame_h) if frame_h > 0 else 1
+    return max_idx >= total_frames
 
 
 def split_trim_atlas(raw):
@@ -80,10 +184,14 @@ def apply_missing_model_fallbacks(read, paths, fallbacks):
         ns, _, p = ref.rpartition(":")
         return f"assets/{ns or 'minecraft'}/models/{p}.json"
 
+    def is_vanilla_model(ref):
+        ns, _, p = ref.rpartition(":")
+        return (ns or "minecraft") == "minecraft" and p.startswith(("block/", "item/")) and not p.startswith("item/custom/")
+
     for missing, target in fallbacks.items():
         if model_file(missing) in paths:
             raise SystemExit(f"Fallback would replace an existing model: {missing}")
-        if model_file(target) not in paths:
+        if model_file(target) not in paths and not is_vanilla_model(target):
             raise SystemExit(f"Missing fallback model: {model_file(target)}")
     keys = {m.removeprefix("minecraft:"): t for m, t in fallbacks.items()}
 
@@ -104,8 +212,9 @@ def apply_missing_model_fallbacks(read, paths, fallbacks):
     changed = {}
     for path in sorted(paths):
         parts = path.split("/")
-        modern = len(parts) >= 4 and parts[-2] == "items" and parts[-4] == "assets"
-        legacy = len(parts) >= 5 and parts[-3:-1] == ["models", "item"] and parts[-5] == "assets"
+        assets_idx = parts.index("assets") if "assets" in parts else -1
+        modern = assets_idx >= 0 and len(parts) >= assets_idx + 4 and parts[assets_idx + 2] == "items"
+        legacy = assets_idx >= 0 and len(parts) >= assets_idx + 5 and parts[assets_idx + 2:assets_idx + 4] == ["models", "item"]
         if not (modern or legacy) or not path.endswith(".json"):
             continue
         doc = json.loads(read(path))
@@ -172,6 +281,13 @@ def main():
         add["pack.mcmeta"] = (repo / "pack.mcmeta").read_bytes()
     if (repo / "pack.png").exists():
         add["pack.png"] = (repo / "pack.png").read_bytes()
+
+    # Atlas de blocks: eliminar directory source 'entity' que duplica 154 sprites con chests/banners/shields/pots/shulkers
+    blocks_atlas_raw = add.get(ATLAS_BLOCKS) or (base.read(ATLAS_BLOCKS) if ATLAS_BLOCKS in names else None)
+    clean_blocks_atlas = sanitize_blocks_atlas(blocks_atlas_raw) if blocks_atlas_raw else None
+    if clean_blocks_atlas:
+        add[ATLAS_BLOCKS] = clean_blocks_atlas
+    report["atlas_blocks_entity_duplicado_eliminado"] = bool(clean_blocks_atlas)
 
     # Atlas de trims: raiz compatible con 26.2 y el formato 26.3 (palettes/) solo en su overlay
     atlas_raw = add.get(ATLAS_ITEMS) or (base.read(ATLAS_ITEMS) if ATLAS_ITEMS in names else None)
@@ -621,6 +737,11 @@ def main():
                 patched_models += 1
     report["modelos_parcheados"] = patched_models
 
+    # Backfill automatico de 'particle' en modelos con elements sin parent para evitar WARN 'Missing texture references: particle'
+    particle_fixed = backfill_missing_model_particles(lambda p: add[p] if p in add else base.read(p), names | set(add))
+    add.update(particle_fixed)
+    report["modelos_particle_completados"] = len(particle_fixed)
+
     fallbacks_file = repo / "scripts/t2_missing_model_fallbacks.json"
     if fallbacks_file.is_file():
         fixed = apply_missing_model_fallbacks(lambda p: add[p] if p in add else base.read(p), names | set(add),
@@ -667,10 +788,16 @@ def main():
 
     on_shelf_sanitized = 0
     beds_dropped = 0
+    invalid_paths_dropped = 0
+    stale_mcmeta_dropped = 0
+    read_any = lambda p: add[p] if p in add else (base.read(p) if p in names else None)
     a.out.parent.mkdir(parents=True, exist_ok=True)
     with zipfile.ZipFile(a.out, "w", zipfile.ZIP_DEFLATED) as out:
         for info in base.infolist():
             if info.filename in add:
+                continue
+            if not info.is_dir() and has_invalid_resource_location_chars(info.filename):
+                invalid_paths_dropped += 1
                 continue
             # Politica de Jack (2026-11-20): el pack NO toca bloques vanilla (texturas, modelos ni blockstates); solo herramientas,
             # armas, armaduras, scoreboard, tab, rangos, Slimefun, interfaces y botones.
@@ -686,6 +813,9 @@ def main():
             if not info.is_dir() and "/textures/" in info.filename and "." not in Path(info.filename).name:
                 continue
             raw_b = base.read(info.filename)
+            if is_stale_single_frame_animation_mcmeta(info.filename, raw_b, read_any):
+                stale_mcmeta_dropped += 1
+                continue
             if is_legacy_bed_item(info.filename, raw_b):
                 beds_dropped += 1
                 continue
@@ -698,7 +828,13 @@ def main():
             out.writestr(info, raw_b)
         dt = base.getinfo("pack.mcmeta").date_time
         for n_, b in sorted(add.items()):
+            if has_invalid_resource_location_chars(n_):
+                invalid_paths_dropped += 1
+                continue
             if n_.startswith("assets/minecraft/textures/block/"):
+                continue
+            if is_stale_single_frame_animation_mcmeta(n_, b, read_any):
+                stale_mcmeta_dropped += 1
                 continue
             if is_legacy_bed_item(n_, b):
                 beds_dropped += 1
@@ -744,6 +880,8 @@ def main():
                 on_shelf_left += 1
     if ATLAS_ITEMS in z.namelist() and b'"minecraft:trim_base"' in z.read(ATLAS_ITEMS):
         gate_violations.append("atlases/items.json raiz usa minecraft:trim_base (solo 26.3): trims rotos en 26.2")
+    if ATLAS_BLOCKS in z.namelist() and sanitize_blocks_atlas(z.read(ATLAS_BLOCKS)) is not None:
+        gate_violations.append("atlases/blocks.json incluye directory source 'entity' (154 Duplicate sprite en 26.x)")
     stray_shaders = [n for n in z.namelist() if "/shaders/" in n and not n.endswith("/")
                      and not n.startswith(SHADER_OVERLAY + "/")]
     if stray_shaders:
@@ -751,6 +889,9 @@ def main():
     legacy_beds = [n for n in z.namelist() if n.endswith("_bed.json") and is_legacy_bed_item(n, z.read(n))]
     if legacy_beds:
         gate_violations.append(f"{len(legacy_beds)} items/*_bed.json con special minecraft:bed (camas sin modelo en 26.x)")
+    bad_locs = [n for n in z.namelist() if not n.endswith("/") and has_invalid_resource_location_chars(n)]
+    if bad_locs:
+        gate_violations.append(f"{len(bad_locs)} rutas con caracteres invalidos en ResourceLocation: {bad_locs[:3]}")
     if on_shelf_left:
         gate_violations.append(f"Quedaron {on_shelf_left} JSONs con token 'on_shelf' incompatible con 1.21.4-1.21.8")
     if extless_tex:
@@ -762,6 +903,7 @@ def main():
 
     report.update({"archivos_anadidos_o_reemplazados": len(add), "reemplazan_base": len([n for n in add if n in names]),
                    "on_shelf_sanitizados": on_shelf_sanitized, "camas_legacy_omitidas": beds_dropped,
+                   "rutas_invalidas_omitidas": invalid_paths_dropped, "mcmeta_anim_obsoletos_omitidos": stale_mcmeta_dropped,
                    "entradas": len(z.namelist()), "bytes": a.out.stat().st_size, "crc": bad or "ok",
                    "pack_gate": {"passed": not gate_violations, "rank_glyphs": rank_glyphs, "has_polis": has_polis,
                                  "violations": gate_violations}})

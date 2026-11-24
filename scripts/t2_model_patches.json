@@ -20,5 +20,15 @@
   },
   "assets/minecraft/models/item/custom/item/demon_katana.json": {
     "particle": "custom/demon_katana"
+  },
+  "assets/minecraft/models/item/custom/item/red_katana.json": {
+    "2": "custom/cherry_katana2",
+    "3": "custom/cherry_katana1",
+    "particle": "custom/cherry_katana2"
+  },
+  "assets/minecraft/models/item/custom/item/gauntlet_of_the_dread.json": {
+    "2": "custom/gauntlet_of_dread",
+    "particle": "custom/gauntlet_of_dread"
   }
 }
+
