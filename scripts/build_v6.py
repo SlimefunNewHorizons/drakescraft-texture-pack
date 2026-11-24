@@ -30,6 +30,14 @@ GEAR_PREFIX = "assets/minecraft/items/"
 ATLAS_ITEMS = "assets/minecraft/atlases/items.json"
 TRIM_OVERLAY = "overlay_26_3_trims"
 TRIM_OVERLAY_MIN = 97  # 26.3: paletas de trims pasan a textures/palettes/ (trim_base, trim/<material>)
+SHADER_OVERLAY = "overlay_legacy_shaders"
+SHADER_MAX_FORMAT = 88  # 26.2; 26.3 compila con ShaderC y rechaza el GLSL legacy (moj_import)
+
+
+def is_root_shader(name):
+    """assets/<ns>/shaders/** en la raiz del pack (no en un overlay)."""
+    parts = name.split("/")
+    return len(parts) >= 4 and parts[0] == "assets" and parts[2] == "shaders" and not name.endswith("/")
 
 
 def split_trim_atlas(raw):
@@ -175,6 +183,20 @@ def main():
                             "min_format": [TRIM_OVERLAY_MIN, 0], "max_format": [500, 0]})
         add["pack.mcmeta"] = (json.dumps(meta, ensure_ascii=False, indent=2) + "\n").encode()
     report["atlas_trims_26_3_a_overlay"] = bool(split)
+
+    # Shaders legacy: solo para clientes <=26.2 (en 26.3 rompen); se mueven a su overlay al escribir
+    shaders = sorted({n for n in names | set(add) if is_root_shader(n)})
+    if shaders:
+        meta = json.loads(add.get("pack.mcmeta") or base.read("pack.mcmeta"))
+        entries = meta.setdefault("overlays", {}).setdefault("entries", [])
+        if not any(e.get("directory") == SHADER_OVERLAY for e in entries):
+            lo = meta["pack"].get("min_format", [meta["pack"].get("pack_format", 0), 0])
+            lo = lo[0] if isinstance(lo, list) else lo
+            entries.append({"directory": SHADER_OVERLAY,
+                            "formats": {"min_inclusive": lo, "max_inclusive": SHADER_MAX_FORMAT},
+                            "min_format": [lo, 0], "max_format": [SHADER_MAX_FORMAT, 65535]})
+        add["pack.mcmeta"] = (json.dumps(meta, ensure_ascii=False, indent=2) + "\n").encode()
+    report["shaders_legacy_a_overlay"] = len(shaders)
 
     # fuente default: utilizar la definicion maestra del repo (con todos los rangos, grecas y drakescraft:holo)
     if (repo / "assets/minecraft/font/default.json").exists():
@@ -667,7 +689,10 @@ def main():
             raw_b, san = _sanitize_json_bytes(info.filename, raw_b)
             if san:
                 on_shelf_sanitized += 1
-            out.writestr(copy.copy(info), raw_b)
+            info = copy.copy(info)
+            if is_root_shader(info.filename):
+                info.filename = f"{SHADER_OVERLAY}/{info.filename}"
+            out.writestr(info, raw_b)
         dt = base.getinfo("pack.mcmeta").date_time
         for n_, b in sorted(add.items()):
             if n_.startswith("assets/minecraft/textures/block/"):
@@ -678,7 +703,7 @@ def main():
             b, san = _sanitize_json_bytes(n_, b)
             if san:
                 on_shelf_sanitized += 1
-            zi = zipfile.ZipInfo(n_, date_time=dt)
+            zi = zipfile.ZipInfo(f"{SHADER_OVERLAY}/{n_}" if is_root_shader(n_) else n_, date_time=dt)
             zi.compress_type = zipfile.ZIP_DEFLATED
             out.writestr(zi, b)
     z = zipfile.ZipFile(a.out)
@@ -716,6 +741,10 @@ def main():
                 on_shelf_left += 1
     if ATLAS_ITEMS in z.namelist() and b'"minecraft:trim_base"' in z.read(ATLAS_ITEMS):
         gate_violations.append("atlases/items.json raiz usa minecraft:trim_base (solo 26.3): trims rotos en 26.2")
+    stray_shaders = [n for n in z.namelist() if "/shaders/" in n and not n.endswith("/")
+                     and not n.startswith(SHADER_OVERLAY + "/")]
+    if stray_shaders:
+        gate_violations.append(f"{len(stray_shaders)} shaders fuera de {SHADER_OVERLAY} (GLSL legacy roto en 26.3)")
     legacy_beds = [n for n in z.namelist() if n.endswith("_bed.json") and is_legacy_bed_item(n, z.read(n))]
     if legacy_beds:
         gate_violations.append(f"{len(legacy_beds)} items/*_bed.json con special minecraft:bed (camas sin modelo en 26.x)")
