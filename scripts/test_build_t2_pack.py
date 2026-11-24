@@ -431,6 +431,66 @@ class LegacyShaderIsolationTests(unittest.TestCase):
                               required_models=["svm:item/first"])
                     self.assertEqual(self.output.read_bytes(), b"previous artifact")
 
+    def test_nonfinite_json_constants_preserve_candidate(self):
+        model = "assets/svm/models/item/first.json"
+        parent = "assets/svm/models/item/base.json"
+        item = "assets/svm/items/first.json"
+        texture = "assets/svm/textures/item/first.png"
+        original_entries = dict(self.entries)
+        for constant in (b"NaN", b"Infinity", b"-Infinity"):
+            for location in ("model", "parent", "reference", "mcmeta", "pack"):
+                for replacement in (False, True):
+                    with self.subTest(constant=constant, location=location, replacement=replacement):
+                        self.entries = dict(original_entries)
+                        self.entries[model] = b'{"parent":"minecraft:item/generated"}'
+                        self.entries[item] = b'{"model":{"type":"minecraft:model","model":"svm:item/first"}}'
+                        if location == "model":
+                            path = model
+                            data = b'{"parent":"minecraft:item/generated","display":{"gui":{"rotation":[' + constant + b',0,0]}}}'
+                        elif location == "parent":
+                            self.entries[model] = b'{"parent":"svm:item/base"}'
+                            path = parent
+                            data = b'{"parent":"minecraft:item/generated","display":{"gui":{"rotation":[' + constant + b',0,0]}}}'
+                        elif location == "reference":
+                            path = item
+                            data = b'{"model":{"type":"minecraft:model","model":"svm:item/first"},"invalid":' + constant + b'}'
+                        elif location == "mcmeta":
+                            self.entries[model] = b'{"textures":{"layer0":"svm:item/first"}}'
+                            self.entries[texture] = PNG_SIGNATURE + b"fixture"
+                            path = texture + ".mcmeta"
+                            data = b'{"animation":{},"invalid":' + constant + b'}'
+                        else:
+                            path = "pack.mcmeta"
+                            data = self.entries[path][:-1] + b',"invalid":' + constant + b'}'
+                        # pack.mcmeta is not an allowed supplemental asset.
+                        if replacement and location == "pack":
+                            continue
+                        if replacement:
+                            # Only the supplemental bytes are invalid.
+                            self.entries[path] = {
+                                "model": b'{"parent":"minecraft:item/generated"}',
+                                "parent": b'{"parent":"minecraft:item/generated"}',
+                                "reference": self.entries[item],
+                                "mcmeta": b'{"animation":{}}',
+                            }[location]
+                        else:
+                            self.entries[path] = data
+                        digest = self.write_base()
+                        self.output.write_bytes(b"previous artifact")
+                        with self.assertRaises(ValueError):
+                            build(self.base, self.output, digest,
+                                  extra_files={path: data} if replacement else None,
+                                  required_models=["svm:item/first"])
+                        self.assertEqual(self.output.read_bytes(), b"previous artifact")
+
+    def test_json_constant_names_remain_valid_strings(self):
+        model = "assets/svm/models/item/first.json"
+        self.entries[model] = b'{"parent":"minecraft:item/generated","credit":"NaN Infinity -Infinity"}'
+        self.entries["assets/svm/items/first.json"] = b'{"model":{"type":"minecraft:model","model":"svm:item/first"}}'
+        build(self.base, self.output, self.write_base(), required_models=["svm:item/first"])
+        with zipfile.ZipFile(self.output) as archive:
+            self.assertEqual(archive.read(model), self.entries[model])
+
     def test_required_model_rejects_unsafe_references_before_output(self):
         digest = self.write_base()
         for reference in ("item/first", "svm:../first", "svm:item//first", "SVM:item/first",

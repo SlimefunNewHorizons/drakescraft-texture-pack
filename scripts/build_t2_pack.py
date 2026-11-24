@@ -21,6 +21,13 @@ PNG_SIGNATURE = b"\x89PNG\r\n\x1a\n"
 CUBE_FACES = {"down", "up", "north", "south", "west", "east"}
 
 
+def parse_json(payload: bytes | str):
+    """Reject non-JSON constants wherever they occur in an inspected resource."""
+    def reject_constant(value):
+        raise ValueError(f"Invalid JSON constant: {value}")
+    return json.loads(payload, parse_constant=reject_constant)
+
+
 def finite_number(value: object) -> bool:
     if type(value) not in {int, float}:
         return False
@@ -50,7 +57,7 @@ def valid_resource_reference(value: object) -> str | None:
 
 def valid_texture_mcmeta(payload: bytes) -> bool:
     try:
-        node = json.loads(payload)
+        node = parse_json(payload)
     except (ValueError, UnicodeError):
         return False
     if not isinstance(node, dict) or not node:
@@ -88,14 +95,14 @@ def patch_languages(source: zipfile.ZipFile, patches: dict) -> dict[str, bytes]:
     for name, replacements in patches.items():
         if not re.fullmatch(r"assets/[a-z0-9_.-]+/lang/[a-z]{2}_[a-z]{2}\.json", name):
             raise ValueError(f"Invalid language path: {name}")
-        translations = json.loads(source.read(name))
+        translations = parse_json(source.read(name))
         for key, value in replacements.items():
             if key not in translations or not isinstance(value, str) or not value.strip() or value == key:
                 raise ValueError(f"Invalid translation: {name}: {key}")
             # A raw key has no reliable placeholders: compare against English.
             reference = translations[key]
             if reference == key:
-                english = json.loads(source.read(name.rsplit('/', 1)[0] + '/en_us.json'))
+                english = parse_json(source.read(name.rsplit('/', 1)[0] + '/en_us.json'))
                 reference = english[key]
             if sorted(PLACEHOLDER.findall(reference)) != sorted(PLACEHOLDER.findall(value)):
                 raise ValueError(f"Translation placeholders differ: {name}: {key}")
@@ -116,7 +123,7 @@ def patch_model_textures(source: zipfile.ZipFile, patches: dict) -> dict[str, by
         if (not re.fullmatch(r"assets/[a-z0-9_.-]+/models/[a-z0-9_./-]+\.json", name)
                 or any(part in {".", "..", ""} for part in name.split("/"))):
             raise ValueError(f"Invalid model path: {name}")
-        model = json.loads(source.read(name))
+        model = parse_json(source.read(name))
         textures = model.get("textures", {})
         for slot, reference in replacements.items():
             if slot not in textures or not isinstance(reference, str):
@@ -170,7 +177,7 @@ def bridge_legacy_items(source: zipfile.ZipFile, carriers: list[str],
         if not isinstance(carrier, str) or not re.fullmatch(r"[a-z0-9_]+", carrier):
             raise ValueError(f"Invalid legacy item carrier: {carrier}")
         legacy_path = f"assets/minecraft/models/item/{carrier}.json"
-        legacy = json.loads(source.read(legacy_path))
+        legacy = parse_json(source.read(legacy_path))
         entries = []
         previous = 0
         for override in legacy.get("overrides", []):
@@ -204,7 +211,7 @@ def bridge_legacy_items(source: zipfile.ZipFile, carriers: list[str],
         if any(name.endswith("/" + item_path) for name in names):
             raise ValueError(f"Audit modern item in existing overlays: {item_path}")
         vanilla = {"type": "minecraft:model", "model": f"minecraft:item/{carrier}"}
-        definition = json.loads(source.read(item_path)) if item_path in names else {"model": vanilla}
+        definition = parse_json(source.read(item_path)) if item_path in names else {"model": vanilla}
         root = definition["model"]
         # Only the existing vanilla fallback is replaced: SF cases keep priority.
         selected = root
@@ -256,7 +263,7 @@ def required_model_references(source, replacements, metadata, required):
             continue
         content = replacements[name] if name in replacements else source.read(name)
         try:
-            node = json.loads(content)
+            node = parse_json(content)
         except (ValueError, UnicodeError):
             continue
         if not isinstance(node, dict):
@@ -313,7 +320,7 @@ def required_model_parent_chains(source, replacements, required, metadata):
             if name not in names:
                 break
             try:
-                node = json.loads(content)
+                node = parse_json(content)
             except (ValueError, UnicodeError) as exc:
                 raise ValueError(f"Invalid required model parent JSON: {name}") from exc
             if not isinstance(node, dict):
@@ -369,7 +376,7 @@ def required_model_textures(source, replacements, metadata, parent_chains):
             if root_model not in names:
                 continue
             content = replacements[root_model] if root_model in replacements else source.read(root_model)
-            node = json.loads(content)
+            node = parse_json(content)
             if "textures" in node:
                 textures = node["textures"]
                 if not isinstance(textures, dict):
@@ -543,13 +550,13 @@ def build(base: Path, output: Path, expected_sha256: str,
             else:
                 raise ValueError(f"Missing required model: {name}")
             try:
-                model = json.loads(content)
+                model = parse_json(content)
             except (ValueError, UnicodeDecodeError) as exc:
                 raise ValueError(f"Invalid required model JSON: {name}") from exc
             if not isinstance(model, dict) or not model:
                 raise ValueError(f"Expected a nonempty required model object: {name}")
             checked_models[reference] = hashlib.sha256(content).hexdigest()
-        metadata = json.loads(source.read("pack.mcmeta"))
+        metadata = parse_json(source.read("pack.mcmeta"))
         incoming = required_model_references(source, replacements, metadata, checked_models)
         parent_chains = required_model_parent_chains(source, replacements, checked_models, metadata)
         model_textures = required_model_textures(source, replacements, metadata, parent_chains)
@@ -637,10 +644,10 @@ def main() -> None:
     if args.with_terralense:
         from merge_terralense import collect
         extra = {**(extra or {}), **collect()}
-    patches = json.loads(args.language_patches.read_text()) if args.language_patches else None
-    models = json.loads(args.model_patches.read_text()) if args.model_patches else None
-    bridges = json.loads(args.legacy_item_bridges.read_text()) if args.legacy_item_bridges else None
-    fallbacks = json.loads(args.missing_model_fallbacks.read_text()) if args.missing_model_fallbacks else None
+    patches = parse_json(args.language_patches.read_text()) if args.language_patches else None
+    models = parse_json(args.model_patches.read_text()) if args.model_patches else None
+    bridges = parse_json(args.legacy_item_bridges.read_text()) if args.legacy_item_bridges else None
+    fallbacks = parse_json(args.missing_model_fallbacks.read_text()) if args.missing_model_fallbacks else None
     print(json.dumps(build(args.base, args.output, args.base_sha256, patches, models, bridges, fallbacks,
                            extra, args.require_model), indent=2))
 
