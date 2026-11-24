@@ -4,7 +4,7 @@ import unittest
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent))
-from build_v6 import split_trim_atlas  # noqa: E402
+from build_v6 import is_legacy_bed_item, split_trim_atlas  # noqa: E402
 
 MODERN = {"sources": [
     {"type": "minecraft:directory", "prefix": "item/", "source": "item"},
@@ -27,6 +27,20 @@ class SplitTrimAtlasTest(unittest.TestCase):
     def test_legacy_atlas_untouched(self):
         legacy, _ = split_trim_atlas(json.dumps(MODERN).encode())
         self.assertIsNone(split_trim_atlas(legacy))
+
+
+class LegacyBedItemTest(unittest.TestCase):
+    LEGACY = b'{"model":{"type":"minecraft:special","base":"minecraft:item/template_bed",' \
+             b'"model":{"type":"minecraft:bed","texture":"minecraft:black"}}}'
+    MODERN = b'{"model":{"type":"minecraft:composite","models":[{"type":"minecraft:model",' \
+             b'"model":"minecraft:block/black_bed_head"}]}}'
+
+    def test_legacy_special_bed_dropped(self):
+        self.assertTrue(is_legacy_bed_item("assets/minecraft/items/black_bed.json", self.LEGACY))
+
+    def test_modern_and_custom_kept(self):
+        self.assertFalse(is_legacy_bed_item("assets/minecraft/items/black_bed.json", self.MODERN))
+        self.assertFalse(is_legacy_bed_item("assets/lunareclipse.watching/items/deathbed.json", self.LEGACY))
 
 
 if __name__ == "__main__":

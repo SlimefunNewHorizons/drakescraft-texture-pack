@@ -56,6 +56,13 @@ def split_trim_atlas(raw):
     return (json.dumps(doc, ensure_ascii=False, indent=2) + "\n").encode(), raw
 
 
+def is_legacy_bed_item(name, raw):
+    """items/*_bed.json con special 'minecraft:bed' (1.21.4-1.21.11): 26.2/26.3 lo rechazan ('Unknown element id:
+    minecraft:bed') y la cama queda sin modelo; vanilla ya trae su propia definicion en cada version, asi que se omite."""
+    return (name.startswith("assets/minecraft/items/") and name.endswith("_bed.json")
+            and b'"minecraft:bed"' in raw)
+
+
 def apply_missing_model_fallbacks(read, paths, fallbacks):
     """Reescribe en items/*.json (cualquier namespace u overlay) las referencias a modelos ausentes declaradas en
     t2_missing_model_fallbacks.json. Sin esto un item moderno (p. ej. svm_ep:katana_fire -> item/custom/item/fire_katana)
@@ -634,6 +641,7 @@ def main():
         return raw, False
 
     on_shelf_sanitized = 0
+    beds_dropped = 0
     a.out.parent.mkdir(parents=True, exist_ok=True)
     with zipfile.ZipFile(a.out, "w", zipfile.ZIP_DEFLATED) as out:
         for info in base.infolist():
@@ -652,13 +660,20 @@ def main():
             # Evitar StringIndexOutOfBoundsException en InteractiveChatDiscordSrvAddon por archivos WIP sin extension bajo textures/
             if not info.is_dir() and "/textures/" in info.filename and "." not in Path(info.filename).name:
                 continue
-            raw_b, san = _sanitize_json_bytes(info.filename, base.read(info.filename))
+            raw_b = base.read(info.filename)
+            if is_legacy_bed_item(info.filename, raw_b):
+                beds_dropped += 1
+                continue
+            raw_b, san = _sanitize_json_bytes(info.filename, raw_b)
             if san:
                 on_shelf_sanitized += 1
             out.writestr(copy.copy(info), raw_b)
         dt = base.getinfo("pack.mcmeta").date_time
         for n_, b in sorted(add.items()):
             if n_.startswith("assets/minecraft/textures/block/"):
+                continue
+            if is_legacy_bed_item(n_, b):
+                beds_dropped += 1
                 continue
             b, san = _sanitize_json_bytes(n_, b)
             if san:
@@ -701,6 +716,9 @@ def main():
                 on_shelf_left += 1
     if ATLAS_ITEMS in z.namelist() and b'"minecraft:trim_base"' in z.read(ATLAS_ITEMS):
         gate_violations.append("atlases/items.json raiz usa minecraft:trim_base (solo 26.3): trims rotos en 26.2")
+    legacy_beds = [n for n in z.namelist() if n.endswith("_bed.json") and is_legacy_bed_item(n, z.read(n))]
+    if legacy_beds:
+        gate_violations.append(f"{len(legacy_beds)} items/*_bed.json con special minecraft:bed (camas sin modelo en 26.x)")
     if on_shelf_left:
         gate_violations.append(f"Quedaron {on_shelf_left} JSONs con token 'on_shelf' incompatible con 1.21.4-1.21.8")
     if extless_tex:
@@ -711,7 +729,7 @@ def main():
         gate_violations.append(f"Faltan glyphs de rangos (count={rank_glyphs}, polis={has_polis})")
 
     report.update({"archivos_anadidos_o_reemplazados": len(add), "reemplazan_base": len([n for n in add if n in names]),
-                   "on_shelf_sanitizados": on_shelf_sanitized,
+                   "on_shelf_sanitizados": on_shelf_sanitized, "camas_legacy_omitidas": beds_dropped,
                    "entradas": len(z.namelist()), "bytes": a.out.stat().st_size, "crc": bad or "ok",
                    "pack_gate": {"passed": not gate_violations, "rank_glyphs": rank_glyphs, "has_polis": has_polis,
                                  "violations": gate_violations}})
