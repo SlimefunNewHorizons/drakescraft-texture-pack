@@ -13,6 +13,10 @@ class MissingModelFallbackTest(unittest.TestCase):
                 {"model": {"type": "minecraft:select", "cases": [{"model": {"model": "item/custom/item/fire_katana"}}],
                            "fallback": {"type": "minecraft:model", "model": "item/stick"}}}),
             "assets/svm_ep/items/katana.json": json.dumps({"model": {"model": "minecraft:item/custom/item/katana"}}),
+            "assets/minecraft/models/item/warped_fungus_on_a_stick.json": json.dumps(
+                {"parent": "item/handheld_rod", "overrides": [
+                    {"predicate": {"custom_model_data": 1}, "model": "item/custom/item/fire_katana"},
+                    {"predicate": {"custom_model_data": 2}, "model": "item/custom/item/fire_katana2"}]}),
             "assets/minecraft/models/item/custom/item/fire_katana2.json": "{}",
             "assets/minecraft/models/item/custom/item/katana.json": "{}",
         }
@@ -24,7 +28,11 @@ class MissingModelFallbackTest(unittest.TestCase):
     def test_rewrites_modern_items_in_any_namespace_and_overlay(self):
         changed = self.run_fallbacks()
         self.assertEqual(set(changed), {"assets/svm_ep/items/katana_fire.json",
-                                        "overlay_x/assets/minecraft/items/stick.json"})
+                                        "overlay_x/assets/minecraft/items/stick.json",
+                                        "assets/minecraft/models/item/warped_fungus_on_a_stick.json"})
+        rod = json.loads(changed["assets/minecraft/models/item/warped_fungus_on_a_stick.json"])
+        self.assertEqual([o["model"] for o in rod["overrides"]],
+                         ["minecraft:item/custom/item/fire_katana2", "item/custom/item/fire_katana2"])
         self.assertEqual(json.loads(changed["assets/svm_ep/items/katana_fire.json"])["model"]["model"],
                          "minecraft:item/custom/item/fire_katana2")
         stick = json.loads(changed["overlay_x/assets/minecraft/items/stick.json"])["model"]

@@ -72,9 +72,10 @@ def is_legacy_bed_item(name, raw):
 
 
 def apply_missing_model_fallbacks(read, paths, fallbacks):
-    """Reescribe en items/*.json (cualquier namespace u overlay) las referencias a modelos ausentes declaradas en
-    t2_missing_model_fallbacks.json. Sin esto un item moderno (p. ej. svm_ep:katana_fire -> item/custom/item/fire_katana)
-    se ve como modelo faltante en 26.x. Devuelve {ruta: bytes} solo de los archivos cambiados."""
+    """Reescribe en items/*.json y en los overrides legacy de models/item/*.json (cualquier namespace u overlay) las
+    referencias a modelos ausentes declaradas en t2_missing_model_fallbacks.json. Sin esto un item moderno (p. ej.
+    svm_ep:katana_fire -> item/custom/item/fire_katana) se ve como modelo faltante en 26.x, y el override de
+    warped_fungus_on_a_stick en clientes <=1.21.3. Devuelve {ruta: bytes} solo de los archivos cambiados."""
     def model_file(ref):
         ns, _, p = ref.rpartition(":")
         return f"assets/{ns or 'minecraft'}/models/{p}.json"
@@ -103,7 +104,9 @@ def apply_missing_model_fallbacks(read, paths, fallbacks):
     changed = {}
     for path in sorted(paths):
         parts = path.split("/")
-        if len(parts) < 4 or parts[-2] != "items" or parts[-4] != "assets" or not path.endswith(".json"):
+        modern = len(parts) >= 4 and parts[-2] == "items" and parts[-4] == "assets"
+        legacy = len(parts) >= 5 and parts[-3:-1] == ["models", "item"] and parts[-5] == "assets"
+        if not (modern or legacy) or not path.endswith(".json"):
             continue
         doc = json.loads(read(path))
         if swap(doc):
