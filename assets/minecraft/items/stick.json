@@ -4,7 +4,7 @@
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"ADVANCED_BARREL"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/infinityexpansion/advanced_storage"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"BARREL"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/slimefunwarfare/barrel"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"BUMP_PEACH_WOOD"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/bump/bump_peach_wood"}},
-		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CLT_CROP_STICKS"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/cultivation/clt_mystical_wood"}},
+		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CLT_CROP_STICKS"}},"model":{"type":"minecraft:model","model":"minecraft:item/stick"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CRY_STAVE_1"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/crystamaehistoria/cry_stave_1"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CRY_STAVE_2"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/crystamaehistoria/cry_stave_2"}},
 		{"when":{"PublicBukkitValues":{"slimefun:slimefun_item":"CRY_STAVE_3"}},"model":{"type":"minecraft:model","model":"slimefun/drakes_proc/crystamaehistoria/cry_stave_3"}},
